@@ -1,4 +1,4 @@
-package sonido;
+package gui.sonido;
 
 public class Sonido {
 

@@ -1,4 +1,4 @@
-package entidades;
+package mario;
 
 public class Mario {
 

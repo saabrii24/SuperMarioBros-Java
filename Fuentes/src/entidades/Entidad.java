@@ -1,4 +1,4 @@
-package logica;
+package entidades;
 
 public class Entidad {
 

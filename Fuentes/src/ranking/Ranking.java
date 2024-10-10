@@ -1,12 +1,14 @@
 package ranking;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  * La clase {@code Ranking} gestiona el sistema de clasificación de jugadores
  * y mantiene el top 5 de puntajes más altos registrados en el juego.
  */
-public class Ranking {
+@SuppressWarnings("serial")
+public class Ranking implements Serializable {
 
     /**
      * Mapa que almacena el nombre de los jugadores y sus puntajes asociados.

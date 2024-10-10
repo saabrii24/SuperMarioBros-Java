@@ -89,15 +89,4 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
 		ventana.repaint();
 	}
 
-	@Override
-	public Observer registrar_silueta(EntidadLogica silueta) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void mostrar_pantalla_carrera() {
-		// TODO Auto-generated method stub
-		
-	}
 }

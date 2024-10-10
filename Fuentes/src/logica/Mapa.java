@@ -55,4 +55,8 @@ public class Mapa {
         */
     }
 
+    public void eliminar_entidad(Entidad entidad_a_eliminar) {
+        entidades.remove(entidad_a_eliminar);
+    }
+    
 }

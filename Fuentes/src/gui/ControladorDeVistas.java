@@ -1,16 +1,12 @@
 package gui;
 
 import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
-import java.io.InputStream;
-
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-
 import logica.EntidadJugador;
 import logica.EntidadLogica;
 import logica.Juego;
@@ -22,7 +18,8 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
     protected PanelPantallaPrincipal panel_pantalla_principal;
     protected PanelPantallaMapa panel_pantalla_mapa;
     protected PanelPantallaAyuda panel_pantalla_ayuda; 
-
+    protected PanelPantallaRanking panel_pantalla_ranking; // Nueva instancia para el ranking
+    protected PanelPantallaModoDeJuego panel_pantalla_modo_de_juego; // Nueva instancia para el modo de juego
     protected Juego juego;
 
     public ControladorDeVistas(Juego juego) {
@@ -30,16 +27,12 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
         panel_pantalla_principal = new PanelPantallaPrincipal(this);
         panel_pantalla_mapa = new PanelPantallaMapa();
         panel_pantalla_ayuda = new PanelPantallaAyuda(this); 
+        panel_pantalla_ranking = new PanelPantallaRanking(this); // Inicializar el panel de ranking
+        panel_pantalla_modo_de_juego = new PanelPantallaModoDeJuego(this); // Inicializar el panel de modo de juego
         configurar_ventana();
         mostrar_pantalla_inicial();
-        registrar_oyente_ventana();
-        try {
-            InputStream in = getClass().getResourceAsStream("/assets/tipografia/mario-font.ttf");
-            tipografia = Font.createFont(Font.TRUETYPE_FONT, in);
-        } catch (FontFormatException | IOException e) {
-            tipografia = new Font("Verdana", Font.PLAIN, 12);
-            e.printStackTrace();
-        }
+        registrar_oyente_panel_principal();
+        registrar_oyente_panel_modo_de_juego();
     }
 
     protected void configurar_ventana() {
@@ -49,24 +42,21 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
         ventana.setSize(ConstantesVistas.VENTANA_ANCHO, ConstantesVistas.VENTANA_ALTO);
         ventana.setLocationRelativeTo(null);
         Image icono;
-		try {
-			icono = ImageIO.read(getClass().getResourceAsStream("/assets/imagenes/sprites/dominio1/mario_ocioso_derecha.png"));
-			ventana.setIconImage(icono);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+        try {
+            icono = ImageIO.read(getClass().getResourceAsStream("/assets/imagenes/sprites/dominio1/mario_ocioso_derecha.png"));
+            ventana.setIconImage(icono);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         
         ventana.setVisible(true);
-
     }
 
-    protected void registrar_oyente_ventana() {
-        ventana.addKeyListener(new KeyAdapter() {
+    protected void registrar_oyente_panel_principal() {
+        panel_pantalla_principal.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent evento) {
-                int keyCode = evento.getKeyCode();
-
-                switch (keyCode) {
+                switch (evento.getKeyCode()) {
                     case KeyEvent.VK_UP:
                         panel_pantalla_principal.mover_seleccion(true);
                         break;
@@ -80,10 +70,30 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
             }
         });
     }
-
+    
+    protected void registrar_oyente_panel_modo_de_juego() {
+    	panel_pantalla_modo_de_juego.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent evento) {
+                switch (evento.getKeyCode()) {
+                    case KeyEvent.VK_UP:
+                    	panel_pantalla_modo_de_juego.mover_seleccion(true);
+                        break;
+                    case KeyEvent.VK_DOWN:
+                    	panel_pantalla_modo_de_juego.mover_seleccion(false);
+                        break;
+                    case KeyEvent.VK_ENTER:
+                    	panel_pantalla_modo_de_juego.ejecutar_accion_seleccionada();
+                        break;
+                }
+            }
+        });
+    }
+    
     public void mostrar_pantalla_inicial() {
         ventana.setContentPane(panel_pantalla_principal);
-
+        panel_pantalla_principal.setFocusable(true);
+        panel_pantalla_principal.requestFocusInWindow(); // Solicita el foco
         refrescar();
     }
 
@@ -93,30 +103,32 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
     }
 
     public void mostrar_pantalla_mapa() {
-       // ventana.getContentPane().removeAll();
         ventana.setContentPane(panel_pantalla_mapa);
         refrescar();
     }
-
-    // Método para mostrar la pantalla de ayuda
-    public void accionar_pantalla_ayuda() {
+    
+    public void mostrar_pantalla_ayuda() {
         ventana.setContentPane(panel_pantalla_ayuda);
+        refrescar();
+    }
+
+    @Override
+    public void accionar_pantalla_ranking() {
+        ventana.setContentPane(panel_pantalla_ranking);
+        refrescar();
+    }
+
+    @Override
+    public void accionar_pantalla_modo_juego() {
+        ventana.setContentPane(panel_pantalla_modo_de_juego);
+        panel_pantalla_modo_de_juego.setFocusable(true);
+        panel_pantalla_modo_de_juego.requestFocusInWindow(); // Solicita el foco
         refrescar();
     }
 
     protected void refrescar() {
         ventana.revalidate();
         ventana.repaint();
-    }
-
-    @Override
-    public void accionar_pantalla_puntajes() {
-        // TODO Auto-generated method stub
-    }
-
-    @Override
-    public void accionar_pantalla_modo_juego() {
-        // TODO Auto-generated method stub
     }
 
     @Override
@@ -137,9 +149,35 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
     }
 
     @Override
-    public void mostrar_pantalla_fin_juego() {
+    public void mostrar_pantalla_ranking() {
+        // Este método no es necesario, ya que se maneja a través de accionar_pantalla_ranking <- REVISAR
+    }
+
+    @Override
+    public void mostrar_pantalla_modo_de_juego() {
+        // Este método no es necesario, ya que se maneja a través de accionar_pantalla_modo_juego <- REVISAR
+    }
+
+    @Override
+    public void mostrar_pantalla_victoria() {
         // TODO Auto-generated method stub
     }
 
-    // Otros métodos de la interfaz
+    @Override
+    public void mostrar_pantalla_derrota() {
+        // TODO Auto-generated method stub
+    }
+
+	@Override
+	public void accionar_pantalla_victoria() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void accionar_pantalla_derrota() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

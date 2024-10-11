@@ -1,41 +1,45 @@
 package gui;
 
-import java.awt.Dimension;
-import java.awt.Image;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
 
-public class PanelPantallaAyuda extends JPanel {
+public class PanelPantallaRanking extends JPanel {
 
     private static final long serialVersionUID = 1L;
     private ControladorDeVistas controlador_vistas;
     private JLabel imagen_fondo;
     private JButton boton_volver;
 
-    public PanelPantallaAyuda(ControladorDeVistas controlador_vistas) {
+    public PanelPantallaRanking(ControladorDeVistas controlador_vistas) {
         this.controlador_vistas = controlador_vistas;
         setSize(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
         setLayout(null);
+        
         agregar_imagen_fondo();
+        mostrar_ranking(); // Llamar a un método que muestra los puntajes
         agregar_boton_volver();
     }
 
     protected void agregar_imagen_fondo() {
         imagen_fondo = new JLabel();
-        ImageIcon icono_imagen = new ImageIcon(this.getClass().getResource("/assets/imagenes/pantalla-ayuda.png"));
+        ImageIcon icono_imagen = new ImageIcon(this.getClass().getResource("/assets/imagenes/pantalla-ranking.png")); // Reemplaza con tu imagen
         Image imagen_escalada = icono_imagen.getImage().getScaledInstance(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO, Image.SCALE_SMOOTH);
         Icon icono_imagen_escalado = new ImageIcon(imagen_escalada);
         imagen_fondo.setIcon(icono_imagen_escalado);
-        setPreferredSize(new Dimension(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO));
         imagen_fondo.setBounds(0, 0, ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
         add(imagen_fondo);
     }
 
+    protected void mostrar_ranking() {
+        // lógica para mostrar el ranking
+        JLabel puntajesLabel = new JLabel("<html>1. Jugador1: 100<br>2. Jugador2: 90<br>3. Jugador3: 80</html>");
+        puntajesLabel.setBounds(50, 50, 300, 200); // Ajustar las coordenadas y tamaño según sea necesario
+        add(puntajesLabel);
+    }
+
     protected void agregar_boton_volver() {
-    	boton_volver = new JButton(" ");
+        boton_volver = new JButton(" ");
+        boton_volver = new JButton(" ");
         boton_volver.setOpaque(false);
         boton_volver.setContentAreaFilled(false);
         boton_volver.setBorderPainted(false);

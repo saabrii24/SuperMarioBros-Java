@@ -4,9 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import entidades.*;
 import fabricas.EntidadesFactory;
-import fabricas.Sprite;
 import logica.Mapa;
 
 /**
@@ -95,7 +93,6 @@ public class GeneradorNivel {
         String[] coordenadas = valor.split(",");
         int x = Integer.parseInt(coordenadas[0].trim());
         int y = Integer.parseInt(coordenadas[1].trim());
-        Sprite fondo = new Sprite("/assets/imagenes/background.png");
         /**
         for (int x = 0; x < fondo.get_ancho(); x++) {
             for (int y = 0; y < fondo.get_alto(); y++) {

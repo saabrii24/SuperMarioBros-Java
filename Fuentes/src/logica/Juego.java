@@ -17,9 +17,9 @@ public class Juego implements Runnable {
     protected Mapa mapa_nivel_actual;
     protected int tiempo_restante;
     protected int contador_puntos;
-    public int vidas = 3;
-    private boolean estaEjecutando;
-    private Thread hilo;
+    protected int vidas = 3;
+    protected boolean esta_ejecutando;
+    protected Thread hilo;
 
     public Juego() {
         iniciar();
@@ -29,12 +29,10 @@ public class Juego implements Runnable {
         mapa_nivel_actual = new Mapa(this);
         fabrica_sprites = new Dominio1Factory();
         fabrica_entidades = new EntidadesFactory(fabrica_sprites);
-        
-        // Inicializa el controlador de vistas pasando el objeto Juego actual
         controlador_vistas = new ControladorDeVistas(this);
  
-        if (estaEjecutando) return;
-        estaEjecutando = true;
+        if (esta_ejecutando) return;
+        esta_ejecutando = true;
         hilo = new Thread(this);
         hilo.start();
     }
@@ -72,25 +70,15 @@ public class Juego implements Runnable {
         double ns = 1000000000 / cantidadTicks;
         double delta = 0;
 
-        while (estaEjecutando) {
+        while (esta_ejecutando) {
             long ahora = System.nanoTime();
             delta += (ahora - ultimoTiempo) / ns;
             ultimoTiempo = ahora;
 
             while (delta >= 1) {
-                actualizarLogica();
                 delta--;
             }
-            renderizar();
         }
-    }
-
-    private void actualizarLogica() {
-        // Actualiza la lógica del juego aquí (por ejemplo, mover entidades, detectar colisiones)
-    }
-
-    private void renderizar() {
-        // Aquí puedes llamar a un método del controlador para actualizar la vista, si es necesario
     }
 
     public static void main(String[] args) {

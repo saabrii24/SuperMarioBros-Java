@@ -25,11 +25,11 @@ public class PanelPantallaPrincipal extends JPanel {
         MODO_DE_JUEGO,
         RANKING;
 
-        public MenuOpciones next() {
+        public MenuOpciones siguiente() {
             return values()[(ordinal() + 1) % values().length];
         }
 
-        public MenuOpciones previous() {
+        public MenuOpciones anterior() {
             return values()[(ordinal() - 1 + values().length) % values().length];
         }
     }
@@ -39,7 +39,7 @@ public class PanelPantallaPrincipal extends JPanel {
         this.opcionActual = MenuOpciones.COMENZAR_JUEGO;
         setSize(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
         setLayout(null);
-
+        
         agregar_icono_seleccion();
         agregar_boton_iniciar();
         agregar_boton_puntaje();
@@ -47,6 +47,7 @@ public class PanelPantallaPrincipal extends JPanel {
         agregar_boton_ayuda();
         agregar_imagen_fondo();
         actualizar_icono_seleccion();
+        
     }
 
     protected void agregar_imagen_fondo() {
@@ -95,17 +96,17 @@ public class PanelPantallaPrincipal extends JPanel {
     }
 
     protected void agregar_boton_puntaje() {
-        boton_puntajes = new JButton("Ranking");
+        boton_puntajes = new JButton(" ");
         transparentar_boton(boton_puntajes);
-        boton_puntajes.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 180, ConstantesVistas.PANEL_ALTO - 255, 360, 50);
+        boton_puntajes.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 180, ConstantesVistas.PANEL_ALTO - 195, 350, 50);
         registrar_oyente_boton_puntajes();
         add(boton_puntajes);
     }
 
     protected void agregar_boton_modo_de_juego() {
-        boton_modo_de_juego = new JButton("Modo de Juego");
+        boton_modo_de_juego = new JButton(" ");
         transparentar_boton(boton_modo_de_juego);
-        boton_modo_de_juego.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 180, ConstantesVistas.PANEL_ALTO - 195, 350, 50);
+        boton_modo_de_juego.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 180, ConstantesVistas.PANEL_ALTO - 255, 360, 50);
         boton_modo_de_juego.addActionListener(e -> controlador_vistas.accionar_pantalla_modo_juego());
         add(boton_modo_de_juego);
     }
@@ -114,7 +115,7 @@ public class PanelPantallaPrincipal extends JPanel {
         boton_ayuda = new JButton(" ");
         transparentar_boton(boton_ayuda);
         boton_ayuda.setBounds(ConstantesVistas.PANEL_ANCHO - 180, 15, 150, 50);
-        boton_ayuda.addActionListener(e -> controlador_vistas.accionar_pantalla_ayuda());
+        boton_ayuda.addActionListener(e -> controlador_vistas.mostrar_pantalla_ayuda());
         add(boton_ayuda);
     }
 
@@ -123,7 +124,7 @@ public class PanelPantallaPrincipal extends JPanel {
     }
 
     protected void registrar_oyente_boton_puntajes() {
-        boton_puntajes.addActionListener(e -> controlador_vistas.accionar_pantalla_puntajes());
+        boton_puntajes.addActionListener(e -> controlador_vistas.accionar_pantalla_ranking());
     }
 
     protected void transparentar_boton(JButton boton) {
@@ -132,11 +133,11 @@ public class PanelPantallaPrincipal extends JPanel {
         boton.setBorderPainted(false);
     }
 
-    protected void mover_seleccion(boolean haciaArriba) {
-        if (haciaArriba) {
-            opcionActual = opcionActual.previous();
+    protected void mover_seleccion(boolean hacia_arriba) {
+        if (hacia_arriba) {
+            opcionActual = opcionActual.anterior();
         } else {
-            opcionActual = opcionActual.next();
+            opcionActual = opcionActual.siguiente();
         }
         actualizar_icono_seleccion();
     }
@@ -150,7 +151,7 @@ public class PanelPantallaPrincipal extends JPanel {
                 controlador_vistas.accionar_pantalla_modo_juego();
                 break;
             case RANKING:
-                controlador_vistas.accionar_pantalla_puntajes();
+                controlador_vistas.accionar_pantalla_ranking();
                 break;
         }
     }

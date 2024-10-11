@@ -18,12 +18,12 @@ public class PanelPantallaMapa extends JPanel {
 
     private static final long serialVersionUID = -1366756178696496543L;
     private JLabel imagen_fondo;
-    private JPanel panel_informacion; // Este panel se usará para los labels
+    private JPanel panel_informacion;
     private JLabel label_puntaje;
     private JLabel label_monedas;
     private JLabel label_nivel;
-    private JLabel label_tiempo; // Nueva etiqueta para mostrar el tiempo
-    private JLabel label_vidas;  // Nueva etiqueta para mostrar las vidas
+    private JLabel label_tiempo; 
+    private JLabel label_vidas;  
 
     /**
      * Constructor que inicializa el panel de pantalla del mapa.

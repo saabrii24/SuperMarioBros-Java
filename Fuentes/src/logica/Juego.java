@@ -32,10 +32,7 @@ public class Juego implements Runnable {
         
         // Inicializa el controlador de vistas pasando el objeto Juego actual
         controlador_vistas = new ControladorDeVistas(this);
-        
-        // Mostrar la pantalla inicial a través del controlador de vistas
-        controlador_vistas.mostrar_pantalla_inicial();
-
+ 
         if (estaEjecutando) return;
         estaEjecutando = true;
         hilo = new Thread(this);

@@ -38,7 +38,6 @@ public class PanelPantallaMapa extends JPanel {
     public PanelPantallaMapa() {
         setPreferredSize(new Dimension(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO));
         setLayout(new BorderLayout());
-        agregar_panel_informacion();
         agregar_panel_mapa_con_fondo();
     }
 
@@ -152,31 +151,6 @@ public class PanelPantallaMapa extends JPanel {
         panel_mapa = new JPanel(null);
         panel_mapa.setPreferredSize(new Dimension(ConstantesVistas.PANEL_MAPA_ANCHO, ConstantesVistas.PANEL_ALTO));
         panel_mapa.add(imagen_fondo_panel_mapa);
-    }
-
-    /**
-     * Agrega el panel de información en el lado derecho de la pantalla.
-     */
-    protected void agregar_panel_informacion() {
-        panel_informacion = new JPanel();
-        panel_informacion.setLayout(null);
-        panel_informacion.setPreferredSize(new Dimension(ConstantesVistas.PANEL_INFORMACION_ANCHO, ConstantesVistas.PANEL_ALTO));
-        agregar_imagen_fondo_panel_informacion();
-        agregar_labels_editables_informacion();
-        add(panel_informacion, BorderLayout.EAST);
-    }
-
-    /**
-     * Agrega una imagen de fondo al panel de información.
-     */
-    protected void agregar_imagen_fondo_panel_informacion() {
-        imagen_fondo_panel_informacion = new JLabel();
-        ImageIcon icono_imagen = new ImageIcon(this.getClass().getResource("/imagenes/pantalla-informacion.png"));
-        Image imagen_escalada = icono_imagen.getImage().getScaledInstance(ConstantesVistas.PANEL_INFORMACION_ANCHO, ConstantesVistas.PANEL_ALTO, Image.SCALE_SMOOTH);
-        Icon icono_imagen_escalado = new ImageIcon(imagen_escalada);
-        imagen_fondo_panel_informacion.setIcon(icono_imagen_escalado);
-        imagen_fondo_panel_informacion.setBounds(0, 0, ConstantesVistas.PANEL_INFORMACION_ANCHO, ConstantesVistas.PANEL_ALTO);
-        panel_informacion.add(imagen_fondo_panel_informacion);
     }
 
     /**

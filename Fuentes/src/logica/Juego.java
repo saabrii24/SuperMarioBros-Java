@@ -5,19 +5,17 @@ import entidades.mario.Mario;
 import fabricas.*;
 import gui.ConstantesVistas;
 import gui.ControladorDeVistas;
-import gui.ControladorEntreJuegoVista;
 import gui.PanelPantallaPrincipal; // Importa tu clase PanelPantallaPrincipal
 import niveles.GeneradorNivel;
 import niveles.Nivel;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.List;
 
 public class Juego implements Runnable {
 
-    private static final int ANCHO = ConstantesVistas.VENTANA_ANCHO;
-    private static final int ALTO = ConstantesVistas.VENTANA_ALTO;
+    private static final int ANCHO = ConstantesVistas.VENTANA_ANCHO; // Usar la constante
+    private static final int ALTO = ConstantesVistas.VENTANA_ALTO; // Usar la constante
     protected ControladorDeVistas controlador_vistas;
     protected Nivel nivel_actual;
     protected SpritesFactory fabrica_sprites;
@@ -32,22 +30,25 @@ public class Juego implements Runnable {
     private PanelPantallaPrincipal panelPantallaPrincipal; // Nueva variable para el panel principal
 
     public Juego() {
-        init();
-        mostrarVentanaJuego();
+        iniciar();
     }
 
-    private void init() {
+    private void iniciar() {
         mapa_nivel_actual = new Mapa(this);
         fabrica_sprites = new Dominio1Factory();
         fabrica_entidades = new EntidadesFactory(fabrica_sprites);
-        cargarDatos(fabrica_entidades);
+        //cargar_datos(fabrica_entidades);
+        
+        // Inicializa el controlador de vistas pasando el objeto Juego actual
+        controlador_vistas = new ControladorDeVistas(this);
+        mostrar_ventana_juego();
         if (estaEjecutando) return;
         estaEjecutando = true;
         hilo = new Thread(this);
         hilo.start();
     }
 
-    private void mostrarVentanaJuego() {
+    private void mostrar_ventana_juego() {
         ventanaJuego = new JFrame("Super Mario Bros.");
         ventanaJuego.setSize(ANCHO, ALTO);
         ventanaJuego.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -57,12 +58,15 @@ public class Juego implements Runnable {
         // Crear el panel principal del juego y añadirlo al JFrame
         panelPantallaPrincipal = new PanelPantallaPrincipal(controlador_vistas);
         ventanaJuego.add(panelPantallaPrincipal);
-
-        ventanaJuego.setVisible(true);
-        ventanaJuego.pack();
+        
+        ventanaJuego.pack(); // Empaqueta los componentes
+        ventanaJuego.setVisible(true); // Finalmente muestra la ventana
+        panelPantallaPrincipal.revalidate(); // Asegura que los componentes se actualicen correctamente
+        panelPantallaPrincipal.repaint(); // Fuerza un repintado del panel
     }
 
-    public void cargarDatos(EntidadesFactory generador) {
+
+    public void cargar_datos(EntidadesFactory generador) {
         nivel_actual = GeneradorNivel.cargar_nivel_y_mapa(
                 getClass().getResourceAsStream("/niveles/nivel-1.txt"),
                 generador,

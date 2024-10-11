@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,6 +36,7 @@ public class PanelPantallaPrincipal extends JPanel {
         this.controlador_vistas = controlador_vistas;
         this.opcionActual = MenuOption.START_GAME;
         setSize(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
+        
         setLayout(null);
         agregar_imagen_fondo();
         agregar_boton_iniciar();
@@ -48,6 +50,8 @@ public class PanelPantallaPrincipal extends JPanel {
         Image imagen_escalada = icono_imagen.getImage().getScaledInstance(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO, Image.SCALE_SMOOTH);
         Icon icono_imagen_escalado = new ImageIcon(imagen_escalada);
         imagen_fondo.setIcon(icono_imagen_escalado);
+        setPreferredSize(new Dimension(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO));
+
         imagen_fondo.setBounds(0, 0, ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
         add(imagen_fondo);
     }

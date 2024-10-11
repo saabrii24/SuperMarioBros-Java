@@ -38,9 +38,9 @@ public class PanelPantallaPrincipal extends JPanel {
         setSize(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
         
         setLayout(null);
-        agregar_imagen_fondo();
         agregar_boton_iniciar();
         agregar_boton_puntaje();
+        agregar_imagen_fondo();
         actualizarSeleccion();
     }
 
@@ -57,14 +57,14 @@ public class PanelPantallaPrincipal extends JPanel {
     }
 
     protected void agregar_boton_iniciar() {
-        boton_iniciar = new JButton("Iniciar Juego");
+        boton_iniciar = new JButton("Comenzar Juego");
         decorar_boton_iniciar();
         registrar_oyente_boton_iniciar();
         add(boton_iniciar);
     }
 
     protected void agregar_boton_puntaje() {
-        boton_puntajes = new JButton("Ver Puntajes");
+        boton_puntajes = new JButton("Ranking");
         decorar_boton_puntajes();
         registrar_oyente_boton_puntajes();
         add(boton_puntajes);
@@ -72,12 +72,12 @@ public class PanelPantallaPrincipal extends JPanel {
 
     protected void decorar_boton_iniciar() {
         transparentar_boton(boton_iniciar);
-        boton_iniciar.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 100, ConstantesVistas.PANEL_ALTO - 150, 200, 50);
+        boton_iniciar.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 180, ConstantesVistas.PANEL_ALTO - 320, 350, 50);
     }
 
     protected void decorar_boton_puntajes() {
         transparentar_boton(boton_puntajes);
-        boton_puntajes.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 130, ConstantesVistas.PANEL_ALTO - 90, 260, 50);
+        boton_puntajes.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 180, ConstantesVistas.PANEL_ALTO - 250, 360, 50);
     }
 
     protected void registrar_oyente_boton_iniciar() {

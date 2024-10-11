@@ -6,5 +6,6 @@ public interface EntidadJugador extends EntidadLogica {
 	int get_monedas();
 	int get_nivel();
 	int get_tiempo();
+	int get_vidas();
 
 }

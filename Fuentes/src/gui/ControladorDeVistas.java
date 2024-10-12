@@ -27,8 +27,8 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
     protected PanelPantallaPrincipal panel_pantalla_principal;
     protected PanelPantallaMapa panel_pantalla_mapa;
     protected PanelPantallaAyuda panel_pantalla_ayuda; 
-    protected PanelPantallaRanking panel_pantalla_ranking; // Nueva instancia para el ranking
-    protected PanelPantallaModoDeJuego panel_pantalla_modo_de_juego; // Nueva instancia para el modo de juego
+    protected PanelPantallaRanking panel_pantalla_ranking;
+    protected PanelPantallaModoDeJuego panel_pantalla_modo_de_juego; 
     protected Juego juego;
     protected EntidadesFactory generador;
 
@@ -37,8 +37,8 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
         panel_pantalla_principal = new PanelPantallaPrincipal(this);
         panel_pantalla_mapa = new PanelPantallaMapa();
         panel_pantalla_ayuda = new PanelPantallaAyuda(this); 
-        panel_pantalla_ranking = new PanelPantallaRanking(this); // Inicializar el panel de ranking
-        panel_pantalla_modo_de_juego = new PanelPantallaModoDeJuego(this); // Inicializar el panel de modo de juego
+        panel_pantalla_ranking = new PanelPantallaRanking(this); 
+        panel_pantalla_modo_de_juego = new PanelPantallaModoDeJuego(this); 
         configurar_ventana();
         mostrar_pantalla_inicial();
         registrar_oyente_panel_principal();
@@ -103,7 +103,7 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
     public void mostrar_pantalla_inicial() {
         ventana.setContentPane(panel_pantalla_principal);
         panel_pantalla_principal.setFocusable(true);
-        panel_pantalla_principal.requestFocusInWindow(); // Solicita el foco
+        panel_pantalla_principal.requestFocusInWindow(); 
         refrescar();
     }
 
@@ -149,8 +149,10 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
 
     @Override
     public Observer registrar_entidad(EntidadLogica entidad_logica) {
-        // TODO Auto-generated method stub
-        return null;
+    	Observer observer_entidad = panel_pantalla_mapa.incorporar_entidad(entidad_logica);
+    	System.out.println("aaa");
+		refrescar();
+		return observer_entidad;
     }
 
     @Override

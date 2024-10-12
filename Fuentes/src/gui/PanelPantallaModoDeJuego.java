@@ -2,13 +2,9 @@ package gui;
 
 import java.awt.Dimension;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -135,15 +131,16 @@ public class PanelPantallaModoDeJuego extends JPanel {
         case MARIO:
         	SpritesFactory fabrica_mario = new Dominio1Factory();
         	generador = new EntidadesFactory(fabrica_mario);
-        	controlador_vistas.mostrar_pantalla_mapa();
+        	
         	controlador_vistas.notificar_eleccion(generador);
-        	repaint();
+        	
+        	controlador_vistas.mostrar_pantalla_mapa();
+
             break;
         case LUIGI:
             SpritesFactory fabrica_luigi = new Dominio2Factory();
-            controlador_vistas.mostrar_pantalla_mapa();
             generador = new EntidadesFactory(fabrica_luigi);
-            repaint();
+            controlador_vistas.mostrar_pantalla_mapa();
             break;
 
     }

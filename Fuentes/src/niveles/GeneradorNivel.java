@@ -91,8 +91,13 @@ public class GeneradorNivel {
      */
     private static void procesar_entidad(String tipo_de_entidad, String valor, EntidadesFactory generador, Mapa mapa) {
         String[] coordenadas = valor.split(",");
+        if (coordenadas.length < 2) {
+            System.err.println("Error: Las coordenadas para " + tipo_de_entidad + " no están bien formadas: " + valor);
+            return; // Salir del método si las coordenadas son incorrectas
+        }
         int x = Integer.parseInt(coordenadas[0].trim());
-        int y = Integer.parseInt(coordenadas[1].trim());
+        int y = Integer.parseInt(coordenadas[1].trim());  
+        System.out.println("Agregando entidad: " + tipo_de_entidad + " en (" + x + ", " + y + ")");
         /**
         for (int x = 0; x < fondo.get_ancho(); x++) {
             for (int y = 0; y < fondo.get_alto(); y++) {

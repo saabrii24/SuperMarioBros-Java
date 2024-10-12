@@ -2,11 +2,19 @@ package gui;
 
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+
+import fabricas.Dominio1Factory;
+import fabricas.Dominio2Factory;
+import fabricas.EntidadesFactory;
+import fabricas.SpritesFactory;
 import logica.EntidadJugador;
 import logica.EntidadLogica;
 import logica.Juego;
@@ -15,12 +23,14 @@ import logica.Observer;
 public class ControladorDeVistas implements ControladorEntreJuegoVista, ControladorJuegoVista {
     protected JFrame ventana;
     protected Font tipografia;
+    protected JComboBox<SpritesFactory> combo_box;
     protected PanelPantallaPrincipal panel_pantalla_principal;
     protected PanelPantallaMapa panel_pantalla_mapa;
     protected PanelPantallaAyuda panel_pantalla_ayuda; 
     protected PanelPantallaRanking panel_pantalla_ranking; // Nueva instancia para el ranking
     protected PanelPantallaModoDeJuego panel_pantalla_modo_de_juego; // Nueva instancia para el modo de juego
     protected Juego juego;
+    protected EntidadesFactory generador;
 
     public ControladorDeVistas(Juego juego) {
         this.juego = juego;
@@ -99,7 +109,7 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
 
     public void accionar_inicio_juego() {
         // juego.cargar_datos(new EntidadesFactory(new Dominio1Factory())); // Cargar los datos
-        mostrar_pantalla_mapa();
+        
     }
 
     public void mostrar_pantalla_mapa() {
@@ -123,8 +133,9 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
         ventana.setContentPane(panel_pantalla_modo_de_juego);
         panel_pantalla_modo_de_juego.setFocusable(true);
         panel_pantalla_modo_de_juego.requestFocusInWindow(); // Solicita el foco
-        refrescar();
-    }
+        refrescar();        
+        }
+    
 
     protected void refrescar() {
         ventana.revalidate();
@@ -178,6 +189,10 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
 	public void accionar_pantalla_derrota() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public void notificar_eleccion(EntidadesFactory generador) {
+		juego.cargar_datos(generador);		
 	}
 
 }

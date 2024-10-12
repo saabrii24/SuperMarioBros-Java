@@ -145,7 +145,7 @@ public class PanelPantallaPrincipal extends JPanel {
     protected void ejecutar_accion_seleccionada() {
         switch (opcionActual) {
             case COMENZAR_JUEGO:
-                controlador_vistas.accionar_inicio_juego();
+            	controlador_vistas.accionar_pantalla_modo_juego();
                 break;
             case MODO_DE_JUEGO:
                 controlador_vistas.accionar_pantalla_modo_juego();

@@ -2,11 +2,20 @@ package gui;
 
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import fabricas.Dominio1Factory;
+import fabricas.Dominio2Factory;
+import fabricas.EntidadesFactory;
+import fabricas.SpritesFactory;
 
 public class PanelPantallaModoDeJuego extends JPanel {
 
@@ -18,6 +27,7 @@ public class PanelPantallaModoDeJuego extends JPanel {
     private JButton boton_luigi; 
     private JButton boton_volver; 
     private MenuOpciones opcionActual;
+    private EntidadesFactory generador;
 
     public enum MenuOpciones {
         MARIO,
@@ -123,10 +133,17 @@ public class PanelPantallaModoDeJuego extends JPanel {
 	public void ejecutar_accion_seleccionada() {
         switch (opcionActual) {
         case MARIO:
-        	// Logica para fabricar entidades con imagenes del dominio 1
+        	SpritesFactory fabrica_mario = new Dominio1Factory();
+        	generador = new EntidadesFactory(fabrica_mario);
+        	controlador_vistas.mostrar_pantalla_mapa();
+        	controlador_vistas.notificar_eleccion(generador);
+        	repaint();
             break;
         case LUIGI:
-            // Logica para fabricar entidades con imagenes del dominio 2
+            SpritesFactory fabrica_luigi = new Dominio2Factory();
+            controlador_vistas.mostrar_pantalla_mapa();
+            generador = new EntidadesFactory(fabrica_luigi);
+            repaint();
             break;
 
     }

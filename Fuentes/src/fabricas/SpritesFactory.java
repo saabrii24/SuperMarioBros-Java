@@ -1,6 +1,6 @@
 package fabricas;
 
-public class SpritesFactory {
+public abstract class SpritesFactory {
     private String ruta_a_carpeta;
 
     public SpritesFactory(String ruta_a_carpeta) {

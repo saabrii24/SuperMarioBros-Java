@@ -20,6 +20,7 @@ public class Juego implements Runnable {
     protected int vidas = 3;
     protected boolean esta_ejecutando;
     protected Thread hilo;
+    protected EntidadesFactory generador;
 
     public Juego() {
         iniciar();
@@ -61,6 +62,10 @@ public class Juego implements Runnable {
             Observer observer = controlador_vistas.registrar_entidad(entidad);
             entidad.registrar_observer(observer);
         }
+    }
+    
+    public void set_generador(EntidadesFactory generador) {
+    	this.generador = generador;
     }
 
     @Override

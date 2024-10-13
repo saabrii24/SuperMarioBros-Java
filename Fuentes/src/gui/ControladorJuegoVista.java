@@ -6,5 +6,4 @@ public interface ControladorJuegoVista {
 	public void accionar_pantalla_victoria();
 	public void accionar_pantalla_derrota();
 	public void accionar_pantalla_modo_juego();
-	public void cambiar_modo_juego(int modo);
 }

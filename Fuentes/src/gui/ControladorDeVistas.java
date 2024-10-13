@@ -23,11 +23,11 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
     protected PanelPantallaAyuda panel_pantalla_ayuda; 
     protected PanelPantallaRanking panel_pantalla_ranking;
     protected PanelPantallaModoDeJuego panel_pantalla_modo_de_juego; 
-    protected Juego juego;
+    protected Juego mi_juego;
     protected EntidadesFactory generador;
 
     public ControladorDeVistas(Juego juego) {
-        this.juego = juego;
+        mi_juego = juego;
         panel_pantalla_principal = new PanelPantallaPrincipal(this);
         panel_pantalla_mapa = new PanelPantallaMapa();
         panel_pantalla_ayuda = new PanelPantallaAyuda(this); 
@@ -136,11 +136,6 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
     }
 
     @Override
-    public void cambiar_modo_juego(int modo) {
-        // TODO Auto-generated method stub
-    }
-
-    @Override
     public Observer registrar_entidad(EntidadLogica entidad_logica) {
     	Observer observer_entidad = panel_pantalla_mapa.incorporar_entidad(entidad_logica);
     	System.out.println("aaa");
@@ -152,26 +147,6 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
     public Observer registrar_entidad(EntidadJugador entidad_jugador) {
         // TODO Auto-generated method stub
         return null;
-    }
-
-    @Override
-    public void mostrar_pantalla_ranking() {
-        // Este método no es necesario, ya que se maneja a través de accionar_pantalla_ranking <- REVISAR
-    }
-
-    @Override
-    public void mostrar_pantalla_modo_de_juego() {
-        // Este método no es necesario, ya que se maneja a través de accionar_pantalla_modo_juego <- REVISAR
-    }
-
-    @Override
-    public void mostrar_pantalla_victoria() {
-        // TODO Auto-generated method stub
-    }
-
-    @Override
-    public void mostrar_pantalla_derrota() {
-        // TODO Auto-generated method stub
     }
 
 	@Override
@@ -187,7 +162,7 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
 	}
 
 	public void notificar_eleccion(EntidadesFactory generador) {
-		juego.cargar_datos(generador);		
+		mi_juego.cargar_datos(generador);		
 	}
 
 }

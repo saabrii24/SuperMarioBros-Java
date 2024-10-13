@@ -8,11 +8,11 @@ public abstract class SpritesFactory {
     }
 
     private Sprite cargarSprite(String nombreArchivo) {
-        return new Sprite(ruta_a_carpeta + "/" + nombreArchivo);
+        return new Sprite(ruta_a_carpeta + nombreArchivo);
     }
 
     public Sprite get_mario() {
-        return cargarSprite("mario.png");
+        return cargarSprite("ocioso_derecha.png");
     }
 
     public Sprite get_goomba() {
@@ -48,7 +48,7 @@ public abstract class SpritesFactory {
     }
 
     public Sprite get_estrella() {
-        return cargarSprite("estrella.png");
+        return cargarSprite("estrella.gif");
     }
 
     public Sprite get_champi_verde() {

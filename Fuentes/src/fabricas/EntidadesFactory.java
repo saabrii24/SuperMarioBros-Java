@@ -15,7 +15,8 @@ public class EntidadesFactory {
     }
 
     public Mario get_mario(int x, int y) {
-        return Mario.get_instancia();
+    	Sprite sprite_mario = fabrica_sprites.get_mario();
+        return new Mario(x, y , sprite_mario);
     }
 
     public Goomba get_goomba(int x, int y) {

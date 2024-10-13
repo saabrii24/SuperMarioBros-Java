@@ -4,10 +4,14 @@ import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.imageio.ImageIO;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 
+import entidades.Entidad;
 import fabricas.EntidadesFactory;
 import fabricas.SpritesFactory;
 import logica.EntidadJugador;
@@ -25,6 +29,7 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
     protected PanelPantallaModoDeJuego panel_pantalla_modo_de_juego; 
     protected Juego mi_juego;
     protected EntidadesFactory generador;
+    
 
     public ControladorDeVistas(Juego juego) {
         mi_juego = juego;
@@ -102,7 +107,6 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
     }
 
     public void accionar_inicio_juego() {
-        // juego.cargar_datos(new EntidadesFactory(new Dominio1Factory())); // Cargar los datos
     	accionar_pantalla_modo_juego();
     }
 
@@ -135,18 +139,18 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
         ventana.repaint();
     }
 
-    @Override
     public Observer registrar_entidad(EntidadLogica entidad_logica) {
-    	Observer observer_entidad = panel_pantalla_mapa.incorporar_entidad(entidad_logica);
-    	System.out.println("aaa");
-		refrescar();
-		return observer_entidad;
+        Observer observer_entidad = panel_pantalla_mapa.incorporar_entidad(entidad_logica);
+        refrescar();
+        return observer_entidad;
     }
+
 
     @Override
     public Observer registrar_entidad(EntidadJugador entidad_jugador) {
-        // TODO Auto-generated method stub
-        return null;
+    	Observer observer_jugador = panel_pantalla_mapa.incorporar_entidad(entidad_jugador);
+    	refrescar();
+        return observer_jugador;
     }
 
 	@Override
@@ -162,7 +166,10 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
 	}
 
 	public void notificar_eleccion(EntidadesFactory generador) {
-		mi_juego.cargar_datos(generador);		
-	}
+		mi_juego.cargar_datos(generador);
+		mi_juego.registrar_observers();
+		
+		}
+	
 
 }

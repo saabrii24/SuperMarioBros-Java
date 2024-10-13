@@ -1,6 +1,7 @@
 package logica;
 
 import entidades.Entidad;
+import entidades.enemigos.Enemigo;
 import entidades.mario.Mario;
 import fabricas.*;
 import gui.ControladorDeVistas;
@@ -47,13 +48,17 @@ public class Juego implements Runnable {
         fabrica_entidades = generador;
     }
 
-    protected void registrar_observers() {
+   public void registrar_observers() {
+	   System.out.println(mapa_nivel_actual.get_mario().get_sprite());
         registrar_observer_jugador(mapa_nivel_actual.get_mario());
-        registrar_observers_para_entidades(mapa_nivel_actual.get_entidades());
+        registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_enemigo());
+        registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_powerup());
+        registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_plataforma());
     }
 
     protected void registrar_observer_jugador(Mario jugador_mario) {
         Observer observer_jugador = controlador_vistas.registrar_entidad(jugador_mario);
+        System.out.println(jugador_mario.get_sprite());
         jugador_mario.registrar_observer(observer_jugador);
     }
 
@@ -84,6 +89,10 @@ public class Juego implements Runnable {
                 delta--;
             }
         }
+    }
+    
+    public Mapa get_mapa() {
+    	return mapa_nivel_actual;
     }
 
     public static void main(String[] args) {

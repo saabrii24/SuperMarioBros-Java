@@ -18,6 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
+
+import entidades.Entidad;
 import logica.*;
 
 /**
@@ -59,8 +61,12 @@ public class PanelPantallaMapa extends JPanel {
 	// Operaciones para ControladorVistas
 
     public Observer incorporar_entidad(EntidadLogica entidad_logica) {
+        if (entidad_logica == null || entidad_logica.get_sprite() == null) {
+            System.err.println("Error: La entidad o su sprite son nulos.");
+            return null; // Salimos si la entidad o el sprite es nulo
+        }
         ObserverEntidades observer_entidad = new ObserverEntidades(entidad_logica);
-        imagen_fondo.add(observer_entidad); // Cambié de imagen_fondo a mapaPanel
+        imagen_fondo.add(observer_entidad);
         return observer_entidad;
     }
 

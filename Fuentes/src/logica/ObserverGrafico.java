@@ -13,6 +13,7 @@ public abstract class ObserverGrafico extends JLabel implements Observer{
 	
 	protected ObserverGrafico(EntidadLogica entidad_observada) {
 		super();
+		System.out.println("entre al observer grafico: " + entidad_observada.get_sprite());
 		this.entidad_observada = entidad_observada;
 	}
 	
@@ -22,8 +23,9 @@ public abstract class ObserverGrafico extends JLabel implements Observer{
 	}
 	
 	protected void actualizar_imagen() {
+		System.out.println("entre al observer grafico, al metodo actualizar imagen : " + entidad_observada.get_sprite().get_ruta_imagen());
 		String ruta_imagen = entidad_observada.get_sprite().get_ruta_imagen();
-		ImageIcon icono = new ImageIcon(getClass().getClassLoader().getResource(ruta_imagen));
+		ImageIcon icono = new ImageIcon(getClass().getResource("/" + ruta_imagen));
 		setIcon(icono);
 	}
 	

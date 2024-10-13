@@ -13,7 +13,7 @@ public class Mario extends Entidad{
     private int monedas;
     private static Sprite sprite;
 
-    private Mario(int x, int y, Sprite sprite) {
+    public Mario(int x, int y, Sprite sprite) {
     	super(x, y, sprite);
         this.puntaje_acumulado = 0;
         this.monedas = 0;

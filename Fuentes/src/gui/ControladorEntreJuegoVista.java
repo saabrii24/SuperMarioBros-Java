@@ -1,5 +1,6 @@
 package gui;
 
+import entidades.Entidad;
 import logica.*;
 
 public interface ControladorEntreJuegoVista {

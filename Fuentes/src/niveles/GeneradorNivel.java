@@ -53,7 +53,7 @@ public class GeneradorNivel {
                             String[] marioPos = valor.split(",");
                             mario_posicion_en_x = Integer.parseInt(marioPos[0].trim());
                             mario_posicion_en_y = Integer.parseInt(marioPos[1].trim());
-                            mapa.agregar_entidad(generador.get_mario(mario_posicion_en_x, mario_posicion_en_y));
+                            mapa.agregar_mario(generador.get_mario(mario_posicion_en_x, mario_posicion_en_y));;
                             break;
                         case "Mapa":
                             // Implementar la lógica para la creación del mapa si es necesario
@@ -104,34 +104,34 @@ public class GeneradorNivel {
          **/
 		        switch (tipo_de_entidad) {
 		            case "Goomba":
-		                mapa.agregar_entidad(generador.get_goomba(x, y));
+		                mapa.agregar_enemigo(generador.get_goomba(x, y));
 		                break;
 		            case "Koopa":
-		                mapa.agregar_entidad(generador.get_koopa_troopa(x, y));
+		            	mapa.agregar_enemigo(generador.get_koopa_troopa(x, y));
 		                break;
 		            case "Spiny":
-		                mapa.agregar_entidad(generador.get_spiny(x, y));
+		            	mapa.agregar_enemigo(generador.get_spiny(x, y));
 		                break;
 		            case "Lakitu":
-		                mapa.agregar_entidad(generador.get_lakitu(x, y));
+		            	mapa.agregar_enemigo(generador.get_lakitu(x, y));
 		                break;
 		            case "Piranha":
-		                mapa.agregar_entidad(generador.get_piranha_plant(x, y));
+		            	mapa.agregar_enemigo(generador.get_piranha_plant(x, y));
 		                break;
 		            case "Buzzy":
-		                mapa.agregar_entidad(generador.get_buzzy_beetle(x, y));
+		            	mapa.agregar_enemigo(generador.get_buzzy_beetle(x, y));
 		                break;
 		            case "Estrella":
-		                mapa.agregar_entidad(generador.get_estrella(x, y));
+		                mapa.agregar_powerup(generador.get_estrella(x, y));
 		                break;
 		            case "BloqueSolido":
-		                mapa.agregar_entidad(generador.get_bloque_solido(x, y));
+		                mapa.agregar_plataforma(generador.get_bloque_solido(x, y));
 		                break;
 		            case "LadrilloSolido":
-		                mapa.agregar_entidad(generador.get_ladrillo_solido(x, y));
+		                mapa.agregar_plataforma(generador.get_ladrillo_solido(x, y));
 		                break;
 		            case "BloqueDePregunta":
-		                mapa.agregar_entidad(generador.get_bloque_de_pregunta(x, y));
+		                mapa.agregar_plataforma(generador.get_bloque_de_pregunta(x, y));
 		                break;
 		            default:
 		                

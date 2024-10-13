@@ -10,20 +10,20 @@ Tiempo: 100
 
 # Creación de las entidades
 # Mario (x,y)
-Mario: 50, 0
+Mario: 120, 115
 # Enemigos
 Goomba: 100, 0
 Goomba: 120, 0
-Koopa: 120, 50
+Koopa: 120, 100
 
 # PowerUps
 Estrella: 150, 150
 
 # Plataformas
-BloqueSolido: 50, -10
-BloqueSolido: 55, -10
-BloqueSolido: 60, -10
-BloqueSolido: 65, -10
+BloqueSolido: 110, 95
+BloqueSolido: 115, 95
+BloqueSolido: 120, 95
+BloqueSolido: 125, 95
 BloqueDePregunta: 80, 20
 
 

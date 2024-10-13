@@ -16,13 +16,11 @@ public class PanelPantallaPrincipal extends JPanel {
     private JLabel icono_seleccion;
     private JButton boton_iniciar;
     private JButton boton_puntajes;
-    private JButton boton_modo_de_juego; 
     private JButton boton_ayuda; 
     private MenuOpciones opcionActual;
 
     public enum MenuOpciones {
         COMENZAR_JUEGO,
-        MODO_DE_JUEGO,
         RANKING;
 
         public MenuOpciones siguiente() {
@@ -43,7 +41,6 @@ public class PanelPantallaPrincipal extends JPanel {
         agregar_icono_seleccion();
         agregar_boton_iniciar();
         agregar_boton_puntaje();
-        agregar_boton_modo_de_juego();
         agregar_boton_ayuda();
         agregar_imagen_fondo();
         actualizar_icono_seleccion();
@@ -77,11 +74,8 @@ public class PanelPantallaPrincipal extends JPanel {
             case COMENZAR_JUEGO:
                 yOffset = ConstantesVistas.PANEL_ALTO - 320 + 10;
                 break;
-            case MODO_DE_JUEGO:
-                yOffset = ConstantesVistas.PANEL_ALTO - 255 + 10;
-                break;
             case RANKING:
-                yOffset = ConstantesVistas.PANEL_ALTO - 195 + 10;
+                yOffset = ConstantesVistas.PANEL_ALTO - 255 + 10;
                 break;
         }
         icono_seleccion.setLocation(xOffset, yOffset);
@@ -98,17 +92,9 @@ public class PanelPantallaPrincipal extends JPanel {
     protected void agregar_boton_puntaje() {
         boton_puntajes = new JButton(" ");
         transparentar_boton(boton_puntajes);
-        boton_puntajes.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 180, ConstantesVistas.PANEL_ALTO - 195, 350, 50);
+        boton_puntajes.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 180, ConstantesVistas.PANEL_ALTO - 255, 360, 50);
         registrar_oyente_boton_puntajes();
         add(boton_puntajes);
-    }
-
-    protected void agregar_boton_modo_de_juego() {
-        boton_modo_de_juego = new JButton(" ");
-        transparentar_boton(boton_modo_de_juego);
-        boton_modo_de_juego.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 180, ConstantesVistas.PANEL_ALTO - 255, 360, 50);
-        boton_modo_de_juego.addActionListener(e -> controlador_vistas.accionar_pantalla_modo_juego());
-        add(boton_modo_de_juego);
     }
 
     protected void agregar_boton_ayuda() {
@@ -146,9 +132,6 @@ public class PanelPantallaPrincipal extends JPanel {
         switch (opcionActual) {
             case COMENZAR_JUEGO:
             	controlador_vistas.accionar_pantalla_modo_juego();
-                break;
-            case MODO_DE_JUEGO:
-                controlador_vistas.accionar_pantalla_modo_juego();
                 break;
             case RANKING:
                 controlador_vistas.accionar_pantalla_ranking();

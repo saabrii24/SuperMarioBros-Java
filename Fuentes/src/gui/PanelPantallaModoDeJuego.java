@@ -81,17 +81,11 @@ public class PanelPantallaModoDeJuego extends JPanel {
         boton_mario.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 150, ConstantesVistas.PANEL_ALTO / 2 - 180, 300, 50);
         boton_luigi.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 150, ConstantesVistas.PANEL_ALTO / 2 - 120, 300, 50);
 
-        boton_mario.addActionListener(e -> seleccionar_personaje(MenuOpciones.MARIO));
-        boton_luigi.addActionListener(e -> seleccionar_personaje(MenuOpciones.LUIGI));
-
+        boton_mario.addActionListener(e -> ejecutar_accion_seleccionada());
+        boton_luigi.addActionListener(e -> ejecutar_accion_seleccionada());
+        
         add(boton_mario);
         add(boton_luigi);
-    }
-
-    protected void seleccionar_personaje(MenuOpciones opcion) {
-        this.opcionActual = opcion;
-        actualizar_icono_seleccion(); // Actualizar el icono de selección al seleccionar un personaje
-        
     }
 
     protected void transparentar_boton(JButton boton) {
@@ -117,7 +111,7 @@ public class PanelPantallaModoDeJuego extends JPanel {
         add(boton_volver);
     }
 
-	public void mover_seleccion(boolean haciaArriba) {
+    protected void mover_seleccion(boolean haciaArriba) {
         if (haciaArriba) {
             opcionActual = opcionActual.anterior();
         } else {
@@ -126,23 +120,20 @@ public class PanelPantallaModoDeJuego extends JPanel {
         actualizar_icono_seleccion();
 	}
 
-	public void ejecutar_accion_seleccionada() {
+    protected void ejecutar_accion_seleccionada() {
         switch (opcionActual) {
-        case MARIO:
-        	SpritesFactory fabrica_mario = new Dominio1Factory();
-        	generador = new EntidadesFactory(fabrica_mario);
-        	
-        	controlador_vistas.notificar_eleccion(generador);
-        	
-        	controlador_vistas.mostrar_pantalla_mapa();
-
-            break;
-        case LUIGI:
-            SpritesFactory fabrica_luigi = new Dominio2Factory();
-            generador = new EntidadesFactory(fabrica_luigi);
-            controlador_vistas.mostrar_pantalla_mapa();
-            break;
-
-    }
+	        case MARIO:
+	        	SpritesFactory fabrica_mario = new Dominio1Factory();
+	        	generador = new EntidadesFactory(fabrica_mario);	        	
+	        	controlador_vistas.notificar_eleccion(generador);
+	        	controlador_vistas.mostrar_pantalla_mapa();
+	            break;
+	        case LUIGI:
+	            SpritesFactory fabrica_luigi = new Dominio2Factory();
+	            generador = new EntidadesFactory(fabrica_luigi);
+	            controlador_vistas.notificar_eleccion(generador);
+	            controlador_vistas.mostrar_pantalla_mapa();
+	            break;
+        }
 	}
 }

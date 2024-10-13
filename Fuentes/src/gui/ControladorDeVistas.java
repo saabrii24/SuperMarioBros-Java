@@ -1,9 +1,6 @@
 package gui;
 
-import java.awt.Font;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
@@ -11,8 +8,6 @@ import javax.imageio.ImageIO;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 
-import fabricas.Dominio1Factory;
-import fabricas.Dominio2Factory;
 import fabricas.EntidadesFactory;
 import fabricas.SpritesFactory;
 import logica.EntidadJugador;
@@ -22,7 +17,6 @@ import logica.Observer;
 
 public class ControladorDeVistas implements ControladorEntreJuegoVista, ControladorJuegoVista {
     protected JFrame ventana;
-    protected Font tipografia;
     protected JComboBox<SpritesFactory> combo_box;
     protected PanelPantallaPrincipal panel_pantalla_principal;
     protected PanelPantallaMapa panel_pantalla_mapa;
@@ -53,7 +47,7 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
         ventana.setLocationRelativeTo(null);
         Image icono;
         try {
-            icono = ImageIO.read(getClass().getResourceAsStream("/assets/imagenes/sprites/dominio1/mario_ocioso_derecha.png"));
+            icono = ImageIO.read(getClass().getResourceAsStream("/assets/imagenes/icon.png"));
             ventana.setIconImage(icono);
         } catch (IOException e) {
             e.printStackTrace();
@@ -109,7 +103,7 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
 
     public void accionar_inicio_juego() {
         // juego.cargar_datos(new EntidadesFactory(new Dominio1Factory())); // Cargar los datos
-        
+    	accionar_pantalla_modo_juego();
     }
 
     public void mostrar_pantalla_mapa() {
@@ -134,9 +128,8 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
         panel_pantalla_modo_de_juego.setFocusable(true);
         panel_pantalla_modo_de_juego.requestFocusInWindow(); // Solicita el foco
         refrescar();        
-        }
+    }
     
-
     protected void refrescar() {
         ventana.revalidate();
         ventana.repaint();

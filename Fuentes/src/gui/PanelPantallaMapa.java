@@ -8,8 +8,7 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
-import java.io.InputStream;
-
+import java.io.File;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -19,7 +18,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
-import javax.swing.OverlayLayout; // Importa OverlayLayout
 import logica.*;
 
 /**
@@ -37,6 +35,7 @@ public class PanelPantallaMapa extends JPanel {
     private JLabel label_nivel;
     private JLabel label_tiempo; 
     private JLabel label_vidas;  
+    private Font tipografia;
 
     /**
      * Constructor que inicializa el panel de pantalla del mapa.
@@ -46,7 +45,7 @@ public class PanelPantallaMapa extends JPanel {
         setLayout(new BorderLayout()); // Usar OverlayLayout para superponer componentes
         JLayeredPane layeredPane = new JLayeredPane();
         layeredPane.setPreferredSize(new Dimension(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO));
-        
+        cargar_tipografia("src/assets/tipografia/mario-font.ttf");
         panel_informacion = new JPanel();
         panel_mapa = new JPanel();
         agregar_panel_mapa_con_fondo(panel_mapa);
@@ -143,10 +142,10 @@ public class PanelPantallaMapa extends JPanel {
     }
 
     protected void agregar_labels_editables_informacion() {
-        label_puntaje = new JLabel("      Puntos: 00000      ");
-        label_monedas = new JLabel("Monedas: 00000      ");
-        label_nivel = new JLabel("Nivel: 1-3       ");
-        label_tiempo = new JLabel("Tiempo: 00000      "); 
+        label_puntaje = new JLabel("  Puntos: 00000  ");
+        label_monedas = new JLabel("Monedas: 000  ");
+        label_nivel = new JLabel("Nivel: 1-3   ");
+        label_tiempo = new JLabel("Tiempo: 000  "); 
         label_vidas = new JLabel("Vidas: 0");
 
         decorar_labels_informacion(); // Aplica estilos a los labels
@@ -166,11 +165,15 @@ public class PanelPantallaMapa extends JPanel {
         label_tiempo.setForeground(Color.WHITE);
         label_vidas.setForeground(Color.WHITE);   
 
-        label_puntaje.setFont(new Font(label_puntaje.getFont().getName(), Font.BOLD, 30));
-        label_monedas.setFont(new Font(label_monedas.getFont().getName(), Font.BOLD, 30));
-        label_nivel.setFont(new Font(label_nivel.getFont().getName(), Font.BOLD, 30));
-        label_tiempo.setFont(new Font(label_tiempo.getFont().getName(), Font.BOLD, 30));
-        label_vidas.setFont(new Font(label_vidas.getFont().getName(), Font.BOLD, 30));  
+        if (tipografia != null) {
+            label_puntaje.setFont(tipografia);
+            label_monedas.setFont(tipografia);
+            label_nivel.setFont(tipografia);
+            label_tiempo.setFont(tipografia);
+            label_vidas.setFont(tipografia);
+        } else {
+            System.out.println("Fuente personalizada no cargada, se usa la fuente predeterminada.");
+        }
     }
     
     private void configurar_desplazamiento_con_teclado(JScrollPane scroll) {
@@ -209,6 +212,20 @@ public class PanelPantallaMapa extends JPanel {
                 horizontalBar.setValue(horizontalBar.getValue() + horizontalBar.getUnitIncrement(1));
             }
         });
+    }
+    
+    /**
+     * Método para cargar la fuente personalizada desde un archivo.
+     * @param rutaArchivo La ruta completa al archivo de la fuente TTF.
+     */
+    private void cargar_tipografia(String ruta_archivo) {
+        try {
+            tipografia = Font.createFont(Font.TRUETYPE_FONT, new File(ruta_archivo)).deriveFont(18f);
+        } catch (FontFormatException | IOException e) {
+            e.printStackTrace();
+            System.out.println("No se pudo cargar la fuente personalizada, se usará la fuente predeterminada.");
+            tipografia = new Font("SansSerif", Font.BOLD, 30); // Fuente alternativa en caso de error
+        }
     }
 
 }

@@ -119,26 +119,26 @@ public class PanelPantallaMapa extends JPanel {
     }
     
     
-    protected void agregar_scroll_al_mapa(JLayeredPane layeredPane, JPanel panel) {
+    protected void agregar_scroll_al_mapa(JLayeredPane panel_con_capas, JPanel panel) {
         JScrollPane scroll = new JScrollPane(panel);
         scroll.setBounds(0, 0, ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
         scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         
         // Agregar el JScrollPane al JLayeredPane en una capa inferior
-        layeredPane.add(scroll, Integer.valueOf(0)); // Capa base para el mapa
+        panel_con_capas.add(scroll, Integer.valueOf(0)); // Capa base para el mapa
         
         configurar_desplazamiento_con_teclado(scroll);
     }
     
-    protected void agregar_panel_informacion(JLayeredPane layeredPane, JPanel panel) {
+    protected void agregar_panel_informacion(JLayeredPane panel_con_capas, JPanel panel) {
         panel.setLayout(new FlowLayout(FlowLayout.LEFT));
         panel.setOpaque(false); // Hacer el panel transparente
         agregar_labels_editables_informacion();
         
         // Colocar el panel de información en una posición fija sobre el mapa
         panel.setBounds(10, 10, ConstantesVistas.PANEL_ANCHO, 50); // Ajustar la posición y tamaño del panel
-        layeredPane.add(panel, Integer.valueOf(1)); // Capa superior para el panel de información
+        panel_con_capas.add(panel, Integer.valueOf(1)); // Capa superior para el panel de información
     }
 
     protected void agregar_labels_editables_informacion() {
@@ -164,16 +164,13 @@ public class PanelPantallaMapa extends JPanel {
         label_nivel.setForeground(Color.WHITE);
         label_tiempo.setForeground(Color.WHITE);
         label_vidas.setForeground(Color.WHITE);   
+        
+        label_puntaje.setFont(tipografia);
+        label_monedas.setFont(tipografia);
+        label_nivel.setFont(tipografia);
+        label_tiempo.setFont(tipografia);
+        label_vidas.setFont(tipografia);
 
-        if (tipografia != null) {
-            label_puntaje.setFont(tipografia);
-            label_monedas.setFont(tipografia);
-            label_nivel.setFont(tipografia);
-            label_tiempo.setFont(tipografia);
-            label_vidas.setFont(tipografia);
-        } else {
-            System.out.println("Fuente personalizada no cargada, se usa la fuente predeterminada.");
-        }
     }
     
     private void configurar_desplazamiento_con_teclado(JScrollPane scroll) {

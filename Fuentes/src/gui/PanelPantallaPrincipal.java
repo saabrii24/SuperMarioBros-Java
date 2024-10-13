@@ -17,7 +17,7 @@ public class PanelPantallaPrincipal extends JPanel {
     private JButton boton_iniciar;
     private JButton boton_puntajes;
     private JButton boton_ayuda; 
-    private MenuOpciones opcionActual;
+    private MenuOpciones opcion_actual;
 
     public enum MenuOpciones {
         COMENZAR_JUEGO,
@@ -34,7 +34,7 @@ public class PanelPantallaPrincipal extends JPanel {
 
     public PanelPantallaPrincipal(ControladorDeVistas controlador_vistas) {
         this.controlador_vistas = controlador_vistas;
-        this.opcionActual = MenuOpciones.COMENZAR_JUEGO;
+        this.opcion_actual = MenuOpciones.COMENZAR_JUEGO;
         setSize(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
         setLayout(null);
         
@@ -70,7 +70,7 @@ public class PanelPantallaPrincipal extends JPanel {
         int xOffset = (ConstantesVistas.PANEL_ANCHO / 2) - 240;
         int yOffset = 0;
 
-        switch (opcionActual) {
+        switch (opcion_actual) {
             case COMENZAR_JUEGO:
                 yOffset = ConstantesVistas.PANEL_ALTO - 320 + 10;
                 break;
@@ -123,15 +123,15 @@ public class PanelPantallaPrincipal extends JPanel {
 
     protected void mover_seleccion(boolean hacia_arriba) {
         if (hacia_arriba) {
-            opcionActual = opcionActual.anterior();
+        	opcion_actual = opcion_actual.anterior();
         } else {
-            opcionActual = opcionActual.siguiente();
+        	opcion_actual = opcion_actual.siguiente();
         }
         actualizar_icono_seleccion();
     }
 
     protected void ejecutar_accion_seleccionada() {
-        switch (opcionActual) {
+        switch (opcion_actual) {
             case COMENZAR_JUEGO:
             	controlador_vistas.accionar_pantalla_modo_juego();
                 break;
@@ -142,7 +142,7 @@ public class PanelPantallaPrincipal extends JPanel {
     }
     
     protected void mantener_seleccion(MenuOpciones opcion) {
-        this.opcionActual = opcion;
+        this.opcion_actual = opcion;
         actualizar_icono_seleccion(); // Actualizar el icono de selección al seleccionar un personaje
         
     }

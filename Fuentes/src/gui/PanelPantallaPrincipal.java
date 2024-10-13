@@ -106,10 +106,12 @@ public class PanelPantallaPrincipal extends JPanel {
     }
 
     protected void registrar_oyente_boton_iniciar() {
+    	boton_iniciar.addActionListener(e -> mantener_seleccion(MenuOpciones.COMENZAR_JUEGO));
         boton_iniciar.addActionListener(e -> controlador_vistas.accionar_inicio_juego());
     }
 
     protected void registrar_oyente_boton_puntajes() {
+    	boton_puntajes.addActionListener(e -> mantener_seleccion(MenuOpciones.RANKING));
         boton_puntajes.addActionListener(e -> controlador_vistas.accionar_pantalla_ranking());
     }
 
@@ -137,5 +139,11 @@ public class PanelPantallaPrincipal extends JPanel {
                 controlador_vistas.accionar_pantalla_ranking();
                 break;
         }
+    }
+    
+    protected void mantener_seleccion(MenuOpciones opcion) {
+        this.opcionActual = opcion;
+        actualizar_icono_seleccion(); // Actualizar el icono de selección al seleccionar un personaje
+        
     }
 }

@@ -83,11 +83,11 @@ public class PanelPantallaMapa extends JPanel {
     }
 
     protected void actualizar_labels_informacion(EntidadJugador jugador) {
-        label_puntaje.setText(texto_con_cantidad_digitos(jugador.get_puntaje(), 5));
-        label_monedas.setText(texto_con_cantidad_digitos(jugador.get_monedas(), 5));
-        label_nivel.setText(texto_con_cantidad_digitos(jugador.get_nivel(), 5));
-        label_tiempo.setText(texto_con_cantidad_digitos(jugador.get_tiempo(), 5)); 
-        label_vidas.setText(texto_con_cantidad_digitos(jugador.get_vidas(), 5));
+        label_puntaje.setText(texto_con_cantidad_digitos(jugador.get_puntaje(), 4));
+        label_monedas.setText(texto_con_cantidad_digitos(jugador.get_monedas(), 3));
+        label_nivel.setText(texto_con_cantidad_digitos(jugador.get_nivel(), 1));
+        label_tiempo.setText(texto_con_cantidad_digitos(jugador.get_tiempo(), 3)); 
+        label_vidas.setText(texto_con_cantidad_digitos(jugador.get_vidas(), 1));
     }
 
     protected String texto_con_cantidad_digitos(int numero, int digitos) {

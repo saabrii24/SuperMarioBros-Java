@@ -4,26 +4,24 @@ import entidades.Entidad;
 import entidades.enemigos.Enemigo;
 import entidades.powerups.PowerUp;
 import fabricas.Sprite;
+import logica.EntidadJugador;
 
-public class Mario extends Entidad{
+public class Mario extends Entidad implements EntidadJugador{
     private MarioState estado;
     private static Mario instancia_mario;
     private int puntaje_nivel_actual;
     private int puntaje_acumulado;
     private int monedas;
-    private static Sprite sprite;
 
-    public Mario(int x, int y, Sprite sprite) {
+    private Mario(int x, int y, Sprite sprite) {  	
     	super(x, y, sprite);
         this.puntaje_acumulado = 0;
         this.monedas = 0;
     }
 
     //Mario Singleton
-    public static Mario get_instancia() {
-        if (instancia_mario == null) {
-            instancia_mario = new Mario(0, 0, sprite);
-        }
+    public static Mario get_instancia(Sprite sprite) {
+        if (instancia_mario == null) instancia_mario = new Mario(0, 0, sprite);
         return instancia_mario;
     }
 
@@ -88,4 +86,25 @@ public class Mario extends Entidad{
     public void resetear_monedas() {
         this.monedas = 0;
     }
+
+	@Override
+	public int get_puntaje() {
+		return puntaje_acumulado + puntaje_nivel_actual;
+	}
+
+	@Override
+	public int get_nivel() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int get_tiempo() {
+		return 0;
+	}
+
+	@Override
+	public int get_vidas() {
+		return 0;
+	}
 }

@@ -22,7 +22,7 @@ public class PanelPantallaModoDeJuego extends JPanel {
     private JButton boton_mario;
     private JButton boton_luigi; 
     private JButton boton_volver; 
-    private MenuOpciones opcionActual;
+    private MenuOpciones opcion_actual;
     private EntidadesFactory generador;
 
     public enum MenuOpciones {
@@ -40,7 +40,7 @@ public class PanelPantallaModoDeJuego extends JPanel {
 
     public PanelPantallaModoDeJuego(ControladorDeVistas controlador_vistas) {
         this.controlador_vistas = controlador_vistas;
-        this.opcionActual = MenuOpciones.MARIO; // Opción inicial
+        this.opcion_actual = MenuOpciones.MARIO; // Opción inicial
         setSize(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
         setLayout(null);
                
@@ -96,7 +96,7 @@ public class PanelPantallaModoDeJuego extends JPanel {
 
     protected void actualizar_icono_seleccion() {
         int xOffset = (ConstantesVistas.PANEL_ANCHO / 2) - 190; // Ajustar posición en X
-        int yOffset = (opcionActual == MenuOpciones.MARIO) ? (ConstantesVistas.PANEL_ALTO / 2 - 170) : (ConstantesVistas.PANEL_ALTO / 2 - 110); // Ajustar según la opción
+        int yOffset = (opcion_actual == MenuOpciones.MARIO) ? (ConstantesVistas.PANEL_ALTO / 2 - 170) : (ConstantesVistas.PANEL_ALTO / 2 - 110); // Ajustar según la opción
 
         icono_seleccion.setLocation(xOffset, yOffset);
     }
@@ -111,17 +111,17 @@ public class PanelPantallaModoDeJuego extends JPanel {
         add(boton_volver);
     }
 
-    protected void mover_seleccion(boolean haciaArriba) {
-        if (haciaArriba) {
-            opcionActual = opcionActual.anterior();
+    protected void mover_seleccion(boolean hacia_arriba) {
+        if (hacia_arriba) {
+            opcion_actual = opcion_actual.anterior();
         } else {
-            opcionActual = opcionActual.siguiente();
+        	opcion_actual = opcion_actual.siguiente();
         }
         actualizar_icono_seleccion();
 	}
 
     protected void ejecutar_accion_seleccionada() {
-        switch (opcionActual) {
+        switch (opcion_actual) {
 	        case MARIO:
 	        	SpritesFactory fabrica_mario = new Dominio1Factory();
 	        	generador = new EntidadesFactory(fabrica_mario);	        	

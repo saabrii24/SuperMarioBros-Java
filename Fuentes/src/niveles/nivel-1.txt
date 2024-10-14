@@ -1,10 +1,6 @@
 # Archivo de configuración del Nivel 1
 Nivel: 1
 
-# Tamaño del mapa
-#Ancho: 200
-#Alto: 200
-
 # Tiempo límite en segundos
 Tiempo: 100
 
@@ -12,19 +8,19 @@ Tiempo: 100
 # Mario (x,y)
 Mario: 120, 115
 # Enemigos
-Goomba: 100, 0
-Goomba: 120, 0
-Koopa: 120, 100
+Goomba: 140, 115
+Goomba: 160, 115
+Koopa: 180, 117
 
 # PowerUps
 Estrella: 150, 150
 
 # Plataformas
-BloqueSolido: 110, 95
-BloqueSolido: 115, 95
-BloqueSolido: 120, 95
-BloqueSolido: 125, 95
-BloqueDePregunta: 80, 20
+BloqueSolido: 110, 100
+BloqueSolido: 125, 100
+BloqueSolido: 140, 100
+BloqueSolido: 155, 100
+BloqueDePregunta: 180, 150
 
 
 # Definición del mapa

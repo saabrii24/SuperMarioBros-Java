@@ -29,8 +29,8 @@ public class Mario extends Entidad implements EntidadJugador{
 
     //Mario State
     public interface MarioState {
-        void consumir(PowerUp powerup);
-        boolean matar_si_hay_colision(Enemigo enemigo);
+        public void consumir(PowerUp powerup);
+        public boolean matar_si_hay_colision(Enemigo enemigo);
     }
 
     public void saltar() {

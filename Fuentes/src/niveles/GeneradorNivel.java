@@ -17,13 +17,10 @@ public class GeneradorNivel {
 
             // Variables para las características del nivel
             int nivel = 1;
-            int posicion_en_x_inicial = 0;
-            int posicion_en_y_inicial = 0;
             int tiempo = 0;
             int mario_posicion_en_x = 0;
             int mario_posicion_en_y = 0;
-            
-            
+                       
             String linea;
             while ((linea = br.readLine()) != null) {
                 // Ignorar líneas de comentario
@@ -39,12 +36,6 @@ public class GeneradorNivel {
                     switch (clave) {
                         case "Nivel":
                             nivel = Integer.parseInt(valor);
-                            break;
-                        case "XInicial":
-                        	posicion_en_x_inicial = Integer.parseInt(valor);
-                            break;
-                        case "Yinicial":
-                        	posicion_en_y_inicial = Integer.parseInt(valor);
                             break;
                         case "Tiempo":
                             tiempo = Integer.parseInt(valor);
@@ -69,8 +60,8 @@ public class GeneradorNivel {
             // Crear y devolver el nivel con las características y el mapa cargados
             return new Nivel.Builder()
                     .set_nivel_actual(nivel)
-                    .set_posicion_en_x_inicial(posicion_en_x_inicial)
-                    .set_posicion_en_y_inicial(posicion_en_y_inicial)
+                    .set_posicion_en_x_inicial(mario_posicion_en_x)
+                    .set_posicion_en_y_inicial(mario_posicion_en_y)
                     .set_tiempo_limite(tiempo)
                     .build();
 
@@ -96,8 +87,7 @@ public class GeneradorNivel {
             return; // Salir del método si las coordenadas son incorrectas
         }
         int x = Integer.parseInt(coordenadas[0].trim());
-        int y = Integer.parseInt(coordenadas[1].trim());  
-        System.out.println("Agregando entidad: " + tipo_de_entidad + " en (" + x + ", " + y + ")");
+        int y = Integer.parseInt(coordenadas[1].trim()); 
         /**
         for (int x = 0; x < fondo.get_ancho(); x++) {
             for (int y = 0; y < fondo.get_alto(); y++) {

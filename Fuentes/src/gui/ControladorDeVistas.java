@@ -4,20 +4,13 @@ import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
-
 import javax.imageio.ImageIO;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 
-import entidades.Entidad;
 import fabricas.EntidadesFactory;
 import fabricas.SpritesFactory;
-import logica.EntidadJugador;
-import logica.EntidadLogica;
-import logica.Juego;
-import logica.Observer;
+import logica.*;
 
 public class ControladorDeVistas implements ControladorEntreJuegoVista, ControladorJuegoVista {
     protected JFrame ventana;
@@ -148,7 +141,7 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
 
     @Override
     public Observer registrar_entidad(EntidadJugador entidad_jugador) {
-    	Observer observer_jugador = panel_pantalla_mapa.incorporar_entidad(entidad_jugador);
+    	Observer observer_jugador = panel_pantalla_mapa.incorporar_entidad_jugador(entidad_jugador, mi_juego.get_nivel_actual());
     	refrescar();
         return observer_jugador;
     }
@@ -168,8 +161,7 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
 	public void notificar_eleccion(EntidadesFactory generador) {
 		mi_juego.cargar_datos(generador);
 		mi_juego.registrar_observers();
-		
-		}
+	}
 	
 
 }

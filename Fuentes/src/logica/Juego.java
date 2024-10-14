@@ -49,7 +49,6 @@ public class Juego implements Runnable {
     }
 
    public void registrar_observers() {
-	   System.out.println(mapa_nivel_actual.get_mario().get_sprite());
         registrar_observer_jugador(mapa_nivel_actual.get_mario());
         registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_enemigo());
         registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_powerup());
@@ -58,7 +57,6 @@ public class Juego implements Runnable {
 
     protected void registrar_observer_jugador(Mario jugador_mario) {
         Observer observer_jugador = controlador_vistas.registrar_entidad(jugador_mario);
-        System.out.println(jugador_mario.get_sprite());
         jugador_mario.registrar_observer(observer_jugador);
     }
 
@@ -93,6 +91,10 @@ public class Juego implements Runnable {
     
     public Mapa get_mapa() {
     	return mapa_nivel_actual;
+    }
+    
+    public Nivel get_nivel_actual() {
+    	return nivel_actual;
     }
 
     public static void main(String[] args) {

@@ -12,11 +12,13 @@ public class Mario extends Entidad implements EntidadJugador{
     private int puntaje_nivel_actual;
     private int puntaje_acumulado;
     private int monedas;
+    private int vidas;
 
     private Mario(int x, int y, Sprite sprite) {  	
     	super(x, y, sprite);
         this.puntaje_acumulado = 0;
         this.monedas = 0;
+        this.vidas = 3;
     }
 
     //Mario Singleton
@@ -58,6 +60,10 @@ public class Mario extends Entidad implements EntidadJugador{
     public int get_monedas() {
         return monedas;
     }
+    
+    public int get_vidas() {
+    	return vidas;
+    }
 
     public void set_puntaje_acumulado(int puntaje) {
         this.puntaje_acumulado = puntaje;
@@ -86,25 +92,14 @@ public class Mario extends Entidad implements EntidadJugador{
     public void resetear_monedas() {
         this.monedas = 0;
     }
+    
+    public void quitar_vida() {
+    	if(vidas > 0) vidas = vidas-1;
+    }
 
 	@Override
 	public int get_puntaje() {
 		return puntaje_acumulado + puntaje_nivel_actual;
 	}
 
-	@Override
-	public int get_nivel() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int get_tiempo() {
-		return 0;
-	}
-
-	@Override
-	public int get_vidas() {
-		return 0;
-	}
 }

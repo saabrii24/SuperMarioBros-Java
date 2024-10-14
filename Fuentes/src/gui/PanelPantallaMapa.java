@@ -20,7 +20,9 @@ import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
 
 import entidades.Entidad;
+import entidades.mario.Mario;
 import logica.*;
+import niveles.Nivel;
 
 /**
  * La clase {@code PanelPantallaMapa} representa el panel que muestra el mapa del juego,
@@ -70,41 +72,39 @@ public class PanelPantallaMapa extends JPanel {
         return observer_entidad;
     }
 
-    public Observer incorporar_entidad_jugador(EntidadJugador entidad_jugador) {
+    public Observer incorporar_entidad_jugador(EntidadJugador entidad_jugador, Nivel nivel) {
         ObserverJugador observer_jugador = new ObserverJugador(this, entidad_jugador);
         imagen_fondo.add(observer_jugador); // Cambié de imagen_fondo a mapaPanel
-        actualizar_info_jugador(entidad_jugador);
+        actualizar_info_jugador(entidad_jugador, nivel);
         return observer_jugador;
     }
 
-    protected void actualizar_info_jugador(EntidadJugador jugador) {
-        actualizar_labels_informacion(jugador);
+    protected void actualizar_info_jugador(EntidadJugador jugador, Nivel nivel) {
+        actualizar_labels_informacion(jugador, nivel);
         actualizar_scroll_hacia_jugador(jugador);
     }
 
-    protected void actualizar_labels_informacion(EntidadJugador jugador) {
-        label_puntaje.setText(texto_con_cantidad_digitos(jugador.get_puntaje(), 4));
-        label_monedas.setText(texto_con_cantidad_digitos(jugador.get_monedas(), 3));
-        label_nivel.setText(texto_con_cantidad_digitos(jugador.get_nivel(), 1));
-        label_tiempo.setText(texto_con_cantidad_digitos(jugador.get_tiempo(), 3)); 
-        label_vidas.setText(texto_con_cantidad_digitos(jugador.get_vidas(), 1));
+    protected void actualizar_labels_informacion(EntidadJugador jugador, Nivel nivel) {
+        label_puntaje.setText("  Puntos: " + texto_con_cantidad_digitos(jugador.get_puntaje(), 4) + "  ");
+        label_monedas.setText("Monedas: " + texto_con_cantidad_digitos(jugador.get_monedas(), 3) + "  ");
+        label_nivel.setText("Nivel: " + nivel.get_numero_de_nivel() + "-3   ");
+        label_tiempo.setText("Tiempo: " + texto_con_cantidad_digitos(nivel.get_tiempo_restante(), 3) + "  ");
+        label_vidas.setText("Vidas: " + jugador.get_vidas());
     }
 
+
     protected String texto_con_cantidad_digitos(int numero, int digitos) {
-        String texto_autocompletado = "";
-        if (en_rango(numero, 0, 9)) {
-            texto_autocompletado = "0000" + numero;
-        } else if (en_rango(numero, 10, 99)) {
-            texto_autocompletado = "000" + numero;
-        } else if (en_rango(numero, 100, 999)) {
-            texto_autocompletado = "00" + numero;
-        } else if (en_rango(numero, 1000, 9999)) {
-            texto_autocompletado = "0" + numero;
-        } else {
-            texto_autocompletado += numero;
+        String formato = "%0" + digitos + "d";
+        String texto_autocompletado = String.format(formato, numero);
+
+        // Limitar el número de dígitos según el máximo permitido
+        if (texto_autocompletado.length() > digitos) {
+            texto_autocompletado = texto_autocompletado.substring(0, digitos);
         }
+
         return texto_autocompletado;
     }
+
 
     protected boolean en_rango(int numero, int piso, int techo) {
         return numero >= piso && numero <= techo;
@@ -150,7 +150,7 @@ public class PanelPantallaMapa extends JPanel {
     protected void agregar_labels_editables_informacion() {
         label_puntaje = new JLabel("  Puntos: 00000  ");
         label_monedas = new JLabel("Monedas: 000  ");
-        label_nivel = new JLabel("Nivel: 1-3   ");
+        label_nivel = new JLabel("Nivel: " + "1" + "-3   ");
         label_tiempo = new JLabel("Tiempo: 000  "); 
         label_vidas = new JLabel("Vidas: 0");
 

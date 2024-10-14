@@ -2,7 +2,6 @@ package logica;
 
 import java.util.LinkedList;
 import java.util.List;
-import entidades.Entidad;
 import entidades.enemigos.Enemigo;
 import entidades.mario.Mario;
 import entidades.plataformas.Plataforma;
@@ -22,6 +21,7 @@ public class Mapa {
 	    this.entidades_enemigos = new LinkedList<>();
 	    this.entidades_plataforma = new LinkedList<>();
 	    this.entidades_powerup = new LinkedList<>();
+	    
 	}
 
     public List<Plataforma> get_entidades_plataforma() {
@@ -51,7 +51,6 @@ public class Mapa {
     public void agregar_plataforma(Plataforma plataforma) {
     	entidades_plataforma.add(plataforma);
     }
-
     
     public void resetear_mapa() {
         entidades_enemigos.clear();
@@ -61,8 +60,27 @@ public class Mapa {
     }
 
     public void mover_jugador(int direccion) {
-    	
+        if (mario == null) {
+            return;
+        }
+        switch (direccion) {
+            case Juego.IZQUIERDA:
+                mario.mover_a_izquierda();
+                break;
+            case Juego.DERECHA:
+                mario.mover_a_derecha();
+                break;
+            case Juego.SALTAR:
+                mario.saltar();
+                break;
+            case Juego.DISPARAR:
+                mario.disparar();
+                break;
+            default:
+                break;
+        }
     }
+
 
     public boolean nivel_completado() {
 
@@ -82,5 +100,13 @@ public class Mapa {
    // public void eliminar_entidad(Entidad entidad_a_eliminar) {
     //    entidades.remove(entidad_a_eliminar);
     //}
+    
+    public void actualizar_entidades() {
+        if (mario != null) {
+            mario.actualizar_posicion();
+        }
+        chequear_colisiones();
+    }
+
     
 }

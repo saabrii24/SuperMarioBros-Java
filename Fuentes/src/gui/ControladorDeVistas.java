@@ -35,6 +35,7 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
         mostrar_pantalla_inicial();
         registrar_oyente_panel_principal();
         registrar_oyente_panel_modo_de_juego();
+        registrar_oyente_panel_mapa();
     }
 
     protected void configurar_ventana() {
@@ -92,6 +93,32 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
         });
     }
     
+    protected void registrar_oyente_panel_mapa() {
+        panel_pantalla_mapa.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent evento) {
+                switch (evento.getKeyCode()) {
+                    case KeyEvent.VK_A:
+                        mi_juego.mover_jugador(Juego.IZQUIERDA);
+                        mi_juego.notificar_observadores();
+                        break;
+                    case KeyEvent.VK_D:
+                        mi_juego.mover_jugador(Juego.DERECHA);
+                        mi_juego.notificar_observadores();
+                        break;
+                    case KeyEvent.VK_W:
+                        mi_juego.mover_jugador(Juego.SALTAR);
+                        mi_juego.notificar_observadores();
+                        break;
+                    case KeyEvent.VK_SPACE:
+                        mi_juego.mover_jugador(Juego.DISPARAR);
+                        mi_juego.notificar_observadores();
+                        break;
+                }
+            }
+        });
+    }
+
     public void mostrar_pantalla_inicial() {
         ventana.setContentPane(panel_pantalla_principal);
         panel_pantalla_principal.setFocusable(true);
@@ -105,6 +132,8 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
 
     public void mostrar_pantalla_mapa() {
         ventana.setContentPane(panel_pantalla_mapa);
+        panel_pantalla_mapa.setFocusable(true);
+        panel_pantalla_mapa.requestFocusInWindow(); 
         refrescar();
     }
     
@@ -123,7 +152,7 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
     public void accionar_pantalla_modo_juego() {
         ventana.setContentPane(panel_pantalla_modo_de_juego);
         panel_pantalla_modo_de_juego.setFocusable(true);
-        panel_pantalla_modo_de_juego.requestFocusInWindow(); // Solicita el foco
+        panel_pantalla_modo_de_juego.requestFocusInWindow();
         refrescar();        
     }
     

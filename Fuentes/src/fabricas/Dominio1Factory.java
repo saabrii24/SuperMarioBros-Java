@@ -12,7 +12,7 @@ public class Dominio1Factory extends SpritesFactory {
      * imágenes del dominio 1 utilizadas para los sprites.
      */
     public Dominio1Factory() {
-        super("assets/imagenes/sprites/dominio1/mario_");
+        super("/assets/imagenes/sprites/dominio1/mario_");
     }
 
     /**

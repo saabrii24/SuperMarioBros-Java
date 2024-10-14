@@ -10,6 +10,11 @@ import java.util.List;
 
 public class Juego implements Runnable {
 
+	public static final int SALTAR = 15000;
+	public static final int IZQUIERDA = 15001;
+	public static final int DERECHA = 15003;
+	public static final int DISPARAR = 15004;
+	
     protected ControladorDeVistas controlador_vistas;
     protected Nivel nivel_actual;
     protected SpritesFactory fabrica_sprites;
@@ -40,12 +45,13 @@ public class Juego implements Runnable {
 
     public void cargar_datos(EntidadesFactory generador) {
         nivel_actual = GeneradorNivel.cargar_nivel_y_mapa(
-                getClass().getResourceAsStream("/niveles/nivel-1.txt"),
-                generador,
-                mapa_nivel_actual
+            getClass().getResourceAsStream("/niveles/nivel-1.txt"),
+            generador,
+            mapa_nivel_actual
         );
         fabrica_entidades = generador;
     }
+
 
    public void registrar_observers() {
         registrar_observer_jugador(mapa_nivel_actual.get_mario());
@@ -81,22 +87,48 @@ public class Juego implements Runnable {
             long ahora = System.nanoTime();
             delta += (ahora - ultimo_tiempo) / ns;
             ultimo_tiempo = ahora;
-
+            
             while (delta >= 1) {
                 delta--;
             }
         }
     }
-    
-    public Mapa get_mapa() {
+
+	public Mapa get_mapa() {
     	return mapa_nivel_actual;
     }
     
     public Nivel get_nivel_actual() {
     	return nivel_actual;
     }
+    
+	public void mover_jugador(int d) {
+		mapa_nivel_actual.mover_jugador(d);
+	}
 
     public static void main(String[] args) {
         new Juego();
     }
+
+    public void notificar_observadores() {
+        notificar_observadores_mario();
+        notificar_observadores_entidades(mapa_nivel_actual.get_entidades_enemigo());
+        notificar_observadores_entidades(mapa_nivel_actual.get_entidades_powerup());
+        notificar_observadores_entidades(mapa_nivel_actual.get_entidades_plataforma());
+    }
+
+    private void notificar_observadores_mario() {
+        Mario mario = mapa_nivel_actual.get_mario();
+        if (mario != null) {
+            mario.notificar_observer();
+        }
+    }
+
+    private void notificar_observadores_entidades(List<? extends Entidad> entidades) {
+        for (Entidad entidad : entidades) {
+            entidad.notificar_observer();
+        }
+    }
+
+
 }

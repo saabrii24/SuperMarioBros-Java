@@ -40,4 +40,8 @@ public abstract class Entidad implements EntidadLogica, Agresiva, Consumible, De
 	public void registrar_observer(Observer observer) {
 		this.observer = observer;
 	}
+	
+    public void notificar_observer() {
+            observer.actualizar();
+    }
 }

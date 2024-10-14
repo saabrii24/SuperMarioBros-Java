@@ -19,8 +19,6 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
 
-import entidades.Entidad;
-import entidades.mario.Mario;
 import logica.*;
 import niveles.Nivel;
 
@@ -70,7 +68,7 @@ public class PanelPantallaMapa extends JPanel {
 
     public Observer incorporar_entidad_jugador(EntidadJugador entidad_jugador, Nivel nivel) {
         ObserverJugador observer_jugador = new ObserverJugador(this, entidad_jugador);
-        imagen_fondo.add(observer_jugador); // Cambié de imagen_fondo a mapaPanel
+        imagen_fondo.add(observer_jugador);
         actualizar_info_jugador(entidad_jugador, nivel);
         return observer_jugador;
     }
@@ -106,9 +104,10 @@ public class PanelPantallaMapa extends JPanel {
         return numero >= piso && numero <= techo;
     }
 
-    protected void actualizar_scroll_hacia_jugador(EntidadJugador jugador) {
-        // Implementar lógica para desplazar el JScrollPane hacia el jugador
+    public void actualizar_scroll_hacia_jugador(EntidadJugador jugador) {
+
     }
+
 
     protected void agregar_panel_mapa_con_fondo(JPanel panel) {
         imagen_fondo = new JLabel();

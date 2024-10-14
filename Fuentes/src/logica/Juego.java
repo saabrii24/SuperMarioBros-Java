@@ -1,7 +1,6 @@
 package logica;
 
 import entidades.Entidad;
-import entidades.enemigos.Enemigo;
 import entidades.mario.Mario;
 import fabricas.*;
 import gui.ControladorDeVistas;
@@ -73,15 +72,15 @@ public class Juego implements Runnable {
 
     @Override
     public void run() {
-        long ultimoTiempo = System.nanoTime();
-        double cantidadTicks = 60.0;
-        double ns = 1000000000 / cantidadTicks;
+        long ultimo_tiempo = System.nanoTime();
+        double cantidad_ticks = 60.0;
+        double ns = 1000000000 / cantidad_ticks;
         double delta = 0;
 
         while (esta_ejecutando) {
             long ahora = System.nanoTime();
-            delta += (ahora - ultimoTiempo) / ns;
-            ultimoTiempo = ahora;
+            delta += (ahora - ultimo_tiempo) / ns;
+            ultimo_tiempo = ahora;
 
             while (delta >= 1) {
                 delta--;

@@ -12,6 +12,7 @@ import fabricas.Dominio1Factory;
 import fabricas.Dominio2Factory;
 import fabricas.EntidadesFactory;
 import fabricas.SpritesFactory;
+import gui.PanelPantallaPrincipal.MenuOpciones;
 
 public class PanelPantallaModoDeJuego extends JPanel {
 
@@ -81,14 +82,27 @@ public class PanelPantallaModoDeJuego extends JPanel {
         boton_mario.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 150, ConstantesVistas.PANEL_ALTO / 2 - 180, 300, 50);
         boton_luigi.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 150, ConstantesVistas.PANEL_ALTO / 2 - 120, 300, 50);
 
-        boton_mario.addActionListener(e -> ejecutar_accion_seleccionada());
-        boton_luigi.addActionListener(e -> ejecutar_accion_seleccionada());
-        
+        boton_mario.addActionListener(e -> {
+            mantener_seleccion(MenuOpciones.MARIO);
+            ejecutar_accion_seleccionada();
+        });
+
+        boton_luigi.addActionListener(e -> {
+            mantener_seleccion(MenuOpciones.LUIGI);
+            ejecutar_accion_seleccionada();
+        });
+
         add(boton_mario);
         add(boton_luigi);
     }
 
-    protected void transparentar_boton(JButton boton) {
+
+    protected void mantener_seleccion(MenuOpciones opcion) {
+        this.opcion_actual = opcion;
+        actualizar_icono_seleccion(); 
+    }
+
+	protected void transparentar_boton(JButton boton) {
         boton.setOpaque(false);
         boton.setContentAreaFilled(false);
         boton.setBorderPainted(false);

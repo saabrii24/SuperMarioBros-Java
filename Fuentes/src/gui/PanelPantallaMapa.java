@@ -63,10 +63,6 @@ public class PanelPantallaMapa extends JPanel {
 	// Operaciones para ControladorVistas
 
     public Observer incorporar_entidad(EntidadLogica entidad_logica) {
-        if (entidad_logica == null || entidad_logica.get_sprite() == null) {
-            System.err.println("Error: La entidad o su sprite son nulos.");
-            return null; // Salimos si la entidad o el sprite es nulo
-        }
         ObserverEntidades observer_entidad = new ObserverEntidades(entidad_logica);
         imagen_fondo.add(observer_entidad);
         return observer_entidad;
@@ -150,7 +146,7 @@ public class PanelPantallaMapa extends JPanel {
     protected void agregar_labels_editables_informacion() {
         label_puntaje = new JLabel("  Puntos: 00000  ");
         label_monedas = new JLabel("Monedas: 000  ");
-        label_nivel = new JLabel("Nivel: " + "1" + "-3   ");
+        label_nivel = new JLabel("Nivel: 0-3   ");
         label_tiempo = new JLabel("Tiempo: 000  "); 
         label_vidas = new JLabel("Vidas: 0");
 

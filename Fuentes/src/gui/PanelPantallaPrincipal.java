@@ -106,13 +106,18 @@ public class PanelPantallaPrincipal extends JPanel {
     }
 
     protected void registrar_oyente_boton_iniciar() {
-    	boton_iniciar.addActionListener(e -> mantener_seleccion(MenuOpciones.COMENZAR_JUEGO));
-        boton_iniciar.addActionListener(e -> controlador_vistas.accionar_inicio_juego());
+    	boton_iniciar.addActionListener(e -> {
+    		mantener_seleccion(MenuOpciones.COMENZAR_JUEGO);
+    		controlador_vistas.accionar_inicio_juego();
+    	});
+        
     }
 
     protected void registrar_oyente_boton_puntajes() {
-    	boton_puntajes.addActionListener(e -> mantener_seleccion(MenuOpciones.RANKING));
-        boton_puntajes.addActionListener(e -> controlador_vistas.accionar_pantalla_ranking());
+    	boton_puntajes.addActionListener(e -> {
+    		mantener_seleccion(MenuOpciones.RANKING);
+    		controlador_vistas.accionar_pantalla_ranking();
+    	});
     }
 
     protected void transparentar_boton(JButton boton) {

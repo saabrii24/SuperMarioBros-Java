@@ -99,12 +99,10 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
             public void keyPressed(KeyEvent evento) {
                 switch (evento.getKeyCode()) {
                     case KeyEvent.VK_A:
-                        mi_juego.mover_jugador(Juego.IZQUIERDA);
-                        mi_juego.notificar_observadores();
+                       mi_juego.set_direccion_mario(-1);
                         break;
                     case KeyEvent.VK_D:
-                        mi_juego.mover_jugador(Juego.DERECHA);
-                        mi_juego.notificar_observadores();
+                       mi_juego.set_direccion_mario(1);
                         break;
                     case KeyEvent.VK_W:
                         mi_juego.mover_jugador(Juego.SALTAR);
@@ -122,8 +120,8 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
                 switch (evento.getKeyCode()) {
                     case KeyEvent.VK_A:
                     case KeyEvent.VK_D:
-                        mi_juego.get_mapa().get_mario().detener_movimiento();
-                        mi_juego.notificar_observadores();
+                        mi_juego.set_direccion_mario(0);
+                        
                         break;
                 }
             }

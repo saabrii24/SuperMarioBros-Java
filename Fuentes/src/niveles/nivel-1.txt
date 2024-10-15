@@ -29,6 +29,7 @@ Tiempo: 100
 	BloqueSolido: 336, 96
 	BloqueSolido: 384, 96
 	BloqueSolido: 432, 96
+	Vacio: 480, 48
 	Vacio: 480, 96
 	
 	BloqueDePregunta: 672, 288

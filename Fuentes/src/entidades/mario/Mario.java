@@ -4,6 +4,7 @@ import entidades.Entidad;
 import entidades.enemigos.Enemigo;
 import entidades.powerups.PowerUp;
 import fabricas.Sprite;
+import fabricas.SpritesFactory;
 import logica.EntidadJugador;
 
 public class Mario extends Entidad implements EntidadJugador {
@@ -18,9 +19,12 @@ public class Mario extends Entidad implements EntidadJugador {
     private double gravedad = 0.38;
     private boolean saltando;
     private boolean cayendo;
-
-    private Mario(int x, int y, Sprite sprite) {
+    private boolean movimiento_derecha;
+    private SpritesFactory spritesFactory; 
+    
+    private Mario(int x, int y, Sprite sprite, SpritesFactory factory) {
         super(x, y, sprite);
+        this.spritesFactory = factory; // Inicializar la fábrica de sprites
         this.puntaje_acumulado = 0;
         this.monedas = 0;
         this.vidas = 3;
@@ -28,11 +32,12 @@ public class Mario extends Entidad implements EntidadJugador {
         this.velocidad_en_y = 0;
         this.saltando = false;
         this.cayendo = true;
+        this.movimiento_derecha = true;
     }
 
     // Mario Singleton
-    public static Mario get_instancia(Sprite sprite) {
-        if (instancia_mario == null) instancia_mario = new Mario(150, 150, sprite);
+    public static Mario get_instancia(SpritesFactory factory) {
+        if (instancia_mario == null) instancia_mario = new Mario(150, 150, factory.get_mario_ocioso_derecha(), factory);
         return instancia_mario;
     }
 
@@ -51,32 +56,37 @@ public class Mario extends Entidad implements EntidadJugador {
             posicion_en_y -= velocidad_en_y;
         }
 
-        /*
-        if (cayendo && !esta_en_el_suelo()) { // Verificar si está en el suelo antes de seguir cayendo
-            posicion_en_y += velocidad_en_y;
-            velocidad_en_y += gravedad;
-        } else if (cayendo) {
-            cayendo = false; // Detener la caída si Mario está en el suelo
-            velocidad_en_y = 0;
-        }
-        */
-
         posicion_en_x += velocidad_en_x;
+        if (velocidad_en_x < 0) {
+            cambiar_sprite(spritesFactory.get_mario_movimiento_izquierda());  
+        } else if (velocidad_en_x > 0) {
+            cambiar_sprite(spritesFactory.get_mario_movimiento_derecha()); 
+        } else {
+            if (movimiento_derecha) {  
+            	cambiar_sprite(spritesFactory.get_mario_ocioso_derecha()); 
+                
+            } else {
+            	cambiar_sprite(spritesFactory.get_mario_ocioso_izquierda()); 
+            }
+        }
     }
 
 
     public void mover_a_izquierda() {
         this.velocidad_en_x = -5;
+        movimiento_derecha = false;
         actualizar_posicion();
     }
 
     public void mover_a_derecha() {
         this.velocidad_en_x = 5;
+        movimiento_derecha = true;
         actualizar_posicion();
     }
 
     public void detener_movimiento() {
         this.velocidad_en_x = 0; 
+        actualizar_posicion();
     }
 
     public void saltar() {
@@ -150,6 +160,10 @@ public class Mario extends Entidad implements EntidadJugador {
     @Override
     public int get_puntaje() {
         return puntaje_acumulado + puntaje_nivel_actual;
+    }
+    
+    private void cambiar_sprite(Sprite nuevo_sprite) {
+        this.sprite = nuevo_sprite; // Cambia el sprite actual por el nuevo
     }
 
 }

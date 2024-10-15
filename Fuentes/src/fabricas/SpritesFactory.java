@@ -11,8 +11,24 @@ public abstract class SpritesFactory {
         return new Sprite(ruta_a_carpeta + nombreArchivo);
     }
 
-    public Sprite get_mario() {
+    public Sprite get_mario_ocioso_derecha() {
         return cargarSprite("ocioso_derecha.png");
+    }
+    
+    public Sprite get_mario_ocioso_izquierda() {
+        return cargarSprite("ocioso_izquierda.png");
+    }
+
+    public Sprite get_mario_movimiento_derecha() {
+        return cargarSprite("movimiento_derecha.gif");
+    }
+
+    public Sprite get_mario_movimiento_izquierda() {
+        return cargarSprite("movimiento_izquierda.gif");
+    }
+
+    public Sprite get_mario_saltando() {
+        return cargarSprite("saltando_derecha.png");
     }
 
     public Sprite get_goomba() {

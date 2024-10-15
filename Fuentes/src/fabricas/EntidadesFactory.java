@@ -15,8 +15,8 @@ public class EntidadesFactory {
     }
 
     public Mario get_mario(int x, int y) {
-    	Sprite sprite_mario = fabrica_sprites.get_mario();
-    	Mario mario = Mario.get_instancia(sprite_mario);
+    	//Sprite sprite_mario = fabrica_sprites.get_mario_ocioso_derecha();
+    	Mario mario = Mario.get_instancia(fabrica_sprites);
     	mario.set_posicion_en_x(x);
     	mario.set_posicion_en_y(y);
     	return mario;

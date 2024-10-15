@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 
+import entidades.mario.Mario;
 import fabricas.EntidadesFactory;
 import fabricas.SpritesFactory;
 import logica.*;
@@ -116,8 +117,20 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
                         break;
                 }
             }
+
+            @Override
+            public void keyReleased(KeyEvent evento) {
+                switch (evento.getKeyCode()) {
+                    case KeyEvent.VK_A:
+                    case KeyEvent.VK_D:
+                        mi_juego.get_mapa().get_mario().detener_movimiento();
+                        mi_juego.notificar_observadores();
+                        break;
+                }
+            }
         });
     }
+
 
     public void mostrar_pantalla_inicial() {
         ventana.setContentPane(panel_pantalla_principal);

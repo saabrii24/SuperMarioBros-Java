@@ -5,38 +5,40 @@ Nivel: 1
 Tiempo: 100
 
 # Creación de las entidades
-# Mario (x,y)
-Mario: 100, 148
-# Enemigos
-Goomba: 288, 144
-Goomba: 384, 144
-Koopa: 1056, 165
-Goomba: 1440, 144
-
-# PowerUps
-Estrella: 264, 480
-
-# Plataformas
-BloqueSolido: 0, 96
-BloqueSolido: 48, 96
-BloqueSolido: 96, 96
-BloqueSolido: 144, 96
-BloqueSolido: 192, 96
-BloqueSolido: 240, 96
-BloqueSolido: 288, 96
-BloqueSolido: 336, 96
-BloqueSolido: 384, 96
-BloqueSolido: 432, 96
-Vacio: 480, 96
-
-BloqueDePregunta: 672, 288
-LadrilloSolido: 864, 288
-BloqueDePregunta: 912, 288
-LadrilloSolido: 960, 288
-BloqueDePregunta: 1008, 288
-LadrilloSolido: 1056, 288
-BloqueDePregunta: 960, 480
-
+	
+	# Mario (x,y)
+	Mario: 100, 148
+	
+	# Enemigos
+	Goomba: 288, 144
+	Goomba: 384, 144
+	Koopa: 1056, 165
+	Goomba: 1440, 144
+	
+	# PowerUps
+	Estrella: 264, 480
+	
+	# Plataformas
+	BloqueSolido: 0, 96
+	BloqueSolido: 48, 96
+	BloqueSolido: 96, 96
+	BloqueSolido: 144, 96
+	BloqueSolido: 192, 96
+	BloqueSolido: 240, 96
+	BloqueSolido: 288, 96
+	BloqueSolido: 336, 96
+	BloqueSolido: 384, 96
+	BloqueSolido: 432, 96
+	Vacio: 480, 96
+	
+	BloqueDePregunta: 672, 288
+	LadrilloSolido: 864, 288
+	BloqueDePregunta: 912, 288
+	LadrilloSolido: 960, 288
+	BloqueDePregunta: 1008, 288
+	LadrilloSolido: 1056, 288
+	BloqueDePregunta: 960, 480
+	
 
 # Definición del mapa
 Mapa: (crear)

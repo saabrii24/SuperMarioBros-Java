@@ -1,5 +1,7 @@
 package logica;
 
+import java.awt.Graphics;
+
 import fabricas.Sprite;
 
 public interface EntidadLogica {

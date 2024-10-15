@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.FontFormatException;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.io.File;
@@ -107,7 +108,6 @@ public class PanelPantallaMapa extends JPanel {
     public void actualizar_scroll_hacia_jugador(EntidadJugador jugador) {
 
     }
-
 
     protected void agregar_panel_mapa_con_fondo(JPanel panel) {
         imagen_fondo = new JLabel();

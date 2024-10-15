@@ -6,21 +6,21 @@ Tiempo: 100
 
 # Creación de las entidades
 # Mario (x,y)
-Mario: 120, 115
+Mario: 120, 148
 # Enemigos
-Goomba: 140, 115
-Goomba: 160, 115
-Koopa: 180, 117
+Goomba: 400, 142
+Goomba: 500, 142
+Koopa: 1000, 165
 
 # PowerUps
-Estrella: 150, 150
+Estrella: 300, 500
 
 # Plataformas
-BloqueSolido: 110, 100
-BloqueSolido: 125, 100
-BloqueSolido: 140, 100
-BloqueSolido: 155, 100
-BloqueDePregunta: 180, 150
+BloqueSolido: 0, 97
+BloqueSolido: 48, 97
+BloqueSolido: 96, 97
+BloqueSolido: 144, 97
+BloqueDePregunta: 300, 400
 
 
 # Definición del mapa

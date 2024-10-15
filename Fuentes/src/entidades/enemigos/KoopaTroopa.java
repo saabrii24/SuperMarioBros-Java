@@ -1,6 +1,5 @@
 package entidades.enemigos;
 
-import entidades.powerups.PowerUp;
 import fabricas.Sprite;
 
 public class KoopaTroopa extends Enemigo{

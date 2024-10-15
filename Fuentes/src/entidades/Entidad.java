@@ -1,5 +1,8 @@
 package entidades;
 
+import java.awt.Graphics;
+import java.awt.Image;
+
 import entidades.interfaces.*;
 import fabricas.Sprite;
 import logica.*;
@@ -44,4 +47,5 @@ public abstract class Entidad implements EntidadLogica, Agresiva, Consumible, De
     public void notificar_observer() {
             observer.actualizar();
     }
+ 
 }

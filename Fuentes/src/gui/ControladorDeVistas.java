@@ -8,7 +8,6 @@ import javax.imageio.ImageIO;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 
-import entidades.mario.Mario;
 import fabricas.EntidadesFactory;
 import fabricas.SpritesFactory;
 import logica.*;

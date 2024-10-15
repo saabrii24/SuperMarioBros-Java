@@ -1,8 +1,5 @@
 package entidades;
 
-import java.awt.Graphics;
-import java.awt.Image;
-
 import entidades.interfaces.*;
 import fabricas.Sprite;
 import logica.*;

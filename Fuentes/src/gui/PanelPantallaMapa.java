@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.FontFormatException;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.io.File;
@@ -174,7 +173,8 @@ public class PanelPantallaMapa extends JPanel {
 
     }
     
-    private void configurar_desplazamiento_con_teclado(JScrollPane scroll) {
+    @SuppressWarnings("serial")
+	private void configurar_desplazamiento_con_teclado(JScrollPane scroll) {
         scroll.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("UP"), "moverArriba");
         scroll.getActionMap().put("moverArriba", new AbstractAction() {
             @Override

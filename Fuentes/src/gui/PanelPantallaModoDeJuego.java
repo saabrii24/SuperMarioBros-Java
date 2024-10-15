@@ -12,7 +12,6 @@ import fabricas.Dominio1Factory;
 import fabricas.Dominio2Factory;
 import fabricas.EntidadesFactory;
 import fabricas.SpritesFactory;
-import gui.PanelPantallaPrincipal.MenuOpciones;
 
 public class PanelPantallaModoDeJuego extends JPanel {
 

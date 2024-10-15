@@ -123,6 +123,9 @@ public class GeneradorNivel {
 		            case "BloqueDePregunta":
 		                mapa.agregar_plataforma(generador.get_bloque_de_pregunta(x, y));
 		                break;
+		            case "Vacio":
+		                mapa.agregar_plataforma(generador.get_vacio(x, y));
+		                break;
 		            default:
 		                
 		                break;

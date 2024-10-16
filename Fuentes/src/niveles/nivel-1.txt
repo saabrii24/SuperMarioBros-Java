@@ -13,22 +13,48 @@ Tiempo: 100
 	#Goomba: 288, 144
 	#Goomba: 384, 144
 	#Koopa: 1056, 165
-	Goomba: 200, 144
+	Goomba: 200, 200
 	
 	# PowerUps
 	Estrella: 264, 480
 	
 	# Plataformas
-	#BloqueSolido: 0, 96
-	#BloqueSolido: 48, 96
-	#BloqueSolido: 96, 96
-	BloqueSolido: 144, 144
-	Tuberia: 336, 144
-	#BloqueSolido: 240, 96
-	#BloqueSolido: 288, 96
-	#BloqueSolido: 336, 96
-	#BloqueSolido: 384, 96
-	#BloqueSolido: 432, 96
+	BloqueSolido: 0, 96
+	BloqueSolido: 48, 96
+	BloqueSolido: 96, 96
+	BloqueSolido: 144,96
+	BloqueSolido: 192,96
+	#BloqueSolido: 144, 144
+	BloqueSolido: 336, 144
+	BloqueSolido: 240, 96
+	BloqueSolido: 288, 96
+	BloqueSolido: 336, 96
+	BloqueSolido: 384, 96
+	BloqueSolido: 432, 96
+	BloqueSolido: 384, 96
+	BloqueSolido: 432, 96
+	BloqueSolido: 480, 96
+	BloqueSolido: 528, 96
+	BloqueSolido: 576, 96
+	BloqueSolido: 624, 96
+	BloqueSolido: 672, 96
+	BloqueSolido: 720, 96
+	BloqueSolido: 768, 96
+	BloqueSolido: 816, 96
+	BloqueSolido: 864, 96
+	BloqueSolido: 912, 96
+	BloqueSolido: 960, 96
+	BloqueSolido: 1008, 96
+	BloqueSolido: 1056, 96
+	BloqueSolido: 1104, 96
+	BloqueSolido: 1152, 96
+	BloqueSolido: 1200, 96
+	BloqueSolido: 1248, 96
+	BloqueSolido: 1296, 96
+	BloqueSolido: 1344, 96
+	BloqueSolido: 1392, 96
+	BloqueSolido: 1440, 96
+	
 	#Vacio: 480, 48
 	#Vacio: 480, 96
 	#BloqueSolido: 192, 144

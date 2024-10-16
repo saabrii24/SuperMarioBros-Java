@@ -21,6 +21,15 @@ public class Colisionador {
         } else if (colisiona_con_plataforma(enemigo.get_limites_derecha())) {
             enemigo.set_direccion_enemigo(-1); // Cambia la dirección a la izquierda
         }
+        if (!colisiona_con_plataforma(enemigo.get_limites_inferiores())) {
+            enemigo.set_velocidad_en_y(5); // Aplica gravedad
+            System.out.println("Cayendo");
+        } else {
+        	enemigo.set_cayendo(false);
+            enemigo.set_velocidad_en_y(0); // Detiene la caída si está en una plataforma
+            
+            System.out.println("Deje de caer xd");
+        }
     }
     
 

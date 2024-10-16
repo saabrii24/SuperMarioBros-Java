@@ -37,6 +37,10 @@ public class Enemigo extends Entidad{
 	public void set_direccion_enemigo(int direccion) {
 		direccion_enemigo = direccion;
 	}
+	public void set_velocidad_en_y(int gravedad) {
+		velocidad_en_y = gravedad;
+		
+	}
 	 private void mover_a_izquierda() {
 	        this.velocidad_en_x = -10;
 	        movimiento_derecha = false;
@@ -55,12 +59,12 @@ public class Enemigo extends Entidad{
 	    }
 	    
 	    public void actualizar_posicion() {
-	        if (saltando && velocidad_en_y <= 0) {
-	            saltando = false;
-	            cayendo = true;
-	        } else if (saltando) {
+	    	 if (saltando) {
 	            velocidad_en_y -= gravedad;
 	            posicion_en_y -= velocidad_en_y;
+	        }
+	        else if (cayendo) {
+	        	posicion_en_y -= velocidad_en_y;
 	        }
 
 	        posicion_en_x += velocidad_en_x;

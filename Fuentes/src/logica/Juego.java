@@ -176,7 +176,7 @@ public class Juego extends Thread {
     	while (esta_ejecutando) {
     		for (Enemigo e : mapa_nivel_actual.get_entidades_enemigo()) {
     			controlador_colisiones.verificar_colision_enemigo(e);
-    			e.set_posicion_en_x(e.get_posicion_en_x() + (5 * e.get_direccion_enemigo()));
+    			e.mover();
     			e.notificar_observer();
     		}
     		notificar_observadores();

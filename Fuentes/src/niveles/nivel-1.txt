@@ -13,7 +13,7 @@ Tiempo: 100
 	#Goomba: 288, 144
 	#Goomba: 384, 144
 	#Koopa: 1056, 165
-	#Goomba: 200, 144
+	Goomba: 200, 144
 	
 	# PowerUps
 	Estrella: 264, 480

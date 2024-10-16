@@ -1,6 +1,8 @@
 package fabricas;
 
+import java.awt.Canvas;
 import java.awt.Image;
+import java.awt.MediaTracker;
 import java.awt.Toolkit;
 
 public class Sprite {
@@ -15,6 +17,7 @@ public class Sprite {
         this.imagen = Toolkit.getDefaultToolkit().getImage(ruta_a_imagen);
         this.ancho = imagen.getWidth(null);
         this.alto = imagen.getHeight(null);
+        
     }
 
     public Image get_imagen_escalada(int nuevo_ancho, int nuevo_alto) {
@@ -27,6 +30,7 @@ public class Sprite {
 
     public int get_ancho() {
         return ancho;
+        
     }
 
     public int get_alto() {

@@ -130,6 +130,8 @@ public class GeneradorNivel {
 		            case "Vacio":
 		                mapa.agregar_plataforma(generador.get_vacio(x, y));
 		                break;
+		            case "Tuberia":
+		            	mapa.agregar_plataforma(generador.get_tuberias(x, y));
 		            default:
 		                
 		                break;

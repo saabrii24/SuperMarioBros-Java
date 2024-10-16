@@ -88,7 +88,7 @@ public abstract class SpritesFactory {
     }
 
     public Sprite get_tuberias() {
-        return cargarSprite("tuberias.png");
+        return cargarSprite("tuberia.png");
     }
 
     public Sprite get_vacio() {

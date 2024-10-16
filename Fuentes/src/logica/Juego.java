@@ -30,6 +30,7 @@ public class Juego extends Thread {
     protected volatile int direccion_mario;
     private volatile int direccion_enemigo = -1;
     protected boolean observer_registrado = false;
+    protected Colisionador controlador_colisiones;
 
     public Juego() {
         iniciar();
@@ -41,6 +42,7 @@ public class Juego extends Thread {
         Mario.get_instancia().set_fabrica_sprites(fabrica_sprites);
         fabrica_entidades = new EntidadesFactory(fabrica_sprites);
         controlador_vistas = new ControladorDeVistas(this);
+        controlador_colisiones = new Colisionador(mapa_nivel_actual);
         if (!esta_ejecutando) {
             iniciar_thread_juego();
             iniciar_thread_movimiento();
@@ -147,7 +149,7 @@ public class Juego extends Thread {
     }
     
     private void mover_jugador_continuo() {
-    	Mario.get_instancia().mover(direccion_mario);
+    	Mario.get_instancia().mover();
     	while (!observer_registrado) {
             try {
                 Thread.sleep(16); 
@@ -173,9 +175,9 @@ public class Juego extends Thread {
     	}
     	while (esta_ejecutando) {
     		for (Enemigo e : mapa_nivel_actual.get_entidades_enemigo()) {
-    			e.set_posicion_en_x(e.get_posicion_en_x() + (5 * direccion_enemigo));
+    			controlador_colisiones.verificar_colision_enemigo(e);
+    			e.set_posicion_en_x(e.get_posicion_en_x() + (5 * e.get_direccion_enemigo()));
     			e.notificar_observer();
-    			System.out.println("Cambie posicion enemigo e: " + e.get_posicion_en_x());
     		}
     		notificar_observadores();
     		try {

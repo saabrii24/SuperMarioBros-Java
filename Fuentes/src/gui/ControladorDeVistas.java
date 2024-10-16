@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 
+import entidades.mario.Mario;
 import fabricas.EntidadesFactory;
 import fabricas.SpritesFactory;
 import logica.*;
@@ -99,10 +100,10 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
             public void keyPressed(KeyEvent evento) {
                 switch (evento.getKeyCode()) {
                     case KeyEvent.VK_A:
-                       mi_juego.set_direccion_mario(-1);
+                       Mario.get_instancia().set_direccion_mario(-1);
                         break;
                     case KeyEvent.VK_D:
-                       mi_juego.set_direccion_mario(1);
+                    	Mario.get_instancia().set_direccion_mario(1);
                         break;
                 }
             }
@@ -112,7 +113,7 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
                 switch (evento.getKeyCode()) {
                     case KeyEvent.VK_A:
                     case KeyEvent.VK_D:
-                        mi_juego.set_direccion_mario(0);
+                    	Mario.get_instancia().set_direccion_mario(0);
                         
                         break;
                 }

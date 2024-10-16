@@ -14,6 +14,7 @@ public class Mario extends Entidad implements EntidadJugador {
     private int puntaje_acumulado;
     private int monedas;
     private int vidas;
+    private int direccion;
     private double velocidad_en_x;
     private double velocidad_en_y;
     private double gravedad = 0.38;
@@ -69,15 +70,17 @@ public class Mario extends Entidad implements EntidadJugador {
             }
         }
     }
-    
-    public void mover(int direccion_mario) {
-    	if (direccion_mario == 0) {
+    public void set_direccion_mario(int direccion_mario) {
+    	direccion = direccion_mario;
+    }
+    public void mover() {
+    	if (direccion == 0) {
     		detener_movimiento();
     	}
-    	if (direccion_mario == 1) {
+    	if (direccion == 1) {
     		mover_a_derecha();
     	}
-    	if (direccion_mario == -1) {
+    	if (direccion == -1) {
     		mover_a_izquierda();
     	}
     }

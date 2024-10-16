@@ -21,9 +21,8 @@ public abstract class Entidad implements EntidadLogica, Agresiva, Consumible, De
         this.sprite = sprite;
         this.posicion_en_x = x;
         this.posicion_en_y = y;
-
         if (sprite != null) {
-            setDimension(sprite.get_ancho(), sprite.get_alto());
+            setDimension(48, 48);
         }
         this.gravedad_aceleracion = 0.38;
         this.velocidad_en_x = 0;

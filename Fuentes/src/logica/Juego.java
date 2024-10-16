@@ -24,8 +24,10 @@ public class Juego implements Runnable {
     protected int contador_puntos;
     protected int vidas = 3;
     protected boolean esta_ejecutando;
-    protected Thread hilo;
+    protected Thread hilo_mario;
     protected EntidadesFactory generador;
+    private volatile int direccion_mario;
+    private boolean observer_registrado = false;
 
     public Juego() {
         iniciar();
@@ -39,8 +41,28 @@ public class Juego implements Runnable {
  
         if (esta_ejecutando) return;
         esta_ejecutando = true;
-        hilo = new Thread(this);
-        hilo.start();
+        iniciar_thread_movimiento();
+    }
+
+    public void set_direccion_mario(int direccion) {
+        this.direccion_mario = direccion;
+    }
+
+    public void run() {
+        long ultimo_tiempo = System.nanoTime();
+        double cantidad_ticks = 60.0;
+        double ns = 1000000000 / cantidad_ticks;
+        double delta = 0;
+
+        while (esta_ejecutando) {
+            long ahora = System.nanoTime();
+            delta += (ahora - ultimo_tiempo) / ns;
+            ultimo_tiempo = ahora;
+            
+            while (delta >= 1) {
+                delta--;
+            }
+        }
     }
 
     public void cargar_datos(EntidadesFactory generador) {
@@ -63,6 +85,7 @@ public class Juego implements Runnable {
     protected void registrar_observer_jugador(Mario jugador_mario) {
         Observer observer_jugador = controlador_vistas.registrar_entidad(jugador_mario);
         jugador_mario.registrar_observer(observer_jugador);
+        observer_registrado = true;
     }
 
     protected void registrar_observers_para_entidades(List<? extends Entidad> entidades) {
@@ -76,23 +99,6 @@ public class Juego implements Runnable {
     	this.generador = generador;
     }
 
-    @Override
-    public void run() {
-        long ultimo_tiempo = System.nanoTime();
-        double cantidad_ticks = 60.0;
-        double ns = 1000000000 / cantidad_ticks;
-        double delta = 0;
-
-        while (esta_ejecutando) {
-            long ahora = System.nanoTime();
-            delta += (ahora - ultimo_tiempo) / ns;
-            ultimo_tiempo = ahora;
-            
-            while (delta >= 1) {
-                delta--;
-            }
-        }
-    }
 
 	public Mapa get_mapa() {
     	return mapa_nivel_actual;
@@ -128,6 +134,38 @@ public class Juego implements Runnable {
         for (Entidad entidad : entidades) {
             entidad.notificar_observer();
         }
+    }
+    
+    public void iniciar_thread_movimiento() {
+        Thread hilo_movimiento = new Thread(() -> {
+            while (true) {
+                mover_jugador_continuo();
+                try {
+                    Thread.sleep(16); // Controlar la velocidad del movimiento
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        hilo_movimiento.start();
+    }
+    
+    private void mover_jugador_continuo() {
+    	System.out.println("Entre al metodo, mi direccion es: " + direccion_mario);
+        if (direccion_mario == 0)
+        	Mario.get_instancia(fabrica_sprites).detener_movimiento();
+        if (direccion_mario > 0)
+        	Mario.get_instancia(fabrica_sprites).mover_a_derecha();
+        if(direccion_mario < 0)
+        	Mario.get_instancia(fabrica_sprites).mover_a_izquierda();
+    	while (!observer_registrado) {
+            try {
+                Thread.sleep(16); 
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+        notificar_observadores();
     }
 
 

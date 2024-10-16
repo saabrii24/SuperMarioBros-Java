@@ -33,10 +33,6 @@ public class Mapa {
     public List<PowerUp> get_entidades_powerup(){
     	return entidades_powerup;
     }
-    
-    public Mario get_mario() {
-        return mario;
-    }
 
     public void agregar_mario(Mario mario) {
         this.mario = mario;

@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
+import entidades.mario.Mario;
 import fabricas.EntidadesFactory;
 import logica.Mapa;
 
@@ -44,7 +46,9 @@ public class GeneradorNivel {
                             String[] marioPos = valor.split(",");
                             mario_posicion_en_x = Integer.parseInt(marioPos[0].trim());
                             mario_posicion_en_y = Integer.parseInt(marioPos[1].trim());
-                            mapa.agregar_mario(generador.get_mario(mario_posicion_en_x, mario_posicion_en_y));;
+                            mapa.agregar_mario(Mario.get_instancia());
+                            Mario.get_instancia().set_posicion_en_x(mario_posicion_en_x);
+                            Mario.get_instancia().set_posicion_en_y(mario_posicion_en_y);
                             break;
                         case "Mapa":
                             // Implementar la lógica para la creación del mapa si es necesario

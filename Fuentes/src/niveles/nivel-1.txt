@@ -31,6 +31,7 @@ Tiempo: 100
 	BloqueSolido: 432, 96
 	Vacio: 480, 48
 	Vacio: 480, 96
+	BloqueSolido: 192, 144
 	
 	BloqueDePregunta: 672, 288
 	LadrilloSolido: 864, 288

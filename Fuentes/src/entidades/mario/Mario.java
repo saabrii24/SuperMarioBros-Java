@@ -20,11 +20,11 @@ public class Mario extends Entidad implements EntidadJugador {
     private boolean saltando;
     private boolean cayendo;
     private boolean movimiento_derecha;
-    private SpritesFactory spritesFactory; 
+    private SpritesFactory sprites_factory; 
     
-    private Mario(int x, int y, Sprite sprite, SpritesFactory factory) {
+    private Mario(int x, int y, Sprite sprite) {
         super(x, y, sprite);
-        this.spritesFactory = factory; // Inicializar la fábrica de sprites
+        this.sprites_factory = null; // Inicializar la fábrica de sprites
         this.puntaje_acumulado = 0;
         this.monedas = 0;
         this.vidas = 3;
@@ -36,8 +36,8 @@ public class Mario extends Entidad implements EntidadJugador {
     }
 
     // Mario Singleton
-    public static Mario get_instancia(SpritesFactory factory) {
-        if (instancia_mario == null) instancia_mario = new Mario(150, 150, factory.get_mario_ocioso_derecha(), factory);
+    public static Mario get_instancia() {
+        if (instancia_mario == null) instancia_mario = new Mario(150, 150, null);
         return instancia_mario;
     }
 
@@ -58,28 +58,26 @@ public class Mario extends Entidad implements EntidadJugador {
 
         posicion_en_x += velocidad_en_x;
         if (velocidad_en_x < 0) {
-            cambiar_sprite(spritesFactory.get_mario_movimiento_izquierda());  
+            cambiar_sprite(sprites_factory.get_mario_movimiento_izquierda());  
         } else if (velocidad_en_x > 0) {
-            cambiar_sprite(spritesFactory.get_mario_movimiento_derecha()); 
+            cambiar_sprite(sprites_factory.get_mario_movimiento_derecha()); 
         } else {
             if (movimiento_derecha) {  
-            	cambiar_sprite(spritesFactory.get_mario_ocioso_derecha()); 
-                
+            	cambiar_sprite(sprites_factory.get_mario_ocioso_derecha());             
             } else {
-            	cambiar_sprite(spritesFactory.get_mario_ocioso_izquierda()); 
+            	cambiar_sprite(sprites_factory.get_mario_ocioso_izquierda()); 
             }
         }
     }
 
-
     public void mover_a_izquierda() {
-        this.velocidad_en_x = -5;
+        this.velocidad_en_x = -10;
         movimiento_derecha = false;
         actualizar_posicion();
     }
 
     public void mover_a_derecha() {
-        this.velocidad_en_x = 5;
+        this.velocidad_en_x = 10;
         movimiento_derecha = true;
         actualizar_posicion();
     }
@@ -164,6 +162,10 @@ public class Mario extends Entidad implements EntidadJugador {
     
     private void cambiar_sprite(Sprite nuevo_sprite) {
         this.sprite = nuevo_sprite; // Cambia el sprite actual por el nuevo
+    }
+    
+    public void set_fabrica_sprites(SpritesFactory sprites) {
+    	this.sprites_factory = sprites;
     }
 
 }

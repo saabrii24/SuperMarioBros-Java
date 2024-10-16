@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import entidades.mario.Mario;
 import fabricas.Dominio1Factory;
 import fabricas.Dominio2Factory;
 import fabricas.EntidadesFactory;
@@ -137,12 +138,14 @@ public class PanelPantallaModoDeJuego extends JPanel {
         switch (opcion_actual) {
 	        case MARIO:
 	        	SpritesFactory fabrica_mario = new Dominio1Factory();
+	        	Mario.get_instancia().set_fabrica_sprites(fabrica_mario);
 	        	generador = new EntidadesFactory(fabrica_mario);	        	
 	        	controlador_vistas.notificar_eleccion(generador);
 	        	controlador_vistas.mostrar_pantalla_mapa();
 	            break;
 	        case LUIGI:
 	            SpritesFactory fabrica_luigi = new Dominio2Factory();
+	        	Mario.get_instancia().set_fabrica_sprites(fabrica_luigi);
 	            generador = new EntidadesFactory(fabrica_luigi);
 	            controlador_vistas.notificar_eleccion(generador);
 	            controlador_vistas.mostrar_pantalla_mapa();

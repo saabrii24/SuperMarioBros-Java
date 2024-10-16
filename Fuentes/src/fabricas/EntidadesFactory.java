@@ -14,14 +14,6 @@ public class EntidadesFactory {
         this.fabrica_sprites = fabrica_sprites;
     }
 
-    public Mario get_mario(int x, int y) {
-    	//Sprite sprite_mario = fabrica_sprites.get_mario_ocioso_derecha();
-    	Mario mario = Mario.get_instancia(fabrica_sprites);
-    	mario.set_posicion_en_x(x);
-    	mario.set_posicion_en_y(y);
-    	return mario;
-    }
-
     public Goomba get_goomba(int x, int y) {
         Sprite sprite_goomba = fabrica_sprites.get_goomba();
         return new Goomba(x, y, sprite_goomba);

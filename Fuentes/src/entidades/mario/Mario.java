@@ -69,20 +69,31 @@ public class Mario extends Entidad implements EntidadJugador {
             }
         }
     }
-
-    public void mover_a_izquierda() {
+    
+    public void mover(int direccion_mario) {
+    	if (direccion_mario == 0) {
+    		detener_movimiento();
+    	}
+    	if (direccion_mario == 1) {
+    		mover_a_derecha();
+    	}
+    	if (direccion_mario == -1) {
+    		mover_a_izquierda();
+    	}
+    }
+    private void mover_a_izquierda() {
         this.velocidad_en_x = -10;
         movimiento_derecha = false;
         actualizar_posicion();
     }
 
-    public void mover_a_derecha() {
+    private void mover_a_derecha() {
         this.velocidad_en_x = 10;
         movimiento_derecha = true;
         actualizar_posicion();
     }
 
-    public void detener_movimiento() {
+    private void detener_movimiento() {
         this.velocidad_en_x = 0; 
         actualizar_posicion();
     }

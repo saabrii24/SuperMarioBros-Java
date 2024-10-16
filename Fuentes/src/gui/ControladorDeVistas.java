@@ -104,14 +104,6 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
                     case KeyEvent.VK_D:
                        mi_juego.set_direccion_mario(1);
                         break;
-                    case KeyEvent.VK_W:
-                        mi_juego.mover_jugador(Juego.SALTAR);
-                        mi_juego.notificar_observadores();
-                        break;
-                    case KeyEvent.VK_SPACE:
-                        mi_juego.mover_jugador(Juego.DISPARAR);
-                        mi_juego.notificar_observadores();
-                        break;
                 }
             }
 

@@ -1,14 +1,15 @@
 package logica;
 
 import entidades.Entidad;
+import entidades.enemigos.Enemigo;
 import entidades.mario.Mario;
 import fabricas.*;
 import gui.ControladorDeVistas;
 import niveles.GeneradorNivel;
 import niveles.Nivel;
-import java.util.List;
+import java.util.List;import javax.swing.tree.DefaultTreeCellEditor.EditorContainer;
 
-public class Juego implements Runnable {
+public class Juego extends Thread {
 
 	public static final int SALTAR = 15000;
 	public static final int IZQUIERDA = 15001;
@@ -24,10 +25,10 @@ public class Juego implements Runnable {
     protected int contador_puntos;
     protected int vidas = 3;
     protected boolean esta_ejecutando;
-    protected Thread hilo_mario;
     protected Thread hilo_juego;
     protected EntidadesFactory generador;
     protected volatile int direccion_mario;
+    private volatile int direccion_enemigo = -1;
     protected boolean observer_registrado = false;
 
     public Juego() {
@@ -41,8 +42,9 @@ public class Juego implements Runnable {
         fabrica_entidades = new EntidadesFactory(fabrica_sprites);
         controlador_vistas = new ControladorDeVistas(this);
         if (!esta_ejecutando) {
-            iniciar_thread_movimiento();
             iniciar_thread_juego();
+            iniciar_thread_movimiento();
+            iniciar_thread_enemigos();
         }
     }
     
@@ -58,23 +60,6 @@ public class Juego implements Runnable {
         this.direccion_mario = direccion;
     }
 
-    public void run() {
-        long ultimo_tiempo = System.nanoTime();
-        double cantidad_ticks = 60.0;
-        double ns = 1000000000 / cantidad_ticks;
-        double delta = 0;
-
-        while (esta_ejecutando  && !hilo_juego.isInterrupted()) {
-            long ahora = System.nanoTime();
-            delta += (ahora - ultimo_tiempo) / ns;
-            ultimo_tiempo = ahora;
-            
-            while (delta >= 1) {
-                delta--;
-            }
-        }
-        System.out.println("Hilo principal del juego detenido");
-    }
 
     public void cargar_datos(EntidadesFactory generador) {
         nivel_actual = GeneradorNivel.cargar_nivel_y_mapa(
@@ -119,9 +104,9 @@ public class Juego implements Runnable {
     	return nivel_actual;
     }
     
-	public void mover_jugador(int d) {
+	/*public void mover_jugador(int d) {
 		mapa_nivel_actual.mover_jugador(d);
-	}
+	}*/
 
     public static void main(String[] args) {
         new Juego();
@@ -162,13 +147,7 @@ public class Juego implements Runnable {
     }
     
     private void mover_jugador_continuo() {
-    	//System.out.println("Entre al metodo, mi direccion es: " + direccion_mario);
-        if (direccion_mario == 0)
-        	Mario.get_instancia().detener_movimiento();
-        if (direccion_mario > 0)
-        	Mario.get_instancia().mover_a_derecha();
-        if(direccion_mario < 0)
-        	Mario.get_instancia().mover_a_izquierda();
+    	Mario.get_instancia().mover(direccion_mario);
     	while (!observer_registrado) {
             try {
                 Thread.sleep(16); 
@@ -177,6 +156,34 @@ public class Juego implements Runnable {
             }
         }
         notificar_observadores();
+    }
+    
+    public void iniciar_thread_enemigos() {
+    	Thread hilo_enemigos = new Thread(() -> mover_enemigos_continuo());
+        hilo_enemigos.start();
+    }
+    
+    private void mover_enemigos_continuo() {
+    	while (!observer_registrado) {
+    		 try {
+                 Thread.sleep(16); 
+             } catch (InterruptedException e) {
+                 Thread.currentThread().interrupt();
+             }
+    	}
+    	while (esta_ejecutando) {
+    		for (Enemigo e : mapa_nivel_actual.get_entidades_enemigo()) {
+    			e.set_posicion_en_x(e.get_posicion_en_x() + (5 * direccion_enemigo));
+    			e.notificar_observer();
+    			System.out.println("Cambie posicion enemigo e: " + e.get_posicion_en_x());
+    		}
+    		notificar_observadores();
+    		try {
+    			Thread.sleep(16); // Velocidad del movimiento de los enemigos
+    		} catch (InterruptedException e) {
+    			Thread.currentThread().interrupt();
+    		}
+        }
     }
 
 

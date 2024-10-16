@@ -55,7 +55,7 @@ public class Mapa {
         
     }
 
-    public void mover_jugador(int direccion) {
+   /* public void mover_jugador(int direccion) {
         if (mario == null) {
             return;
         }
@@ -75,7 +75,7 @@ public class Mapa {
             default:
                 break;
         }
-    }
+    }*/
 
 
     public boolean nivel_completado() {

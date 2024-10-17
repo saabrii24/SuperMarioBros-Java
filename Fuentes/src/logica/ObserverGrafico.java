@@ -35,13 +35,14 @@ public abstract class ObserverGrafico extends JLabel implements Observer{
 	        int nuevoAncho = iconoOriginal.getIconWidth() * 3; 
 	        int nuevoAlto = iconoOriginal.getIconHeight() * 3; 
 	        Image imagenEscalada = iconoOriginal.getImage().getScaledInstance(nuevoAncho, nuevoAlto, Image.SCALE_SMOOTH);
-
+	        
 	        ImageIcon iconoEscalado = new ImageIcon(imagenEscalada);
 	        setIcon(iconoEscalado);
 	    }
+	    
 	}
 
-
+	
 	
 	protected void actualizar_posicion_tamano() {
 		int x = (int) AdaptadorPosicionPixel.transformar_x(entidad_observada.get_posicion_en_x());

@@ -103,6 +103,9 @@ public class Mapa {
         }
         chequear_colisiones();
     }
-
+    
+    public void reproducir_efecto(String efecto) {
+    	mi_juego.reproducir_efecto(efecto);
+    }
     
 }

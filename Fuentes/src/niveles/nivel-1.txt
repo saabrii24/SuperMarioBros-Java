@@ -13,7 +13,7 @@ Tiempo: 100
 	#Goomba: 288, 144
 	#Goomba: 384, 144
 	#Koopa: 1056, 165
-	Goomba: 200, 200
+	Goomba: 700, 200
 	
 	# PowerUps
 	Estrella: 264, 480
@@ -25,7 +25,7 @@ Tiempo: 100
 	BloqueSolido: 144,96
 	BloqueSolido: 192,96
 	#BloqueSolido: 144, 144
-	BloqueSolido: 336, 144
+	BloqueSolido: 500, 144
 	BloqueSolido: 240, 96
 	BloqueSolido: 288, 96
 	BloqueSolido: 336, 96
@@ -57,7 +57,7 @@ Tiempo: 100
 	
 	#Vacio: 480, 48
 	#Vacio: 480, 96
-	#BloqueSolido: 192, 144
+	BloqueSolido: 700, 144
 	
 	#BloqueDePregunta: 672, 288
 	#LadrilloSolido: 864, 288

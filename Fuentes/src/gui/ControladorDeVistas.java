@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import entidades.mario.Mario;
 import fabricas.EntidadesFactory;
 import fabricas.SpritesFactory;
+import gui.sonido.Sonido;
 import logica.*;
 
 public class ControladorDeVistas implements ControladorEntreJuegoVista, ControladorJuegoVista {
@@ -23,8 +24,9 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
     protected PanelPantallaModoDeJuego panel_pantalla_modo_de_juego; 
     protected Juego mi_juego;
     protected EntidadesFactory generador;
+    protected Sonido sonido_juego;
+    protected boolean sonido_activo = true;
     
-
     public ControladorDeVistas(Juego juego) {
         mi_juego = juego;
         panel_pantalla_principal = new PanelPantallaPrincipal(this);
@@ -32,6 +34,7 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
         panel_pantalla_ayuda = new PanelPantallaAyuda(this); 
         panel_pantalla_ranking = new PanelPantallaRanking(this); 
         panel_pantalla_modo_de_juego = new PanelPantallaModoDeJuego(this); 
+        sonido_juego = new Sonido();
         configurar_ventana();
         mostrar_pantalla_inicial();
         registrar_oyente_panel_principal();
@@ -105,6 +108,15 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
                     case KeyEvent.VK_D:
                     	Mario.get_instancia().set_direccion_mario(1);
                         break;
+                    case KeyEvent.VK_M:
+                    	if(!sonido_activo) {
+	                    	sonido_juego.activar_sonido();
+	                    	sonido_activo = true;
+                    	} else {
+                    		sonido_juego.detener_musica_de_fondo();
+	                    	sonido_activo = false;
+                    	}
+                        break;
                 }
             }
 
@@ -113,8 +125,7 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
                 switch (evento.getKeyCode()) {
                     case KeyEvent.VK_A:
                     case KeyEvent.VK_D:
-                    	Mario.get_instancia().set_direccion_mario(0);
-                        
+                    	Mario.get_instancia().set_direccion_mario(0);                       
                         break;
                 }
             }
@@ -137,6 +148,7 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
         ventana.setContentPane(panel_pantalla_mapa);
         panel_pantalla_mapa.setFocusable(true);
         panel_pantalla_mapa.requestFocusInWindow(); 
+        sonido_juego.desactivar_sonido();
         refrescar();
     }
     
@@ -192,7 +204,14 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
 
 	public void notificar_eleccion(EntidadesFactory generador) {
 		mi_juego.cargar_datos(generador);
-		mi_juego.registrar_observers();
+	}
+
+	public PanelPantallaMapa get_pantalla_mapa() {
+		return panel_pantalla_mapa;
+	}
+
+	public void reproducir_efecto(String efecto) {
+		sonido_juego.reproducir_efecto(efecto);
 	}
 	
 

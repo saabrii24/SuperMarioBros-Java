@@ -2,9 +2,7 @@ package logica;
 
 import java.awt.Rectangle;
 
-import entidades.Entidad;
 import entidades.enemigos.Enemigo;
-import entidades.mario.Mario;
 
 public class Colisionador {
 
@@ -15,32 +13,34 @@ public class Colisionador {
     }
 
     public void verificar_colision_enemigo(Enemigo enemigo) {
-        // Verificar colisiones laterales (izquierda o derecha)
         if (colisiona_con_plataforma(enemigo.get_limites_izquierda())) {
-            enemigo.set_direccion_enemigo(1);; // Cambia la dirección a la derecha
+            enemigo.set_direccion_enemigo(1); 
+            mapa.reproducir_efecto("kick");
         } else if (colisiona_con_plataforma(enemigo.get_limites_derecha())) {
-            enemigo.set_direccion_enemigo(-1); // Cambia la dirección a la izquierda
+            enemigo.set_direccion_enemigo(-1);
+            mapa.reproducir_efecto("kick");
         }
-        if (!colisiona_con_plataforma(enemigo.get_limites_inferiores())) {
+        if (!colisiona_con_plataforma(enemigo.get_limites_superiores())) {
             enemigo.set_velocidad_en_y(5); // Aplica gravedad
-            System.out.println("Cayendo");
+            //System.out.println("Cayendo");
         } else {
         	enemigo.set_cayendo(false);
             enemigo.set_velocidad_en_y(0); // Detiene la caída si está en una plataforma
             
-            System.out.println("Deje de caer xd");
+            //System.out.println("Deje de caer xd");
         }
     }
     
 
     private boolean colisiona_con_plataforma(Rectangle limites) {
-        // Itera sobre todas las plataformas del mapa y verifica si colisiona con alguna
-        for (Entidad plataforma : mapa.get_entidades_plataforma()) {
-            if (plataforma.get_limites().intersects(limites)) {
-            	System.out.println("Detecte colision");
-                return true; // Colisión detectada
-            }
+        // Utiliza stream para verificar si alguna plataforma colisiona con los límites
+        boolean colisiona = mapa.get_entidades_plataforma().stream().anyMatch(plataforma -> plataforma.get_limites().intersects(limites));
+
+        if (colisiona) {
+            //System.out.println("Detecte colision");
         }
-        return false; // No hay colisión
+
+        return colisiona; // Devuelve el resultado de la colisión
     }
+
 }

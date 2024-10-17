@@ -22,7 +22,7 @@ public abstract class Entidad implements EntidadLogica, Agresiva, Consumible, De
         this.posicion_en_x = x;
         this.posicion_en_y = y;
         if (sprite != null) {
-            setDimension(48, 48);
+        	set_dimension(48, 48);
         }
         this.gravedad_aceleracion = 0.38;
         this.velocidad_en_x = 0;
@@ -77,7 +77,7 @@ public abstract class Entidad implements EntidadLogica, Agresiva, Consumible, De
         return dimension;
     }
 
-    public void setDimension(int width, int height) {
+    public void set_dimension(int width, int height) {
         this.dimension = new Dimension(width, height);
     }
 

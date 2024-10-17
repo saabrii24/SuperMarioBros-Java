@@ -26,6 +26,9 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
     protected EntidadesFactory generador;
     protected Sonido sonido_juego;
     protected boolean sonido_activo = true;
+    private long tiempo_ultimo_proyectil = 0;
+    private static final long PROYECTIL_COOLDOWN = 1000; 
+
     
     public ControladorDeVistas(Juego juego) {
         mi_juego = juego;
@@ -103,10 +106,19 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
             public void keyPressed(KeyEvent evento) {
                 switch (evento.getKeyCode()) {
                     case KeyEvent.VK_A:
+                    case KeyEvent.VK_LEFT:
                        Mario.get_instancia().set_direccion_mario(-1);
                         break;
                     case KeyEvent.VK_D:
+                    case KeyEvent.VK_RIGHT:
                     	Mario.get_instancia().set_direccion_mario(1);
+                        break;
+                    case KeyEvent.VK_SPACE:
+                    	long currentTime = System.currentTimeMillis();
+                    	 if (currentTime - tiempo_ultimo_proyectil >= PROYECTIL_COOLDOWN) {
+                             mi_juego.get_mapa_nivel_actual().agregar_bola_de_fuego(Mario.get_instancia().disparar());
+                             tiempo_ultimo_proyectil = currentTime;
+                         }
                         break;
                     case KeyEvent.VK_M:
                     	if(!sonido_activo) {

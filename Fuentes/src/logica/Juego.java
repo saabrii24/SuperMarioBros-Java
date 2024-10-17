@@ -1,5 +1,6 @@
 package logica;
 
+import entidades.BolaDeFuego;
 import entidades.Entidad;
 import entidades.enemigos.Enemigo;
 import entidades.mario.Mario;
@@ -26,9 +27,7 @@ public class Juego extends Thread {
     protected int vidas = 3;
     protected boolean esta_ejecutando;
     protected Thread hilo_juego;
-    protected EntidadesFactory generador;
     protected volatile int direccion_mario;
-    private volatile int direccion_enemigo = -1;
     protected boolean observer_registrado = false;
     protected Colisionador controlador_colisiones;
 
@@ -67,6 +66,7 @@ public class Juego extends Thread {
             actualizar_juego(delta);
             notificar_observadores();
             controlador_vistas.get_pantalla_mapa().repaint();
+
             // Controlar la velocidad del juego para mantener 60 FPS
             long tiempo_restante = (long) tiempo_por_frame - (System.nanoTime() - tiempo_actual);
             if (tiempo_restante > 0) {
@@ -80,13 +80,26 @@ public class Juego extends Thread {
     }
 
     private void actualizar_juego(double delta) {
-        // Mover a Mario
-        Mario.get_instancia().mover();
+        mover_mario();
+        mover_enemigos();
+        mover_proyectiles();
+    }
 
-        // Mover a los enemigos y verificar colisiones
+    private void mover_mario() {
+        Mario.get_instancia().mover();
+    }
+
+    private void mover_enemigos() {
         for (Enemigo enemigo : mapa_nivel_actual.get_entidades_enemigo()) {
-            controlador_colisiones.verificar_colision_enemigo(enemigo);
             enemigo.mover();
+            controlador_colisiones.verificar_colision_enemigo(enemigo);
+        }
+    }
+
+    private void mover_proyectiles() {
+        for (BolaDeFuego proyectil : mapa_nivel_actual.get_entidades_proyectiles()) {
+            proyectil.mover();
+            controlador_colisiones.verificar_colision_proyectil(proyectil); 
         }
     }
 
@@ -94,6 +107,7 @@ public class Juego extends Thread {
         notificar_observadores_mario();
         notificar_observadores_entidades(mapa_nivel_actual.get_entidades_enemigo());
         notificar_observadores_entidades(mapa_nivel_actual.get_entidades_powerup());
+        notificar_observadores_entidades(mapa_nivel_actual.get_entidades_proyectiles());
         notificar_observadores_entidades(mapa_nivel_actual.get_entidades_plataforma());
     }
 
@@ -123,6 +137,7 @@ public class Juego extends Thread {
     private void registrar_observers() {
         registrar_observer_jugador(Mario.get_instancia());
         registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_enemigo());
+        registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_proyectiles());
         registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_powerup());
         registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_plataforma());
     }
@@ -139,16 +154,20 @@ public class Juego extends Thread {
             entidad.registrar_observer(observer);
         }
     }
-    
+
     public Nivel get_nivel_actual() {
         return nivel_actual;
+    }
+
+    public Mapa get_mapa_nivel_actual() {
+        return mapa_nivel_actual;
+    }
+
+    public void reproducir_efecto(String efecto) {
+        controlador_vistas.reproducir_efecto(efecto);
     }
 
     public static void main(String[] args) {
         new Juego();
     }
-
-	public void reproducir_efecto(String efecto) {
-		controlador_vistas.reproducir_efecto(efecto);
-	}
 }

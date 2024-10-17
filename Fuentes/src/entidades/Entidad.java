@@ -20,6 +20,7 @@ public abstract class Entidad implements EntidadLogica, Agresiva, Consumible, De
 	protected boolean cayendo;
 	protected boolean movimiento_derecha;
 	protected int direccion_entidad = -1;
+	protected boolean destruida = false;  
 
 	protected Entidad(double x, double y, Sprite sprite) {
 		this.sprite = sprite;
@@ -188,4 +189,14 @@ public abstract class Entidad implements EntidadLogica, Agresiva, Consumible, De
 
 		posicion_en_x += velocidad_en_x;
 	}
+
+    public boolean es_destruida() {
+        return destruida;
+    }
+    
+	public void destruir() {
+		destruida = true;
+		observer.notificar_destruir();
+	}
+   
 }

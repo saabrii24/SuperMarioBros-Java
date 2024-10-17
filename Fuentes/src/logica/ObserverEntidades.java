@@ -8,4 +8,5 @@ public class ObserverEntidades extends ObserverGrafico {
 		super(entidad_observada);
 		actualizar();
 	}
+	
 }

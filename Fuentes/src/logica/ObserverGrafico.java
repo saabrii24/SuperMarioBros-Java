@@ -1,12 +1,9 @@
 package logica;
 
 import java.awt.Image;
-
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-// Abstraccion de los dos tipos de observadores disponibles (grafico y jugador)
-// Encapsula todo el comportamiento en comun.
 
 public abstract class ObserverGrafico extends JLabel implements Observer{
 	
@@ -23,12 +20,16 @@ public abstract class ObserverGrafico extends JLabel implements Observer{
 		actualizar_posicion_tamano();
 	}
 	
+	public void notificar_destruir() {
+		setIcon(null); 
+        setVisible(false); 
+	}
+	
 	protected void actualizar_imagen() {
 	    String ruta_imagen = entidad_observada.get_sprite().get_ruta_imagen();
 	    ImageIcon icono_original = new ImageIcon(getClass().getResource(ruta_imagen));
-
-	    // Verifica si la imagen es un GIF animado
-	    if (ruta_imagen.toLowerCase().endsWith(".gif")) {
+	    boolean es_un_gif = ruta_imagen.toLowerCase().endsWith(".gif");
+	    if (es_un_gif) {
 	        // Mantener el GIF animado sin escalarlo
 	        setIcon(icono_original);
 	        
@@ -37,13 +38,10 @@ public abstract class ObserverGrafico extends JLabel implements Observer{
 	        entidad_observada.set_dimension(icono_original.getIconWidth(), icono_original.getIconWidth());
 	    } else {
 	        int nuevo_ancho = icono_original.getIconWidth() * 3; 
-
 	        int nuevo_alto = icono_original.getIconHeight() * 3; 
-	        Image imagen_escalada = icono_original.getImage().getScaledInstance(nuevo_ancho, nuevo_alto, Image.SCALE_SMOOTH);
-	        
+	        Image imagen_escalada = icono_original.getImage().getScaledInstance(nuevo_ancho, nuevo_alto, Image.SCALE_SMOOTH);	        
 	        ImageIcon icono_escalado = new ImageIcon(imagen_escalada);
-	        setIcon(icono_escalado);
-	        
+	        setIcon(icono_escalado);       
 	        entidad_observada.get_sprite().set_ancho(nuevo_ancho);
 	        entidad_observada.get_sprite().set_alto(nuevo_alto);
 	        entidad_observada.set_dimension(nuevo_ancho, nuevo_alto);

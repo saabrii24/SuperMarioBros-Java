@@ -19,4 +19,5 @@ public class ObserverJugador extends ObserverGrafico{
 		super.actualizar();
 		panel_pantalla_mapa.actualizar_scroll_hacia_jugador(jugador_observado);
 	}
+	
 }

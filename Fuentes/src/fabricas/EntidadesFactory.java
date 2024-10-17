@@ -2,7 +2,6 @@ package fabricas;
 
 import entidades.BolaDeFuego;
 import entidades.enemigos.*;
-import entidades.mario.Mario;
 import entidades.plataformas.*;
 import entidades.powerups.*;
 

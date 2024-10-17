@@ -96,6 +96,6 @@ public abstract class SpritesFactory {
     }
 
     public Sprite get_bola_de_fuego() {
-        return cargarSprite("bola_de_fuego.png");
+        return cargarSprite("bola_de_fuego.gif");
     }
 }

@@ -2,6 +2,8 @@ package logica;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import entidades.BolaDeFuego;
 import entidades.enemigos.Enemigo;
 import entidades.mario.Mario;
 import entidades.plataformas.Plataforma;
@@ -14,6 +16,7 @@ public class Mapa {
 	protected List<Enemigo> entidades_enemigos;
 	protected List<PowerUp> entidades_powerup;
 	protected List<Plataforma> entidades_plataforma;
+	protected List<BolaDeFuego> entidades_bolas_de_fuego;
 	
 	
 	public Mapa(Juego juego) {
@@ -21,7 +24,7 @@ public class Mapa {
 	    this.entidades_enemigos = new LinkedList<>();
 	    this.entidades_plataforma = new LinkedList<>();
 	    this.entidades_powerup = new LinkedList<>();
-	    
+	    this.entidades_bolas_de_fuego = new LinkedList<>();
 	}
 
     public List<Plataforma> get_entidades_plataforma() {
@@ -33,6 +36,9 @@ public class Mapa {
     public List<PowerUp> get_entidades_powerup(){
     	return entidades_powerup;
     }
+    public List<BolaDeFuego> get_entidades_proyectiles(){
+    	return entidades_bolas_de_fuego;
+    }
 
     public void agregar_mario(Mario mario) {
         this.mario = mario;
@@ -41,42 +47,41 @@ public class Mapa {
     public void agregar_enemigo(Enemigo enemigo) {
     	entidades_enemigos.add(enemigo);
     }
+    
     public void agregar_powerup(PowerUp powerup) {
     	entidades_powerup.add(powerup);
     }
+    
     public void agregar_plataforma(Plataforma plataforma) {
     	entidades_plataforma.add(plataforma);
     }
     
+    public void agregar_bola_de_fuego(BolaDeFuego bolaDeFuego) {
+        if (bolaDeFuego != null) {
+            entidades_bolas_de_fuego.add(bolaDeFuego);
+            Observer observer = mi_juego.controlador_vistas.registrar_entidad(bolaDeFuego);
+            bolaDeFuego.registrar_observer(observer);
+        }
+    }
+
+    public void eliminar_enemigo(Enemigo enemigo) {
+    	entidades_enemigos.remove(enemigo);
+    }
+    public void eliminar_powerup(PowerUp powerup) {
+    	entidades_powerup.remove(powerup);
+    }
+    public void eliminar_plataforma(Plataforma plataforma) {
+    	entidades_plataforma.remove(plataforma);
+    }
+    public void eliminar_bola_de_fuego(BolaDeFuego bola_de_fuego) {
+    	entidades_bolas_de_fuego.remove(bola_de_fuego);
+    }
+
     public void resetear_mapa() {
         entidades_enemigos.clear();
         entidades_plataforma.clear();
         entidades_powerup.clear();
-        
     }
-
-   /* public void mover_jugador(int direccion) {
-        if (mario == null) {
-            return;
-        }
-        switch (direccion) {
-            case Juego.IZQUIERDA:
-                mario.mover_a_izquierda();
-                break;
-            case Juego.DERECHA:
-                mario.mover_a_derecha();
-                break;
-            case Juego.SALTAR:
-                mario.saltar();
-                break;
-            case Juego.DISPARAR:
-                mario.disparar();
-                break;
-            default:
-                break;
-        }
-    }*/
-
 
     public boolean nivel_completado() {
 

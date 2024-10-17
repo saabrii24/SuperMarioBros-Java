@@ -49,27 +49,37 @@ public class Mario extends Entidad implements EntidadJugador {
     }
 
     public void actualizar_posicion() {
-        if (saltando && velocidad_en_y <= 0) {
-            saltando = false;
-            cayendo = true;
-        } else if (saltando) {
-            velocidad_en_y -= gravedad;
-            posicion_en_y -= velocidad_en_y;
-        }
+        // Si está cayendo, aplicar gravedad
+        if (cayendo) {
+        	//System.out.println(velocidad_en_y);
+            velocidad_en_y += gravedad; // Incrementar la velocidad en Y debido a la gravedad
+            posicion_en_y -= velocidad_en_y; // Aplicar la velocidad en Y a la posición
+        } 
 
-        posicion_en_x += velocidad_en_x;
-        if (velocidad_en_x < 0) {
-            cambiar_sprite(sprites_factory.get_mario_movimiento_izquierda());  
-        } else if (velocidad_en_x > 0) {
-            cambiar_sprite(sprites_factory.get_mario_movimiento_derecha()); 
-        } else {
-            if (movimiento_derecha) {  
-            	cambiar_sprite(sprites_factory.get_mario_ocioso_derecha());             
-            } else {
-            	cambiar_sprite(sprites_factory.get_mario_ocioso_izquierda()); 
+        if (saltando) {
+            velocidad_en_y -= gravedad; // Disminuir la velocidad en Y para simular el salto
+            posicion_en_y -= velocidad_en_y; // Aplicar la velocidad en Y a la posición
+            
+            if (velocidad_en_y <= 0) { // Alcanza el pico del salto
+                saltando = false; // Deja de saltar
+                cayendo = true; // Comienza a caer
             }
         }
+
+        // Movimiento en X
+        posicion_en_x += velocidad_en_x;
+
+        // Cambiar sprites según el movimiento
+        if (velocidad_en_x < 0) {
+            cambiar_sprite(sprites_factory.get_mario_movimiento_izquierda());
+        } else if (velocidad_en_x > 0) {
+            cambiar_sprite(sprites_factory.get_mario_movimiento_derecha());
+        } else {
+            cambiar_sprite(movimiento_derecha ? sprites_factory.get_mario_ocioso_derecha() : sprites_factory.get_mario_ocioso_izquierda());
+        }
     }
+
+    
     public void set_direccion_mario(int direccion_mario) {
     	direccion = direccion_mario;
     }

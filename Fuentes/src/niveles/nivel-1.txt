@@ -7,7 +7,7 @@ Tiempo: 100
 # Creación de las entidades
 	
 	# Mario (x,y)
-	Mario: 96, 144
+	Mario: 96, 432
 	
 	# Enemigos
 	#Goomba: 288, 144
@@ -19,6 +19,7 @@ Tiempo: 100
 	Estrella: 264, 480
 	
 	# Plataformas
+	BloqueSolido: 96, 500
 	BloqueSolido: 0, 96
 	BloqueSolido: 48, 96
 	BloqueSolido: 96, 96

@@ -1,8 +1,10 @@
 package logica;
 
-import java.awt.Rectangle;
-
+import entidades.mario.Mario;
 import entidades.enemigos.Enemigo;
+import entidades.interfaces.Movible;
+
+import java.awt.Rectangle;
 
 public class Colisionador {
 
@@ -12,35 +14,48 @@ public class Colisionador {
         this.mapa = mapa;
     }
 
+    public void verificar_colision_mario(Mario mario) {
+        manejar_colision_vertical(mario);
+        manejar_colision_horizontal_mario(mario);
+    }
+
     public void verificar_colision_enemigo(Enemigo enemigo) {
-        if (colisiona_con_plataforma(enemigo.get_limites_izquierda())) {
-            enemigo.set_direccion_enemigo(1); 
-            mapa.reproducir_efecto("kick");
-        } else if (colisiona_con_plataforma(enemigo.get_limites_derecha())) {
-            enemigo.set_direccion_enemigo(-1);
-            mapa.reproducir_efecto("kick");
-        }
-        if (!colisiona_con_plataforma(enemigo.get_limites_superiores())) {
-            enemigo.set_velocidad_en_y(5); // Aplica gravedad
-            //System.out.println("Cayendo");
+        manejar_colision_vertical(enemigo);
+        manejar_colision_horizontal_enemigos(enemigo);
+    }
+
+    private void manejar_colision_vertical(Movible entidad) {
+        if (colisiona_con_plataforma(entidad.get_limites_superiores())) {
+            entidad.set_cayendo(false);
+            entidad.set_velocidad_en_y(0); // Detiene la caída si está sobre una plataforma
         } else {
-        	enemigo.set_cayendo(false);
-            enemigo.set_velocidad_en_y(0); // Detiene la caída si está en una plataforma
-            
-            //System.out.println("Deje de caer xd");
+            entidad.set_cayendo(true);
+            entidad.set_velocidad_en_y(5); // Aplica gravedad si no hay colisión
+        }
+    }
+
+    private void manejar_colision_horizontal_enemigos(Movible entidad) {
+        if (colisiona_con_plataforma(entidad.get_limites_derecha())) {
+        	entidad.set_direccion_entidad(-1);
+        }
+
+        if (colisiona_con_plataforma(entidad.get_limites_izquierda())) {
+        	entidad.set_direccion_entidad(1);
         }
     }
     
-
-    private boolean colisiona_con_plataforma(Rectangle limites) {
-        // Utiliza stream para verificar si alguna plataforma colisiona con los límites
-        boolean colisiona = mapa.get_entidades_plataforma().stream().anyMatch(plataforma -> plataforma.get_limites().intersects(limites));
-
-        if (colisiona) {
-            //System.out.println("Detecte colision");
+    private void manejar_colision_horizontal_mario(Movible mario) {
+        if (colisiona_con_plataforma(mario.get_limites_derecha())) {
+        	mario.set_velocidad_en_x(0);
         }
 
-        return colisiona; // Devuelve el resultado de la colisión
+        if (colisiona_con_plataforma(mario.get_limites_izquierda())) {
+        	mario.set_velocidad_en_x(0);
+        }
     }
 
+    private boolean colisiona_con_plataforma(Rectangle limites) {
+        return mapa.get_entidades_plataforma().stream()
+                   .anyMatch(plataforma -> plataforma.get_limites().intersects(limites));
+    }
 }

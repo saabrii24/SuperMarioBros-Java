@@ -1,8 +1,6 @@
 package fabricas;
 
-import java.awt.Canvas;
 import java.awt.Image;
-import java.awt.MediaTracker;
 import java.awt.Toolkit;
 
 public class Sprite {
@@ -30,10 +28,17 @@ public class Sprite {
 
     public int get_ancho() {
         return ancho;
-        
     }
 
     public int get_alto() {
         return alto;
     }
+
+	public void set_alto(int nuevo_alto) {
+		alto = nuevo_alto;
+	}
+
+	public void set_ancho(int nuevo_ancho) {
+		ancho = nuevo_ancho;
+	}
 }

@@ -25,24 +25,31 @@ public abstract class ObserverGrafico extends JLabel implements Observer{
 	
 	protected void actualizar_imagen() {
 	    String ruta_imagen = entidad_observada.get_sprite().get_ruta_imagen();
-	    ImageIcon iconoOriginal = new ImageIcon(getClass().getResource(ruta_imagen));
+	    ImageIcon icono_original = new ImageIcon(getClass().getResource(ruta_imagen));
 
 	    // Verifica si la imagen es un GIF animado
 	    if (ruta_imagen.toLowerCase().endsWith(".gif")) {
 	        // Mantener el GIF animado sin escalarlo
-	        setIcon(iconoOriginal);
-	    } else {
-	        int nuevoAncho = iconoOriginal.getIconWidth() * 3; 
-	        int nuevoAlto = iconoOriginal.getIconHeight() * 3; 
-	        Image imagenEscalada = iconoOriginal.getImage().getScaledInstance(nuevoAncho, nuevoAlto, Image.SCALE_SMOOTH);
+	        setIcon(icono_original);
 	        
-	        ImageIcon iconoEscalado = new ImageIcon(imagenEscalada);
-	        setIcon(iconoEscalado);
+	        entidad_observada.get_sprite().set_ancho(icono_original.getIconWidth());
+	        entidad_observada.get_sprite().set_alto(icono_original.getIconWidth());
+	        entidad_observada.set_dimension(icono_original.getIconWidth(), icono_original.getIconWidth());
+	    } else {
+	        int nuevo_ancho = icono_original.getIconWidth() * 3; 
+
+	        int nuevo_alto = icono_original.getIconHeight() * 3; 
+	        Image imagen_escalada = icono_original.getImage().getScaledInstance(nuevo_ancho, nuevo_alto, Image.SCALE_SMOOTH);
+	        
+	        ImageIcon icono_escalado = new ImageIcon(imagen_escalada);
+	        setIcon(icono_escalado);
+	        
+	        entidad_observada.get_sprite().set_ancho(nuevo_ancho);
+	        entidad_observada.get_sprite().set_alto(nuevo_alto);
+	        entidad_observada.set_dimension(nuevo_ancho, nuevo_alto);
 	    }
 	    
 	}
-
-	
 	
 	protected void actualizar_posicion_tamano() {
 		int x = (int) AdaptadorPosicionPixel.transformar_x(entidad_observada.get_posicion_en_x());

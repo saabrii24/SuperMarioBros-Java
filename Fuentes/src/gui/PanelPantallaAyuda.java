@@ -2,11 +2,18 @@ package gui;
 
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
 public class PanelPantallaAyuda extends JPanel {
 
@@ -21,6 +28,7 @@ public class PanelPantallaAyuda extends JPanel {
         setLayout(null);
         agregar_imagen_fondo();
         agregar_boton_volver();
+        volver_con_esc();
     }
 
     protected void agregar_imagen_fondo() {
@@ -42,5 +50,20 @@ public class PanelPantallaAyuda extends JPanel {
         boton_volver.setBounds(ConstantesVistas.PANEL_ANCHO - 180, 15, 150, 50);
         boton_volver.addActionListener(e -> controlador_vistas.mostrar_pantalla_inicial());
         add(boton_volver);
+    }
+    
+    private void volver_con_esc() {
+        // Acción para volver a la pantalla inicial
+        Action volverAction = new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controlador_vistas.mostrar_pantalla_inicial();
+            }
+        };
+        
+        // Asigna la acción a la tecla 'Esc'
+        InputMap inputMap = getInputMap(WHEN_IN_FOCUSED_WINDOW);
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "volver");
+        getActionMap().put("volver", volverAction);
     }
 }

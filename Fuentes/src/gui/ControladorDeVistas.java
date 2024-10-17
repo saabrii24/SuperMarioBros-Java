@@ -5,18 +5,15 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 
 import entidades.mario.Mario;
 import fabricas.EntidadesFactory;
-import fabricas.SpritesFactory;
 import gui.sonido.Sonido;
 import logica.*;
 
 public class ControladorDeVistas implements ControladorEntreJuegoVista, ControladorJuegoVista {
     protected JFrame ventana;
-    protected JComboBox<SpritesFactory> combo_box;
     protected PanelPantallaPrincipal panel_pantalla_principal;
     protected PanelPantallaMapa panel_pantalla_mapa;
     protected PanelPantallaAyuda panel_pantalla_ayuda; 

@@ -55,7 +55,12 @@ public class PanelPantallaAyuda extends JPanel {
     private void volver_con_esc() {
         // Acción para volver a la pantalla inicial
         Action volverAction = new AbstractAction() {
-            @Override
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
             public void actionPerformed(ActionEvent e) {
                 controlador_vistas.mostrar_pantalla_inicial();
             }

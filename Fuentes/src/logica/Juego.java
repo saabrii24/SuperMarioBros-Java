@@ -10,7 +10,7 @@ import niveles.GeneradorNivel;
 import niveles.Nivel;
 import java.util.List;
 
-public class Juego extends Thread {
+public class Juego {
 
     public static final int SALTAR = 15000;
     public static final int IZQUIERDA = 15001;
@@ -26,7 +26,8 @@ public class Juego extends Thread {
     protected int contador_puntos;
     protected int vidas = 3;
     protected boolean esta_ejecutando;
-    protected Thread hilo_juego;
+    protected Thread hilo_mario_movimiento;
+    protected Thread hilo_enemigos_movimiento;
     protected volatile int direccion_mario;
     protected boolean observer_registrado = false;
     protected Colisionador controlador_colisiones;
@@ -42,19 +43,25 @@ public class Juego extends Thread {
         fabrica_entidades = new EntidadesFactory(fabrica_sprites);
         controlador_vistas = new ControladorDeVistas(this);
         controlador_colisiones = new Colisionador(mapa_nivel_actual);
-        iniciar_hilo_juego();
+        iniciar_hilos_movimiento();
     }
 
-    private synchronized void iniciar_hilo_juego() {
+    private synchronized void iniciar_hilos_movimiento() {
         if (esta_ejecutando) {
             return;
         }
         esta_ejecutando = true;
-        hilo_juego = new Thread(this::bucle_principal);
-        hilo_juego.start();
+
+        // Inicia el hilo para el movimiento de Mario
+        hilo_mario_movimiento = new Thread(this::bucle_movimiento_jugador);
+        hilo_mario_movimiento.start();
+
+        // Inicia el hilo para el movimiento de los enemigos
+        hilo_enemigos_movimiento = new Thread(this::bucle_movimiento_entidades);
+        hilo_enemigos_movimiento.start();
     }
 
-    private void bucle_principal() {
+    private void bucle_movimiento_jugador() {
         long tiempo_anterior = System.nanoTime();
         final double tiempo_por_frame = 1_000_000_000.0 / 60; // 60 FPS
 
@@ -62,27 +69,44 @@ public class Juego extends Thread {
             long tiempo_actual = System.nanoTime();
             double delta = (tiempo_actual - tiempo_anterior) / tiempo_por_frame;
             tiempo_anterior = tiempo_actual;
+
+            mover_mario();
             
-            actualizar_juego(delta);
-            notificar_observadores();
+            notificar_observadores_mario();
             controlador_vistas.get_pantalla_mapa().repaint();
 
-            // Controlar la velocidad del juego para mantener 60 FPS
-            long tiempo_restante = (long) tiempo_por_frame - (System.nanoTime() - tiempo_actual);
-            if (tiempo_restante > 0) {
-                try {
-                    Thread.sleep(tiempo_restante / 1_000_000, (int) (tiempo_restante % 1_000_000));
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                }
-            }
+            controlar_fps(tiempo_actual, tiempo_por_frame);
         }
     }
 
-    private void actualizar_juego(double delta) {
-        mover_mario();
-        mover_enemigos();
-        mover_proyectiles();
+    private void bucle_movimiento_entidades() {
+        long tiempo_anterior = System.nanoTime();
+        final double tiempo_por_frame = 1_000_000_000.0 / 60; // 60 FPS
+
+        while (esta_ejecutando) {
+            long tiempo_actual = System.nanoTime();
+            double delta = (tiempo_actual - tiempo_anterior) / tiempo_por_frame;
+            tiempo_anterior = tiempo_actual;
+
+            mover_enemigos();
+            mover_proyectiles();
+            notificar_observadores_entidades(mapa_nivel_actual.get_entidades_enemigo());
+            controlador_vistas.get_pantalla_mapa().repaint();
+
+            controlar_fps(tiempo_actual, tiempo_por_frame);
+        }
+    }
+
+    private void controlar_fps(long tiempo_actual, double tiempo_por_frame) {
+        // Controlar la velocidad del juego para mantener 60 FPS
+        long tiempo_restante = (long) tiempo_por_frame - (System.nanoTime() - tiempo_actual);
+        if (tiempo_restante > 0) {
+            try {
+                Thread.sleep(tiempo_restante / 1_000_000, (int) (tiempo_restante % 1_000_000));
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
     }
 
     private void mover_mario() {
@@ -95,7 +119,7 @@ public class Juego extends Thread {
             controlador_colisiones.verificar_colision_enemigo(enemigo);
         }
     }
-
+    
     private void mover_proyectiles() {
         for (BolaDeFuego proyectil : mapa_nivel_actual.get_entidades_proyectiles()) {
             proyectil.mover();

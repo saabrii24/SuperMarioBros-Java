@@ -110,13 +110,13 @@ public class Mario extends Entidad implements EntidadJugador {
     	}
     }
     private void mover_a_izquierda() {
-        this.velocidad_en_x = -10;
+        this.velocidad_en_x = -5;
         movimiento_derecha = false;
         actualizar_posicion();
     }
 
     private void mover_a_derecha() {
-        this.velocidad_en_x = 10;
+        this.velocidad_en_x = 5;
         movimiento_derecha = true;
         actualizar_posicion();
     }

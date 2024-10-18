@@ -60,6 +60,7 @@ public class Mapa {
         if (bolaDeFuego != null) {
             entidades_bolas_de_fuego.add(bolaDeFuego);
             Observer observer = mi_juego.controlador_vistas.registrar_entidad(bolaDeFuego);
+            mi_juego.controlador_vistas.reproducir_efecto("fireball");
             bolaDeFuego.registrar_observer(observer);
         }
     }

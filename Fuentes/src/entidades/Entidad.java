@@ -37,73 +37,78 @@ public abstract class Entidad extends JComponent implements EntidadLogica, Agres
         this.saltando = false;
     }
 
-    // Getters y Setters
+    // Getters
     public Sprite get_sprite() {
         return sprite;
-    }
-
-    public void set_sprite(Sprite sprite) {
-        this.sprite = sprite;
     }
 
     public double get_posicion_en_x() {
         return posicion_en_x;
     }
 
-    public void set_posicion_en_x(double posicion_x) {
-        this.posicion_en_x = posicion_x;
-    }
-
     public double get_posicion_en_y() {
         return posicion_en_y;
-    }
-
-    public void set_posicion_en_y(double posicion_y) {
-        this.posicion_en_y = posicion_y;
     }
 
     public double get_velocidad_en_x() {
         return velocidad_en_x;
     }
 
-    public void set_velocidad_en_x(double velocidad_x) {
-        this.velocidad_en_x = velocidad_x;
-    }
-
     public double get_velocidad_en_y() {
         return velocidad_en_y;
-    }
-
-    public void set_velocidad_en_y(double velocidad_y) {
-        this.velocidad_en_y = velocidad_y;
     }
 
     public double get_aceleracion_gravedad() {
         return aceleracion_gravedad;
     }
 
-    public void set_aceleracion_gravedad(double aceleracion_gravedad) {
-        this.aceleracion_gravedad = aceleracion_gravedad;
-    }
-
     public Dimension get_dimension() {
         return dimension;
-    }
-
-    public void set_dimension(int ancho, int alto) {
-        this.dimension = new Dimension(ancho, alto);
     }
 
     public int get_direccion() {
         return direccion;
     }
 
-    public void set_direccion(int direccion) {
-        this.direccion = direccion;
-    }
-
     public boolean esta_cayendo() {
         return cayendo;
+    }
+
+    public boolean esta_destruida() {
+        return destruida;
+    }
+
+    // Setters
+    public void set_sprite(Sprite sprite) {
+        this.sprite = sprite;
+    }
+
+    public void set_posicion_en_x(double posicion_x) {
+        this.posicion_en_x = posicion_x;
+    }
+
+    public void set_posicion_en_y(double posicion_y) {
+        this.posicion_en_y = posicion_y;
+    }
+
+    public void set_velocidad_en_x(double velocidad_x) {
+        this.velocidad_en_x = velocidad_x;
+    }
+
+    public void set_velocidad_en_y(double velocidad_y) {
+        this.velocidad_en_y = velocidad_y;
+    }
+
+    public void set_aceleracion_gravedad(double aceleracion_gravedad) {
+        this.aceleracion_gravedad = aceleracion_gravedad;
+    }
+
+    public void set_dimension(int ancho, int alto) {
+        this.dimension = new Dimension(ancho, alto);
+    }
+
+    public void set_direccion(int direccion) {
+        this.direccion = direccion;
     }
 
     public void set_cayendo(boolean cayendo) {
@@ -189,11 +194,6 @@ public abstract class Entidad extends JComponent implements EntidadLogica, Agres
         posicion_en_x += velocidad_en_x;
     }
 
-    // Métodos de estado
-    public boolean esta_destruida() {
-        return destruida;
-    }
-
     public void destruir() {
         destruida = true;
         if (observer != null) {
@@ -201,4 +201,3 @@ public abstract class Entidad extends JComponent implements EntidadLogica, Agres
         }
     }
 }
-

@@ -11,5 +11,5 @@ public interface Movible {
 	public Rectangle get_limites_izquierda();
 	public Rectangle get_limites_superiores();
 	public Rectangle get_limites();
-	public void set_direccion_entidad(int i);
+	public void set_direccion(int i);
 }

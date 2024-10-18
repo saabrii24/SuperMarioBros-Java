@@ -10,7 +10,7 @@ public class BolaDeFuego extends Entidad {
     public BolaDeFuego(double x, double y, Sprite sprite) {
         super(x, y, sprite);
         direccion_mario = Mario.get_instancia().get_direccion_mario();
-        this.set_direccion_entidad(direccion_mario);
+        this.set_direccion(direccion_mario);
         this.set_velocidad_en_x(direccion_mario == 1 ? 10 : -10);
     }
 

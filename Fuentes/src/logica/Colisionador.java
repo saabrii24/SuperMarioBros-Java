@@ -50,9 +50,9 @@ public class Colisionador {
 
     private void manejarColisionHorizontal(Movible entidad) {
         if (colisionaConPlataforma(entidad.get_limites_derecha())) {
-            entidad.set_direccion_entidad(-1);
+            entidad.set_direccion(-1);
         } else if (colisionaConPlataforma(entidad.get_limites_izquierda())) {
-            entidad.set_direccion_entidad(1);
+            entidad.set_direccion(1);
         }
     }
 

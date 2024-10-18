@@ -19,7 +19,7 @@ public class InvencibleMarioState implements Mario.MarioState {
 	public void consumir(FlorDeFuego flor_de_fuego) {}
 
 	public void consumir(Estrella estrella) {
-		mario.actualizar_puntaje_nivel_actual(35);
+		mario.set_puntaje_nivel_actual(35);
 	}
 
     public boolean matar_si_hay_colision(Enemigo enemigo) {

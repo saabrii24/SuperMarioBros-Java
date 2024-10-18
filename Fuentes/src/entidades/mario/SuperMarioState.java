@@ -13,16 +13,16 @@ public class SuperMarioState implements Mario.MarioState {
     }
 
 	public void consumir(SuperChampi super_champi) {
-		mario.actualizar_puntaje_nivel_actual(50);
+		mario.set_puntaje_nivel_actual(50);
 	}
 
 	public void consumir(FlorDeFuego flor_de_fuego) {
-		mario.actualizar_puntaje_nivel_actual(30);
+		mario.set_puntaje_nivel_actual(30);
 		mario.cambiar_estado(new FireMarioState(mario));
 	}
 
 	public void consumir(Estrella estrella) {
-		mario.actualizar_puntaje_nivel_actual(30);
+		mario.set_puntaje_nivel_actual(30);
 		mario.cambiar_estado(new InvencibleMarioState(mario));
 	}
 

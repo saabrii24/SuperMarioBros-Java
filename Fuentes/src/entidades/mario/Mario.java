@@ -286,5 +286,9 @@ public class Mario extends Entidad implements EntidadJugador {
     public int get_direccion_mario() {
         return movimiento_derecha ? 1 : -1;
     }
+    
+    public void set_velocidad_en_x_mario(int vel) {
+    	velocidad_en_x = vel;
+    }
 
 }

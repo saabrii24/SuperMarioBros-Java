@@ -63,13 +63,14 @@ public class Colisionador {
         }
     }
 
-    private void manejar_colision_horizontal_mario(Movible mario) {
+    private void manejar_colision_horizontal_mario(Mario mario) {
         if (colisiona_con_plataforma(mario.get_limites_derecha())) {
-            mario.set_velocidad_en_x(0);
+        	mario.set_direccion_mario(0);
+        	mario.set_velocidad_en_x_mario(0);
         }
 
         if (colisiona_con_plataforma(mario.get_limites_izquierda())) {
-            mario.set_velocidad_en_x(0);
+            mario.set_direccion_entidad(0);
         }
     }
 

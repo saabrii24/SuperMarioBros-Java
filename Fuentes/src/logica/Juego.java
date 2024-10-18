@@ -111,6 +111,9 @@ public class Juego {
 
     private void mover_mario() {
         Mario.get_instancia().mover();
+        if(Mario.get_instancia().get_dimension() != null) { 
+        	controlador_colisiones.verificar_colision_mario(Mario.get_instancia()); 
+        }
     }
 
     private void mover_enemigos() {

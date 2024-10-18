@@ -67,17 +67,21 @@ public class Colisionador {
         boolean colision_derecha = colisiona_con_plataforma(mario.get_limites_derecha());
         boolean colision_izquierda = colisiona_con_plataforma(mario.get_limites_izquierda());
         boolean colision_inferior = colisiona_con_plataforma(mario.get_limites_inferiores());
+        boolean colision_superior = colisiona_con_plataforma(mario.get_limites_superiores());
 
         if (colision_derecha || colision_izquierda) {
-            mario.bloquear_movimiento();
+            mario.bloquear_movimiento_horizontal();
             mario.set_posicion_en_x(mario.get_posicion_en_x() + (colision_derecha ? -0.5 : 0.5));
         } else {
-            mario.activar_movimiento();
+            mario.activar_movimiento_horizontal();
         }
-
-        mario.set_cayendo(!colision_inferior);
-        if (colision_inferior) {
-            mario.set_velocidad_en_y(0);
+        if(colision_superior) {
+        	mario.bloquear_movimiento_vertical();
+        	mario.set_posicion_en_y(mario.get_posicion_en_y() + (0.5));
+        	
+        }
+        else {
+        	mario.activar_movimiento_vertical();
         }
     }
 

@@ -111,6 +111,7 @@ public abstract class Entidad extends JComponent implements EntidadLogica, Agres
 
     public void set_cayendo(boolean cayendo) {
         this.cayendo = cayendo;
+        System.out.println("entre aca, cayendo: " + cayendo);
     }
 
     // Métodos relacionados con el observador

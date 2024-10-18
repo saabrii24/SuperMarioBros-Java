@@ -26,8 +26,9 @@ public class Mario extends Entidad implements EntidadJugador {
     private int direccion;
     private boolean movimiento_derecha;
     private boolean saltando;
-    private boolean cayendo;
-    private boolean movimiento_bloqueado;
+    private boolean cayendo = true;
+    private boolean movimiento_horizontal_bloqueado;
+    private boolean movimiento_vertical_bloqueado;
 
     // Atributos de movimiento
     private double velocidad_en_x;
@@ -124,24 +125,30 @@ public class Mario extends Entidad implements EntidadJugador {
         this.estado = nuevo_estado;
     }
 
-    public void bloquear_movimiento() {
-        movimiento_bloqueado = true;
-        detener_movimiento();
+    public void bloquear_movimiento_horizontal() {
+        movimiento_horizontal_bloqueado = true;
+        detener_movimiento_horizontal();
     }
-
-    public void activar_movimiento() {
-        movimiento_bloqueado = false;
+    public void bloquear_movimiento_vertical() {
+    	movimiento_vertical_bloqueado = true;
+    	detener_movimiento_vertical();
+    }
+    public void activar_movimiento_horizontal() {
+        movimiento_horizontal_bloqueado = false;
+    }
+    public void activar_movimiento_vertical() {
+    	movimiento_vertical_bloqueado = false;
     }
 
     // Movimiento y lógica del juego
     public void mover() {
-        if (movimiento_bloqueado) {
-            detener_movimiento();
-        } else {
+    	if(movimiento_vertical_bloqueado) {
+    		detener_movimiento_vertical();
+    	} else {
             switch (direccion) {
                 case 1 -> mover_a_derecha();
                 case -1 -> mover_a_izquierda();
-                default -> detener_movimiento();
+                default -> detener_movimiento_horizontal();
             }
         }
     }
@@ -158,11 +165,16 @@ public class Mario extends Entidad implements EntidadJugador {
         actualizar_posicion();
     }
 
-    private void detener_movimiento() {
+    private void detener_movimiento_horizontal() {
         velocidad_en_x = 0;
         actualizar_posicion();
     }
 
+    private void detener_movimiento_vertical() {
+    	velocidad_en_y = 0;
+    	actualizar_posicion();
+    }
+    
     public void saltar() {
         if (!saltando && !cayendo) { // Solo salta si no está ya saltando o cayendo
             saltando = true;
@@ -174,6 +186,9 @@ public class Mario extends Entidad implements EntidadJugador {
         if (cayendo) {
         	velocidad_en_y += aceleracion_gravedad;
             posicion_en_y -= velocidad_en_y;
+        }
+        if (!cayendo) {
+            detener_movimiento_horizontal();
         }
 
         if (saltando) {

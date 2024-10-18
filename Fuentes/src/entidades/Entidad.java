@@ -11,8 +11,6 @@ import javax.swing.JComponent;
 
 public abstract class Entidad extends JComponent implements EntidadLogica, Agresiva, Consumible, Destruible, Gravedad, Movible {
 
-    private static final long serialVersionUID = 1L;
-
     // Campos de la clase
     protected Sprite sprite;
     protected double posicion_en_x, posicion_en_y;

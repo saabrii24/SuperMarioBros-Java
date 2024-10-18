@@ -2,13 +2,7 @@ package entidades.mario;
 
 import entidades.BolaDeFuego;
 import entidades.Entidad;
-import entidades.enemigos.BuzzyBeetle;
 import entidades.enemigos.Enemigo;
-import entidades.enemigos.Goomba;
-import entidades.enemigos.KoopaTroopa;
-import entidades.enemigos.Lakitu;
-import entidades.enemigos.PiranhaPlant;
-import entidades.enemigos.Spiny;
 import entidades.powerups.ChampiVerde;
 import entidades.powerups.Estrella;
 import entidades.powerups.FlorDeFuego;

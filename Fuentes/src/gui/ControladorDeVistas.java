@@ -134,6 +134,8 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
                 switch (evento.getKeyCode()) {
                     case KeyEvent.VK_A:
                     case KeyEvent.VK_D:
+                    case KeyEvent.VK_RIGHT:
+                    case KeyEvent.VK_LEFT:
                     	Mario.get_instancia().set_direccion_mario(0);                       
                         break;
                 }

@@ -3,11 +3,17 @@ package entidades;
 import entidades.interfaces.*;
 import fabricas.Sprite;
 import logica.*;
+
 import java.awt.Dimension;
 import java.awt.Rectangle;
 
-public abstract class Entidad implements EntidadLogica, Agresiva, Consumible, Destruible, Gravedad, Movible {
+import javax.swing.JComponent;
 
+public abstract class Entidad extends JComponent  implements EntidadLogica, Agresiva, Consumible, Destruible, Gravedad, Movible {
+
+	private static final long serialVersionUID = 1L;
+	
+	
 	protected Sprite sprite;
 	protected double posicion_en_x;
 	protected double posicion_en_y;
@@ -15,25 +21,27 @@ public abstract class Entidad implements EntidadLogica, Agresiva, Consumible, De
 	protected Dimension dimension;
 	protected double gravedad_aceleracion;
 	protected Observer observer;
-	protected double gravedad = 0.38;
-	protected boolean saltando;
 	protected boolean cayendo;
+	protected boolean saltando;
 	protected boolean movimiento_derecha;
 	protected int direccion_entidad = -1;
 	protected boolean destruida = false;  
 
 	protected Entidad(double x, double y, Sprite sprite) {
-		this.sprite = sprite;
-		this.posicion_en_x = x;
-		this.posicion_en_y = y;
-        if (sprite != null) {
-            set_dimension(sprite.get_ancho(), sprite.get_alto());
-        }
-		this.gravedad_aceleracion = 0.38;
-		this.velocidad_en_x = 0;
-		this.velocidad_en_y = 0;
+		set_sprite(sprite);
+		set_posicion_en_x(x);
+		set_posicion_en_y(y);
+        if (sprite != null) set_dimension(sprite.get_ancho(), sprite.get_alto());
+        set_velocidad_en_x(0);
+		set_velocidad_en_y(0);
+		set_gravedad_aceleracion(0.1);
+		cayendo = true;
+		saltando = false;
 	}
 
+	public void set_sprite(Sprite sprite) {
+		this.sprite = sprite;
+	}
 	public Sprite get_sprite() {
 		return sprite;
 	}
@@ -98,45 +106,35 @@ public abstract class Entidad implements EntidadLogica, Agresiva, Consumible, De
 
 	// Métodos para el cálculo de colisiones
 	public Rectangle get_limites_superiores() {
-		return new Rectangle((int) posicion_en_x + dimension.width / 6, (int) posicion_en_y, 2 * dimension.width / 3,
-				dimension.height / 2);
+	    return new Rectangle((int) posicion_en_x + dimension.width / 4, (int) posicion_en_y, dimension.width / 2, dimension.height / 4);
 	}
 
 	public Rectangle get_limites_inferiores() {
-		return new Rectangle((int) posicion_en_x + dimension.width / 6, (int) posicion_en_y + dimension.height / 2,
-				2 * dimension.width / 3, dimension.height / 2);
+	    return new Rectangle((int) posicion_en_x + dimension.width / 4, (int) posicion_en_y + dimension.height - dimension.height / 4, 
+	            dimension.width / 2, dimension.height / 4);
 	}
 
 	public Rectangle get_limites_izquierda() {
-		return new Rectangle((int) posicion_en_x, (int) posicion_en_y + dimension.height / 4, dimension.width / 4,
-				dimension.height / 2);
+	    return new Rectangle((int) posicion_en_x, (int) posicion_en_y + dimension.height / 4, dimension.width / 8, dimension.height / 2);
 	}
 
 	public Rectangle get_limites_derecha() {
-		return new Rectangle((int) posicion_en_x + 3 * dimension.width / 4, (int) posicion_en_y + dimension.height / 4,
-				dimension.width / 4, dimension.height / 2);
+	    return new Rectangle((int) posicion_en_x + 7 * dimension.width / 8, (int) posicion_en_y + dimension.height / 4, 
+	    		dimension.width / 8, dimension.height / 2);
 	}
 
 	public Rectangle get_limites() {
-		return new Rectangle((int) posicion_en_x, (int) posicion_en_y, dimension.width+3, dimension.height+3);
+		return new Rectangle((int) posicion_en_x, (int) posicion_en_y, dimension.width-1, dimension.height-1);
 	}
 
 	public boolean esta_cayendo() {
 		return cayendo;
 	}
 
-	public void set_cayendo(boolean falling) {
-		this.cayendo = falling;
+	public void set_cayendo(boolean cayendo) {
+		this.cayendo = cayendo;
 	}
 
-	public boolean esta_saltando() {
-		return saltando;
-	}
-
-	public void set_saltando(boolean jumping) {
-		this.saltando = jumping;
-	}
-	
 	public int get_direccion_entidad() {
 		return direccion_entidad;
 	}
@@ -163,13 +161,13 @@ public abstract class Entidad implements EntidadLogica, Agresiva, Consumible, De
 	}
 
 	private void mover_a_izquierda() {
-		this.velocidad_en_x = -5;
+		this.velocidad_en_x = -3;
 		movimiento_derecha = false;
 		actualizar_posicion();
 	}
 
 	private void mover_a_derecha() {
-		this.velocidad_en_x = 5;
+		this.velocidad_en_x = 3;
 		movimiento_derecha = true;
 		actualizar_posicion();
 	}
@@ -180,13 +178,20 @@ public abstract class Entidad implements EntidadLogica, Agresiva, Consumible, De
 	}
 
 	public void actualizar_posicion() {
-		if (saltando) {
-			velocidad_en_y -= gravedad;
-			posicion_en_y -= velocidad_en_y;
-		} else if (cayendo) {
+		if (cayendo) {
+			//velocidad_en_y += gravedad_aceleracion;
 			posicion_en_y -= velocidad_en_y;
 		}
-
+		
+		if (saltando) {
+            velocidad_en_y -= gravedad_aceleracion; // Disminuir la velocidad en Y para simular el salto
+            posicion_en_y -= velocidad_en_y; // Aplicar la velocidad en Y a la posición
+            
+            if (velocidad_en_y <= 0) { // Alcanza el pico del salto
+                saltando = false; // Deja de saltar
+                cayendo = true; // Comienza a caer
+            }
+        }
 		posicion_en_x += velocidad_en_x;
 	}
 

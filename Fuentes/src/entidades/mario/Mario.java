@@ -34,6 +34,7 @@ public class Mario extends Entidad implements EntidadJugador {
     private boolean movimiento_derecha;
     private SpritesFactory sprites_factory; 
     private MarioState estado_anterior;
+    private boolean movimiento_bloqueado;
     
     private Mario(int x, int y, Sprite sprite) {
         super(x, y, sprite);
@@ -41,10 +42,7 @@ public class Mario extends Entidad implements EntidadJugador {
         this.puntaje_acumulado = 0;
         this.monedas = 0;
         this.vidas = 3;
-        this.velocidad_en_x = 0;
-        this.velocidad_en_y = 0;
         this.saltando = false;
-        this.cayendo = true;
         this.movimiento_derecha = true;
     }
 
@@ -64,14 +62,13 @@ public class Mario extends Entidad implements EntidadJugador {
     }
 
     public void actualizar_posicion() {
-        // Si está cayendo, aplicar gravedad
-        if (cayendo) {
-            //velocidad_en_y += gravedad; // Incrementar la velocidad en Y debido a la gravedad
-            posicion_en_y -= velocidad_en_y; // Aplicar la velocidad en Y a la posición
-        } 
-
-        if (saltando) {
-            velocidad_en_y -= gravedad; // Disminuir la velocidad en Y para simular el salto
+		if (cayendo) {
+			//velocidad_en_y += gravedad_aceleracion;
+			posicion_en_y -= velocidad_en_y;
+		}
+		
+		if (saltando) {
+            velocidad_en_y -= gravedad_aceleracion; // Disminuir la velocidad en Y para simular el salto
             posicion_en_y -= velocidad_en_y; // Aplicar la velocidad en Y a la posición
             
             if (velocidad_en_y <= 0) { // Alcanza el pico del salto
@@ -79,9 +76,7 @@ public class Mario extends Entidad implements EntidadJugador {
                 cayendo = true; // Comienza a caer
             }
         }
-
-        posicion_en_x += velocidad_en_x;
-
+		posicion_en_x += velocidad_en_x;
         actualizar_sprite();
     }
 
@@ -98,16 +93,21 @@ public class Mario extends Entidad implements EntidadJugador {
     public void set_direccion_mario(int direccion_mario) {
     	direccion = direccion_mario;
     }
+    
     public void mover() {
-    	if (direccion == 0) {
-    		detener_movimiento();
-    	}
-    	if (direccion == 1) {
-    		mover_a_derecha();
-    	}
-    	if (direccion == -1) {
-    		mover_a_izquierda();
-    	}
+        if (movimiento_bloqueado) {
+        	detener_movimiento();
+        } else {
+	    	if (direccion == 0) {
+	    		detener_movimiento();
+	    	}
+	    	if (direccion == 1) {
+	    		mover_a_derecha();
+	    	}
+	    	if (direccion == -1) {
+	    		mover_a_izquierda();
+	    	}
+        }
     }
     private void mover_a_izquierda() {
         this.velocidad_en_x = -5;
@@ -289,6 +289,15 @@ public class Mario extends Entidad implements EntidadJugador {
     
     public void set_velocidad_en_x_mario(int vel) {
     	velocidad_en_x = vel;
+    }
+    
+    public void bloquear_movimiento() {
+        movimiento_bloqueado = true;
+        detener_movimiento();
+    }
+
+    public void activar_movimiento() {
+        movimiento_bloqueado = false;
     }
 
 }

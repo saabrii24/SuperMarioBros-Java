@@ -16,7 +16,7 @@ public class Colisionador {
     }
 
     public void verificar_colision_mario(Mario mario) {
-        manejar_colision_vertical(mario);
+        //manejar_colision_vertical(mario);
         manejar_colision_horizontal_mario(mario);
     }
 
@@ -64,15 +64,27 @@ public class Colisionador {
     }
 
     private void manejar_colision_horizontal_mario(Mario mario) {
-        if (colisiona_con_plataforma(mario.get_limites_derecha())) {
-        	mario.set_direccion_mario(0);
-        	mario.set_velocidad_en_x_mario(0);
-        }
+        boolean colision_derecha = colisiona_con_plataforma(mario.get_limites_derecha());
+        boolean colision_izquierda = colisiona_con_plataforma(mario.get_limites_izquierda());
+        boolean colision_inferior = colisiona_con_plataforma(mario.get_limites_superiores());
 
-        if (colisiona_con_plataforma(mario.get_limites_izquierda())) {
-            mario.set_direccion_entidad(0);
+        if (colision_derecha) {
+            mario.bloquear_movimiento();
+            mario.set_posicion_en_x(mario.get_posicion_en_x() - 0.5);
+        } else if (colision_izquierda) {
+            mario.bloquear_movimiento();
+            mario.set_posicion_en_x(mario.get_posicion_en_x() + 0.5);
+        } else {
+            mario.activar_movimiento();
+        }
+        if(colision_inferior) {
+        	mario.set_cayendo(false);
+            mario.set_velocidad_en_y(0);
+            mario.mover();
         }
     }
+
+
 
     private boolean colisiona_con_plataforma(Rectangle limites) {
         return mapa.get_entidades_plataforma().stream()

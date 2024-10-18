@@ -52,11 +52,16 @@ public class Juego {
         }
         esta_ejecutando = true;
 
-        // Inicia el hilo para el movimiento de Mario
+        iniciar_hilo_movimiento_mario();
+        iniciar_hilo_movimiento_enemigos();
+    }
+
+    private void iniciar_hilo_movimiento_mario() {
         hilo_mario_movimiento = new Thread(this::bucle_movimiento_jugador);
         hilo_mario_movimiento.start();
+    }
 
-        // Inicia el hilo para el movimiento de los enemigos
+    private void iniciar_hilo_movimiento_enemigos() {
         hilo_enemigos_movimiento = new Thread(this::bucle_movimiento_entidades);
         hilo_enemigos_movimiento.start();
     }
@@ -98,7 +103,6 @@ public class Juego {
     }
 
     private void controlar_fps(long tiempo_actual, double tiempo_por_frame) {
-        // Controlar la velocidad del juego para mantener 60 FPS
         long tiempo_restante = (long) tiempo_por_frame - (System.nanoTime() - tiempo_actual);
         if (tiempo_restante > 0) {
             try {

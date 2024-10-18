@@ -12,7 +12,7 @@ Tiempo: 100
 	# Enemigos
 	#Goomba: 288, 144
 	#Goomba: 384, 144
-	#Koopa: 1056, 165
+	Koopa: 1056, 500
 	Goomba: 700, 400
 	
 	# PowerUps

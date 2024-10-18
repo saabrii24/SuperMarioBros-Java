@@ -36,8 +36,8 @@ public abstract class ObserverGrafico extends JLabel implements Observer {
             setIcon(icono_original);
             
             entidad_observada.get_sprite().set_ancho(icono_original.getIconWidth());
-            entidad_observada.get_sprite().set_alto(icono_original.getIconWidth());
-            entidad_observada.set_dimension(icono_original.getIconWidth(), icono_original.getIconWidth());
+            entidad_observada.get_sprite().set_alto(icono_original.getIconHeight());
+            entidad_observada.set_dimension(icono_original.getIconWidth(), icono_original.getIconHeight());
         } else {
             int nuevo_ancho = icono_original.getIconWidth() * 3; 
             int nuevo_alto = icono_original.getIconHeight() * 3; 

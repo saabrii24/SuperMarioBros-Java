@@ -15,24 +15,28 @@ public class Colisionador {
         this.mapa = mapa;
     }
 
+    // Verificación de colisiones para Mario
     public void verificar_colision_mario(Mario mario) {
-        manejarColisionConPlataforma(mario);
+        manejar_colision_con_plataforma(mario);
     }
 
+    // Verificación de colisiones para Enemigos
     public void verificar_colision_enemigo(Enemigo enemigo) {
-        manejarColisionVertical(enemigo);
-        manejarColisionHorizontal(enemigo);
+        manejar_colision_vertical(enemigo);
+        manejar_colision_horizontal(enemigo);
     }
 
+    // Verificación de colisiones para proyectiles (Bola de Fuego)
     public void verificar_colision_proyectil(BolaDeFuego proyectil) {
-        if (colisionaConPlataforma(proyectil.get_limites())) {
+        if (colisiona_con_plataforma(proyectil.get_limites())) {
             proyectil.destruir(mapa);
         } else {
-            manejarColisionConEnemigos(proyectil);
+            manejar_colision_con_enemigos(proyectil);
         }
     }
 
-    private void manejarColisionConEnemigos(BolaDeFuego proyectil) {
+    // Manejo de colisiones entre el proyectil y los enemigos
+    private void manejar_colision_con_enemigos(BolaDeFuego proyectil) {
         mapa.get_entidades_enemigo().stream()
             .filter(enemigo -> proyectil.get_limites().intersects(enemigo.get_limites()))
             .findFirst()
@@ -42,39 +46,43 @@ public class Colisionador {
             });
     }
 
-    private void manejarColisionVertical(Movible entidad) {
-        boolean colisionSuperior = colisionaConPlataforma(entidad.get_limites_superiores());
-        entidad.set_cayendo(!colisionSuperior);
-        entidad.set_velocidad_en_y(colisionSuperior ? 0 : 5);
+    // Manejo de colisiones verticales para entidades que se mueven
+    private void manejar_colision_vertical(Movible entidad) {
+        boolean colision_superior = colisiona_con_plataforma(entidad.get_limites_superiores());
+        entidad.set_cayendo(!colision_superior);
+        entidad.set_velocidad_en_y(colision_superior ? 0 : 5);
     }
 
-    private void manejarColisionHorizontal(Movible entidad) {
-        if (colisionaConPlataforma(entidad.get_limites_derecha())) {
+    // Manejo de colisiones horizontales para entidades que se mueven
+    private void manejar_colision_horizontal(Movible entidad) {
+        if (colisiona_con_plataforma(entidad.get_limites_derecha())) {
             entidad.set_direccion(-1);
-        } else if (colisionaConPlataforma(entidad.get_limites_izquierda())) {
+        } else if (colisiona_con_plataforma(entidad.get_limites_izquierda())) {
             entidad.set_direccion(1);
         }
     }
 
-    private void manejarColisionConPlataforma(Mario mario) {
-        boolean colisionDerecha = colisionaConPlataforma(mario.get_limites_derecha());
-        boolean colisionIzquierda = colisionaConPlataforma(mario.get_limites_izquierda());
-        boolean colisionInferior = colisionaConPlataforma(mario.get_limites_superiores());
+    // Manejo de colisiones entre Mario y las plataformas
+    private void manejar_colision_con_plataforma(Mario mario) {
+        boolean colision_derecha = colisiona_con_plataforma(mario.get_limites_derecha());
+        boolean colision_izquierda = colisiona_con_plataforma(mario.get_limites_izquierda());
+        boolean colision_inferior = colisiona_con_plataforma(mario.get_limites_inferiores());
 
-        if (colisionDerecha || colisionIzquierda) {
+        if (colision_derecha || colision_izquierda) {
             mario.bloquear_movimiento();
-            mario.set_posicion_en_x(mario.get_posicion_en_x() + (colisionDerecha ? -0.5 : 0.5));
+            mario.set_posicion_en_x(mario.get_posicion_en_x() + (colision_derecha ? -0.5 : 0.5));
         } else {
             mario.activar_movimiento();
         }
 
-        mario.set_cayendo(!colisionInferior);
-        if (colisionInferior) {
+        mario.set_cayendo(!colision_inferior);
+        if (colision_inferior) {
             mario.set_velocidad_en_y(0);
         }
     }
 
-    private boolean colisionaConPlataforma(Rectangle limites) {
+    // Verificación de si hay colisión con cualquier plataforma
+    private boolean colisiona_con_plataforma(Rectangle limites) {
         return mapa.get_entidades_plataforma().stream()
                    .anyMatch(plataforma -> plataforma.get_limites().intersects(limites));
     }

@@ -172,6 +172,7 @@ public class Mario extends Entidad implements EntidadJugador {
 
     public void actualizar_posicion() {
         if (cayendo) {
+        	velocidad_en_y += aceleracion_gravedad;
             posicion_en_y -= velocidad_en_y;
         }
 

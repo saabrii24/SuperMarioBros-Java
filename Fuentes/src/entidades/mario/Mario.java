@@ -24,16 +24,9 @@ public class Mario extends Entidad implements EntidadJugador {
     private int monedas;
     private int vidas;
     private int direccion;
-    private boolean movimiento_derecha;
-    private boolean saltando;
     private boolean cayendo = true;
     private boolean movimiento_horizontal_bloqueado;
     private boolean movimiento_vertical_bloqueado;
-
-    // Atributos de movimiento
-    private double velocidad_en_x;
-    private double velocidad_en_y;
-    private final double gravedad = 0.1;
 
     // Fábrica de sprites
     private SpritesFactory sprites_factory;
@@ -45,8 +38,7 @@ public class Mario extends Entidad implements EntidadJugador {
         this.puntaje_acumulado = 0;
         this.monedas = 0;
         this.vidas = 3;
-        this.saltando = false;
-        this.movimiento_derecha = true;
+        //this.cambiar_estado(new SuperMarioState(this));
     }
 
     // Singleton: Obtiene la instancia de Mario
@@ -78,10 +70,6 @@ public class Mario extends Entidad implements EntidadJugador {
         return vidas;
     }
 
-    public int get_direccion() {
-        return direccion;
-    }
-
     public int get_puntaje() {
         return puntaje_acumulado + puntaje_nivel_actual;
     }
@@ -89,7 +77,7 @@ public class Mario extends Entidad implements EntidadJugador {
     public MarioState get_estado_anterior() {
         return estado_anterior;
     }
-
+    
     public int get_direccion_mario() {
         return movimiento_derecha ? 1 : -1;
     }
@@ -98,7 +86,7 @@ public class Mario extends Entidad implements EntidadJugador {
     public void set_direccion_mario(int direccion_mario) {
         direccion = direccion_mario;
     }
-
+    
     public void set_puntaje_acumulado(int puntaje) {
         this.puntaje_acumulado += puntaje;
     }
@@ -113,10 +101,6 @@ public class Mario extends Entidad implements EntidadJugador {
 
     public void set_fabrica_sprites(SpritesFactory sprites) {
         this.sprites_factory = sprites;
-    }
-
-    public void set_velocidad_en_x_mario(int vel) {
-        velocidad_en_x = vel;
     }
 
     // Métodos de estado y movimiento
@@ -174,14 +158,14 @@ public class Mario extends Entidad implements EntidadJugador {
     	velocidad_en_y = 0;
     	actualizar_posicion();
     }
-    
+
     public void saltar() {
-        	System.out.println("Saltando");
-        	if (!saltando) {
-            saltando = true;
-            velocidad_en_y = -5; // Velocidad inicial del salto
-            actualizar_posicion();}
-        
+    	System.out.println("Saltando");
+    	if (!saltando) {
+	        saltando = true;
+	        velocidad_en_y = -5; // Velocidad inicial del salto
+	        actualizar_posicion();
+        }
     }
 
     public void actualizar_posicion() {
@@ -194,7 +178,7 @@ public class Mario extends Entidad implements EntidadJugador {
         }
 
         if (saltando) {
-            velocidad_en_y -= gravedad; // Disminuir la velocidad para simular el salto
+            velocidad_en_y -= aceleracion_gravedad; // Disminuir la velocidad para simular el salto
             posicion_en_y -= velocidad_en_y;
 
             if (velocidad_en_y <= 0) {
@@ -202,7 +186,6 @@ public class Mario extends Entidad implements EntidadJugador {
                 cayendo = true;   // Comienza a caer
             }
         }
-
         posicion_en_x += velocidad_en_x;
         actualizar_sprite();
     }

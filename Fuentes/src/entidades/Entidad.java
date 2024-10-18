@@ -19,7 +19,7 @@ public abstract class Entidad extends JComponent implements EntidadLogica, Agres
     protected double aceleracion_gravedad;
     protected Observer observer;
     protected boolean cayendo, saltando, movimiento_derecha;
-    protected int direccion = -1;
+    protected int direccion;
     protected boolean destruida = false;
 
     // Constructor
@@ -30,9 +30,11 @@ public abstract class Entidad extends JComponent implements EntidadLogica, Agres
         this.dimension = (sprite != null) ? new Dimension(sprite.get_ancho(), sprite.get_alto()) : new Dimension(0, 0);
         this.velocidad_en_x = 0;
         this.velocidad_en_y = 0;
-        this.aceleracion_gravedad = 0.15;
+        this.aceleracion_gravedad = 0.1;
         this.cayendo = true;
         this.saltando = false;
+        this.direccion = -1;
+        this.movimiento_derecha = true;
     }
 
     // Getters
@@ -111,7 +113,6 @@ public abstract class Entidad extends JComponent implements EntidadLogica, Agres
 
     public void set_cayendo(boolean cayendo) {
         this.cayendo = cayendo;
-        System.out.println("entre aca, cayendo: " + cayendo);
     }
 
     // Métodos relacionados con el observador

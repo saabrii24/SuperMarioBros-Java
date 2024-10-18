@@ -110,6 +110,9 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
                     case KeyEvent.VK_RIGHT:
                     	Mario.get_instancia().set_direccion_mario(1);
                         break;
+                    case KeyEvent.VK_W:
+                    	Mario.get_instancia().saltar();
+                    	break;
                     case KeyEvent.VK_SPACE:
                     	long currentTime = System.currentTimeMillis();
                     	 if (currentTime - tiempo_ultimo_proyectil >= PROYECTIL_COOLDOWN) {

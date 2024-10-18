@@ -30,7 +30,7 @@ public abstract class Entidad extends JComponent implements EntidadLogica, Agres
         this.dimension = (sprite != null) ? new Dimension(sprite.get_ancho(), sprite.get_alto()) : new Dimension(0, 0);
         this.velocidad_en_x = 0;
         this.velocidad_en_y = 0;
-        this.aceleracion_gravedad = 0.1;
+        this.aceleracion_gravedad = 0.15;
         this.cayendo = true;
         this.saltando = false;
     }

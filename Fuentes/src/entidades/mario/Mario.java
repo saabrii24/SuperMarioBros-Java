@@ -33,7 +33,7 @@ public class Mario extends Entidad implements EntidadJugador {
     // Atributos de movimiento
     private double velocidad_en_x;
     private double velocidad_en_y;
-    private final double gravedad = 0.38;
+    private final double gravedad = 0.1;
 
     // Fábrica de sprites
     private SpritesFactory sprites_factory;
@@ -176,10 +176,12 @@ public class Mario extends Entidad implements EntidadJugador {
     }
     
     public void saltar() {
-        if (!saltando && !cayendo) { // Solo salta si no está ya saltando o cayendo
+        	System.out.println("Saltando");
+        	if (!saltando) {
             saltando = true;
-            velocidad_en_y = 10; // Velocidad inicial del salto
-        }
+            velocidad_en_y = -5; // Velocidad inicial del salto
+            actualizar_posicion();}
+        
     }
 
     public void actualizar_posicion() {

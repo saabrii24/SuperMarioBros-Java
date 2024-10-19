@@ -12,19 +12,20 @@ public class NormalMarioState implements Mario.MarioState {
         this.mario = mario;
     }
 
-    public void consumir(SuperChampi super_champi) {
-    	mario.set_puntaje_nivel_actual(10);
-    	mario.cambiar_estado(new SuperMarioState(mario));
-    }
-    public void consumir(FlorDeFuego flor_de_fuego) {
-    	mario.set_puntaje_nivel_actual(5);
-    	mario.cambiar_estado(new FireMarioState(mario));
-    }
-
-    public void consumir(Estrella estrella) {
+    public void consumir_estrella() {
     	mario.set_puntaje_nivel_actual(20);
     	mario.cambiar_estado(new InvencibleMarioState(mario));
-    }
+	}
+
+	public void consumir_super_champi() {
+		mario.set_puntaje_nivel_actual(10);
+    	mario.cambiar_estado(new SuperMarioState(mario));
+	}
+
+	public void consumir_flor_de_fuego() {
+		mario.set_puntaje_nivel_actual(5);
+    	mario.cambiar_estado(new FireMarioState(mario));
+	}
 
     public boolean matar_si_hay_colision(Enemigo enemigo) {
         // En estado normal, Mario muere si colisiona con un enemigo

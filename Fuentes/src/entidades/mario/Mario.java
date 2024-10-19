@@ -62,9 +62,9 @@ public class Mario extends Entidad implements EntidadJugador {
     // Interfaz del estado de Mario
     public interface MarioState {
         boolean matar_si_hay_colision(Enemigo enemigo);
-        void consumir(SuperChampi powerup);
-        void consumir(FlorDeFuego powerup);
-        void consumir(Estrella powerup);
+        void consumir_estrella();
+    	void consumir_super_champi();
+    	void consumir_flor_de_fuego();
 		void actualizar_sprite();
     }
 
@@ -250,36 +250,21 @@ public class Mario extends Entidad implements EntidadJugador {
     public void consumir(ListaPowerUps power_up) {
         switch(power_up) {
         	case MONEDA : consumir_moneda();
-        	case FLOR_DE_FUEGO: consumir_flor_de_fuego();
-        	case SUPER_CHAMPI: consumir_super_champi();
+        	case FLOR_DE_FUEGO: get_instancia().estado.consumir_flor_de_fuego();
+        	case SUPER_CHAMPI: get_instancia().estado.consumir_super_champi();
         	case CHAMPI_VERDE: consumir_champi_verde();
-        	case ESTRELLA: consumir_estrella();
+        	case ESTRELLA: get_instancia().estado.consumir_estrella();
         }
     }
     
     private void consumir_moneda() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	private void consumir_champi_verde() {
-		// TODO Auto-generated method stub
 		
 	}
 
-	private void consumir_estrella() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private void consumir_super_champi() {
-		
-	}
-
-	private void consumir_flor_de_fuego() {
-		// TODO Auto-generated method stub
-		
-	}
 
 
 

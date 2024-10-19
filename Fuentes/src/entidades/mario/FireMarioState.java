@@ -11,15 +11,18 @@ public class FireMarioState implements Mario.MarioState {
     public FireMarioState(Mario mario) {
         this.mario = mario;
     }
+	
+	public void consumir_estrella() {
+		mario.cambiar_estado(new InvencibleMarioState(mario));
+		mario.set_puntaje_nivel_actual(30);
+	}
 
-	public void consumir(SuperChampi super_champi) {}
-
-	public void consumir(FlorDeFuego flor_de_fuego) {
+	public void consumir_super_champi() {
 		mario.set_puntaje_nivel_actual(50);
 	}
 
-	public void consumir(Estrella estrella) {
-		mario.cambiar_estado(new InvencibleMarioState(mario));
+	public void consumir_flor_de_fuego() {
+		mario.set_puntaje_nivel_actual(50);
 	}
 
     public boolean matar_si_hay_colision(Enemigo enemigo) {

@@ -34,7 +34,6 @@ public class Mario extends Entidad implements EntidadJugador {
     // Atributos de movimiento
     private double velocidad_en_x;
     private double velocidad_en_y;
-    private final double gravedad = 0.1;
 
     // Fábrica de sprites
     private SpritesFactory sprites_factory;
@@ -48,7 +47,7 @@ public class Mario extends Entidad implements EntidadJugador {
         this.vidas = 3;
         this.saltando = false;
         this.movimiento_derecha = true;
-        this.estado = new NormalMarioState(this);
+       // this.estado = new NormalMarioState(this);
     }
 
     // Singleton: Obtiene la instancia de Mario
@@ -204,7 +203,7 @@ public class Mario extends Entidad implements EntidadJugador {
     }
     public void actualizar_posicion() {
         if (cayendo) {
-        	velocidad_en_y += gravedad;
+        	velocidad_en_y += Entidad.GRAVEDAD;
             posicion_en_y -= velocidad_en_y;
         }
         if (!cayendo) {
@@ -212,7 +211,7 @@ public class Mario extends Entidad implements EntidadJugador {
         }
 
         if (saltando) {
-            velocidad_en_y -= gravedad; // Disminuir la velocidad para simular el salto
+            velocidad_en_y -= Entidad.GRAVEDAD; // Disminuir la velocidad para simular el salto
             posicion_en_y -= velocidad_en_y;
 
             if (velocidad_en_y <= 0) {
@@ -231,7 +230,7 @@ public class Mario extends Entidad implements EntidadJugador {
             cambiar_sprite(movimiento_derecha ? 
                 sprites_factory.get_mario_saltando_derecha() : 
                 sprites_factory.get_mario_saltando_izquierda());
-        } else if (velocidad_en_x != 0 && !saltando && !cayendo) {
+        } else if (velocidad_en_x != 0 && !saltando) {
             cambiar_sprite(movimiento_derecha ? 
                 sprites_factory.get_mario_movimiento_derecha() : 
                 sprites_factory.get_mario_movimiento_izquierda());

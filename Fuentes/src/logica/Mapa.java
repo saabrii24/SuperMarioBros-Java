@@ -58,12 +58,12 @@ public class Mapa {
     	entidades_plataforma.add(plataforma);
     }
     
-    public void agregar_bola_de_fuego(BolaDeFuego bolaDeFuego) {
-        if (bolaDeFuego != null) {
-            entidades_proyectiles.add(bolaDeFuego);
-            Observer observer = mi_juego.controlador_vistas.registrar_entidad(bolaDeFuego);
+    public void agregar_bola_de_fuego(BolaDeFuego bola_de_fuego) {
+        if (bola_de_fuego != null) {
+            entidades_proyectiles.add(bola_de_fuego);
+            Observer observer = mi_juego.controlador_vistas.registrar_entidad(bola_de_fuego);
             mi_juego.controlador_vistas.reproducir_efecto("fireball");
-            bolaDeFuego.registrar_observer(observer);
+            bola_de_fuego.registrar_observer(observer);
         }
     }
 

@@ -12,7 +12,7 @@ import javax.swing.JComponent;
 public abstract class Entidad extends JComponent implements EntidadLogica, Agresiva, Consumible, Destruible, Movible {
 
     // Atributos de la clase
-	private static final double GRAVEDAD = 0.15;  
+	protected static final double GRAVEDAD = 0.15;  
 	   
     protected Sprite sprite;
     protected double posicion_en_x, posicion_en_y;

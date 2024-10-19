@@ -252,12 +252,17 @@ public class Mario extends Entidad implements EntidadJugador {
         	case MONEDA : sumar_moneda();
         	case FLOR_DE_FUEGO: consumir_flor_de_fuego();
         	case SUPER_CHAMPI: consumir_super_champi();
-        	case CHAMPI_VERDE: sumar_vida();
+        	case CHAMPI_VERDE: consumir_champi_verde();
         	case ESTRELLA: consumir_estrella();
         }
     }
     
-    private void consumir_estrella() {
+    private void consumir_champi_verde() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void consumir_estrella() {
 		// TODO Auto-generated method stub
 		
 	}

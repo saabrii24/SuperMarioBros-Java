@@ -3,8 +3,8 @@ package logica;
 import entidades.mario.Mario;
 import entidades.powerups.PowerUp;
 import entidades.BolaDeFuego;
+import entidades.EntidadMovible;
 import entidades.enemigos.Enemigo;
-import entidades.interfaces.Movible;
 
 import java.awt.Rectangle;
 import java.util.List;
@@ -70,14 +70,14 @@ public class Colisionador {
     }
 
     // Manejo de colisiones verticales para entidades movibles
-    private void manejar_colision_vertical(Movible entidad) {
+    private void manejar_colision_vertical(EntidadMovible entidad) {
         boolean colision_superior = colisiona_con_plataforma(entidad.get_limites_superiores());
         entidad.set_cayendo(!colision_superior);
         entidad.set_velocidad_en_y(colision_superior ? 0 : 5);
     }
 
     // Manejo de colisiones horizontales para entidades movibles
-    private void manejar_colision_horizontal(Movible entidad) {
+    private void manejar_colision_horizontal(EntidadMovible entidad) {
         if (colisiona_con_plataforma(entidad.get_limites_derecha())) {
             entidad.set_direccion(-1);
         } else if (colisiona_con_plataforma(entidad.get_limites_izquierda())) {

@@ -1,5 +1,6 @@
 package logica;
 
+import entidades.interfaces.EntidadJugador;
 import gui.PanelPantallaMapa;
 
 public class ObserverJugador extends ObserverGrafico{

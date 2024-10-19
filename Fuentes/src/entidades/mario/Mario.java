@@ -2,7 +2,11 @@ package entidades.mario;
 
 import entidades.BolaDeFuego;
 import entidades.Entidad;
+import entidades.EntidadMovible;
 import entidades.enemigos.Enemigo;
+import entidades.interfaces.EntidadJugador;
+import entidades.interfaces.SistemaPuntuacion;
+import entidades.interfaces.SistemaVidas;
 import entidades.powerups.ChampiVerde;
 import entidades.powerups.Estrella;
 import entidades.powerups.FlorDeFuego;
@@ -11,42 +15,36 @@ import entidades.powerups.ListaPowerUps;
 import entidades.powerups.SuperChampi;
 import fabricas.Sprite;
 import fabricas.SpritesFactory;
-import logica.EntidadJugador;
 
-public class Mario extends Entidad implements EntidadJugador {
+public class Mario extends EntidadMovible implements EntidadJugador {
     // Atributos estáticos y del singleton
     private static Mario instancia_mario;
 
     // Atributos de estado y puntaje
     private MarioState estado;
     private MarioState estado_anterior;
-    private int puntaje_nivel_actual;
-    private int puntaje_acumulado;
-    private int monedas;
-    private int vidas;
+    private final SistemaPuntuacion sistema_puntuacion;
+    private final SistemaVidas sistema_vidas;
+    private SpritesFactory sprites_factory;
+    
     private int direccion;
     private int contador_saltos = 0;
     private boolean movimiento_derecha;
-    private boolean saltando;
-    private boolean cayendo = true;
+    
     private boolean movimiento_horizontal_bloqueado;
     private boolean movimiento_vertical_bloqueado;
 
     // Atributos de movimiento
     private double velocidad_en_x;
     private double velocidad_en_y;
-
-    // Fábrica de sprites
-    private SpritesFactory sprites_factory;
     
     // Constructor privado del Singleton
     private Mario(int x, int y, Sprite sprite) {
         super(x, y, sprite);
         this.sprites_factory = null;
-        this.puntaje_acumulado = 0;
-        this.monedas = 0;
-        this.vidas = 3;
-        this.saltando = false;
+        this.sistema_puntuacion = new PuntuacionMario();
+        this.sistema_vidas = new VidasMario(3);
+
         this.movimiento_derecha = true;
        // this.estado = new NormalMarioState(this);
     }
@@ -69,24 +67,16 @@ public class Mario extends Entidad implements EntidadJugador {
     }
 
     // Getters
-    public int get_puntaje_acumulado() {
-        return puntaje_acumulado;
+    public SistemaPuntuacion get_sistema_puntuacion() {
+        return sistema_puntuacion;
     }
 
-    public int get_monedas() {
-        return monedas;
-    }
-
-    public int get_vidas() {
-        return vidas;
+    public SistemaVidas get_sistema_vidas() {
+        return sistema_vidas;
     }
 
     public int get_direccion() {
         return direccion;
-    }
-
-    public int get_puntaje() {
-        return puntaje_acumulado + puntaje_nivel_actual;
     }
 
     public MarioState get_estado_anterior() {
@@ -108,18 +98,6 @@ public class Mario extends Entidad implements EntidadJugador {
     // Setters
     public void set_direccion_mario(int direccion_mario) {
         direccion = direccion_mario;
-    }
-
-    public void set_puntaje_acumulado(int puntaje) {
-        this.puntaje_acumulado += puntaje;
-    }
-    
-    public void set_puntaje_nivel_actual(int puntaje) {
-        this.puntaje_nivel_actual += puntaje;
-    }
-
-    public void set_monedas(int monedas) {
-        this.monedas = monedas;
     }
 
     public void set_fabrica_sprites(SpritesFactory sprites) {
@@ -152,10 +130,9 @@ public class Mario extends Entidad implements EntidadJugador {
     }
 
     // Movimiento y lógica del juego
+    @Override
     public void mover() {
-    	if(movimiento_vertical_bloqueado) {
-    		detener_movimiento_vertical();
-    	} else {
+        if(!movimiento_vertical_bloqueado) {
             switch (direccion) {
                 case 1 -> mover_a_derecha();
                 case -1 -> mover_a_izquierda();
@@ -164,15 +141,15 @@ public class Mario extends Entidad implements EntidadJugador {
         }
     }
 
-    private void mover_a_izquierda() {
-        velocidad_en_x = -5;
-        movimiento_derecha = false;
-        actualizar_posicion();
-    }
-
     private void mover_a_derecha() {
         velocidad_en_x = 5;
         movimiento_derecha = true;
+        actualizar_posicion();
+    }
+
+    private void mover_a_izquierda() {
+        velocidad_en_x = -5;
+        movimiento_derecha = false;
         actualizar_posicion();
     }
 
@@ -204,7 +181,7 @@ public class Mario extends Entidad implements EntidadJugador {
     }
     public void actualizar_posicion() {
         if (cayendo) {
-        	velocidad_en_y += Entidad.GRAVEDAD;
+        	velocidad_en_y += EntidadMovible.GRAVEDAD;
             posicion_en_y -= velocidad_en_y;
         }
         if (!cayendo) {
@@ -212,7 +189,7 @@ public class Mario extends Entidad implements EntidadJugador {
         }
 
         if (saltando) {
-            velocidad_en_y -= Entidad.GRAVEDAD; // Disminuir la velocidad para simular el salto
+            velocidad_en_y -= EntidadMovible.GRAVEDAD; // Disminuir la velocidad para simular el salto
             posicion_en_y -= velocidad_en_y;
 
             if (velocidad_en_y <= 0) {
@@ -258,24 +235,21 @@ public class Mario extends Entidad implements EntidadJugador {
     }
     
     private void consumir_moneda() {
-    	set_puntaje_nivel_actual(5);
-    	sumar_moneda();
+    	get_sistema_puntuacion().sumar_puntos(5);
+    	get_sistema_puntuacion().sumar_moneda();
 	}
 
 	private void consumir_champi_verde() {
-		set_puntaje_nivel_actual(100);
-		sumar_vida();
+		get_sistema_puntuacion().sumar_puntos(100);
+		get_sistema_vidas().sumar_vida();
 	}
-
-
-
 
     public void matar_si_hay_colision(Enemigo enemigo) {
         if (estado.matar_si_hay_colision(enemigo)) {
-            set_puntaje_nivel_actual(calcular_puntaje_enemigo(enemigo));
+        	get_sistema_puntuacion().sumar_puntos(calcular_puntaje_enemigo(enemigo));
         } else {
-            set_puntaje_acumulado(calcular_penalizacion_enemigo(enemigo));
-            quitar_vida();
+        	get_sistema_puntuacion().sumar_puntos(calcular_penalizacion_enemigo(enemigo));
+            get_sistema_vidas().quitar_vida();
         }
     }
 
@@ -299,28 +273,27 @@ public class Mario extends Entidad implements EntidadJugador {
     }
 
     public void caer_en_vacio() {
-        set_puntaje_acumulado(-15);
-        quitar_vida();
-    }
-
-    private void sumar_moneda() {
-        this.monedas++;
-    }
-
-    private void sumar_vida() {
-        if (vidas > 0) {
-            vidas++;
-        }
-    }
-
-    protected void quitar_vida() {
-        if (vidas > 0) {
-            vidas--;
-        }
+    	get_sistema_puntuacion().restar_puntos(15);
+    	get_sistema_vidas().quitar_vida();
     }
 
     public BolaDeFuego disparar() {
         return new BolaDeFuego(get_posicion_en_x(), get_posicion_en_y(), sprites_factory.get_bola_de_fuego());
     }
+
+	@Override
+	public int get_puntaje() {
+		return get_sistema_puntuacion().get_puntaje_total();
+	}
+
+	@Override
+	public int get_monedas() {
+		return get_sistema_puntuacion().get_monedas();
+	}
+
+	@Override
+	public int get_vidas() {
+		return get_sistema_vidas().get_vidas();
+	}
 
 }

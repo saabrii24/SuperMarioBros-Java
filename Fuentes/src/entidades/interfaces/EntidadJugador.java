@@ -1,4 +1,4 @@
-package logica;
+package entidades.interfaces;
 
 public interface EntidadJugador extends EntidadLogica {
 

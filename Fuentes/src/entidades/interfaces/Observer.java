@@ -1,4 +1,4 @@
-package logica;
+package entidades.interfaces;
 
 import java.awt.Graphics;
 

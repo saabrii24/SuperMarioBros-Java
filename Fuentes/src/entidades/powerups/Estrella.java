@@ -1,5 +1,6 @@
 package entidades.powerups;
 
+import entidades.mario.Mario;
 import fabricas.Sprite;
 
 public class Estrella extends PowerUp{
@@ -12,6 +13,12 @@ public class Estrella extends PowerUp{
 	
 	public ListaPowerUps get_tipo() {
 		return ListaPowerUps.ESTRELLA;
+	}
+
+	@Override
+	public void aplicar_efecto(Mario mario) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

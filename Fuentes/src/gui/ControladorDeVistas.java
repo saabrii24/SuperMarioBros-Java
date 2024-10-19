@@ -7,6 +7,9 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
+import entidades.interfaces.EntidadJugador;
+import entidades.interfaces.EntidadLogica;
+import entidades.interfaces.Observer;
 import entidades.mario.Mario;
 import fabricas.EntidadesFactory;
 import gui.sonido.Sonido;

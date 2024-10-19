@@ -20,6 +20,9 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
 
+import entidades.interfaces.EntidadJugador;
+import entidades.interfaces.EntidadLogica;
+import entidades.interfaces.Observer;
 import entidades.mario.Mario;
 import logica.*;
 import niveles.Nivel;

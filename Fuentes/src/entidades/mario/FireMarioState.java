@@ -14,15 +14,15 @@ public class FireMarioState implements Mario.MarioState {
 	
 	public void consumir_estrella() {
 		mario.cambiar_estado(new InvencibleMarioState(mario));
-		mario.set_puntaje_nivel_actual(30);
+		mario.get_sistema_puntuacion().sumar_puntos(30);
 	}
 
 	public void consumir_super_champi() {
-		mario.set_puntaje_nivel_actual(50);
+		mario.get_sistema_puntuacion().sumar_puntos(50);
 	}
 
 	public void consumir_flor_de_fuego() {
-		mario.set_puntaje_nivel_actual(50);
+		mario.get_sistema_puntuacion().sumar_puntos(50);
 	}
 
     public boolean matar_si_hay_colision(Enemigo enemigo) {

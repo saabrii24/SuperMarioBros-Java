@@ -4,10 +4,11 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
-
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+
+import entidades.interfaces.EntidadLogica;
+import entidades.interfaces.Observer;
 
 public abstract class ObserverGrafico extends JLabel implements Observer {
 

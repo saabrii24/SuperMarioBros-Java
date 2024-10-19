@@ -5,6 +5,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import entidades.BolaDeFuego;
 import entidades.enemigos.Enemigo;
+import entidades.interfaces.Observer;
 import entidades.mario.Mario;
 import entidades.plataformas.Plataforma;
 import entidades.powerups.PowerUp;

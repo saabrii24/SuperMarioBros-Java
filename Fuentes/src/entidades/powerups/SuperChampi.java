@@ -1,5 +1,6 @@
 package entidades.powerups;
 
+import entidades.mario.Mario;
 import fabricas.Sprite;
 
 public class SuperChampi extends PowerUp{
@@ -12,6 +13,12 @@ public class SuperChampi extends PowerUp{
 	
 	public ListaPowerUps get_tipo() {
 		return ListaPowerUps.SUPER_CHAMPI;
+	}
+
+	@Override
+	public void aplicar_efecto(Mario mario) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

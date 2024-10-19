@@ -160,11 +160,11 @@ public class Mario extends Entidad implements EntidadJugador {
     }
 
     public void saltar() {
-    	System.out.println("Saltando");
     	if (!saltando) {
 	        saltando = true;
-	        velocidad_en_y = -5; // Velocidad inicial del salto
+	        velocidad_en_y = -5;
 	        actualizar_posicion();
+	        
         }
     }
 

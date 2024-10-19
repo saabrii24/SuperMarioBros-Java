@@ -2,6 +2,7 @@ package logica;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import entidades.BolaDeFuego;
 import entidades.enemigos.Enemigo;
@@ -13,39 +14,41 @@ public class Mapa {
 	
 	protected Juego mi_juego;
 	protected Mario mario;
-	protected List<Enemigo> entidades_enemigos;
-	protected List<PowerUp> entidades_powerup;
-	protected List<Plataforma> entidades_plataforma;
-	protected List<BolaDeFuego> entidades_bolas_de_fuego;
+	protected CopyOnWriteArrayList<Enemigo> entidades_enemigo;
+	protected CopyOnWriteArrayList<PowerUp> entidades_powerup;
+	protected CopyOnWriteArrayList<Plataforma> entidades_plataforma;
+	protected CopyOnWriteArrayList<BolaDeFuego> entidades_proyectiles;
 	
 	
 	public Mapa(Juego juego) {
 		this.mi_juego = juego;
-	    this.entidades_enemigos = new LinkedList<>();
-	    this.entidades_plataforma = new LinkedList<>();
-	    this.entidades_powerup = new LinkedList<>();
-	    this.entidades_bolas_de_fuego = new LinkedList<>();
+        this.entidades_enemigo = new CopyOnWriteArrayList<>();
+        this.entidades_powerup = new CopyOnWriteArrayList<>();
+        this.entidades_plataforma = new CopyOnWriteArrayList<>();
+        this.entidades_proyectiles = new CopyOnWriteArrayList<>();
 	}
+
+    public List<Enemigo> get_entidades_enemigo() {
+        return entidades_enemigo;
+    }
+
+    public List<PowerUp> get_entidades_powerup() {
+        return entidades_powerup;
+    }
 
     public List<Plataforma> get_entidades_plataforma() {
         return entidades_plataforma;
     }
-    public List<Enemigo> get_entidades_enemigo(){
-    	return entidades_enemigos;
-    }
-    public List<PowerUp> get_entidades_powerup(){
-    	return entidades_powerup;
-    }
-    public List<BolaDeFuego> get_entidades_proyectiles(){
-    	return entidades_bolas_de_fuego;
-    }
 
+    public List<BolaDeFuego> get_entidades_proyectiles() {
+        return entidades_proyectiles;
+    }
     public void agregar_mario(Mario mario) {
         this.mario = mario;
     }
     
     public void agregar_enemigo(Enemigo enemigo) {
-    	entidades_enemigos.add(enemigo);
+    	entidades_enemigo.add(enemigo);
     }
     
     public void agregar_powerup(PowerUp powerup) {
@@ -58,7 +61,7 @@ public class Mapa {
     
     public void agregar_bola_de_fuego(BolaDeFuego bolaDeFuego) {
         if (bolaDeFuego != null) {
-            entidades_bolas_de_fuego.add(bolaDeFuego);
+            entidades_proyectiles.add(bolaDeFuego);
             Observer observer = mi_juego.controlador_vistas.registrar_entidad(bolaDeFuego);
             mi_juego.controlador_vistas.reproducir_efecto("fireball");
             bolaDeFuego.registrar_observer(observer);
@@ -66,7 +69,7 @@ public class Mapa {
     }
 
     public void eliminar_enemigo(Enemigo enemigo) {
-    	entidades_enemigos.remove(enemigo);
+    	entidades_enemigo.remove(enemigo);
     }
     public void eliminar_powerup(PowerUp powerup) {
     	entidades_powerup.remove(powerup);
@@ -75,11 +78,11 @@ public class Mapa {
     	entidades_plataforma.remove(plataforma);
     }
     public void eliminar_bola_de_fuego(BolaDeFuego bola_de_fuego) {
-    	entidades_bolas_de_fuego.remove(bola_de_fuego);
+    	entidades_proyectiles.remove(bola_de_fuego);
     }
 
     public void resetear_mapa() {
-        entidades_enemigos.clear();
+        entidades_enemigo.clear();
         entidades_plataforma.clear();
         entidades_powerup.clear();
     }

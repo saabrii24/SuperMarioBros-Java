@@ -8,8 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public abstract class ObserverGrafico extends JLabel implements Observer {
-    
-    private static final long serialVersionUID = 1L;
+
     private EntidadLogica entidad_observada;
     
     protected ObserverGrafico(EntidadLogica entidad_observada) {
@@ -20,7 +19,6 @@ public abstract class ObserverGrafico extends JLabel implements Observer {
     public void actualizar() {
         actualizar_imagen();
         actualizar_posicion_tamano();
-        repaint(); // Solicitar que el componente se repinte para actualizar la imagen y los límites
     }
     
     public void notificar_destruir() {

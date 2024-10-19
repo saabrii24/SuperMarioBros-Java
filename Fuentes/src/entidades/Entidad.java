@@ -9,7 +9,7 @@ import java.awt.Rectangle;
 
 import javax.swing.JComponent;
 
-public abstract class Entidad extends JComponent implements EntidadLogica, Agresiva, Consumible, Destruible, Gravedad, Movible {
+public abstract class Entidad extends JComponent implements EntidadLogica, Agresiva, Consumible, Destruible, Movible {
 
     // Campos de la clase
     protected Sprite sprite;
@@ -82,6 +82,11 @@ public abstract class Entidad extends JComponent implements EntidadLogica, Agres
     public void set_sprite(Sprite sprite) {
         this.sprite = sprite;
     }
+    
+    public void set_posicion(double x, double y) {
+    	set_posicion_en_x(x);
+    	set_posicion_en_x(y);
+    }
 
     public void set_posicion_en_x(double posicion_x) {
         this.posicion_en_x = posicion_x;
@@ -114,7 +119,10 @@ public abstract class Entidad extends JComponent implements EntidadLogica, Agres
     public void set_cayendo(boolean cayendo) {
         this.cayendo = cayendo;
     }
-
+    
+    public void set_saltando(boolean saltando) {
+		this.saltando = saltando;
+	}
     // Métodos relacionados con el observador
     public void registrar_observer(Observer observer) {
         this.observer = observer;

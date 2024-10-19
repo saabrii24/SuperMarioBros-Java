@@ -8,6 +8,8 @@ import fabricas.*;
 import gui.ControladorDeVistas;
 import niveles.GeneradorNivel;
 import niveles.Nivel;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Juego {
@@ -67,13 +69,10 @@ public class Juego {
     }
 
     private void bucle_movimiento_jugador() {
-        long tiempo_anterior = System.nanoTime();
         final double tiempo_por_frame = 1_000_000_000.0 / 60; // 60 FPS
 
         while (esta_ejecutando) {
             long tiempo_actual = System.nanoTime();
-            double delta = (tiempo_actual - tiempo_anterior) / tiempo_por_frame;
-            tiempo_anterior = tiempo_actual;
 
             mover_mario();
             
@@ -85,13 +84,10 @@ public class Juego {
     }
 
     private void bucle_movimiento_entidades() {
-        long tiempo_anterior = System.nanoTime();
         final double tiempo_por_frame = 1_000_000_000.0 / 60; // 60 FPS
 
         while (esta_ejecutando) {
             long tiempo_actual = System.nanoTime();
-            double delta = (tiempo_actual - tiempo_anterior) / tiempo_por_frame;
-            tiempo_anterior = tiempo_actual;
 
             mover_enemigos();
             mover_proyectiles();
@@ -114,23 +110,42 @@ public class Juego {
     }
 
     private void mover_mario() {
-        Mario.get_instancia().mover();
-        if(Mario.get_instancia().get_dimension() != null) { 
-        	controlador_colisiones.verificar_colision_mario(Mario.get_instancia()); 
+        Mario mario = Mario.get_instancia();
+        synchronized(mario) {
+            mario.mover();
+            if(mario.get_dimension() != null) { 
+                controlador_colisiones.verificar_colision_mario(mario); 
+            }
         }
     }
 
     private void mover_enemigos() {
-        for (Enemigo enemigo : mapa_nivel_actual.get_entidades_enemigo()) {
-            enemigo.mover();
-            controlador_colisiones.verificar_colision_enemigo(enemigo);
+        List<Enemigo> enemigos = new ArrayList<>(mapa_nivel_actual.get_entidades_enemigo());
+        for (Enemigo enemigo : enemigos) {
+            synchronized(enemigo) {
+                try {
+                    enemigo.mover();
+                    controlador_colisiones.verificar_colision_enemigo(enemigo);
+                } catch (Exception e) {
+                    // Si la entidad fue eliminada mientras iterábamos
+                    continue;
+                }
+            }
         }
     }
     
     private void mover_proyectiles() {
-        for (BolaDeFuego proyectil : mapa_nivel_actual.get_entidades_proyectiles()) {
-            proyectil.mover();
-            controlador_colisiones.verificar_colision_proyectil(proyectil); 
+        List<BolaDeFuego> proyectiles = new ArrayList<>(mapa_nivel_actual.get_entidades_proyectiles());
+        for (BolaDeFuego proyectil : proyectiles) {
+            synchronized(proyectil) {
+                try {
+                    proyectil.mover();
+                    controlador_colisiones.verificar_colision_proyectil(proyectil);
+                } catch (Exception e) {
+                    // Si el proyectil fue eliminado mientras iterábamos
+                    continue;
+                }
+            }
         }
     }
 
@@ -150,8 +165,17 @@ public class Juego {
     }
 
     private void notificar_observadores_entidades(List<? extends Entidad> entidades) {
-        for (Entidad entidad : entidades) {
-            entidad.notificar_observer();
+        // Crear una copia de la lista para evitar ConcurrentModificationException
+        List<? extends Entidad> entidadesCopia = new ArrayList<>(entidades);
+        for (Entidad entidad : entidadesCopia) {
+            synchronized(entidad) {
+                try {
+                    entidad.notificar_observer();
+                } catch (Exception e) {
+                    // Si la entidad fue eliminada mientras iterábamos
+                    continue;
+                }
+            }
         }
     }
 
@@ -180,9 +204,13 @@ public class Juego {
     }
 
     protected void registrar_observers_para_entidades(List<? extends Entidad> entidades) {
-        for (Entidad entidad : entidades) {
-            Observer observer = controlador_vistas.registrar_entidad(entidad);
-            entidad.registrar_observer(observer);
+        // Crear una copia de la lista para evitar ConcurrentModificationException
+        List<? extends Entidad> entidadesCopia = new ArrayList<>(entidades);
+        for (Entidad entidad : entidadesCopia) {
+            synchronized(entidad) {
+                Observer observer = controlador_vistas.registrar_entidad(entidad);
+                entidad.registrar_observer(observer);
+            }
         }
     }
 

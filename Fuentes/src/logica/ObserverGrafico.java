@@ -52,10 +52,9 @@ public abstract class ObserverGrafico extends JLabel implements Observer {
     }
     
     protected void actualizar_posicion_tamano() {
-    	
+    	if (this.getIcon() == null) { return; }
         int x = (int) AdaptadorPosicionPixel.transformar_x(entidad_observada.get_posicion_en_x());
         int y = (int) AdaptadorPosicionPixel.transformar_y(entidad_observada.get_posicion_en_y());
-        if (this.getIcon() == null) { return; }
         int ancho = this.getIcon().getIconWidth();
         int alto = this.getIcon().getIconHeight();
         setBounds(x, y, ancho, alto);

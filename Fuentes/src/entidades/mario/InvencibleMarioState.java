@@ -8,10 +8,14 @@ import entidades.powerups.SuperChampi;
 public class InvencibleMarioState implements Mario.MarioState {
     private Mario mario;
     private Mario.MarioState estado_anterior;
+    private long tiempo_inicio;
+    private static final long DURACION_ESTRELLA = 10000;
 
     public InvencibleMarioState(Mario mario) {
         this.mario = mario;
         this.estado_anterior = mario.get_estado_anterior();
+        this.tiempo_inicio = System.currentTimeMillis();
+        // cambiar el sprite a Star Mario
     }
 
 	public void consumir(SuperChampi super_champi) {}
@@ -23,8 +27,11 @@ public class InvencibleMarioState implements Mario.MarioState {
 	}
 
     public boolean matar_si_hay_colision(Enemigo enemigo) {
-        // Mario invencible elimina a los enemigos al tocarlos
-        return true; // Mario mata al enemigo
+        if (System.currentTimeMillis() - tiempo_inicio > DURACION_ESTRELLA) {
+            mario.cambiar_estado(estado_anterior);
+            return false;
+        }
+        return true; // Star Mario mata enemigos al tocarlos
     }
 
     public void finalizar_invulnerabilidad() {

@@ -38,7 +38,7 @@ public class Mario extends Entidad implements EntidadJugador {
 
     // Fábrica de sprites
     private SpritesFactory sprites_factory;
-
+    
     // Constructor privado del Singleton
     private Mario(int x, int y, Sprite sprite) {
         super(x, y, sprite);
@@ -48,12 +48,13 @@ public class Mario extends Entidad implements EntidadJugador {
         this.vidas = 3;
         this.saltando = false;
         this.movimiento_derecha = true;
+        this.estado = new NormalMarioState(this);
     }
 
     // Singleton: Obtiene la instancia de Mario
     public static Mario get_instancia() {
         if (instancia_mario == null) {
-            instancia_mario = new Mario(150, 150, null);
+        	instancia_mario = new Mario(150, 150, null);
         }
         return instancia_mario;
     }
@@ -220,9 +221,10 @@ public class Mario extends Entidad implements EntidadJugador {
             cambiar_sprite(sprites_factory.get_mario_movimiento_izquierda());
         } else if (velocidad_en_x > 0) {
             cambiar_sprite(sprites_factory.get_mario_movimiento_derecha());
-        } else {
+        } else if(velocidad_en_x == 0){
             cambiar_sprite(movimiento_derecha ? sprites_factory.get_mario_ocioso_derecha() : sprites_factory.get_mario_ocioso_izquierda());
-        }
+        }else if(velocidad_en_y > 0)
+        	cambiar_sprite(movimiento_derecha ? sprites_factory.get_mario_saltando_derecha() : sprites_factory.get_mario_saltando_izquierda());
     }
 
     private void cambiar_sprite(Sprite nuevo_sprite) {

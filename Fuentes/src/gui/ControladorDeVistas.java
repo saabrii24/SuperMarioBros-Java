@@ -111,8 +111,10 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
                     	Mario.get_instancia().set_direccion_mario(1);
                         break;
                     case KeyEvent.VK_W:
+                    case KeyEvent.VK_UP:
                     	Mario.get_instancia().saltar();
-                    	mi_juego.reproducir_efecto("jump-small");
+                    	if(!Mario.get_instancia().esta_cayendo())
+                    		mi_juego.reproducir_efecto("jump-small");
                     	break;
                     case KeyEvent.VK_SPACE:
                     	long currentTime = System.currentTimeMillis();

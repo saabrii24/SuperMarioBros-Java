@@ -8,7 +8,6 @@ import entidades.interfaces.Movible;
 import java.awt.Rectangle;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Colisionador {
     private Mapa mapa;
@@ -20,6 +19,7 @@ public class Colisionador {
     // Verificación de colisiones para Mario
     public synchronized void verificar_colision_mario(Mario mario) {
         manejar_colision_con_plataforma(mario);
+        manejar_colision_con_enemigos(mario);
     }
 
     // Verificación de colisiones para Enemigos
@@ -49,6 +49,17 @@ public class Colisionador {
         }
     }
 
+    private void manejar_colision_con_enemigos(Mario mario) {
+        List<Enemigo> entidades_enemigo = new ArrayList<>(mapa.get_entidades_enemigo());
+         for(Enemigo e : entidades_enemigo) {
+             if (mario.get_limites_superiores().intersects(e.get_limites_inferiores())) {
+                 System.out.println("entre aca");
+                 e.destruir(mapa);
+                 break;
+             }
+         }
+    }
+    
     // Manejo de colisiones verticales para entidades que se mueven
     private void manejar_colision_vertical(Movible entidad) {
         boolean colision_superior = colisiona_con_plataforma(entidad.get_limites_superiores());

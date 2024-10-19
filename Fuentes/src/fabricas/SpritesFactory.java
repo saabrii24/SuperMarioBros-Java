@@ -27,9 +27,13 @@ public abstract class SpritesFactory {
         return cargarSprite("movimiento_izquierda.gif");
     }
 
-    public Sprite get_mario_saltando() {
-        return cargarSprite("saltando_derecha.png");
-    }
+	public Sprite get_mario_saltando_derecha() {
+		return cargarSprite("saltando_derecha.png");
+	}
+	
+	public Sprite get_mario_saltando_izquierda() {
+		return cargarSprite("saltando_izquierda.png");
+	}
 
     public Sprite get_goomba() {
         return cargarSprite("goomba.gif");
@@ -98,4 +102,5 @@ public abstract class SpritesFactory {
     public Sprite get_bola_de_fuego() {
         return cargarSprite("bola_de_fuego.gif");
     }
+
 }

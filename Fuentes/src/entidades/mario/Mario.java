@@ -258,11 +258,13 @@ public class Mario extends Entidad implements EntidadJugador {
     }
     
     private void consumir_moneda() {
-		
+    	set_puntaje_nivel_actual(5);
+    	sumar_moneda();
 	}
 
 	private void consumir_champi_verde() {
-		
+		set_puntaje_nivel_actual(100);
+		sumar_vida();
 	}
 
 

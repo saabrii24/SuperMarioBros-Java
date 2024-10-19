@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.FontFormatException;
+import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.io.File;
@@ -19,6 +20,7 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.KeyStroke;
 
+import entidades.mario.Mario;
 import logica.*;
 import niveles.Nivel;
 
@@ -38,6 +40,7 @@ public class PanelPantallaMapa extends JPanel {
     private JLabel label_tiempo; 
     private JLabel label_vidas;  
     private Font tipografia;
+    private JScrollPane scrollPane;
 
     /**
      * Constructor que inicializa el panel de pantalla del mapa.
@@ -105,7 +108,18 @@ public class PanelPantallaMapa extends JPanel {
     }
 
     public void actualizar_scroll_hacia_jugador(EntidadJugador jugador) {
+        if (scrollPane != null) {  // Verificar que scrollPane no sea null
+            JScrollBar verticalBar = scrollPane.getVerticalScrollBar();
+            JScrollBar horizontalBar = scrollPane.getHorizontalScrollBar();
 
+            // Calcular la nueva posición de desplazamiento para centrar al jugador
+            int nuevaPosicionX = (int) (Mario.get_instancia().get_posicion_en_x() - (scrollPane.getViewport().getWidth() / 2));
+            int nuevaPosicionY = (int) (Mario.get_instancia().get_posicion_en_y() - (scrollPane.getViewport().getHeight() / 2));
+
+            // Ajustar el scroll horizontal y vertical
+            horizontalBar.setValue(Math.max(0, nuevaPosicionX));  // Desplazar horizontalmente
+            verticalBar.setValue(Math.max(0, nuevaPosicionY));    // Desplazar verticalmente
+        }
     }
 
     protected void agregar_panel_mapa_con_fondo(JPanel panel) {
@@ -120,15 +134,16 @@ public class PanelPantallaMapa extends JPanel {
     
     
     protected void agregar_scroll_al_mapa(JLayeredPane panel_con_capas, JPanel panel) {
-        JScrollPane scroll = new JScrollPane(panel);
-        scroll.setBounds(0, 0, ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
-        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        
+        scrollPane = new JScrollPane(panel);  // Inicializar el scrollPane
+        scrollPane.setBounds(0, 0, ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+
         // Agregar el JScrollPane al JLayeredPane en una capa inferior
-        panel_con_capas.add(scroll, Integer.valueOf(0)); // Capa base para el mapa
-        
-        configurar_desplazamiento_con_teclado(scroll);
+        panel_con_capas.add(scrollPane, Integer.valueOf(0));  // Capa base para el mapa
+
+        // Configurar el desplazamiento con el teclado
+        configurar_desplazamiento_con_teclado(scrollPane);
     }
     
     protected void agregar_panel_informacion(JLayeredPane panel_con_capas, JPanel panel) {

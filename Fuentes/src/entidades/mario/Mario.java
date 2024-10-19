@@ -7,6 +7,7 @@ import entidades.powerups.ChampiVerde;
 import entidades.powerups.Estrella;
 import entidades.powerups.FlorDeFuego;
 import entidades.powerups.Moneda;
+import entidades.powerups.PowerUps;
 import entidades.powerups.SuperChampi;
 import fabricas.Sprite;
 import fabricas.SpritesFactory;
@@ -246,15 +247,30 @@ public class Mario extends Entidad implements EntidadJugador {
     }
 
     // Métodos de interacción y puntaje
-    public void consumir(Moneda moneda) {
-        sumar_moneda();
-        set_puntaje_nivel_actual(5);
+    public void consumir(PowerUps pu) {
+        switch(pu) {
+        	case MONEDA : sumar_moneda();
+        	case FLOR_DE_FUEGO: consumir_flor_de_fuego();
+        	case SUPER_CHAMPI: consumir_super_champi();
+        	case CHAMPI_VERDE: sumar_vida();
+        	case ESTRELLA: consumir_estrella();
+        }
     }
+    
+    private void consumir_estrella() {
+		// TODO Auto-generated method stub
+		
+	}
 
-    public void consumir(ChampiVerde champi) {
-        sumar_vida();
-        set_puntaje_nivel_actual(100);
-    }
+	private void consumir_super_champi() {
+		
+	}
+
+	private void consumir_flor_de_fuego() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
     public void matar_si_hay_colision(Enemigo enemigo) {
         if (estado.matar_si_hay_colision(enemigo)) {

@@ -26,7 +26,6 @@ public class Juego {
     protected Mapa mapa_nivel_actual;
     protected int tiempo_restante;
     protected int contador_puntos;
-    protected int vidas = 3;
     protected boolean esta_ejecutando;
     protected Thread hilo_mario_movimiento;
     protected Thread hilo_enemigos_movimiento;
@@ -45,10 +44,10 @@ public class Juego {
         fabrica_entidades = new EntidadesFactory(fabrica_sprites);
         controlador_vistas = new ControladorDeVistas(this);
         controlador_colisiones = new Colisionador(mapa_nivel_actual);
-        iniciar_hilos_movimiento();
+        
     }
 
-    private synchronized void iniciar_hilos_movimiento() {
+    public synchronized void iniciar_hilos_movimiento() {
         if (esta_ejecutando) {
             return;
         }
@@ -187,6 +186,7 @@ public class Juego {
         );
         fabrica_entidades = generador;
         registrar_observers(); 
+        iniciar_hilos_movimiento();
     }
 
     private void registrar_observers() {

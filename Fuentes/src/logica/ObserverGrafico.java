@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
+
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -27,6 +29,7 @@ public abstract class ObserverGrafico extends JLabel implements Observer {
     }
     
     protected void actualizar_imagen() {
+        if (entidad_observada.get_sprite() == null) { return; }
         String ruta_imagen = entidad_observada.get_sprite().get_ruta_imagen();
         ImageIcon icono_original = new ImageIcon(getClass().getResource(ruta_imagen));
         boolean es_un_gif = ruta_imagen.toLowerCase().endsWith(".gif");
@@ -49,8 +52,10 @@ public abstract class ObserverGrafico extends JLabel implements Observer {
     }
     
     protected void actualizar_posicion_tamano() {
+    	
         int x = (int) AdaptadorPosicionPixel.transformar_x(entidad_observada.get_posicion_en_x());
         int y = (int) AdaptadorPosicionPixel.transformar_y(entidad_observada.get_posicion_en_y());
+        if (this.getIcon() == null) { return; }
         int ancho = this.getIcon().getIconWidth();
         int alto = this.getIcon().getIconHeight();
         setBounds(x, y, ancho, alto);

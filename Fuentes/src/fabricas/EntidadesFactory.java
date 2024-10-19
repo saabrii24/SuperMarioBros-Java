@@ -19,7 +19,7 @@ public class EntidadesFactory {
     }
 
     public KoopaTroopa get_koopa_troopa(int x, int y) {
-        Sprite sprite_koopa = fabrica_sprites.get_koopa_troopa();
+        Sprite sprite_koopa = fabrica_sprites.get_koopa_movimiento_izquierda();
         return new KoopaTroopa(x, y, sprite_koopa);
     }
 

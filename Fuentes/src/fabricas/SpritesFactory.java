@@ -39,8 +39,12 @@ public abstract class SpritesFactory {
         return cargarSprite("goomba.gif");
     }
 
-    public Sprite get_koopa_troopa() {
-        return cargarSprite("koopa.gif");
+    public Sprite get_koopa_movimiento_derecha() {
+        return cargarSprite("koopa_derecha.gif");
+    }
+    
+    public Sprite get_koopa_movimiento_izquierda() {
+        return cargarSprite("koopa_izquierda.gif");
     }
 
     public Sprite get_piranha_plant() {

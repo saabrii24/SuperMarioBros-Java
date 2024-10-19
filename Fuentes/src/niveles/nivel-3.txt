@@ -1,5 +1,5 @@
 # Archivo de configuración del Nivel 1
-Nivel: 1
+Nivel: 3
 
 # Tiempo límite en segundos
 Tiempo: 100
@@ -16,10 +16,11 @@ Tiempo: 100
 	Goomba: 700, 400
 	
 	# PowerUps
-	Estrella: 240, 480
+	Estrella: 264, 480
+	Estrella: 288, 480
+	Estrella: 336, 480
 	
 	# Plataformas
-
 	BloqueSolido: 336, 144
 	BloqueSolido: 720, 144
 

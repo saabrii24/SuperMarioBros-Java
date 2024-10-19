@@ -1,5 +1,5 @@
 # Archivo de configuración del Nivel 1
-Nivel: 1
+Nivel: 2
 
 # Tiempo límite en segundos
 Tiempo: 100
@@ -17,6 +17,7 @@ Tiempo: 100
 	
 	# PowerUps
 	Estrella: 240, 480
+	Estrella: 288, 480
 	
 	# Plataformas
 

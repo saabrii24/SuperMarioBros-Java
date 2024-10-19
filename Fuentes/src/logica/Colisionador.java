@@ -1,6 +1,7 @@
 package logica;
 
 import entidades.mario.Mario;
+import entidades.powerups.PowerUp;
 import entidades.BolaDeFuego;
 import entidades.enemigos.Enemigo;
 import entidades.interfaces.Movible;
@@ -20,7 +21,17 @@ public class Colisionador {
     public synchronized void verificar_colision_mario(Mario mario) {
         manejar_colision_con_plataformas(mario);
         manejar_colision_con_enemigos(mario);
+        manejar_colision_con_power_up(mario);
     }
+    
+    // Verifica colisiones con Power Ups
+    public synchronized void manejar_colision_con_power_up(Mario mario) {
+    	List<PowerUp> entidades_power_up= new ArrayList<>(mapa.get_entidades_powerup());
+		for(PowerUp power_up:entidades_power_up) {
+			if( mario.get_limites().intersects(power_up.get_limites()))
+				mario.consumir(power_up.get_tipo());
+		}
+	}
 
     // Verifica colisiones para Enemigos
     public synchronized void verificar_colision_enemigo(Enemigo enemigo) {

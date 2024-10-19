@@ -246,10 +246,10 @@ public class Mario extends Entidad implements EntidadJugador {
         this.sprite = nuevo_sprite;
     }
 
-    // Métodos de interacción y puntaje
+ // Métodos de interacción y puntaje
     public void consumir(ListaPowerUps power_up) {
         switch(power_up) {
-        	case MONEDA : sumar_moneda();
+        	case MONEDA : consumir_moneda();
         	case FLOR_DE_FUEGO: consumir_flor_de_fuego();
         	case SUPER_CHAMPI: consumir_super_champi();
         	case CHAMPI_VERDE: consumir_champi_verde();
@@ -257,7 +257,12 @@ public class Mario extends Entidad implements EntidadJugador {
         }
     }
     
-    private void consumir_champi_verde() {
+    private void consumir_moneda() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void consumir_champi_verde() {
 		// TODO Auto-generated method stub
 		
 	}
@@ -275,6 +280,7 @@ public class Mario extends Entidad implements EntidadJugador {
 		// TODO Auto-generated method stub
 		
 	}
+
 
 
     public void matar_si_hay_colision(Enemigo enemigo) {

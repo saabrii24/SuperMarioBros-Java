@@ -81,6 +81,7 @@ public class Colisionador {
         if(colision_superior) {
         	mario.bloquear_movimiento_vertical();
         	mario.set_posicion_en_y(mario.get_posicion_en_y() + (0.5));
+        	mario.set_contador_saltos(0);
         	
         }
         else {

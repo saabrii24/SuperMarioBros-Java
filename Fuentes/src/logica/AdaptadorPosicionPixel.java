@@ -4,12 +4,12 @@ import gui.ConstantesVistas;
 
 public class AdaptadorPosicionPixel {
 	
-	public static double transformar_x(double d) {
-		return d;
+	public static double transformar_x(double x) {
+		return x;
 	}
 	
 	// Las coordenadas gráficas se miden de arriba hacia abajo
-	public static double transformar_y(double d) {
-		return ConstantesVistas.PANEL_ALTO - d;
+	public static double transformar_y(double y) {
+		return ConstantesVistas.PANEL_ALTO - y;
 	}
 }

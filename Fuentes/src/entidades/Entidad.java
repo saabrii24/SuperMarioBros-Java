@@ -11,12 +11,13 @@ import javax.swing.JComponent;
 
 public abstract class Entidad extends JComponent implements EntidadLogica, Agresiva, Consumible, Destruible, Movible {
 
-    // Campos de la clase
+    // Atributos de la clase
+	private static final double GRAVEDAD = 0.15;  
+	   
     protected Sprite sprite;
     protected double posicion_en_x, posicion_en_y;
     protected double velocidad_en_x, velocidad_en_y;
     protected Dimension dimension;
-    protected double aceleracion_gravedad;
     protected Observer observer;
     protected boolean cayendo, saltando, movimiento_derecha;
     protected int direccion;
@@ -30,11 +31,9 @@ public abstract class Entidad extends JComponent implements EntidadLogica, Agres
         this.dimension = (sprite != null) ? new Dimension(sprite.get_ancho(), sprite.get_alto()) : new Dimension(0, 0);
         this.velocidad_en_x = 0;
         this.velocidad_en_y = 0;
-        this.aceleracion_gravedad = 0.1;
         this.cayendo = true;
         this.saltando = false;
         this.direccion = -1;
-        this.movimiento_derecha = true;
     }
 
     // Getters
@@ -56,10 +55,6 @@ public abstract class Entidad extends JComponent implements EntidadLogica, Agres
 
     public double get_velocidad_en_y() {
         return velocidad_en_y;
-    }
-
-    public double get_aceleracion_gravedad() {
-        return aceleracion_gravedad;
     }
 
     public Dimension get_dimension() {
@@ -102,10 +97,6 @@ public abstract class Entidad extends JComponent implements EntidadLogica, Agres
 
     public void set_velocidad_en_y(double velocidad_y) {
         this.velocidad_en_y = velocidad_y;
-    }
-
-    public void set_aceleracion_gravedad(double aceleracion_gravedad) {
-        this.aceleracion_gravedad = aceleracion_gravedad;
     }
 
     public void set_dimension(int ancho, int alto) {
@@ -186,12 +177,12 @@ public abstract class Entidad extends JComponent implements EntidadLogica, Agres
     // Métodos de actualización y lógica interna
     public void actualizar_posicion() {
         if (cayendo) {
-            velocidad_en_y += aceleracion_gravedad;
+            velocidad_en_y += GRAVEDAD;
             posicion_en_y -= velocidad_en_y;
         }
 
         if (saltando) {
-            velocidad_en_y -= aceleracion_gravedad;
+            velocidad_en_y -= GRAVEDAD;
             posicion_en_y -= velocidad_en_y;
             if (velocidad_en_y <= 0) {
                 saltando = false;

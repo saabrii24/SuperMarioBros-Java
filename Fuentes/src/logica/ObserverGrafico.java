@@ -73,16 +73,16 @@ public abstract class ObserverGrafico extends JLabel implements Observer {
 
         // Dibuja los rectángulos de colisión
         g.setColor(Color.BLUE);
-        Rectangle superiores = entidad_observada.get_limites_superiores();
-        g.drawRect((int) (superiores.x - entidad_observada.get_posicion_en_x()), 
-                   (int) (superiores.y - entidad_observada.get_posicion_en_y()), 
-                   superiores.width, superiores.height);
-
-        g.setColor(Color.GREEN);
         Rectangle inferiores = entidad_observada.get_limites_inferiores();
         g.drawRect((int) (inferiores.x - entidad_observada.get_posicion_en_x()), 
                    (int) (inferiores.y - entidad_observada.get_posicion_en_y()), 
                    inferiores.width, inferiores.height);
+
+        g.setColor(Color.GREEN);
+        Rectangle superiores = entidad_observada.get_limites_superiores();
+        g.drawRect((int) (superiores.x - entidad_observada.get_posicion_en_x()), 
+                   (int) (superiores.y - entidad_observada.get_posicion_en_y()), 
+                   superiores.width, superiores.height);
 
         g.setColor(Color.YELLOW);
         Rectangle izquierda = entidad_observada.get_limites_izquierda();

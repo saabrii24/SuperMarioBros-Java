@@ -204,7 +204,7 @@ public class Mario extends Entidad implements EntidadJugador {
     }
     public void actualizar_posicion() {
         if (cayendo) {
-        	velocidad_en_y += aceleracion_gravedad;
+        	velocidad_en_y += gravedad;
             posicion_en_y -= velocidad_en_y;
         }
         if (!cayendo) {
@@ -227,15 +227,20 @@ public class Mario extends Entidad implements EntidadJugador {
     }
 
     private void actualizar_sprite() {
-        if (velocidad_en_x < 0) {
-            cambiar_sprite(sprites_factory.get_mario_movimiento_izquierda());
-        } else if (velocidad_en_x > 0) {
-            cambiar_sprite(sprites_factory.get_mario_movimiento_derecha());
-        } else if(velocidad_en_x == 0){
-            cambiar_sprite(movimiento_derecha ? sprites_factory.get_mario_ocioso_derecha() : sprites_factory.get_mario_ocioso_izquierda());
-        }else if(velocidad_en_y > 0)
-        	cambiar_sprite(movimiento_derecha ? sprites_factory.get_mario_saltando_derecha() : sprites_factory.get_mario_saltando_izquierda());
-    } 
+        if (saltando || velocidad_en_y < 0) {  // Saltando o cayendo (velocidad negativa)
+            cambiar_sprite(movimiento_derecha ? 
+                sprites_factory.get_mario_saltando_derecha() : 
+                sprites_factory.get_mario_saltando_izquierda());
+        } else if (velocidad_en_x != 0 && !saltando && !cayendo) {
+            cambiar_sprite(movimiento_derecha ? 
+                sprites_factory.get_mario_movimiento_derecha() : 
+                sprites_factory.get_mario_movimiento_izquierda());
+        } else {
+            cambiar_sprite(movimiento_derecha ? 
+                sprites_factory.get_mario_ocioso_derecha() : 
+                sprites_factory.get_mario_ocioso_izquierda());
+        }
+    }
 
     protected void cambiar_sprite(Sprite nuevo_sprite) {
         this.sprite = nuevo_sprite;
@@ -304,7 +309,5 @@ public class Mario extends Entidad implements EntidadJugador {
     public BolaDeFuego disparar() {
         return new BolaDeFuego(get_posicion_en_x(), get_posicion_en_y(), sprites_factory.get_bola_de_fuego());
     }
-
-
 
 }

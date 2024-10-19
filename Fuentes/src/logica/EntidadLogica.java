@@ -13,8 +13,8 @@ public interface EntidadLogica {
 	public void set_dimension(int width, int height);
 	
 	public Rectangle get_limites();
-	public Rectangle get_limites_superiores();
 	public Rectangle get_limites_inferiores();
+	public Rectangle get_limites_superiores();
 	public Rectangle get_limites_izquierda();
 	public Rectangle get_limites_derecha();
 	

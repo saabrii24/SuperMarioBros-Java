@@ -11,6 +11,10 @@ public class SuperMarioState implements Mario.MarioState {
     public SuperMarioState(Mario mario) {
         this.mario = mario;
     }
+    
+    public void actualizar_sprite() {
+
+    }
 
 	public void consumir(SuperChampi super_champi) {
 		mario.set_puntaje_nivel_actual(50);

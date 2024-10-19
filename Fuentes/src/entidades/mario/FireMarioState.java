@@ -32,4 +32,10 @@ public class FireMarioState implements Mario.MarioState {
         mario.disparar(); // Mario lanza una bola de fuego
     }
 
+	@Override
+	public void actualizar_sprite() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

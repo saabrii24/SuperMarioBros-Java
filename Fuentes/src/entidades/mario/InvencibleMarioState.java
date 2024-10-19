@@ -15,7 +15,10 @@ public class InvencibleMarioState implements Mario.MarioState {
         this.mario = mario;
         this.estado_anterior = mario.get_estado_anterior();
         this.tiempo_inicio = System.currentTimeMillis();
-        // cambiar el sprite a Star Mario
+    }
+    
+    public void actualizar_sprite() {
+
     }
 
 	public void consumir(SuperChampi super_champi) {}

@@ -65,6 +65,7 @@ public class Mario extends Entidad implements EntidadJugador {
         void consumir(SuperChampi powerup);
         void consumir(FlorDeFuego powerup);
         void consumir(Estrella powerup);
+		void actualizar_sprite();
     }
 
     // Getters
@@ -95,6 +96,14 @@ public class Mario extends Entidad implements EntidadJugador {
     public int get_direccion_mario() {
         return movimiento_derecha ? 1 : -1;
     }
+    
+	public boolean get_movimiento_derecha() {
+		return movimiento_derecha;
+	}
+    
+	public SpritesFactory get_sprite_factory() {
+		return sprites_factory;
+	}
 
     // Setters
     public void set_direccion_mario(int direccion_mario) {
@@ -213,6 +222,7 @@ public class Mario extends Entidad implements EntidadJugador {
         }
 
         posicion_en_x += velocidad_en_x;
+        //estado.actualizar_sprite(); <- sería para cambiarla segun el estado, pero no anda
         actualizar_sprite();
     }
 
@@ -225,9 +235,9 @@ public class Mario extends Entidad implements EntidadJugador {
             cambiar_sprite(movimiento_derecha ? sprites_factory.get_mario_ocioso_derecha() : sprites_factory.get_mario_ocioso_izquierda());
         }else if(velocidad_en_y > 0)
         	cambiar_sprite(movimiento_derecha ? sprites_factory.get_mario_saltando_derecha() : sprites_factory.get_mario_saltando_izquierda());
-    }
+    } 
 
-    private void cambiar_sprite(Sprite nuevo_sprite) {
+    protected void cambiar_sprite(Sprite nuevo_sprite) {
         this.sprite = nuevo_sprite;
     }
 
@@ -294,5 +304,7 @@ public class Mario extends Entidad implements EntidadJugador {
     public BolaDeFuego disparar() {
         return new BolaDeFuego(get_posicion_en_x(), get_posicion_en_y(), sprites_factory.get_bola_de_fuego());
     }
+
+
 
 }

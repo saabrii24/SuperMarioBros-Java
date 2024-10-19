@@ -32,5 +32,19 @@ public class NormalMarioState implements Mario.MarioState {
         mario.cambiar_estado(new NormalMarioState(mario));
         return false; // Mario no mata al enemigo
     }
+    
+    public void actualizar_sprite() {
+    	System.out.println(mario.get_velocidad_en_x());
+        if (mario.get_velocidad_en_x() < 0) {
+        	mario.cambiar_sprite(mario.get_sprite_factory().get_mario_movimiento_izquierda());
+        } else if (mario.get_velocidad_en_x() > 0) {
+        	mario.cambiar_sprite(mario.get_sprite_factory().get_mario_movimiento_derecha());
+        } else if(mario.get_velocidad_en_x() == 0){
+        	mario.cambiar_sprite(mario.get_movimiento_derecha() ? mario.get_sprite_factory().get_mario_ocioso_derecha() : mario.get_sprite_factory().get_mario_ocioso_izquierda());
+        }
+        //else if(mario.get_velocidad_en_y() > 0)
+        	//mario.cambiar_sprite(mario.get_movimiento_derecha() == 1 ? mario.get_sprite_factory().get_mario_saltando_derecha() : mario.get_sprite_factory().get_mario_saltando_izquierda());
+    }
+
 }
 

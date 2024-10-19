@@ -25,7 +25,12 @@ Tiempo: 100
 
 	BloqueSolido: 336, 144
 	BloqueSolido: 720, 144
-	
+
+	BloqueSolido: -48, 96
+	BloqueSolido: -48, 144
+	BloqueSolido: -48, 192
+	BloqueSolido: -48, 240
+	BloqueSolido: -48, 288
 	BloqueSolido: 0, 96
 	BloqueSolido: 48, 96
 	BloqueSolido: 96, 96
@@ -59,17 +64,102 @@ Tiempo: 100
 	BloqueSolido: 1344, 96
 	BloqueSolido: 1392, 96
 	BloqueSolido: 1440, 96
-	
+	BloqueSolido: 1488, 96
+	BloqueSolido: 1536, 96
+	BloqueSolido: 1584, 96
+	BloqueSolido: 1632, 96
+	BloqueSolido: 1680, 96
+	BloqueSolido: 1728, 96
+	BloqueSolido: 1776, 96
+	BloqueSolido: 1824, 96
+	BloqueSolido: 1872, 96
+	BloqueSolido: 1920, 96
+	BloqueSolido: 1968, 96
+	BloqueSolido: 2016, 96
+	BloqueSolido: 2064, 96
+	BloqueSolido: 2112, 96
+	BloqueSolido: 2160, 96
+	BloqueSolido: 2208, 96
+	BloqueSolido: 2256, 96
+	BloqueSolido: 2304, 96
+	BloqueSolido: 2352, 96
+	BloqueSolido: 2400, 96
+	BloqueSolido: 2448, 96
+	BloqueSolido: 2496, 96
+	BloqueSolido: 2544, 96
+	BloqueSolido: 2592, 96
+	BloqueSolido: 2640, 96
+	BloqueSolido: 2688, 96
+	BloqueSolido: 2736, 96
+	BloqueSolido: 2784, 96
+	BloqueSolido: 2832, 96
+	BloqueSolido: 2880, 96
+	BloqueSolido: 2928, 96
+	BloqueSolido: 2976, 96
+	BloqueSolido: 3024, 96
+	BloqueSolido: 3072, 96
+	BloqueSolido: 3120, 96
+	BloqueSolido: 3168, 96
+	BloqueSolido: 3216, 96
+	BloqueSolido: 3264, 96
+	BloqueSolido: 3312, 96
+	BloqueSolido: 3360, 96
+	BloqueSolido: 3408, 96
+	BloqueSolido: 3456, 96
+	BloqueSolido: 3504, 96
+	BloqueSolido: 3552, 96
+	BloqueSolido: 3600, 96
+	BloqueSolido: 3648, 96
+	BloqueSolido: 3696, 96
+	BloqueSolido: 3744, 96
+	BloqueSolido: 3792, 96
+	BloqueSolido: 3840, 96
+	BloqueSolido: 3888, 96
+	BloqueSolido: 3936, 96
+	BloqueSolido: 3984, 96
+	BloqueSolido: 4032, 96
+	BloqueSolido: 4080, 96
+	BloqueSolido: 4128, 96
+	BloqueSolido: 4176, 96
+	BloqueSolido: 4224, 96
+	BloqueSolido: 4272, 96
+	BloqueSolido: 4320, 96
+	BloqueSolido: 4368, 96
+	BloqueSolido: 4416, 96
+	BloqueSolido: 4464, 96
+	BloqueSolido: 4512, 96
+	BloqueSolido: 4560, 96
+	BloqueSolido: 4608, 96
+	BloqueSolido: 4656, 96
+	BloqueSolido: 4704, 96
+	BloqueSolido: 4752, 96
+	BloqueSolido: 4800, 96
+	BloqueSolido: 4848, 96
+	BloqueSolido: 4896, 96
+	BloqueSolido: 4944, 96
+	BloqueSolido: 4992, 96
+	BloqueSolido: 5040, 96
+	BloqueSolido: 5088, 96
+	BloqueSolido: 5136, 96
+	BloqueSolido: 5184, 96
+	BloqueSolido: 5232, 96
+	BloqueSolido: 5280, 96
+	BloqueSolido: 5328, 96
+	BloqueSolido: 5376, 96
+	BloqueSolido: 5376, 144
+	BloqueSolido: 5376, 192
+	BloqueSolido: 5376, 240
+	BloqueSolido: 5376, 288
 	#Vacio: 480, 48
 	#Vacio: 480, 96
 	
-	#BloqueDePregunta: 672, 288
-	#LadrilloSolido: 864, 288
-	#BloqueDePregunta: 912, 288
-	#LadrilloSolido: 960, 288
-	#BloqueDePregunta: 1008, 288
-	#LadrilloSolido: 1056, 288
-	#BloqueDePregunta: 960, 480
+	BloqueDePregunta: 672, 288
+	LadrilloSolido: 864, 288
+	BloqueDePregunta: 912, 288
+	LadrilloSolido: 960, 288
+	BloqueDePregunta: 1008, 288
+	LadrilloSolido: 1056, 288
+	BloqueDePregunta: 960, 480
 	
 
 # Definición del mapa

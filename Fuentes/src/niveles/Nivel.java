@@ -8,8 +8,8 @@ package niveles;
 public class Nivel {
 
     // Atributos del nivel
-    protected final double posicion_inicial_jugador_x;
-    protected final double posicion_inicial_jugador_y;
+    protected final int posicion_inicial_jugador_x;
+    protected final int posicion_inicial_jugador_y;
     protected final int tiempo;
     protected final int numero_de_nivel;
 
@@ -31,7 +31,7 @@ public class Nivel {
      *
      * @return La posición inicial del jugador en X.
      */
-    public double get_posicion_inicial_jugador_x() {
+    public int get_posicion_inicial_jugador_x() {
         return posicion_inicial_jugador_x;
     }
 
@@ -40,7 +40,7 @@ public class Nivel {
      *
      * @return La posición inicial del jugador en Y.
      */
-    public double get_posicion_inicial_jugador_y() {
+    public int get_posicion_inicial_jugador_y() {
         return posicion_inicial_jugador_y;
     }
 
@@ -85,8 +85,8 @@ public class Nivel {
     public static class Builder {
 
         // Atributos de configuración del nivel
-        private double posicion_inicial_jugador_x;
-        private double posicion_inicial_jugador_y;
+        private int posicion_inicial_jugador_x;
+        private int posicion_inicial_jugador_y;
         private int tiempo;
         private int numero_de_nivel;
 
@@ -107,7 +107,7 @@ public class Nivel {
          * @param posicion_inicial_jugador_x La posición inicial del jugador en X.
          * @return La instancia actual de {@code Builder} para encadenar métodos.
          */
-        public Nivel.Builder set_posicion_en_x_inicial(double posicion_inicial_jugador_x) {
+        public Nivel.Builder set_posicion_en_x_inicial(int posicion_inicial_jugador_x) {
             this.posicion_inicial_jugador_x = posicion_inicial_jugador_x;
             return this;
         }
@@ -118,7 +118,7 @@ public class Nivel {
          * @param posicion_inicial_jugador_y La posición inicial del jugador en Y.
          * @return La instancia actual de {@code Builder} para encadenar métodos.
          */
-        public Nivel.Builder set_posicion_en_y_inicial(double posicion_inicial_jugador_y) {
+        public Nivel.Builder set_posicion_en_y_inicial(int posicion_inicial_jugador_y) {
             this.posicion_inicial_jugador_y = posicion_inicial_jugador_y;
             return this;
         }

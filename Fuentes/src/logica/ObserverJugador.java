@@ -4,8 +4,7 @@ import entidades.interfaces.EntidadJugador;
 import gui.PanelPantallaMapa;
 
 public class ObserverJugador extends ObserverGrafico{
-
-	private static final long serialVersionUID = 7017967195998406908L;
+	
 	private PanelPantallaMapa panel_pantalla_mapa;
 	private EntidadJugador jugador_observado;
 	

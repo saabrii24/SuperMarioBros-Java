@@ -1,10 +1,6 @@
 package entidades.mario;
 
 import entidades.enemigos.Enemigo;
-import entidades.powerups.Estrella;
-import entidades.powerups.FlorDeFuego;
-import entidades.powerups.SuperChampi;
-
 public class SuperMarioState implements Mario.MarioState {
     private Mario mario;
 

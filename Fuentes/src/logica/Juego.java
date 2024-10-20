@@ -3,7 +3,6 @@ package logica;
 import entidades.BolaDeFuego;
 import entidades.Entidad;
 import entidades.enemigos.Enemigo;
-import entidades.interfaces.Observer;
 import entidades.mario.Mario;
 import fabricas.*;
 import gui.ControladorDeVistas;

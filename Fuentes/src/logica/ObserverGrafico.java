@@ -8,11 +8,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import entidades.interfaces.EntidadLogica;
-import entidades.interfaces.Observer;
 
 public abstract class ObserverGrafico extends JLabel implements Observer {
 
-    private EntidadLogica entidad_observada;
+	private static final long serialVersionUID = 1L;
+	
+	private EntidadLogica entidad_observada;
     
     protected ObserverGrafico(EntidadLogica entidad_observada) {
         super();
@@ -54,7 +55,7 @@ public abstract class ObserverGrafico extends JLabel implements Observer {
     
     protected void actualizar_posicion_tamano() {
     	if (this.getIcon() == null) { return; }
-        int x = (int) AdaptadorPosicionPixel.transformar_x(entidad_observada.get_posicion_en_x());
+    	int x = (int) AdaptadorPosicionPixel.transformar_x(entidad_observada.get_posicion_en_x());
         int y = (int) AdaptadorPosicionPixel.transformar_y(entidad_observada.get_posicion_en_y());
         int ancho = this.getIcon().getIconWidth();
         int alto = this.getIcon().getIconHeight();

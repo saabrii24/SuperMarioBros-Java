@@ -1,6 +1,7 @@
 package entidades;
 
 import fabricas.Sprite;
+import logica.Observer;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;
@@ -8,7 +9,6 @@ import java.awt.Rectangle;
 import javax.swing.JComponent;
 
 import entidades.interfaces.EntidadLogica;
-import entidades.interfaces.Observer;
 
 public abstract class Entidad extends JComponent implements EntidadLogica {
     protected Sprite sprite;

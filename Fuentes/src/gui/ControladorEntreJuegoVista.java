@@ -2,7 +2,6 @@ package gui;
 
 import entidades.interfaces.EntidadJugador;
 import entidades.interfaces.EntidadLogica;
-import entidades.interfaces.Observer;
 import logica.*;
 
 public interface ControladorEntreJuegoVista {

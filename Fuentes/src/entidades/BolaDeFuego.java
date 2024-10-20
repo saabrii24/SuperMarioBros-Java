@@ -28,5 +28,23 @@ public class BolaDeFuego extends EntidadMovible {
             destruir();
         }
     }
+
+    protected void actualizar_posicion() {
+        if (cayendo) {
+            velocidad_en_y += GRAVEDAD;
+            posicion_en_y -= velocidad_en_y;
+        }
+
+        if (saltando) {
+            velocidad_en_y -= GRAVEDAD;
+            posicion_en_y -= velocidad_en_y;
+            if (velocidad_en_y <= 0) {
+                saltando = false;
+                cayendo = true;
+            }
+        }
+
+        posicion_en_x += velocidad_en_x;
+    }
 }
 

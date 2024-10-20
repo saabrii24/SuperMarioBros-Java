@@ -8,4 +8,16 @@ public class PiranhaPlant extends Enemigo{
 		super(x, y, sprite);
 	}
 
+	@Override
+	public void mover() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void actualizar_posicion() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

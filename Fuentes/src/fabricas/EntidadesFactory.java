@@ -34,12 +34,12 @@ public class EntidadesFactory {
     }
 
     public Spiny get_spiny(int x, int y) {
-        Sprite sprite_lpiny = fabrica_sprites.get_spiny();
+        Sprite sprite_lpiny = fabrica_sprites.get_spiny_movimiento_izquierda();
         return new Spiny(x, y, sprite_lpiny);
     }
 
     public BuzzyBeetle get_buzzy_beetle(int x, int y) {
-        Sprite spriteBuzzy = fabrica_sprites.get_buzzy_beetle();
+        Sprite spriteBuzzy = fabrica_sprites.get_buzzy_movimiento_izquierda();
         return new BuzzyBeetle(x, y, spriteBuzzy);
     }
 

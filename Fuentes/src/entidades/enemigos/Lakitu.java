@@ -8,4 +8,12 @@ public class Lakitu extends Enemigo{
 		super(x, y, sprite);
 	}
 
+	public void mover() {
+		//TO DO
+	}
+
+	protected void actualizar_posicion() {
+		//TO DO
+	}
+
 }

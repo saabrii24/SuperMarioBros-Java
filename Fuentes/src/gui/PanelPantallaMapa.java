@@ -22,7 +22,6 @@ import javax.swing.KeyStroke;
 
 import entidades.interfaces.EntidadJugador;
 import entidades.interfaces.EntidadLogica;
-import entidades.interfaces.Observer;
 import entidades.mario.Mario;
 import logica.*;
 import niveles.Nivel;
@@ -127,7 +126,7 @@ public class PanelPantallaMapa extends JPanel {
 
     protected void agregar_panel_mapa_con_fondo(JPanel panel) {
         imagen_fondo = new JLabel();
-        ImageIcon icono_imagen = new ImageIcon(this.getClass().getResource("/assets/imagenes/pantalla-mapa-test.png"));
+        ImageIcon icono_imagen = new ImageIcon(this.getClass().getResource("/assets/imagenes/mapa.png"));
 
         // No escalamos la imagen, mantenemos el tamaño original
         imagen_fondo.setIcon(icono_imagen);

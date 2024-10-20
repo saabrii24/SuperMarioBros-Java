@@ -7,104 +7,111 @@ public abstract class SpritesFactory {
         this.ruta_a_carpeta = ruta_a_carpeta;
     }
 
-    private Sprite cargarSprite(String nombreArchivo) {
+    private Sprite cargar_sprite(String nombreArchivo) {
         return new Sprite(ruta_a_carpeta + nombreArchivo);
     }
 
     public Sprite get_mario_ocioso_derecha() {
-        return cargarSprite("ocioso_derecha.png");
+        return cargar_sprite("ocioso_derecha.png");
     }
     
     public Sprite get_mario_ocioso_izquierda() {
-        return cargarSprite("ocioso_izquierda.png");
+        return cargar_sprite("ocioso_izquierda.png");
     }
 
     public Sprite get_mario_movimiento_derecha() {
-        return cargarSprite("movimiento_derecha.gif");
+        return cargar_sprite("movimiento_derecha.gif");
     }
 
     public Sprite get_mario_movimiento_izquierda() {
-        return cargarSprite("movimiento_izquierda.gif");
+        return cargar_sprite("movimiento_izquierda.gif");
     }
 
 	public Sprite get_mario_saltando_derecha() {
-		return cargarSprite("saltando_derecha.png");
+		return cargar_sprite("saltando_derecha.png");
 	}
 	
 	public Sprite get_mario_saltando_izquierda() {
-		return cargarSprite("saltando_izquierda.png");
+		return cargar_sprite("saltando_izquierda.png");
 	}
 
     public Sprite get_goomba() {
-        return cargarSprite("goomba.gif");
+        return cargar_sprite("goomba.gif");
     }
 
     public Sprite get_koopa_movimiento_derecha() {
-        return cargarSprite("koopa_derecha.gif");
+        return cargar_sprite("koopa_derecha.gif");
     }
     
     public Sprite get_koopa_movimiento_izquierda() {
-        return cargarSprite("koopa_izquierda.gif");
+        return cargar_sprite("koopa_izquierda.gif");
     }
 
     public Sprite get_piranha_plant() {
-        return cargarSprite("pirania.png");
+        return cargar_sprite("pirania.png");
     }
 
     public Sprite get_lakitu() {
-        return cargarSprite("lakitu.png");
+        return cargar_sprite("lakitu.png");
     }
 
-    public Sprite get_spiny() {
-        return cargarSprite("spiny.png");
+    public Sprite get_spiny_movimiento_derecha() {
+        return cargar_sprite("spiny.png");
+    }
+    public Sprite get_spiny_movimiento_izquierda() {
+        return cargar_sprite("spiny.png");
     }
 
-    public Sprite get_buzzy_beetle() {
-        return cargarSprite("buzzy_beetle.png");
+    public Sprite get_buzzy_movimiento_derecha() {
+        return cargar_sprite("buzzy_izquierda.png");
+    }
+    
+    public Sprite get_buzzy_movimiento_izquierda() {
+        return cargar_sprite("buzzy_izquierda.png");
     }
 
     public Sprite get_super_champi() {
-        return cargarSprite("super_champi.png");
+        return cargar_sprite("super_champi.png");
     }
 
     public Sprite get_flor_de_fuego() {
-        return cargarSprite("flor_de_fuego.png");
+        return cargar_sprite("flor_de_fuego.png");
     }
 
     public Sprite get_estrella() {
-        return cargarSprite("estrella.gif");
+        return cargar_sprite("estrella.gif");
     }
 
     public Sprite get_champi_verde() {
-        return cargarSprite("champi_verde.png");
+        return cargar_sprite("champi_verde.png");
     }
 
     public Sprite get_moneda() {
-        return cargarSprite("moneda.png");
+        return cargar_sprite("moneda.png");
     }
 
     public Sprite get_bloque_solido() {
-        return cargarSprite("bloque_solido.png");
+        return cargar_sprite("bloque_solido.png");
     }
 
     public Sprite get_ladrillo_solido() {
-        return cargarSprite("ladrillo_solido.png");
+        return cargar_sprite("ladrillo_solido.png");
     }
 
     public Sprite get_bloque_de_pregunta() {
-        return cargarSprite("bloque_de_pregunta.gif");
+        return cargar_sprite("bloque_de_pregunta.gif");
     }
 
     public Sprite get_tuberias() {
-        return cargarSprite("tuberia.png");
+        return cargar_sprite("tuberia.png");
     }
 
     public Sprite get_vacio() {
-        return cargarSprite("vacio.png");
+        return cargar_sprite("vacio.png");
     }
 
     public Sprite get_bola_de_fuego() {
-        return cargarSprite("bola_de_fuego.gif");
+        return cargar_sprite("bola_de_fuego.gif");
     }
 
 }

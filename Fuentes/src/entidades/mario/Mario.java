@@ -39,11 +39,11 @@ public class Mario extends EntidadMovible implements EntidadJugador {
     private double velocidad_en_y;
     
     // Constructor privado del Singleton
-    private Mario(int x, int y, Sprite sprite) {
+    private Mario(double x, double y, Sprite sprite) {
         super(x, y, sprite);
         this.sprites_factory = null;
-        this.sistema_puntuacion = new PuntuacionMario();
-        this.sistema_vidas = new VidasMario(3);
+        this.sistema_puntuacion = new ControladorPuntuacionMario();
+        this.sistema_vidas = new ControladorVidasMario(3);
 
         this.movimiento_derecha = true;
        // this.estado = new NormalMarioState(this);
@@ -104,7 +104,7 @@ public class Mario extends EntidadMovible implements EntidadJugador {
         this.sprites_factory = sprites;
     }
 
-    public void set_velocidad_en_x_mario(int vel) {
+    public void set_velocidad_en_x_mario(double vel) {
         velocidad_en_x = vel;
     }
 

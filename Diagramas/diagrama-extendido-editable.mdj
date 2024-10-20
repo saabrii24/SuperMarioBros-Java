@@ -871,7 +871,7 @@
 											"top": 1150,
 											"width": 278,
 											"height": 13,
-											"text": "#posicion_inicial_jugador_x: double",
+											"text": "#posicion_inicial_jugador_x: int",
 											"horizontalAlignment": 0
 										},
 										{
@@ -888,7 +888,7 @@
 											"top": 1165,
 											"width": 278,
 											"height": 13,
-											"text": "#posicion_inicial_jugador_y: double",
+											"text": "#posicion_inicial_jugador_y: int",
 											"horizontalAlignment": 0
 										},
 										{
@@ -991,7 +991,7 @@
 											"top": 1248,
 											"width": 278,
 											"height": 13,
-											"text": "+get_posicion_inicial_jugador_x(): double",
+											"text": "+get_posicion_inicial_jugador_x(): int",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1008,7 +1008,7 @@
 											"top": 1263,
 											"width": 278,
 											"height": 13,
-											"text": "+get_posicion_inicial_jugador_y(): double",
+											"text": "+get_posicion_inicial_jugador_y(): int",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1640,7 +1640,7 @@
 											"top": 69,
 											"width": 406.5166015625,
 											"height": 13,
-											"text": "#posicion_en_y: double",
+											"text": "#posicion_en_y: int",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1657,7 +1657,7 @@
 											"top": 84,
 											"width": 406.5166015625,
 											"height": 13,
-											"text": "#posicion_en_y: double",
+											"text": "#posicion_en_y: int",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1725,7 +1725,7 @@
 											"top": 137,
 											"width": 406.5166015625,
 											"height": 13,
-											"text": "+Entidad(x: double, y: double, sprite: Sprite)",
+											"text": "+Entidad(x: int, y: int, sprite: Sprite)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -3096,7 +3096,7 @@
 											"top": 2776,
 											"width": 260.50146484375,
 											"height": 13,
-											"text": "+Enemigo(x: double, y: double, sprite: Sprite)",
+											"text": "+Enemigo(x: int, y: int, sprite: Sprite)",
 											"horizontalAlignment": 0
 										}
 									],
@@ -3291,7 +3291,7 @@
 											"top": 2584,
 											"width": 272.05419921875,
 											"height": 13,
-											"text": "+Plataforma(x: double, y: double, sprite: Sprite)",
+											"text": "+Plataforma(x: int, y: int, sprite: Sprite)",
 											"horizontalAlignment": 0
 										}
 									],
@@ -3681,7 +3681,7 @@
 											"top": 2848,
 											"width": 406,
 											"height": 13,
-											"text": "+Goomba(x: double, y: double, sprite: Sprite)",
+											"text": "+Goomba(x: int, y: int, sprite: Sprite)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -3929,7 +3929,7 @@
 											"top": 2957,
 											"width": 408.916015625,
 											"height": 13,
-											"text": "+KoopaTroopa(x: double, y: double, sprite: Sprite, estado: KoopaState)",
+											"text": "+KoopaTroopa(x: int, y: int, sprite: Sprite, estado: KoopaState)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -4226,7 +4226,7 @@
 											"top": 2848,
 											"width": 356.65576171875,
 											"height": 13,
-											"text": "+PiranhaPlant(x: double, y: double, sprite: Sprite)",
+											"text": "+PiranhaPlant(x: int, y: int, sprite: Sprite)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -4457,7 +4457,7 @@
 											"top": 2829,
 											"width": 356.65576171875,
 											"height": 13,
-											"text": "+Lakitu(x: double, y: double, sprite: Sprite)",
+											"text": "+Lakitu(x: int, y: int, sprite: Sprite)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -4739,7 +4739,7 @@
 											"top": 3293,
 											"width": 390,
 											"height": 13,
-											"text": "+Spiny(x: double, y: double, sprite: Sprite, estado: SpinyState)",
+											"text": "+Spiny(x: int, y: int, sprite: Sprite, estado: SpinyState)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -5036,7 +5036,7 @@
 											"top": 2848,
 											"width": 356.65576171875,
 											"height": 13,
-											"text": "+BuzzyBeetle(x: double, y: double, sprite: Sprite)",
+											"text": "+BuzzyBeetle(x: int, y: int, sprite: Sprite)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -5265,7 +5265,7 @@
 											"top": 2456,
 											"width": 288.6787109375,
 											"height": 13,
-											"text": "+SuperChampi(x: double, y: double, sprite: Sprite)",
+											"text": "+SuperChampi(x: int, y: int, sprite: Sprite)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -5477,7 +5477,7 @@
 											"top": 2376,
 											"width": 285.060546875,
 											"height": 13,
-											"text": "+FlorDeFuego(x: double, y: double, sprite: Sprite)",
+											"text": "+FlorDeFuego(x: int, y: int, sprite: Sprite)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -5689,7 +5689,7 @@
 											"top": 2376,
 											"width": 252.54150390625,
 											"height": 13,
-											"text": "+Estrella(x: double, y: double, sprite: Sprite)",
+											"text": "+Estrella(x: int, y: int, sprite: Sprite)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -5901,7 +5901,7 @@
 											"top": 2456,
 											"width": 287.96142578125,
 											"height": 13,
-											"text": "+ChampiVerde(x: double, y: double, sprite: Sprite)",
+											"text": "+ChampiVerde(x: int, y: int, sprite: Sprite)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -6132,7 +6132,7 @@
 											"top": 2469,
 											"width": 630.525390625,
 											"height": 13,
-											"text": "+BloqueDePregunta(x: double, y: double, sprite: Sprite, powerup: PowerUp, estado: BloqueDePreguntaState)",
+											"text": "+BloqueDePregunta(x: int, y: int, sprite: Sprite, powerup: PowerUp, estado: BloqueDePreguntaState)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -6344,7 +6344,7 @@
 											"top": 2656,
 											"width": 287.244140625,
 											"height": 13,
-											"text": "+LadrilloSolido(x: double, y: double, sprite: Sprite)",
+											"text": "+LadrilloSolido(x: int, y: int, sprite: Sprite)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -6570,7 +6570,7 @@
 											"top": 2656,
 											"width": 285.8095703125,
 											"height": 13,
-											"text": "+BloqueSolido(x: double, y: double, sprite: Sprite)",
+											"text": "+BloqueSolido(x: int, y: int, sprite: Sprite)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -6818,7 +6818,7 @@
 											"top": 2637,
 											"width": 356.65576171875,
 											"height": 13,
-											"text": "+Tuberia(x: double, y: double, sprite: Sprite)",
+											"text": "+Tuberia(x: int, y: int, sprite: Sprite)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -7064,7 +7064,7 @@
 											"top": 2656,
 											"width": 270.6005859375,
 											"height": 13,
-											"text": "+Vacio(x: double, y: double, sprite: Sprite)",
+											"text": "+Vacio(x: int, y: int, sprite: Sprite)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -8396,7 +8396,7 @@
 											"top": 2456,
 											"width": 272.79052734375,
 											"height": 13,
-											"text": "+Moneda(iin x: double, y: double, sprite: Sprite)",
+											"text": "+Moneda(iin x: int, y: int, sprite: Sprite)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -9512,7 +9512,7 @@
 											"top": 1968,
 											"width": 354.77685546875,
 											"height": 13,
-											"text": "-Mario(x: double, y: double, sprite: Sprite, estado: MarioState)",
+											"text": "-Mario(x: int, y: int, sprite: Sprite, estado: MarioState)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -12465,7 +12465,7 @@
 											"top": 1507,
 											"width": 174,
 											"height": 13,
-											"text": "+get_x(): double",
+											"text": "+get_x(): int",
 											"horizontalAlignment": 0
 										},
 										{
@@ -12482,7 +12482,7 @@
 											"top": 1522,
 											"width": 174,
 											"height": 13,
-											"text": "+get_y(): double",
+											"text": "+get_y(): int",
 											"horizontalAlignment": 0
 										},
 										{
@@ -20415,7 +20415,7 @@
 							},
 							"name": "posicion_inicial_jugador_x",
 							"visibility": "protected",
-							"type": "double"
+							"type": "int"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -20425,7 +20425,7 @@
 							},
 							"name": "posicion_inicial_jugador_y",
 							"visibility": "protected",
-							"type": "double"
+							"type": "int"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -20491,7 +20491,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGSPrz+jcXAi2w="
 									},
-									"type": "double",
+									"type": "int",
 									"direction": "return"
 								}
 							]
@@ -20510,7 +20510,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGSPr1X58XJIlc="
 									},
-									"type": "double",
+									"type": "int",
 									"direction": "return"
 								}
 							]
@@ -21010,7 +21010,7 @@
 							},
 							"name": "posicion_en_y",
 							"visibility": "protected",
-							"type": "double"
+							"type": "int"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -21020,7 +21020,7 @@
 							},
 							"name": "posicion_en_y",
 							"visibility": "protected",
-							"type": "double"
+							"type": "int"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -21061,7 +21061,7 @@
 										"$ref": "AAAAAAGSPvVrVMkOu5w="
 									},
 									"name": "x",
-									"type": "double"
+									"type": "int"
 								},
 								{
 									"_type": "UMLParameter",
@@ -21070,7 +21070,7 @@
 										"$ref": "AAAAAAGSPvVrVMkOu5w="
 									},
 									"name": "y",
-									"type": "double"
+									"type": "int"
 								},
 								{
 									"_type": "UMLParameter",
@@ -22235,7 +22235,7 @@
 										"$ref": "AAAAAAGSPtjAisfJHko="
 									},
 									"name": "x",
-									"type": "double"
+									"type": "int"
 								},
 								{
 									"_type": "UMLParameter",
@@ -22244,7 +22244,7 @@
 										"$ref": "AAAAAAGSPtjAisfJHko="
 									},
 									"name": "y",
-									"type": "double"
+									"type": "int"
 								},
 								{
 									"_type": "UMLParameter",
@@ -22350,7 +22350,7 @@
 										"$ref": "AAAAAAGSPth98ce+AMk="
 									},
 									"name": "x",
-									"type": "double"
+									"type": "int"
 								},
 								{
 									"_type": "UMLParameter",
@@ -22359,7 +22359,7 @@
 										"$ref": "AAAAAAGSPth98ce+AMk="
 									},
 									"name": "y",
-									"type": "double"
+									"type": "int"
 								},
 								{
 									"_type": "UMLParameter",
@@ -22495,7 +22495,7 @@
 										"$ref": "AAAAAAGSaEI//yM6t/Q="
 									},
 									"name": "x",
-									"type": "double"
+									"type": "int"
 								},
 								{
 									"_type": "UMLParameter",
@@ -22504,7 +22504,7 @@
 										"$ref": "AAAAAAGSaEI//yM6t/Q="
 									},
 									"name": "y",
-									"type": "double"
+									"type": "int"
 								},
 								{
 									"_type": "UMLParameter",
@@ -23479,7 +23479,7 @@
 										"$ref": "AAAAAAGSPtJAc8dA/Rs="
 									},
 									"name": "iin x",
-									"type": "double"
+									"type": "int"
 								},
 								{
 									"_type": "UMLParameter",
@@ -23488,7 +23488,7 @@
 										"$ref": "AAAAAAGSPtJAc8dA/Rs="
 									},
 									"name": "y",
-									"type": "double"
+									"type": "int"
 								},
 								{
 									"_type": "UMLParameter",
@@ -23866,7 +23866,7 @@
 										"$ref": "AAAAAAGSY966TtIa8eI="
 									},
 									"name": "x",
-									"type": "double"
+									"type": "int"
 								},
 								{
 									"_type": "UMLParameter",
@@ -23875,7 +23875,7 @@
 										"$ref": "AAAAAAGSY966TtIa8eI="
 									},
 									"name": "y",
-									"type": "double"
+									"type": "int"
 								},
 								{
 									"_type": "UMLParameter",
@@ -26292,7 +26292,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGSY6BhZl8WPls="
 									},
-									"type": "double",
+									"type": "int",
 									"direction": "return"
 								}
 							]
@@ -26311,7 +26311,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGSY6CJKV8fg34="
 									},
-									"type": "double",
+									"type": "int",
 									"direction": "return"
 								}
 							]
@@ -30283,7 +30283,7 @@
 												"$ref": "AAAAAAGSPtZNUMd71hs="
 											},
 											"name": "x",
-											"type": "double"
+											"type": "int"
 										},
 										{
 											"_type": "UMLParameter",
@@ -30292,7 +30292,7 @@
 												"$ref": "AAAAAAGSPtZNUMd71hs="
 											},
 											"name": "y",
-											"type": "double"
+											"type": "int"
 										},
 										{
 											"_type": "UMLParameter",
@@ -30635,7 +30635,7 @@
 												"$ref": "AAAAAAGSPtcNTMeP9EA="
 											},
 											"name": "x",
-											"type": "double"
+											"type": "int"
 										},
 										{
 											"_type": "UMLParameter",
@@ -30644,7 +30644,7 @@
 												"$ref": "AAAAAAGSPtcNTMeP9EA="
 											},
 											"name": "y",
-											"type": "double"
+											"type": "int"
 										},
 										{
 											"_type": "UMLParameter",
@@ -30743,7 +30743,7 @@
 												"$ref": "AAAAAAGSPtavpseFHf4="
 											},
 											"name": "x",
-											"type": "double"
+											"type": "int"
 										},
 										{
 											"_type": "UMLParameter",
@@ -30752,7 +30752,7 @@
 												"$ref": "AAAAAAGSPtavpseFHf4="
 											},
 											"name": "y",
-											"type": "double"
+											"type": "int"
 										},
 										{
 											"_type": "UMLParameter",
@@ -31121,7 +31121,7 @@
 												"$ref": "AAAAAAGSPteZDselv5g="
 											},
 											"name": "x",
-											"type": "double"
+											"type": "int"
 										},
 										{
 											"_type": "UMLParameter",
@@ -31130,7 +31130,7 @@
 												"$ref": "AAAAAAGSPteZDselv5g="
 											},
 											"name": "y",
-											"type": "double"
+											"type": "int"
 										},
 										{
 											"_type": "UMLParameter",
@@ -31341,7 +31341,7 @@
 												"$ref": "AAAAAAGSPtfB/8evlHw="
 											},
 											"name": "x",
-											"type": "double"
+											"type": "int"
 										},
 										{
 											"_type": "UMLParameter",
@@ -31350,7 +31350,7 @@
 												"$ref": "AAAAAAGSPtfB/8evlHw="
 											},
 											"name": "y",
-											"type": "double"
+											"type": "int"
 										},
 										{
 											"_type": "UMLParameter",
@@ -31479,7 +31479,7 @@
 												"$ref": "AAAAAAGSPtdWQseZi6s="
 											},
 											"name": "x",
-											"type": "double"
+											"type": "int"
 										},
 										{
 											"_type": "UMLParameter",
@@ -31488,7 +31488,7 @@
 												"$ref": "AAAAAAGSPtdWQseZi6s="
 											},
 											"name": "y",
-											"type": "double"
+											"type": "int"
 										},
 										{
 											"_type": "UMLParameter",
@@ -31643,7 +31643,7 @@
 												"$ref": "AAAAAAGSPwf+tclPcmw="
 											},
 											"name": "x",
-											"type": "double"
+											"type": "int"
 										},
 										{
 											"_type": "UMLParameter",
@@ -31652,7 +31652,7 @@
 												"$ref": "AAAAAAGSPwf+tclPcmw="
 											},
 											"name": "y",
-											"type": "double"
+											"type": "int"
 										},
 										{
 											"_type": "UMLParameter",
@@ -31708,7 +31708,7 @@
 												"$ref": "AAAAAAGSPtV/NMdtE6M="
 											},
 											"name": "x",
-											"type": "double"
+											"type": "int"
 										},
 										{
 											"_type": "UMLParameter",
@@ -31717,7 +31717,7 @@
 												"$ref": "AAAAAAGSPtV/NMdtE6M="
 											},
 											"name": "y",
-											"type": "double"
+											"type": "int"
 										},
 										{
 											"_type": "UMLParameter",
@@ -31791,7 +31791,7 @@
 												"$ref": "AAAAAAGSPtVHX8dkODg="
 											},
 											"name": "x",
-											"type": "double"
+											"type": "int"
 										},
 										{
 											"_type": "UMLParameter",
@@ -31800,7 +31800,7 @@
 												"$ref": "AAAAAAGSPtVHX8dkODg="
 											},
 											"name": "y",
-											"type": "double"
+											"type": "int"
 										},
 										{
 											"_type": "UMLParameter",
@@ -31874,7 +31874,7 @@
 												"$ref": "AAAAAAGSPtCskMcrGqQ="
 											},
 											"name": "x",
-											"type": "double"
+											"type": "int"
 										},
 										{
 											"_type": "UMLParameter",
@@ -31883,7 +31883,7 @@
 												"$ref": "AAAAAAGSPtCskMcrGqQ="
 											},
 											"name": "y",
-											"type": "double"
+											"type": "int"
 										},
 										{
 											"_type": "UMLParameter",
@@ -31957,7 +31957,7 @@
 												"$ref": "AAAAAAGSPtkGI8fU/44="
 											},
 											"name": "x",
-											"type": "double"
+											"type": "int"
 										},
 										{
 											"_type": "UMLParameter",
@@ -31966,7 +31966,7 @@
 												"$ref": "AAAAAAGSPtkGI8fU/44="
 											},
 											"name": "y",
-											"type": "double"
+											"type": "int"
 										},
 										{
 											"_type": "UMLParameter",
@@ -32146,7 +32146,7 @@
 												"$ref": "AAAAAAGSPwfIxslFGHw="
 											},
 											"name": "x",
-											"type": "double"
+											"type": "int"
 										},
 										{
 											"_type": "UMLParameter",
@@ -32155,7 +32155,7 @@
 												"$ref": "AAAAAAGSPwfIxslFGHw="
 											},
 											"name": "y",
-											"type": "double"
+											"type": "int"
 										},
 										{
 											"_type": "UMLParameter",
@@ -32211,7 +32211,7 @@
 												"$ref": "AAAAAAGSPtKFUsdMsL0="
 											},
 											"name": "x",
-											"type": "double"
+											"type": "int"
 										},
 										{
 											"_type": "UMLParameter",
@@ -32220,7 +32220,7 @@
 												"$ref": "AAAAAAGSPtKFUsdMsL0="
 											},
 											"name": "y",
-											"type": "double"
+											"type": "int"
 										},
 										{
 											"_type": "UMLParameter",
@@ -32405,7 +32405,7 @@
 												"$ref": "AAAAAAGSPs5a7ccXwL4="
 											},
 											"name": "x",
-											"type": "double"
+											"type": "int"
 										},
 										{
 											"_type": "UMLParameter",
@@ -32414,7 +32414,7 @@
 												"$ref": "AAAAAAGSPs5a7ccXwL4="
 											},
 											"name": "y",
-											"type": "double"
+											"type": "int"
 										},
 										{
 											"_type": "UMLParameter",

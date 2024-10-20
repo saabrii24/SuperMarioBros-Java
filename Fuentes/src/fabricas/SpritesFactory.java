@@ -59,6 +59,55 @@ public abstract class SpritesFactory {
         return cargar_sprite("star_saltando_izquierda.png");
     }
 
+	public Sprite get_supermario_ocioso_derecha() {
+		return cargar_sprite("supermario_ocioso_derecha.png");
+	}
+	
+	public Sprite get_supermario_ocioso_izquierda() {
+		return cargar_sprite("supermario_ocioso_izquierda.png");
+	}
+	
+	public Sprite get_supermario_movimiento_derecha() {
+		return cargar_sprite("supermario_movimiento_derecha.gif");
+	}
+	
+	public Sprite get_supermario_movimiento_izquierda() {
+		return cargar_sprite("supermario_movimiento_izquierda.gif");
+	}
+	
+	public Sprite get_supermario_saltando_derecha() {
+		return cargar_sprite("supermario_saltando_derecha.png");
+	}
+	
+	public Sprite get_supermario_saltando_izquierda() {
+		return cargar_sprite("supermario_saltando_izquierda.png");
+	}
+	
+	public Sprite get_supermario_star_ocioso_derecha() {
+		return cargar_sprite("supermario_star_ocioso_derecha.png");
+	}
+	
+	public Sprite get_supermario_star_ocioso_izquierda() {
+		return cargar_sprite("supermario_star_ocioso_izquierda.png");
+	}
+	
+	public Sprite get_supermario_star_movimiento_derecha() {
+		return cargar_sprite("supermario_star_movimiento_derecha.gif");
+	}
+	
+	public Sprite get_supermario_star_movimiento_izquierda() {
+		return cargar_sprite("supermario_star_movimiento_izquierda.gif");
+	}
+	
+	public Sprite get_supermario_star_saltando_derecha() {
+		return cargar_sprite("supermario_star_saltando_derecha.png");
+	}
+	
+	public Sprite get_supermario_star_saltando_izquierda() {
+		return cargar_sprite("supermario_star_saltando_izquierda.png");
+	}
+	
+	
     public Sprite get_goomba() {
         return cargar_sprite("goomba.gif");
     }

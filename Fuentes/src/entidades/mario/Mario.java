@@ -198,7 +198,6 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
         }
 
         posicion_en_x += velocidad_en_x;
-        //estado.actualizar_sprite(); <- sería para cambiarla segun el estado, pero no anda
         estado.actualizar_sprite();
     }
 

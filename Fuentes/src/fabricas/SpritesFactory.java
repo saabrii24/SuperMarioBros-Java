@@ -44,11 +44,11 @@ public abstract class SpritesFactory {
     }
 	
 	public Sprite get_mario_star_movimiento_derecha() {
-        return cargar_sprite("star_movimiento_derecha.png");
+        return cargar_sprite("star_movimiento_derecha.gif");
     }
 	
 	public Sprite get_mario_star_movimiento_izquierda() {
-        return cargar_sprite("star_movimiento_izquierda.png");
+        return cargar_sprite("star_movimiento_izquierda.gif");
     }
 	
 	public Sprite get_mario_star_saltando_derecha() {

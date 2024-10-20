@@ -45,9 +45,8 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
         this.sprites_factory = null;
         this.sistema_puntuacion = new ControladorPuntuacionMario();
         this.sistema_vidas = new ControladorVidasMario(3);
-        this.cambiar_estado(new NormalMarioState(this));
         this.movimiento_derecha = true;
-       // this.estado = new NormalMarioState(this);
+        this.estado = new NormalMarioState(this);
     }
 
     // Singleton: Obtiene la instancia de Mario

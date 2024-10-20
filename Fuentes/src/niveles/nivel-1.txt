@@ -1,3 +1,4 @@
+
 # Archivo de configuración del Nivel 1
 Nivel: 1
 
@@ -7,7 +8,7 @@ Tiempo: 100
 # Creación de las entidades
 	
 	# Mario (x,y)
-	Mario: 96, 432
+	Mario: 96, 600
 	
 	# Enemigos
 	#Goomba: 288, 144
@@ -16,13 +17,12 @@ Tiempo: 100
 	Goomba: 700, 400
 	
 	# PowerUps
-	Estrella: 240, 480
+	Estrella: 240, 144
 	
 	# Plataformas
 
 	BloqueSolido: 336, 144
 	BloqueSolido: 720, 144
-
 	BloqueSolido: -48, 96
 	BloqueSolido: -48, 144
 	BloqueSolido: -48, 192

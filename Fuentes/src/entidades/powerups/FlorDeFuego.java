@@ -1,6 +1,5 @@
 package entidades.powerups;
 
-import entidades.mario.Mario;
 import fabricas.Sprite;
 
 public class FlorDeFuego extends PowerUp{
@@ -11,14 +10,8 @@ public class FlorDeFuego extends PowerUp{
 		super(x, y, sprite);
 	}
 	
-	public ListaPowerUps get_tipo() {
-		return ListaPowerUps.FLOR_DE_FUEGO;
-	}
-
 	@Override
-	public void aplicar_efecto(Mario mario) {
-		// TODO Auto-generated method stub
-		
+	public void aceptar(PowerUpVisitor visitador) {
+		visitador.visitar(this);
 	}
-
 }

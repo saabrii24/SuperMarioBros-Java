@@ -1,7 +1,6 @@
 package entidades.mario;
 
 import entidades.BolaDeFuego;
-import entidades.Entidad;
 import entidades.EntidadMovible;
 import entidades.enemigos.Enemigo;
 import entidades.interfaces.EntidadJugador;
@@ -11,13 +10,15 @@ import entidades.powerups.ChampiVerde;
 import entidades.powerups.Estrella;
 import entidades.powerups.FlorDeFuego;
 import entidades.powerups.Moneda;
-import entidades.powerups.ListaPowerUps;
+import entidades.powerups.PowerUpVisitor;
 import entidades.powerups.SuperChampi;
 import fabricas.Sprite;
 import fabricas.SpritesFactory;
 
-public class Mario extends EntidadMovible implements EntidadJugador {
-    // Atributos estáticos y del singleton
+public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisitor {
+	private static final long serialVersionUID = 1L;
+
+	// Atributos estáticos y del singleton
     private static Mario instancia_mario;
 
     // Atributos de estado y puntaje
@@ -44,7 +45,7 @@ public class Mario extends EntidadMovible implements EntidadJugador {
         this.sprites_factory = null;
         this.sistema_puntuacion = new ControladorPuntuacionMario();
         this.sistema_vidas = new ControladorVidasMario(3);
-
+        this.cambiar_estado(new NormalMarioState(this));
         this.movimiento_derecha = true;
        // this.estado = new NormalMarioState(this);
     }
@@ -223,15 +224,7 @@ public class Mario extends EntidadMovible implements EntidadJugador {
     }
 
  // Métodos de interacción y puntaje
-    public void consumir(ListaPowerUps power_up) {
-        switch(power_up) {
-        	case MONEDA : consumir_moneda();
-        	case FLOR_DE_FUEGO: get_instancia().estado.consumir_flor_de_fuego();
-        	case SUPER_CHAMPI: get_instancia().estado.consumir_super_champi();
-        	case CHAMPI_VERDE: consumir_champi_verde();
-        	case ESTRELLA: get_instancia().estado.consumir_estrella();
-        }
-    }
+    
     
     private void consumir_moneda() {
     	get_sistema_puntuacion().sumar_puntos(5);
@@ -293,6 +286,31 @@ public class Mario extends EntidadMovible implements EntidadJugador {
 	@Override
 	public int get_vidas() {
 		return get_sistema_vidas().get_vidas();
+	}
+
+	@Override
+	public void visitar(Moneda moneda) {
+		consumir_moneda();
+	}
+
+	@Override
+	public void visitar(FlorDeFuego florDeFuego) {
+		estado.consumir_flor_de_fuego();
+	}
+
+	@Override
+	public void visitar(SuperChampi superChampi) {
+		estado.consumir_super_champi();
+	}
+
+	@Override
+	public void visitar(ChampiVerde champiVerde) {
+		consumir_champi_verde();
+	}
+
+	@Override
+	public void visitar(Estrella estrella) {
+		estado.consumir_estrella();
 	}
 
 }

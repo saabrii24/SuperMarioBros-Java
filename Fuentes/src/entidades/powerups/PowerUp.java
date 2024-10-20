@@ -1,8 +1,8 @@
 package entidades.powerups;
 
 import entidades.Entidad;
-import entidades.mario.Mario;
 import fabricas.Sprite;
+import logica.Mapa;
 
 public abstract class PowerUp extends Entidad{
 
@@ -12,6 +12,13 @@ public abstract class PowerUp extends Entidad{
 		super(x, y, sprite);
 	}
 	
-	public abstract ListaPowerUps get_tipo();
-	public abstract void aplicar_efecto(Mario mario);
+	public abstract void aceptar(PowerUpVisitor visitador);
+	
+	public void destruir(Mapa mapa) {
+        if (!destruida) {
+            destruida = true;           
+            mapa.eliminar_powerup(this);  
+            destruir();
+        }
+    }
 }

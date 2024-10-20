@@ -28,8 +28,10 @@ public class Colisionador {
     public synchronized void manejar_colision_con_power_up(Mario mario) {
     	List<PowerUp> entidades_power_up= new ArrayList<>(mapa.get_entidades_powerup());
 		for(PowerUp power_up:entidades_power_up) {
-			if( mario.get_limites().intersects(power_up.get_limites()))
-				mario.consumir(power_up.get_tipo());
+			if( mario.get_limites().intersects(power_up.get_limites())) {
+				power_up.aceptar(mario);
+				power_up.destruir(mapa);
+			}
 		}
 	}
 

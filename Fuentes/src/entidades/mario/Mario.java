@@ -164,7 +164,6 @@ public class Mario extends EntidadMovible implements EntidadJugador {
     }
     
     public void saltar() {
-        	System.out.println("Saltando");
         	if (!saltando && contador_saltos < 1) {
         		contador_saltos+= 1;
         		saltando = true;

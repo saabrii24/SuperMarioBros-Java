@@ -34,6 +34,30 @@ public abstract class SpritesFactory {
 	public Sprite get_mario_saltando_izquierda() {
 		return cargar_sprite("saltando_izquierda.png");
 	}
+	
+	public Sprite get_mario_star_ocioso_derecha() {
+        return cargar_sprite("star_ocioso_derecha.png");
+    }
+	
+	public Sprite get_mario_star_ocioso_izquierda() {
+        return cargar_sprite("star_ocioso_izquierda.png");
+    }
+	
+	public Sprite get_mario_star_movimiento_derecha() {
+        return cargar_sprite("star_movimiento_derecha.png");
+    }
+	
+	public Sprite get_mario_star_movimiento_izquierda() {
+        return cargar_sprite("star_movimiento_izquierda.png");
+    }
+	
+	public Sprite get_mario_star_saltando_derecha() {
+        return cargar_sprite("star_saltando_derecha.png");
+    }
+	
+	public Sprite get_mario_star_saltando_izquierda() {
+        return cargar_sprite("star_saltando_izquierda.png");
+    }
 
     public Sprite get_goomba() {
         return cargar_sprite("goomba.gif");

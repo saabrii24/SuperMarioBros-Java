@@ -15,8 +15,15 @@ public class InvencibleMarioState implements Mario.MarioState {
     }
     
     public void actualizar_sprite() {
-
+    	if (mario.get_velocidad_x() < 0) {
+        	mario.cambiar_sprite(mario.get_sprite_factory().get_mario_star_movimiento_izquierda());
+        } else if (mario.get_velocidad_x() > 0) {
+        	mario.cambiar_sprite(mario.get_sprite_factory().get_mario_star_movimiento_derecha());
+        } else if(mario.get_velocidad_x() == 0){
+        	mario.cambiar_sprite(mario.get_movimiento_derecha() ? mario.get_sprite_factory().get_mario_star_ocioso_derecha() : mario.get_sprite_factory().get_mario_star_ocioso_izquierda());
+        }
     }
+
 
     public void consumir_estrella() {
     	mario.get_sistema_puntuacion().sumar_puntos(35);

@@ -199,24 +199,10 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
 
         posicion_en_x += velocidad_en_x;
         //estado.actualizar_sprite(); <- sería para cambiarla segun el estado, pero no anda
-        actualizar_sprite();
+        estado.actualizar_sprite();
     }
 
-    private void actualizar_sprite() {
-        if (saltando || velocidad_en_y < 0) {  // Saltando o cayendo (velocidad negativa)
-            cambiar_sprite(movimiento_derecha ? 
-                sprites_factory.get_mario_saltando_derecha() : 
-                sprites_factory.get_mario_saltando_izquierda());
-        } else if (velocidad_en_x != 0 && !saltando) {
-            cambiar_sprite(movimiento_derecha ? 
-                sprites_factory.get_mario_movimiento_derecha() : 
-                sprites_factory.get_mario_movimiento_izquierda());
-        } else {
-            cambiar_sprite(movimiento_derecha ? 
-                sprites_factory.get_mario_ocioso_derecha() : 
-                sprites_factory.get_mario_ocioso_izquierda());
-        }
-    }
+   
 
     protected void cambiar_sprite(Sprite nuevo_sprite) {
         this.sprite = nuevo_sprite;

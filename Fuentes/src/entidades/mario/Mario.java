@@ -67,6 +67,14 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
     }
 
     // Getters
+    public double get_velocidad_x() { // Este getter es porque no anda el de entidad movible a la hora de actualizar los sprites de Mario
+    	return velocidad_en_x;
+    }
+    
+    public double get_velocidad_y() { // Este getter es porque no anda el de entidad movible a la hora de actualizar los sprites de Mario
+    	return velocidad_en_y;
+    }
+    
     public SistemaPuntuacion get_sistema_puntuacion() {
         return sistema_puntuacion;
     }
@@ -91,6 +99,10 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
 		return movimiento_derecha;
 	}
     
+	public boolean esta_saltando() {
+		return saltando;
+	}
+	
 	public SpritesFactory get_sprite_factory() {
 		return sprites_factory;
 	}
@@ -201,9 +213,9 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
         estado.actualizar_sprite();
     }
 
-   
+  
 
-    protected void cambiar_sprite(Sprite nuevo_sprite) {
+	protected void cambiar_sprite(Sprite nuevo_sprite) {
         this.sprite = nuevo_sprite;
     }
 

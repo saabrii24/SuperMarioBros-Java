@@ -48,7 +48,7 @@ public class PanelPantallaAyuda extends JPanel {
         boton_volver.setContentAreaFilled(false);
         boton_volver.setBorderPainted(false);
         boton_volver.setBounds(ConstantesVistas.PANEL_ANCHO - 180, 15, 150, 50);
-        boton_volver.addActionListener(e -> controlador_vistas.mostrar_pantalla_inicial());
+        boton_volver.addActionListener(e -> controlador_vistas.accionar_pantalla_inicial());
         add(boton_volver);
     }
     
@@ -62,7 +62,7 @@ public class PanelPantallaAyuda extends JPanel {
 
 			@Override
             public void actionPerformed(ActionEvent e) {
-                controlador_vistas.mostrar_pantalla_inicial();
+                controlador_vistas.accionar_pantalla_inicial();
             }
         };
         

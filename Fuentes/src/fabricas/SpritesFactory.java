@@ -186,5 +186,8 @@ public abstract class SpritesFactory {
     public Sprite get_bola_de_fuego() {
         return cargar_sprite("bola_de_fuego.gif");
     }
-
+    
+    public Sprite get_imagen_mapa() {
+        return cargar_sprite("mapa.png");
+    }
 }

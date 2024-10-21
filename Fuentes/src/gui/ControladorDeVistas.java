@@ -15,7 +15,7 @@ import fabricas.EntidadesFactory;
 import gui.sonido.Sonido;
 import logica.*;
 
-public class ControladorDeVistas implements ControladorEntreJuegoVista, ControladorJuegoVista {
+public class ControladorDeVistas implements ControladorJuegoVistaEntidades, ControladorJuegoVistaPaneles {
     protected JFrame ventana;
     protected PanelPantallaPrincipal panel_pantalla_principal;
     protected PanelPantallaMapa panel_pantalla_mapa;
@@ -43,7 +43,7 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
         panel_pantalla_victoria = new PanelPantallaVictoria(this);
         sonido_juego = new Sonido();
         configurar_ventana();
-        mostrar_pantalla_inicial();
+        accionar_pantalla_inicial();
         registrar_oyente_panel_principal();
         registrar_oyente_panel_modo_de_juego();
         registrar_oyente_panel_mapa();
@@ -157,7 +157,7 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
     }
 
 
-    public void mostrar_pantalla_inicial() {
+    public void accionar_pantalla_inicial() {
         ventana.setContentPane(panel_pantalla_principal);
         panel_pantalla_principal.setFocusable(true);
         panel_pantalla_principal.requestFocusInWindow(); 
@@ -168,7 +168,7 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
     	accionar_pantalla_modo_juego();
     }
 
-    public void mostrar_pantalla_mapa() {
+    public void accionar_pantalla_mapa() {
         ventana.setContentPane(panel_pantalla_mapa);
         panel_pantalla_mapa.setFocusable(true);
         panel_pantalla_mapa.requestFocusInWindow(); 
@@ -176,7 +176,7 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
         refrescar();
     }
     
-    public void mostrar_pantalla_ayuda() {
+    public void accionar_pantalla_ayuda() {
         ventana.setContentPane(panel_pantalla_ayuda);
         refrescar();
     }
@@ -237,6 +237,5 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
 	public void reproducir_efecto(String efecto) {
 		sonido_juego.reproducir_efecto(efecto);
 	}
-	
 
 }

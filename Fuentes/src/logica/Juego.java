@@ -10,6 +10,7 @@ import niveles.GeneradorNivel;
 import niveles.Nivel;
 import ranking.Ranking;
 
+import java.awt.EventQueue;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,6 @@ public class Juego {
     protected EntidadesFactory fabrica_entidades;
     protected Mapa mapa_nivel_actual;
     protected int tiempo_restante;
-    protected int contador_puntos;
     protected volatile boolean esta_ejecutando;
     protected Thread hilo_mario_movimiento;
     protected Thread hilo_enemigos_movimiento;
@@ -209,9 +209,46 @@ public class Juego {
             generador,
             mapa_nivel_actual
         );
-        fabrica_entidades = generador;
+        fabrica_entidades = generador;   
         registrar_observers(); 
         iniciar_hilos_movimiento();
+    }
+
+    public void reiniciar_nivel() {
+        nivel_actual = GeneradorNivel.cargar_nivel_y_mapa(
+                getClass().getResourceAsStream("/niveles/nivel-"+nivel_a_cargar+".txt"), fabrica_entidades, mapa_nivel_actual);
+
+        mapa_nivel_actual.resetear_mapa();
+        cargar_datos(fabrica_entidades);
+        
+        // Restablecer a Mario a su posición inicial
+        Mario mario = Mario.get_instancia();
+        mario.resetear_posicion();
+        mapa_nivel_actual.agregar_mario(mario);
+        
+        tiempo_restante = nivel_actual.get_tiempo_restante();
+        Mario.get_instancia().get_sistema_puntuacion().restar_puntos(Mario.get_instancia().get_puntaje()); 
+        
+        controlador_vistas.refrescar();
+
+    }
+
+    public void cargar_proximo_nivel() {
+        nivel_a_cargar++;
+        
+        nivel_actual = GeneradorNivel.cargar_nivel_y_mapa(
+        		getClass().getResourceAsStream("/niveles/nivel-"+nivel_a_cargar+".txt"), fabrica_entidades, mapa_nivel_actual);
+        
+        mapa_nivel_actual.resetear_mapa();
+        cargar_datos(fabrica_entidades);
+        
+        Mario mario = Mario.get_instancia();
+        mario.resetear_posicion();
+        mapa_nivel_actual.agregar_mario(mario);
+        
+        tiempo_restante = nivel_actual.get_tiempo_restante();
+        
+        controlador_vistas.refrescar();
     }
 
     private void registrar_observers() {
@@ -252,11 +289,19 @@ public class Juego {
     }
 
     public static void main(String[] args) {
-        new Juego();
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+              try {
+                new Juego();
+              } catch (Exception e) {
+                e.printStackTrace();
+              }
+            }
+          });
     }
     
     public void actualizar_ranking() {
-    	contador_puntos = Mario.get_instancia().get_puntaje();
+    	int contador_puntos = Mario.get_instancia().get_puntaje();
     	
         //Si no hay un input de nombre, se registra al jugador como invitado
         if (nombre_jugador != null && !nombre_jugador.trim().isEmpty()) {
@@ -281,4 +326,6 @@ public class Juego {
             Thread.currentThread().interrupt();
         }
     }    
+    
+    
 }

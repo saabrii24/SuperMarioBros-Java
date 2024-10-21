@@ -129,18 +129,18 @@ public abstract class SpritesFactory {
     }
 
     public Sprite get_spiny_movimiento_derecha() {
-        return cargar_sprite("spiny.png");
+        return cargar_sprite("spiny.gif");
     }
     public Sprite get_spiny_movimiento_izquierda() {
-        return cargar_sprite("spiny.png");
+        return cargar_sprite("spiny.gif");
     }
 
     public Sprite get_buzzy_movimiento_derecha() {
-        return cargar_sprite("buzzy_izquierda.png");
+        return cargar_sprite("buzzy_izquierda.gif");
     }
     
     public Sprite get_buzzy_movimiento_izquierda() {
-        return cargar_sprite("buzzy_izquierda.png");
+        return cargar_sprite("buzzy_derecha.gif");
     }
 
     public Sprite get_super_champi() {

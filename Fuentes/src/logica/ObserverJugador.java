@@ -20,4 +20,9 @@ public class ObserverJugador extends ObserverGrafico{
 		panel_pantalla_mapa.actualizar_scroll_hacia_jugador(jugador_observado);
 	}
 	
+    public void notificar_destruir() {
+        setIcon(null); 
+        setVisible(false); 
+    }
+	
 }

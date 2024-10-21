@@ -6,7 +6,6 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 import entidades.interfaces.EntidadJugador;
 import entidades.interfaces.EntidadLogica;
@@ -195,7 +194,7 @@ public class ControladorDeVistas implements ControladorJuegoVistaEntidades, Cont
         refrescar();        
     }
     
-    protected void refrescar() {
+    public void refrescar() {
         ventana.revalidate();
         ventana.repaint();
     }

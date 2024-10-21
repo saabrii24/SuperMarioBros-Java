@@ -72,7 +72,7 @@ public class PanelPantallaPrincipal extends JPanel {
 
         switch (opcion_actual) {
             case COMENZAR_JUEGO:
-            	x_offset = ConstantesVistas.PANEL_ALTO - 320 + 10;
+            	y_offset = ConstantesVistas.PANEL_ALTO - 320 + 10;
                 break;
             case RANKING:
             	y_offset = ConstantesVistas.PANEL_ALTO - 255 + 10;
@@ -148,7 +148,6 @@ public class PanelPantallaPrincipal extends JPanel {
     
     protected void mantener_seleccion(MenuOpciones opcion) {
         this.opcion_actual = opcion;
-        actualizar_icono_seleccion(); // Actualizar el icono de selección al seleccionar un personaje
-        
+        actualizar_icono_seleccion();
     }
 }

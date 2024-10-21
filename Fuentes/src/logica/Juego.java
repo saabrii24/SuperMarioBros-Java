@@ -32,6 +32,7 @@ public class Juego {
     protected volatile int direccion_mario;
     protected boolean observer_registrado = false;
     protected Colisionador controlador_colisiones;
+    protected int nivel_a_cargar;
 
     public Juego() {
         iniciar();
@@ -44,6 +45,7 @@ public class Juego {
         fabrica_entidades = new EntidadesFactory(fabrica_sprites);
         controlador_vistas = new ControladorDeVistas(this);
         controlador_colisiones = new Colisionador(mapa_nivel_actual);
+        nivel_a_cargar = 1;
         
     }
 
@@ -115,6 +117,20 @@ public class Juego {
             if(mario.get_dimension() != null) { 
                 controlador_colisiones.verificar_colision_mario(mario); 
             }
+            
+            //cambiar nivel al llegar al castillo
+            if(mario.get_posicion_en_x() >= 4410) {
+            	nivel_a_cargar++;
+            	if(nivel_a_cargar > 3) {
+            		controlador_vistas.accionar_pantalla_victoria();
+            	}
+            	else {
+            		//debug - no elimina el sprite de mario
+            		mapa_nivel_actual.resetear_mapa();
+            		cargar_datos(fabrica_entidades);
+            	}
+            }
+            
         }
     }
 
@@ -180,7 +196,7 @@ public class Juego {
 
     public void cargar_datos(EntidadesFactory generador) {
         nivel_actual = GeneradorNivel.cargar_nivel_y_mapa(
-            getClass().getResourceAsStream("/niveles/nivel-1.txt"),
+            getClass().getResourceAsStream("/niveles/nivel-"+nivel_a_cargar+".txt"),
             generador,
             mapa_nivel_actual
         );

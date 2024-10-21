@@ -32,5 +32,17 @@ public class SuperMarioState implements Mario.MarioState {
         return false; // Mario no mata al enemigo, pero tampoco no pierde una vida
     }
 
+	@Override
+	public void finalizar_invulnerabilidad() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean mata_tocando() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
 

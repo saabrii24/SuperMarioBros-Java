@@ -64,6 +64,11 @@ public class Colisionador {
     // Manejo de colisiones entre Mario y los enemigos
     private void manejar_colision_con_enemigos(Mario mario) {
         for (Enemigo enemigo : new ArrayList<>(mapa.get_entidades_enemigo())) {
+        	if (mario.mata_tocando()) {
+        		if (mario.get_limites().intersects(enemigo.get_limites())) {
+        			enemigo.destruir(mapa);
+        		}
+        	}
             if (mario.get_limites_superiores().intersects(enemigo.get_limites_inferiores())) {
                 enemigo.destruir(mapa);
                 break;

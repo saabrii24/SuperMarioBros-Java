@@ -46,7 +46,7 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
         this.sistema_puntuacion = new ControladorPuntuacionMario();
         this.sistema_vidas = new ControladorVidasMario(3);
         this.movimiento_derecha = true;
-        this.estado = new NormalMarioState(this);
+        set_estado(new NormalMarioState(this));
     }
 
     // Singleton: Obtiene la instancia de Mario
@@ -60,10 +60,13 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
     // Interfaz del estado de Mario
     public interface MarioState {
         boolean matar_si_hay_colision(Enemigo enemigo);
+        boolean mata_tocando();
         void consumir_estrella();
     	void consumir_super_champi();
     	void consumir_flor_de_fuego();
+    	void finalizar_invulnerabilidad();
 		void actualizar_sprite();
+		
     }
 
     // Getters
@@ -93,11 +96,13 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
     public void set_fabrica_sprites(SpritesFactory sprites) { this.sprites_factory = sprites; }
     public void set_velocidad_en_x_mario(double vel) { velocidad_en_x = vel; }
     public void set_contador_saltos(int c) { contador_saltos = c; }
+    public void set_estado(MarioState state) { estado = state; }
+    public void set_estado_anterior (MarioState state) { estado_anterior = state; }
 
     // Métodos de estado y movimiento
     public void cambiar_estado(MarioState nuevo_estado) {
-        this.estado_anterior = this.estado;
-        this.estado = nuevo_estado;
+        set_estado_anterior(this.estado);
+        set_estado(nuevo_estado);
     }
 
     public void bloquear_movimiento_horizontal() {
@@ -262,5 +267,11 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
 	public void resetear_posicion() {
 		this.set_posicion(96, 600);
 	}
-
+	
+	public void finalizar_invulnerabilidad() {
+		estado.finalizar_invulnerabilidad();
+	}
+	public  boolean mata_tocando() {
+		return estado.mata_tocando();
+	}
 }

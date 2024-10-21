@@ -4,6 +4,7 @@ import entidades.BolaDeFuego;
 import entidades.Entidad;
 import entidades.enemigos.Enemigo;
 import entidades.mario.Mario;
+import entidades.mario.NormalMarioState;
 import fabricas.*;
 import gui.ControladorDeVistas;
 import niveles.GeneradorNivel;
@@ -122,7 +123,8 @@ public class Juego {
         synchronized(mario) {
             mario.mover();
             if(mario.get_dimension() != null) { 
-                controlador_colisiones.verificar_colision_mario(mario); 
+                controlador_colisiones.verificar_colision_mario(mario);
+                mario.finalizar_invulnerabilidad();
             }
             
             //cambiar nivel al llegar al castillo
@@ -135,6 +137,7 @@ public class Juego {
             	} else {
             		mapa_nivel_actual.resetear_mapa();
             		cargar_datos(fabrica_entidades);
+            		mario.set_estado(new NormalMarioState(mario));
             	}
             }
             

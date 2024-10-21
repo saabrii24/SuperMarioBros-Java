@@ -6,7 +6,7 @@ public class InvencibleMarioState implements Mario.MarioState {
     private Mario mario;
     private Mario.MarioState estado_anterior;
     private long tiempo_inicio;
-    private static final long DURACION_ESTRELLA = 10000;
+    private static final long DURACION_ESTRELLA = 5000;
 
     public InvencibleMarioState(Mario mario) {
         this.mario = mario;
@@ -44,15 +44,21 @@ public class InvencibleMarioState implements Mario.MarioState {
 	}
 
     public boolean matar_si_hay_colision(Enemigo enemigo) {
-        if (System.currentTimeMillis() - tiempo_inicio > DURACION_ESTRELLA) {
-            mario.cambiar_estado(estado_anterior);
-            return false;
-        }
-        return true; // Star Mario mata enemigos al tocarlos
+		return true;
+    }
+    
+    public boolean mata_tocando() {
+    	return true;
     }
 
     public void finalizar_invulnerabilidad() {
-        mario.cambiar_estado(estado_anterior); // Vuelve al estado previo al efecto de la Estrella
+    	System.out.println("entre aca");
+        if (System.currentTimeMillis() - tiempo_inicio > DURACION_ESTRELLA) {
+        	if (estado_anterior != null) {
+        		mario.cambiar_estado(estado_anterior);
+        	}
+        	else mario.cambiar_estado(new NormalMarioState(mario));
+        }
     }
 
 }

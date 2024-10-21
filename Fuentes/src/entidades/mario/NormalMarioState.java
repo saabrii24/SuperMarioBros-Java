@@ -47,5 +47,16 @@ public class NormalMarioState implements Mario.MarioState {
         }
     }
 
+	@Override
+	public void finalizar_invulnerabilidad() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean mata_tocando() {
+		return false;
+	}
+
 }
 

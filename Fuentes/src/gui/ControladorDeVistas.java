@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import entidades.interfaces.EntidadJugador;
 import entidades.interfaces.EntidadLogica;
@@ -20,7 +21,9 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
     protected PanelPantallaMapa panel_pantalla_mapa;
     protected PanelPantallaAyuda panel_pantalla_ayuda; 
     protected PanelPantallaRanking panel_pantalla_ranking;
-    protected PanelPantallaModoDeJuego panel_pantalla_modo_de_juego; 
+    protected PanelPantallaModoDeJuego panel_pantalla_modo_de_juego;
+    protected PanelPantallaDerrota panel_pantalla_derrota;
+    protected PanelPantallaVictoria panel_pantalla_victoria;
     protected Juego mi_juego;
     protected EntidadesFactory generador;
     protected Sonido sonido_juego;
@@ -35,7 +38,9 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
         panel_pantalla_mapa = new PanelPantallaMapa();
         panel_pantalla_ayuda = new PanelPantallaAyuda(this); 
         panel_pantalla_ranking = new PanelPantallaRanking(this); 
-        panel_pantalla_modo_de_juego = new PanelPantallaModoDeJuego(this); 
+        panel_pantalla_modo_de_juego = new PanelPantallaModoDeJuego(this);
+        panel_pantalla_derrota = new PanelPantallaDerrota(this);
+        panel_pantalla_victoria = new PanelPantallaVictoria(this);
         sonido_juego = new Sonido();
         configurar_ventana();
         mostrar_pantalla_inicial();
@@ -151,6 +156,7 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
         });
     }
 
+
     public void mostrar_pantalla_inicial() {
         ventana.setContentPane(panel_pantalla_principal);
         panel_pantalla_principal.setFocusable(true);
@@ -210,14 +216,14 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
 
 	@Override
 	public void accionar_pantalla_victoria() {
-		// TODO Auto-generated method stub
-		
+		ventana.setContentPane(panel_pantalla_victoria);
+        refrescar();
 	}
 
 	@Override
 	public void accionar_pantalla_derrota() {
-		// TODO Auto-generated method stub
-		
+		ventana.setContentPane(panel_pantalla_derrota);
+        refrescar();
 	}
 
 	public void notificar_eleccion(EntidadesFactory generador) {

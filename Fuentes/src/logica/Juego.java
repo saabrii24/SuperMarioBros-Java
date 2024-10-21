@@ -8,9 +8,12 @@ import fabricas.*;
 import gui.ControladorDeVistas;
 import niveles.GeneradorNivel;
 import niveles.Nivel;
+import ranking.Ranking;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JOptionPane;
 
 public class Juego {
 
@@ -26,13 +29,15 @@ public class Juego {
     protected Mapa mapa_nivel_actual;
     protected int tiempo_restante;
     protected int contador_puntos;
-    protected boolean esta_ejecutando;
+    protected volatile boolean esta_ejecutando;
     protected Thread hilo_mario_movimiento;
     protected Thread hilo_enemigos_movimiento;
     protected volatile int direccion_mario;
     protected boolean observer_registrado = false;
     protected Colisionador controlador_colisiones;
     protected int nivel_a_cargar;
+    protected Ranking ranking;
+    protected String nombre_jugador;
 
     public Juego() {
         iniciar();
@@ -46,7 +51,9 @@ public class Juego {
         controlador_vistas = new ControladorDeVistas(this);
         controlador_colisiones = new Colisionador(mapa_nivel_actual);
         nivel_a_cargar = 1;
-        
+        ranking = new Ranking();
+        nombre_jugador = JOptionPane.showInputDialog(null, "Nombre del jugador: ", "Registrar jugador", JOptionPane.PLAIN_MESSAGE);
+
     }
 
     public synchronized void iniciar_hilos_movimiento() {
@@ -123,6 +130,8 @@ public class Juego {
             	nivel_a_cargar++;
             	if(nivel_a_cargar > 3) {
             		controlador_vistas.accionar_pantalla_victoria();
+            		actualizar_ranking();
+            		detener_hilos();
             	}
             	else {
             		//debug - no elimina el sprite de mario
@@ -245,4 +254,31 @@ public class Juego {
     public static void main(String[] args) {
         new Juego();
     }
+    
+    public void actualizar_ranking() {
+    	contador_puntos = Mario.get_instancia().get_puntaje();
+    	
+        //Si no hay un input de nombre, se registra al jugador como invitado
+        if (nombre_jugador != null && !nombre_jugador.trim().isEmpty()) {
+        ranking.agregar_jugador(nombre_jugador, contador_puntos);
+        }
+        else {
+        	ranking.agregar_jugador("Invitado", contador_puntos);
+        }
+     }
+    
+    public void detener_hilos() {
+        esta_ejecutando = false;
+        
+        try {
+            if (hilo_mario_movimiento != null) {
+                hilo_mario_movimiento.join();
+            }
+            if (hilo_enemigos_movimiento != null) {
+                hilo_enemigos_movimiento.join();
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }    
 }

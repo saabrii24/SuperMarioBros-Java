@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.FontFormatException;
-import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.io.File;
@@ -33,9 +32,9 @@ import niveles.Nivel;
 public class PanelPantallaMapa extends JPanel {
 
     private static final long serialVersionUID = -1366756178696496543L;
-    private JLabel imagen_fondo;
+    private static JLabel imagen_fondo;
     private JPanel panel_informacion;
-    private JPanel panel_mapa;
+    private static JPanel panel_mapa;
     private JLabel label_puntaje;
     private JLabel label_monedas;
     private JLabel label_nivel;
@@ -55,6 +54,7 @@ public class PanelPantallaMapa extends JPanel {
         cargar_tipografia("src/assets/tipografia/mario-font.ttf");
         panel_informacion = new JPanel();
         panel_mapa = new JPanel();
+
         agregar_panel_mapa_con_fondo(panel_mapa);
         agregar_scroll_al_mapa(layeredPane, panel_mapa);
         agregar_panel_informacion(layeredPane, panel_informacion);
@@ -126,12 +126,12 @@ public class PanelPantallaMapa extends JPanel {
 
     protected void agregar_panel_mapa_con_fondo(JPanel panel) {
         imagen_fondo = new JLabel();
-        ImageIcon icono_imagen = new ImageIcon(this.getClass().getResource("/assets/imagenes/pantalla-mapa.png"));
-
-        // No escalamos la imagen, mantenemos el tamaño original
+        ImageIcon icono_imagen= new ImageIcon(this.getClass().getResource("/assets/imagenes/mario-pantalla-mapa.png"));
         imagen_fondo.setIcon(icono_imagen);
-        
+        panel.removeAll(); 
         panel.add(imagen_fondo);
+        panel.revalidate();
+        panel.repaint();
     }
     
     
@@ -238,7 +238,6 @@ public class PanelPantallaMapa extends JPanel {
             tipografia = Font.createFont(Font.TRUETYPE_FONT, new File(ruta_archivo)).deriveFont(18f);
         } catch (FontFormatException | IOException e) {
             e.printStackTrace();
-            System.out.println("No se pudo cargar la fuente personalizada, se usará la fuente predeterminada.");
             tipografia = new Font("SansSerif", Font.BOLD, 30); // Fuente alternativa en caso de error
         }
     }

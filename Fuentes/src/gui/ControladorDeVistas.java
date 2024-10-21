@@ -151,7 +151,6 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
         });
     }
 
-
     public void mostrar_pantalla_inicial() {
         ventana.setContentPane(panel_pantalla_principal);
         panel_pantalla_principal.setFocusable(true);

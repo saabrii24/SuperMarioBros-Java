@@ -186,7 +186,6 @@ public class ControladorDeVistas implements ControladorJuegoVistaEntidades, Cont
         refrescar();
     }
 
-    @Override
     public void accionar_pantalla_modo_juego() {
         ventana.setContentPane(panel_pantalla_modo_de_juego);
         panel_pantalla_modo_de_juego.setFocusable(true);

@@ -15,7 +15,7 @@ public class KoopaTroopa extends Enemigo {
     }
 
     public interface KoopaState {
-        // Define el estado de Koopa aquí si es necesario
+    	
     }
 
     protected void actualizar_posicion() {

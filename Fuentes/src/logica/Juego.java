@@ -132,9 +132,7 @@ public class Juego {
             		controlador_vistas.accionar_pantalla_victoria();
             		actualizar_ranking();
             		detener_hilos();
-            	}
-            	else {
-            		//debug - no elimina el sprite de mario
+            	} else {
             		mapa_nivel_actual.resetear_mapa();
             		cargar_datos(fabrica_entidades);
             	}

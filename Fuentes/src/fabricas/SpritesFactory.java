@@ -121,7 +121,7 @@ public abstract class SpritesFactory {
     }
 
     public Sprite get_piranha_plant() {
-        return cargar_sprite("pirania.png");
+        return cargar_sprite("piranha.gif");
     }
 
     public Sprite get_lakitu() {

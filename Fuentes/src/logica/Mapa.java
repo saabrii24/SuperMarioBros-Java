@@ -83,16 +83,16 @@ public class Mapa {
 
     public void resetear_mapa() {
         for (Enemigo enemigo : entidades_enemigo) enemigo.destruir();
-        entidades_enemigo.clear();
+        	entidades_enemigo.clear();
         
         for (Plataforma plataforma : entidades_plataforma) plataforma.destruir();
-        entidades_plataforma.clear();
+        	entidades_plataforma.clear();
         
         for (PowerUp powerup : entidades_powerup) powerup.destruir();
-        entidades_powerup.clear();
+        	entidades_powerup.clear();
         
         for (BolaDeFuego bolaDeFuego : entidades_proyectiles) bolaDeFuego.destruir();
-        entidades_proyectiles.clear();
+        	entidades_proyectiles.clear();
         
         if (mario != null) mario.destruir();
 

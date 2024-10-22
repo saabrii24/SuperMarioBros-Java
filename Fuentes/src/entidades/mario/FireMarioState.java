@@ -1,5 +1,6 @@
 package entidades.mario;
 
+import entidades.BolaDeFuego;
 import entidades.enemigos.Enemigo;
 
 public class FireMarioState implements Mario.MarioState {
@@ -22,21 +23,26 @@ public class FireMarioState implements Mario.MarioState {
 		mario.get_sistema_puntuacion().sumar_puntos(50);
 	}
 
-    public boolean matar_si_hay_colision(Enemigo enemigo) {
-        // En estado Fire Mario, si colisiona con un enemigo, vuelve al estado Normal
-        mario.cambiar_estado(new NormalMarioState(mario));
-        return false; // Mario no mata al enemigo, pero tampoco no pierde una vida
-    }
-
     public void disparar_bola_de_fuego() {
         mario.disparar(); // Mario lanza una bola de fuego
     }
 
 	@Override
 	public void actualizar_sprite() {
-		// TODO Auto-generated method stub
-		
-	}
+    	if(mario.esta_saltando() || mario.get_velocidad_y() < 0) { // Saltando o cayendo (velocidad negativa)
+        	mario.cambiar_sprite(mario.get_movimiento_derecha() ?
+        			mario.get_sprite_factory().get_supermario_star_saltando_derecha() : 
+        			mario.get_sprite_factory().get_supermario_star_saltando_izquierda());
+        } else if (mario.get_velocidad_x() != 0 && !mario.esta_saltando()) {
+        	mario.cambiar_sprite(mario.get_movimiento_derecha() ? 
+                    mario.get_sprite_factory().get_supermario_star_movimiento_derecha() : 
+                    mario.get_sprite_factory().get_supermario_star_movimiento_izquierda());
+        } else {
+        	 mario.cambiar_sprite(mario.get_movimiento_derecha() ? 
+                     mario.get_sprite_factory().get_supermario_star_ocioso_derecha() : 
+                     mario.get_sprite_factory().get_supermario_star_ocioso_izquierda());
+        }
+    }
 
 	@Override
 	public void finalizar_invulnerabilidad() {
@@ -46,8 +52,23 @@ public class FireMarioState implements Mario.MarioState {
 
 	@Override
 	public boolean mata_tocando() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
+	@Override
+	public boolean rompe_bloque() {
+		return true;
+	}
+
+	@Override
+	public boolean colision_con_enemigo(Enemigo enemigo) {
+		mario.get_sistema_puntuacion().sumar_puntos(mario.calcular_penalizacion_enemigo(enemigo));
+    	mario.cambiar_estado(new NormalMarioState(mario));
+    	return false;
+	}
+
+	public BolaDeFuego disparar() {
+		return new BolaDeFuego(mario.get_posicion_en_x(), mario.get_posicion_en_y(), mario.get_sprite_factory().get_bola_de_fuego());
+	}
+	
 }

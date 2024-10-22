@@ -17,8 +17,8 @@ Tiempo: 100
 	Goomba: 700, 400
 	
 	# PowerUps
-	Estrella: 240, 144
-	Estrella: 240, 432
+	FlorDeFuego: 240, 144
+	Estrella: 290, 144
 	
 	# Plataformas
 

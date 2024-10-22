@@ -14,6 +14,7 @@ import entidades.powerups.PowerUpVisitor;
 import entidades.powerups.SuperChampi;
 import fabricas.Sprite;
 import fabricas.SpritesFactory;
+import logica.Mapa;
 
 public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisitor {
 	private static final long serialVersionUID = 1L;
@@ -59,8 +60,10 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
 
     // Interfaz del estado de Mario
     public interface MarioState {
-        boolean matar_si_hay_colision(Enemigo enemigo);
         boolean mata_tocando();
+        boolean rompe_bloque();
+        boolean colision_con_enemigo(Enemigo enemigo);
+        BolaDeFuego disparar();
         void consumir_estrella();
     	void consumir_super_champi();
     	void consumir_flor_de_fuego();
@@ -202,16 +205,8 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
 		get_sistema_vidas().sumar_vida();
 	}
 
-    public void matar_si_hay_colision(Enemigo enemigo) {
-        if (estado.matar_si_hay_colision(enemigo)) {
-        	get_sistema_puntuacion().sumar_puntos(calcular_puntaje_enemigo(enemigo));
-        } else {
-        	get_sistema_puntuacion().sumar_puntos(calcular_penalizacion_enemigo(enemigo));
-            get_sistema_vidas().quitar_vida();
-        }
-    }
 
-    private int calcular_puntaje_enemigo(Enemigo enemigo) {
+    	int calcular_puntaje_enemigo(Enemigo enemigo) {
         return switch (enemigo.getClass().getSimpleName()) {
             case "Goomba" -> 60;
             case "KoopaTroopa" -> 90;
@@ -221,7 +216,7 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
         };
     }
 
-    private int calcular_penalizacion_enemigo(Enemigo enemigo) {
+    int calcular_penalizacion_enemigo(Enemigo enemigo) {
         return switch (enemigo.getClass().getSimpleName()) {
             case "Goomba", "PiranhaPlant", "Spiny" -> -30;
             case "KoopaTroopa" -> -45;
@@ -236,7 +231,7 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
     }
 
     public BolaDeFuego disparar() {
-        return new BolaDeFuego(get_posicion_en_x(), get_posicion_en_y(), sprites_factory.get_bola_de_fuego());
+        return estado.disparar();
     }
 
 	@Override
@@ -273,5 +268,12 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
 	}
 	public  boolean mata_tocando() {
 		return estado.mata_tocando();
+	}
+	public boolean rompe_bloque() {
+		return estado.rompe_bloque();
+	}
+	
+	public boolean colision_con_enemigo(Enemigo e) {
+		return estado.colision_con_enemigo(e);
 	}
 }

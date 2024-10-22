@@ -1,8 +1,11 @@
 package logica;
 
 import entidades.mario.Mario;
+import entidades.mario.NormalMarioState;
+import entidades.plataformas.Plataforma;
 import entidades.powerups.PowerUp;
 import entidades.BolaDeFuego;
+import entidades.Entidad;
 import entidades.EntidadMovible;
 import entidades.enemigos.Enemigo;
 
@@ -12,6 +15,7 @@ import java.util.ArrayList;
 
 public class Colisionador {
     private Mapa mapa;
+    boolean murio_mario = false;
 
     public Colisionador(Mapa mapa) {
         this.mapa = mapa;
@@ -73,6 +77,15 @@ public class Colisionador {
                 enemigo.destruir(mapa);
                 break;
             }
+            if (mario.get_limites_derecha().intersects(enemigo.get_limites()) || mario.get_limites_izquierda().intersects(enemigo.get_limites())) {
+            	if(mario.colision_con_enemigo(enemigo)) {
+            		murio_mario = true;
+            	}
+            	else {
+            		murio_mario = false;
+            		enemigo.destruir(mapa);
+            	}
+            }
         }
     }
 
@@ -97,6 +110,7 @@ public class Colisionador {
         boolean colision_derecha = colisiona_con_plataforma(mario.get_limites_derecha());
         boolean colision_izquierda = colisiona_con_plataforma(mario.get_limites_izquierda());
         boolean colision_inferior = colisiona_con_plataforma(mario.get_limites_inferiores());
+
         boolean colision_superior = colisiona_con_plataforma(mario.get_limites_superiores());
 
         manejar_colision_horizontal_mario(mario, colision_derecha, colision_izquierda);
@@ -120,6 +134,23 @@ public class Colisionador {
         } else {
             mario.activar_movimiento_vertical();
         }
+        if(colision_inferior) {
+        	 mario.bloquear_movimiento_vertical();
+             mario.set_posicion_en_y(mario.get_posicion_en_y() - 0.5);
+             if(mario.rompe_bloque()) {
+            	 romper_plataforma_debajo_de_mario(mario);
+            	
+             }
+        }
+    }
+    private void romper_plataforma_debajo_de_mario(Mario mario) {
+        List<Plataforma> plataformas = mapa.get_entidades_plataforma();
+        for (Plataforma plataforma : plataformas) {
+            if (plataforma.get_limites().intersects(mario.get_limites_inferiores())) {
+                plataforma.destruir(mapa); // Romper la plataforma
+                break;
+            }
+        }
     }
 
     // Verifica si hay colisión con cualquier plataforma
@@ -128,10 +159,10 @@ public class Colisionador {
             if (plataforma.intersects(limites)) {
                 return true;
             }
+            
         }
         return false;
     }
-
     // Obtiene los límites de todas las plataformas en el mapa
     private List<Rectangle> obtener_limites_de_plataformas() {
         List<Rectangle> limites_plataformas = new ArrayList<>();
@@ -142,4 +173,12 @@ public class Colisionador {
         }
         return limites_plataformas;
     }
-}
+    
+    public boolean get_murio_mario() {
+    	return murio_mario;
+    }
+    
+    public void set_murio_mario(boolean b) {
+    	murio_mario = b;
+    }
+    }

@@ -1,5 +1,6 @@
 package entidades.mario;
 
+import entidades.BolaDeFuego;
 import entidades.enemigos.Enemigo;
 
 public class InvencibleMarioState implements Mario.MarioState {
@@ -60,6 +61,21 @@ public class InvencibleMarioState implements Mario.MarioState {
         	else mario.cambiar_estado(new NormalMarioState(mario));
         }
     }
+
+	@Override
+	public boolean rompe_bloque() {
+		return false;
+	}
+	@Override
+	public boolean colision_con_enemigo(Enemigo enemigo) {
+		return false;
+	}
+
+	@Override
+	public BolaDeFuego disparar() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
 

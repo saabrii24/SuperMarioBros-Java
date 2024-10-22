@@ -144,11 +144,11 @@ public abstract class SpritesFactory {
     }
 
     public Sprite get_super_champi() {
-        return cargar_sprite("super_champi.png");
+        return cargar_sprite("superchampi.png");
     }
 
     public Sprite get_flor_de_fuego() {
-        return cargar_sprite("flor_de_fuego.png");
+        return cargar_sprite("flor_de_fuego.gif");
     }
 
     public Sprite get_estrella() {

@@ -1,5 +1,6 @@
 package entidades.mario;
 
+import entidades.BolaDeFuego;
 import entidades.enemigos.Enemigo;
 
 public class NormalMarioState implements Mario.MarioState {
@@ -56,6 +57,23 @@ public class NormalMarioState implements Mario.MarioState {
 	@Override
 	public boolean mata_tocando() {
 		return false;
+	}
+
+	@Override
+	public boolean rompe_bloque() {
+		return false;
+	}
+
+	@Override
+	public boolean colision_con_enemigo(Enemigo e) {
+		mario.get_sistema_puntuacion().sumar_puntos(mario.calcular_penalizacion_enemigo(e));
+        mario.get_sistema_vidas().quitar_vida();
+		return true;
+	}
+
+	@Override
+	public BolaDeFuego disparar() {
+		return null;
 	}
 
 }

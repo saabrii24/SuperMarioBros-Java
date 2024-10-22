@@ -80,7 +80,8 @@ public class Mapa {
     public void eliminar_bola_de_fuego(BolaDeFuego bola_de_fuego) {
     	entidades_proyectiles.remove(bola_de_fuego);
     }
-
+    
+    
     public void resetear_mapa() {
         for (Enemigo enemigo : entidades_enemigo) enemigo.destruir();
         	entidades_enemigo.clear();
@@ -95,6 +96,8 @@ public class Mapa {
         	entidades_proyectiles.clear();
         
         if (mario != null) mario.destruir();
+        
+        
 
     }
 

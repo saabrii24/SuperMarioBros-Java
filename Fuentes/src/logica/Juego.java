@@ -25,6 +25,7 @@ public class Juego {
     public static final int DISPARAR = 15004;
 
     protected ControladorDeVistas controlador_vistas;
+    protected boolean reiniciando_nivel = false;
     protected Nivel nivel_actual;
     protected SpritesFactory fabrica_sprites;
     protected EntidadesFactory fabrica_entidades;
@@ -125,6 +126,9 @@ public class Juego {
             if(mario.get_dimension() != null) { 
                 controlador_colisiones.verificar_colision_mario(mario);
                 mario.finalizar_invulnerabilidad();
+                if (controlador_colisiones.get_murio_mario() && !reiniciando_nivel) {
+                	reiniciar_nivel();
+                }
             }
             
             //cambiar nivel al llegar al castillo
@@ -216,6 +220,7 @@ public class Juego {
     }
 
     public void reiniciar_nivel() {
+    	reiniciando_nivel = true;
         nivel_actual = GeneradorNivel.cargar_nivel_y_mapa(
                 getClass().getResourceAsStream("/niveles/nivel-"+nivel_a_cargar+".txt"), fabrica_entidades, mapa_nivel_actual);
 
@@ -229,9 +234,9 @@ public class Juego {
         
         tiempo_restante = nivel_actual.get_tiempo_restante();
         Mario.get_instancia().get_sistema_puntuacion().restar_puntos(Mario.get_instancia().get_puntaje()); 
-        
+        controlador_colisiones.set_murio_mario(false);
         controlador_vistas.refrescar();
-
+        reiniciando_nivel = false;
     }
 
     public void cargar_proximo_nivel() {

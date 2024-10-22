@@ -57,10 +57,10 @@ public class PanelPantallaModoDeJuego extends JPanel {
         agregar_boton_volver();
         agregar_imagen_fondo();
         actualizar_icono_seleccion();
-        volver_con_esc();
+        configurar_tecla_volver();
     }
 
-    protected void agregar_imagen_fondo() {
+    private void agregar_imagen_fondo() {
         imagen_fondo = new JLabel();
         ImageIcon icono_imagen = new ImageIcon(this.getClass().getResource("/assets/imagenes/pantalla-modo-de-juego.png")); // Reemplaza con tu imagen
         Image imagen_escalada = icono_imagen.getImage().getScaledInstance(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO, Image.SCALE_SMOOTH);
@@ -71,7 +71,7 @@ public class PanelPantallaModoDeJuego extends JPanel {
         add(imagen_fondo);
     }
 
-    protected void agregar_icono_seleccion() {
+    private void agregar_icono_seleccion() {
         ImageIcon icono_original = new ImageIcon(this.getClass().getResource("/assets/imagenes/icono-seleccion.png")); // Reemplaza con la ruta correcta
         Image imagen_escalada = icono_original.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
         icono_seleccion = new JLabel(new ImageIcon(imagen_escalada));
@@ -79,13 +79,12 @@ public class PanelPantallaModoDeJuego extends JPanel {
         add(icono_seleccion);
     }
 
-    protected void agregar_botones_opcion() {
+    private void agregar_botones_opcion() {
         boton_mario = new JButton(" ");
         boton_luigi = new JButton(" ");
 
-        // Configurar botones
-        transparentar_boton(boton_mario);
-        transparentar_boton(boton_luigi);
+        configurar_boton_transparente(boton_mario);
+        configurar_boton_transparente(boton_luigi);
 
         boton_mario.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 150, ConstantesVistas.PANEL_ALTO / 2 - 180, 300, 50);
         boton_luigi.setBounds((ConstantesVistas.PANEL_ANCHO / 2) - 150, ConstantesVistas.PANEL_ALTO / 2 - 120, 300, 50);
@@ -104,80 +103,71 @@ public class PanelPantallaModoDeJuego extends JPanel {
         add(boton_luigi);
     }
 
-
-    protected void mantener_seleccion(MenuOpciones opcion) {
-        this.opcion_actual = opcion;
-        actualizar_icono_seleccion(); 
-    }
-
-	protected void transparentar_boton(JButton boton) {
+    private void configurar_boton_transparente(JButton boton) {
         boton.setOpaque(false);
         boton.setContentAreaFilled(false);
         boton.setBorderPainted(false);
     }
 
-    protected void actualizar_icono_seleccion() {
-        int xOffset = (ConstantesVistas.PANEL_ANCHO / 2) - 190; // Ajustar posición en X
-        int yOffset = (opcion_actual == MenuOpciones.MARIO) ? (ConstantesVistas.PANEL_ALTO / 2 - 170) : (ConstantesVistas.PANEL_ALTO / 2 - 110); // Ajustar según la opción
-
-        icono_seleccion.setLocation(xOffset, yOffset);
+    private void mantener_seleccion(MenuOpciones opcion) {
+        this.opcion_actual = opcion;
+        actualizar_icono_seleccion(); 
     }
-    
-    protected void agregar_boton_volver() {
-    	boton_volver = new JButton(" ");
-        boton_volver.setOpaque(false);
-        boton_volver.setContentAreaFilled(false);
-        boton_volver.setBorderPainted(false);
+
+    private void actualizar_icono_seleccion() {
+        int x_offset = (ConstantesVistas.PANEL_ANCHO / 2) - 190; // Ajustar posición en X
+        int y_offset = (opcion_actual == MenuOpciones.MARIO) ? (ConstantesVistas.PANEL_ALTO / 2 - 170) : (ConstantesVistas.PANEL_ALTO / 2 - 110); // Ajustar según la opción
+
+        icono_seleccion.setLocation(x_offset, y_offset);
+    }
+
+    private void agregar_boton_volver() {
+        boton_volver = new JButton(" ");
+        configurar_boton_transparente(boton_volver);
         boton_volver.setBounds(ConstantesVistas.PANEL_ANCHO - 180, 15, 150, 50);
-        boton_volver.addActionListener(e -> controlador_vistas.mostrar_pantalla_inicial());
+        boton_volver.addActionListener(e -> controlador_vistas.accionar_pantalla_inicial());
         add(boton_volver);
     }
-    
-    private void volver_con_esc() {
-        // Acción para volver a la pantalla inicial
-        Action volverAction = new AbstractAction() {
-            /**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
 
-			@Override
+    private void configurar_tecla_volver() {
+        Action volver_action = new AbstractAction() {
+            private static final long serialVersionUID = 1L;
+
+            @Override
             public void actionPerformed(ActionEvent e) {
-                controlador_vistas.mostrar_pantalla_inicial();
+                controlador_vistas.accionar_pantalla_inicial();
             }
         };
         
-        // Asigna la acción a la tecla 'Esc'
-        InputMap inputMap = getInputMap(WHEN_IN_FOCUSED_WINDOW);
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "volver");
-        getActionMap().put("volver", volverAction);
+        InputMap input_map = getInputMap(WHEN_IN_FOCUSED_WINDOW);
+        input_map.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "volver");
+        getActionMap().put("volver", volver_action);
     }
 
     protected void mover_seleccion(boolean hacia_arriba) {
         if (hacia_arriba) {
             opcion_actual = opcion_actual.anterior();
         } else {
-        	opcion_actual = opcion_actual.siguiente();
+            opcion_actual = opcion_actual.siguiente();
         }
         actualizar_icono_seleccion();
-	}
+    }
 
     protected void ejecutar_accion_seleccionada() {
+        SpritesFactory fabrica_sprites;
         switch (opcion_actual) {
-	        case MARIO:
-	        	SpritesFactory fabrica_mario = new Dominio1Factory();
-	        	Mario.get_instancia().set_fabrica_sprites(fabrica_mario);
-	        	generador = new EntidadesFactory(fabrica_mario);	        	
-	        	controlador_vistas.notificar_eleccion(generador);
-	        	controlador_vistas.mostrar_pantalla_mapa();
-	            break;
-	        case LUIGI:
-	            SpritesFactory fabrica_luigi = new Dominio2Factory();
-	        	Mario.get_instancia().set_fabrica_sprites(fabrica_luigi);
-	            generador = new EntidadesFactory(fabrica_luigi);
-	            controlador_vistas.notificar_eleccion(generador);
-	            controlador_vistas.mostrar_pantalla_mapa();
-	            break;
+            case MARIO:
+                fabrica_sprites = new Dominio1Factory();
+                break;
+            case LUIGI:
+                fabrica_sprites = new Dominio2Factory();
+                break;
+            default:
+                return;
         }
-	}
+        Mario.get_instancia().set_fabrica_sprites(fabrica_sprites);
+        generador = new EntidadesFactory(fabrica_sprites);
+        controlador_vistas.notificar_eleccion(generador);
+        controlador_vistas.accionar_pantalla_mapa();
+    }
 }

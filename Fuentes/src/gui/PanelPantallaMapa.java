@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.FontFormatException;
-import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.io.File;
@@ -22,10 +21,13 @@ import javax.swing.KeyStroke;
 
 import entidades.interfaces.EntidadJugador;
 import entidades.interfaces.EntidadLogica;
-import entidades.mario.Mario;
 import logica.*;
 import niveles.Nivel;
 
+/**
+ * La clase {@code PanelPantallaMapa} representa el panel que muestra el mapa del juego,
+ * incluyendo información sobre el puntaje, monedas, nivel, tiempo y vidas del jugador.
+ */
 /**
  * La clase {@code PanelPantallaMapa} representa el panel que muestra el mapa del juego,
  * incluyendo información sobre el puntaje, monedas, nivel, tiempo y vidas del jugador.
@@ -42,28 +44,22 @@ public class PanelPantallaMapa extends JPanel {
     private JLabel label_tiempo; 
     private JLabel label_vidas;  
     private Font tipografia;
-    private JScrollPane scrollPane;
+    private JScrollPane scroll_pane;
 
-    /**
-     * Constructor que inicializa el panel de pantalla del mapa.
-     * Configura el panel y agrega los subpaneles de información y mapa.
-     */
     public PanelPantallaMapa() {
-        setLayout(new BorderLayout()); // Usar OverlayLayout para superponer componentes
-        JLayeredPane layeredPane = new JLayeredPane();
-        layeredPane.setPreferredSize(new Dimension(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO));
+        setLayout(new BorderLayout());
+        JLayeredPane layered_pane = new JLayeredPane();
+        layered_pane.setPreferredSize(new Dimension(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO));
         cargar_tipografia("src/assets/tipografia/mario-font.ttf");
         panel_informacion = new JPanel();
         panel_mapa = new JPanel();
-        agregar_panel_mapa_con_fondo(panel_mapa);
-        agregar_scroll_al_mapa(layeredPane, panel_mapa);
-        agregar_panel_informacion(layeredPane, panel_informacion);
-        
-        add(layeredPane, BorderLayout.CENTER);
-        
-    }
 
-	// Operaciones para ControladorVistas
+        agregar_panel_mapa_con_fondo(panel_mapa);
+        agregar_scroll_al_mapa(layered_pane, panel_mapa);
+        agregar_panel_informacion(layered_pane, panel_informacion);
+        
+        add(layered_pane, BorderLayout.CENTER);
+    }
 
     public Observer incorporar_entidad(EntidadLogica entidad_logica) {
         ObserverEntidades observer_entidad = new ObserverEntidades(entidad_logica);
@@ -91,12 +87,10 @@ public class PanelPantallaMapa extends JPanel {
         label_vidas.setText("Vidas: " + jugador.get_vidas());
     }
 
-
     protected String texto_con_cantidad_digitos(int numero, int digitos) {
         String formato = "%0" + digitos + "d";
         String texto_autocompletado = String.format(formato, numero);
 
-        // Limitar el número de dígitos según el máximo permitido
         if (texto_autocompletado.length() > digitos) {
             texto_autocompletado = texto_autocompletado.substring(0, digitos);
         }
@@ -104,58 +98,45 @@ public class PanelPantallaMapa extends JPanel {
         return texto_autocompletado;
     }
 
-
-    protected boolean en_rango(int numero, int piso, int techo) {
-        return numero >= piso && numero <= techo;
-    }
-
     public void actualizar_scroll_hacia_jugador(EntidadJugador jugador) {
-        if (scrollPane != null) {  // Verificar que scrollPane no sea null
-            JScrollBar verticalBar = scrollPane.getVerticalScrollBar();
-            JScrollBar horizontalBar = scrollPane.getHorizontalScrollBar();
+        if (scroll_pane != null) {
+            JScrollBar vertical_bar = scroll_pane.getVerticalScrollBar();
+            JScrollBar horizontal_bar = scroll_pane.getHorizontalScrollBar();
 
-            // Calcular la nueva posición de desplazamiento para centrar al jugador
-            int nuevaPosicionX = (int) (Mario.get_instancia().get_posicion_en_x() - (scrollPane.getViewport().getWidth() / 2));
-            int nuevaPosicionY = (int) (Mario.get_instancia().get_posicion_en_y() - (scrollPane.getViewport().getHeight() / 2));
+            int nueva_posicion_x = (int) (jugador.get_posicion_en_x() - (scroll_pane.getViewport().getWidth() / 2));
+            int nueva_posicion_y = (int) (jugador.get_posicion_en_y() - (scroll_pane.getViewport().getHeight() / 2));
 
-            // Ajustar el scroll horizontal y vertical
-            horizontalBar.setValue(Math.max(0, nuevaPosicionX));  // Desplazar horizontalmente
-            verticalBar.setValue(Math.max(0, nuevaPosicionY));    // Desplazar verticalmente
+            horizontal_bar.setValue(Math.max(0, nueva_posicion_x));
+            vertical_bar.setValue(Math.max(0, nueva_posicion_y));
         }
     }
 
     protected void agregar_panel_mapa_con_fondo(JPanel panel) {
         imagen_fondo = new JLabel();
-        ImageIcon icono_imagen = new ImageIcon(this.getClass().getResource("/assets/imagenes/pantalla-mapa.png"));
-
-        // No escalamos la imagen, mantenemos el tamaño original
+        ImageIcon icono_imagen = new ImageIcon(this.getClass().getResource("/assets/imagenes/mario-pantalla-mapa.png"));
         imagen_fondo.setIcon(icono_imagen);
-        
+        panel.removeAll(); 
         panel.add(imagen_fondo);
+        panel.revalidate();
+        panel.repaint();
     }
-    
-    
-    protected void agregar_scroll_al_mapa(JLayeredPane panel_con_capas, JPanel panel) {
-        scrollPane = new JScrollPane(panel);  // Inicializar el scrollPane
-        scrollPane.setBounds(0, 0, ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
-        // Agregar el JScrollPane al JLayeredPane en una capa inferior
-        panel_con_capas.add(scrollPane, Integer.valueOf(0));  // Capa base para el mapa
+    protected void agregar_scroll_al_mapa(JLayeredPane layered_pane, JPanel panel) {
+        scroll_pane = new JScrollPane(panel);
+        scroll_pane.setBounds(0, 0, ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
+        scroll_pane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scroll_pane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        layered_pane.add(scroll_pane, Integer.valueOf(0));
 
-        // Configurar el desplazamiento con el teclado
-        configurar_desplazamiento_con_teclado(scrollPane);
+        configurar_desplazamiento_con_teclado(scroll_pane);
     }
-    
-    protected void agregar_panel_informacion(JLayeredPane panel_con_capas, JPanel panel) {
+
+    protected void agregar_panel_informacion(JLayeredPane layered_pane, JPanel panel) {
         panel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        panel.setOpaque(false); // Hacer el panel transparente
+        panel.setOpaque(false);
         agregar_labels_editables_informacion();
-        
-        // Colocar el panel de información en una posición fija sobre el mapa
-        panel.setBounds(10, 10, ConstantesVistas.PANEL_ANCHO, 50); // Ajustar la posición y tamaño del panel
-        panel_con_capas.add(panel, Integer.valueOf(1)); // Capa superior para el panel de información
+        panel.setBounds(10, 10, ConstantesVistas.PANEL_ANCHO, 50);
+        layered_pane.add(panel, Integer.valueOf(1));
     }
 
     protected void agregar_labels_editables_informacion() {
@@ -165,9 +146,8 @@ public class PanelPantallaMapa extends JPanel {
         label_tiempo = new JLabel("Tiempo: 000  "); 
         label_vidas = new JLabel("Vidas: 0");
 
-        decorar_labels_informacion(); // Aplica estilos a los labels
+        decorar_labels_informacion();
 
-        // Agregar labels al panel de información en el orden correcto
         panel_informacion.add(label_puntaje);
         panel_informacion.add(label_monedas);
         panel_informacion.add(label_nivel);
@@ -176,71 +156,61 @@ public class PanelPantallaMapa extends JPanel {
     }
 
     protected void decorar_labels_informacion() {
-        label_puntaje.setForeground(Color.WHITE);
-        label_monedas.setForeground(Color.WHITE);
-        label_nivel.setForeground(Color.WHITE);
-        label_tiempo.setForeground(Color.WHITE);
-        label_vidas.setForeground(Color.WHITE);   
+        Color color_texto = Color.WHITE;
+        label_puntaje.setForeground(color_texto);
+        label_monedas.setForeground(color_texto);
+        label_nivel.setForeground(color_texto);
+        label_tiempo.setForeground(color_texto);
+        label_vidas.setForeground(color_texto);   
         
         label_puntaje.setFont(tipografia);
         label_monedas.setFont(tipografia);
         label_nivel.setFont(tipografia);
         label_tiempo.setFont(tipografia);
         label_vidas.setFont(tipografia);
-
     }
-    
+
     @SuppressWarnings("serial")
 	private void configurar_desplazamiento_con_teclado(JScrollPane scroll) {
-        scroll.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("UP"), "moverArriba");
-        scroll.getActionMap().put("moverArriba", new AbstractAction() {
+        scroll.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("UP"), "mover_arriba");
+        scroll.getActionMap().put("mover_arriba", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JScrollBar verticalBar = scroll.getVerticalScrollBar();
-                verticalBar.setValue(verticalBar.getValue() - verticalBar.getUnitIncrement(-1));
+                scroll.getVerticalScrollBar().setValue(scroll.getVerticalScrollBar().getValue() - scroll.getVerticalScrollBar().getUnitIncrement(-1));
             }
         });
 
-        scroll.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("DOWN"), "moverAbajo");
-        scroll.getActionMap().put("moverAbajo", new AbstractAction() {
+        scroll.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("DOWN"), "mover_abajo");
+        scroll.getActionMap().put("mover_abajo", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JScrollBar verticalBar = scroll.getVerticalScrollBar();
-                verticalBar.setValue(verticalBar.getValue() + verticalBar.getUnitIncrement(1));
+                scroll.getVerticalScrollBar().setValue(scroll.getVerticalScrollBar().getValue() + scroll.getVerticalScrollBar().getUnitIncrement(1));
             }
         });
 
-        scroll.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("LEFT"), "moverIzquierda");
-        scroll.getActionMap().put("moverIzquierda", new AbstractAction() {
+        scroll.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("LEFT"), "mover_izquierda");
+        scroll.getActionMap().put("mover_izquierda", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JScrollBar horizontalBar = scroll.getHorizontalScrollBar();
-                horizontalBar.setValue(horizontalBar.getValue() - horizontalBar.getUnitIncrement(-1));
+                scroll.getHorizontalScrollBar().setValue(scroll.getHorizontalScrollBar().getValue() - scroll.getHorizontalScrollBar().getUnitIncrement(-1));
             }
         });
 
-        scroll.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("RIGHT"), "moverDerecha");
-        scroll.getActionMap().put("moverDerecha", new AbstractAction() {
+        scroll.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("RIGHT"), "mover_derecha");
+        scroll.getActionMap().put("mover_derecha", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JScrollBar horizontalBar = scroll.getHorizontalScrollBar();
-                horizontalBar.setValue(horizontalBar.getValue() + horizontalBar.getUnitIncrement(1));
+                scroll.getHorizontalScrollBar().setValue(scroll.getHorizontalScrollBar().getValue() + scroll.getHorizontalScrollBar().getUnitIncrement(1));
             }
         });
     }
-    
-    /**
-     * Método para cargar la fuente personalizada desde un archivo.
-     * @param rutaArchivo La ruta completa al archivo de la fuente TTF.
-     */
+
     private void cargar_tipografia(String ruta_archivo) {
         try {
             tipografia = Font.createFont(Font.TRUETYPE_FONT, new File(ruta_archivo)).deriveFont(18f);
         } catch (FontFormatException | IOException e) {
             e.printStackTrace();
-            System.out.println("No se pudo cargar la fuente personalizada, se usará la fuente predeterminada.");
-            tipografia = new Font("SansSerif", Font.BOLD, 30); // Fuente alternativa en caso de error
+            tipografia = new Font("Arial", Font.PLAIN, 18);
         }
     }
-
 }

@@ -12,11 +12,11 @@ Tiempo: 100
 	# Enemigos
 	#Goomba: 288, 144
 	#Goomba: 384, 144
-	Koopa: 1056, 500
-	Goomba: 700, 400
+	Lakitu: 1056, 500
+	Buzzy: 700, 400
 	
 	# PowerUps
-	Estrella: 264, 480
+	Estrella: 240, 480
 	Estrella: 288, 480
 	Estrella: 336, 480
 	
@@ -37,8 +37,6 @@ Tiempo: 100
 	BloqueSolido: 240, 96
 	BloqueSolido: 288, 96
 	BloqueSolido: 336, 96
-	BloqueSolido: 384, 96
-	BloqueSolido: 432, 96
 	BloqueSolido: 384, 96
 	BloqueSolido: 432, 96
 	BloqueSolido: 480, 96

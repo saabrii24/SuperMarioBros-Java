@@ -14,13 +14,15 @@ import fabricas.EntidadesFactory;
 import gui.sonido.Sonido;
 import logica.*;
 
-public class ControladorDeVistas implements ControladorEntreJuegoVista, ControladorJuegoVista {
+public class ControladorDeVistas implements ControladorJuegoVistaEntidades, ControladorJuegoVistaPaneles {
     protected JFrame ventana;
     protected PanelPantallaPrincipal panel_pantalla_principal;
     protected PanelPantallaMapa panel_pantalla_mapa;
     protected PanelPantallaAyuda panel_pantalla_ayuda; 
     protected PanelPantallaRanking panel_pantalla_ranking;
-    protected PanelPantallaModoDeJuego panel_pantalla_modo_de_juego; 
+    protected PanelPantallaModoDeJuego panel_pantalla_modo_de_juego;
+    protected PanelPantallaDerrota panel_pantalla_derrota;
+    protected PanelPantallaVictoria panel_pantalla_victoria;
     protected Juego mi_juego;
     protected EntidadesFactory generador;
     protected Sonido sonido_juego;
@@ -35,10 +37,12 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
         panel_pantalla_mapa = new PanelPantallaMapa();
         panel_pantalla_ayuda = new PanelPantallaAyuda(this); 
         panel_pantalla_ranking = new PanelPantallaRanking(this); 
-        panel_pantalla_modo_de_juego = new PanelPantallaModoDeJuego(this); 
+        panel_pantalla_modo_de_juego = new PanelPantallaModoDeJuego(this);
+        panel_pantalla_derrota = new PanelPantallaDerrota(this);
+        panel_pantalla_victoria = new PanelPantallaVictoria(this);
         sonido_juego = new Sonido();
         configurar_ventana();
-        mostrar_pantalla_inicial();
+        accionar_pantalla_inicial();
         registrar_oyente_panel_principal();
         registrar_oyente_panel_modo_de_juego();
         registrar_oyente_panel_mapa();
@@ -152,7 +156,7 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
     }
 
 
-    public void mostrar_pantalla_inicial() {
+    public void accionar_pantalla_inicial() {
         ventana.setContentPane(panel_pantalla_principal);
         panel_pantalla_principal.setFocusable(true);
         panel_pantalla_principal.requestFocusInWindow(); 
@@ -163,7 +167,7 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
     	accionar_pantalla_modo_juego();
     }
 
-    public void mostrar_pantalla_mapa() {
+    public void accionar_pantalla_mapa() {
         ventana.setContentPane(panel_pantalla_mapa);
         panel_pantalla_mapa.setFocusable(true);
         panel_pantalla_mapa.requestFocusInWindow(); 
@@ -171,7 +175,7 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
         refrescar();
     }
     
-    public void mostrar_pantalla_ayuda() {
+    public void accionar_pantalla_ayuda() {
         ventana.setContentPane(panel_pantalla_ayuda);
         refrescar();
     }
@@ -182,7 +186,6 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
         refrescar();
     }
 
-    @Override
     public void accionar_pantalla_modo_juego() {
         ventana.setContentPane(panel_pantalla_modo_de_juego);
         panel_pantalla_modo_de_juego.setFocusable(true);
@@ -190,7 +193,7 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
         refrescar();        
     }
     
-    protected void refrescar() {
+    public void refrescar() {
         ventana.revalidate();
         ventana.repaint();
     }
@@ -211,14 +214,14 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
 
 	@Override
 	public void accionar_pantalla_victoria() {
-		// TODO Auto-generated method stub
-		
+		ventana.setContentPane(panel_pantalla_victoria);
+        refrescar();
 	}
 
 	@Override
 	public void accionar_pantalla_derrota() {
-		// TODO Auto-generated method stub
-		
+		ventana.setContentPane(panel_pantalla_derrota);
+        refrescar();
 	}
 
 	public void notificar_eleccion(EntidadesFactory generador) {
@@ -232,6 +235,5 @@ public class ControladorDeVistas implements ControladorEntreJuegoVista, Controla
 	public void reproducir_efecto(String efecto) {
 		sonido_juego.reproducir_efecto(efecto);
 	}
-	
 
 }

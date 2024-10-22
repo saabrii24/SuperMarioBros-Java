@@ -14,6 +14,7 @@ import entidades.powerups.PowerUpVisitor;
 import entidades.powerups.SuperChampi;
 import fabricas.Sprite;
 import fabricas.SpritesFactory;
+import logica.Mapa;
 
 public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisitor {
 	private static final long serialVersionUID = 1L;
@@ -45,74 +46,66 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
         this.sprites_factory = null;
         this.sistema_puntuacion = new ControladorPuntuacionMario();
         this.sistema_vidas = new ControladorVidasMario(3);
-        this.cambiar_estado(new NormalMarioState(this));
         this.movimiento_derecha = true;
-       // this.estado = new NormalMarioState(this);
+        set_estado(new NormalMarioState(this));
     }
 
     // Singleton: Obtiene la instancia de Mario
     public static Mario get_instancia() {
         if (instancia_mario == null) {
-        	instancia_mario = new Mario(150, 150, null);
+        	instancia_mario = new Mario(96, 150, null);
         }
         return instancia_mario;
     }
 
     // Interfaz del estado de Mario
     public interface MarioState {
-        boolean matar_si_hay_colision(Enemigo enemigo);
+        boolean mata_tocando();
+        boolean rompe_bloque();
+        boolean colision_con_enemigo(Enemigo enemigo);
+        BolaDeFuego disparar();
         void consumir_estrella();
     	void consumir_super_champi();
     	void consumir_flor_de_fuego();
+    	void finalizar_invulnerabilidad();
 		void actualizar_sprite();
+		
     }
 
     // Getters
-    public SistemaPuntuacion get_sistema_puntuacion() {
-        return sistema_puntuacion;
-    }
-
-    public SistemaVidas get_sistema_vidas() {
-        return sistema_vidas;
-    }
-
-    public int get_direccion() {
-        return direccion;
-    }
-
-    public MarioState get_estado_anterior() {
-        return estado_anterior;
-    }
-
-    public int get_direccion_mario() {
-        return movimiento_derecha ? 1 : -1;
+    public double get_velocidad_x() { // Este getter es porque no anda el de entidad movible a la hora de actualizar los sprites de Mario
+    	return velocidad_en_x;
     }
     
-	public boolean get_movimiento_derecha() {
-		return movimiento_derecha;
-	}
+    public double get_velocidad_y() { // Este getter es porque no anda el de entidad movible a la hora de actualizar los sprites de Mario
+    	return velocidad_en_y;
+    }
     
-	public SpritesFactory get_sprite_factory() {
-		return sprites_factory;
-	}
-
+    public SistemaPuntuacion get_sistema_puntuacion() { return sistema_puntuacion; }
+    public SistemaVidas get_sistema_vidas() { return sistema_vidas; }
+    public int get_direccion() { return direccion; }
+    public MarioState get_estado_anterior() { return estado_anterior; }
+    public int get_direccion_mario() { return movimiento_derecha ? 1 : -1; } 
+	public boolean get_movimiento_derecha() { return movimiento_derecha; }
+	public boolean esta_saltando() { return saltando; }	
+	public SpritesFactory get_sprite_factory() { return sprites_factory; }
+    public int get_contador_saltos() { return contador_saltos;  }
+	public int get_puntaje() { return get_sistema_puntuacion().get_puntaje_total(); }
+	public int get_monedas() { return get_sistema_puntuacion().get_monedas(); }
+	public int get_vidas() { return get_sistema_vidas().get_vidas(); }
+    
     // Setters
-    public void set_direccion_mario(int direccion_mario) {
-        direccion = direccion_mario;
-    }
-
-    public void set_fabrica_sprites(SpritesFactory sprites) {
-        this.sprites_factory = sprites;
-    }
-
-    public void set_velocidad_en_x_mario(double vel) {
-        velocidad_en_x = vel;
-    }
+    public void set_direccion_mario(int direccion_mario) { direccion = direccion_mario; }
+    public void set_fabrica_sprites(SpritesFactory sprites) { this.sprites_factory = sprites; }
+    public void set_velocidad_en_x_mario(double vel) { velocidad_en_x = vel; }
+    public void set_contador_saltos(int c) { contador_saltos = c; }
+    public void set_estado(MarioState state) { estado = state; }
+    public void set_estado_anterior (MarioState state) { estado_anterior = state; }
 
     // Métodos de estado y movimiento
     public void cambiar_estado(MarioState nuevo_estado) {
-        this.estado_anterior = this.estado;
-        this.estado = nuevo_estado;
+        set_estado_anterior(this.estado);
+        set_estado(nuevo_estado);
     }
 
     public void bloquear_movimiento_horizontal() {
@@ -165,20 +158,14 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
     }
     
     public void saltar() {
-        	if (!saltando && contador_saltos < 1) {
-        		contador_saltos+= 1;
-        		saltando = true;
-        		velocidad_en_y = -5; // Velocidad inicial del salto
-        		actualizar_posicion();}
-        
+        if (!saltando && contador_saltos < 1) {
+        	contador_saltos+= 1;
+        	saltando = true;
+        	velocidad_en_y = -7; // Velocidad inicial del salto
+        	actualizar_posicion();
+        }
     }
     
-    public void set_contador_saltos(int c) {
-    	contador_saltos = c;
-    }
-    public int get_contador_saltos() {
-    	return contador_saltos;
-    }
     public void actualizar_posicion() {
         if (cayendo) {
         	velocidad_en_y += EntidadMovible.GRAVEDAD;
@@ -199,32 +186,14 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
         }
 
         posicion_en_x += velocidad_en_x;
-        //estado.actualizar_sprite(); <- sería para cambiarla segun el estado, pero no anda
-        actualizar_sprite();
+        estado.actualizar_sprite();
     }
 
-    private void actualizar_sprite() {
-        if (saltando || velocidad_en_y < 0) {  // Saltando o cayendo (velocidad negativa)
-            cambiar_sprite(movimiento_derecha ? 
-                sprites_factory.get_mario_saltando_derecha() : 
-                sprites_factory.get_mario_saltando_izquierda());
-        } else if (velocidad_en_x != 0 && !saltando) {
-            cambiar_sprite(movimiento_derecha ? 
-                sprites_factory.get_mario_movimiento_derecha() : 
-                sprites_factory.get_mario_movimiento_izquierda());
-        } else {
-            cambiar_sprite(movimiento_derecha ? 
-                sprites_factory.get_mario_ocioso_derecha() : 
-                sprites_factory.get_mario_ocioso_izquierda());
-        }
-    }
-
-    protected void cambiar_sprite(Sprite nuevo_sprite) {
+	protected void cambiar_sprite(Sprite nuevo_sprite) {
         this.sprite = nuevo_sprite;
     }
 
  // Métodos de interacción y puntaje
-    
     
     private void consumir_moneda() {
     	get_sistema_puntuacion().sumar_puntos(5);
@@ -236,16 +205,8 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
 		get_sistema_vidas().sumar_vida();
 	}
 
-    public void matar_si_hay_colision(Enemigo enemigo) {
-        if (estado.matar_si_hay_colision(enemigo)) {
-        	get_sistema_puntuacion().sumar_puntos(calcular_puntaje_enemigo(enemigo));
-        } else {
-        	get_sistema_puntuacion().sumar_puntos(calcular_penalizacion_enemigo(enemigo));
-            get_sistema_vidas().quitar_vida();
-        }
-    }
 
-    private int calcular_puntaje_enemigo(Enemigo enemigo) {
+    	int calcular_puntaje_enemigo(Enemigo enemigo) {
         return switch (enemigo.getClass().getSimpleName()) {
             case "Goomba" -> 60;
             case "KoopaTroopa" -> 90;
@@ -255,7 +216,7 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
         };
     }
 
-    private int calcular_penalizacion_enemigo(Enemigo enemigo) {
+    int calcular_penalizacion_enemigo(Enemigo enemigo) {
         return switch (enemigo.getClass().getSimpleName()) {
             case "Goomba", "PiranhaPlant", "Spiny" -> -30;
             case "KoopaTroopa" -> -45;
@@ -270,23 +231,8 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
     }
 
     public BolaDeFuego disparar() {
-        return new BolaDeFuego(get_posicion_en_x(), get_posicion_en_y(), sprites_factory.get_bola_de_fuego());
+        return estado.disparar();
     }
-
-	@Override
-	public int get_puntaje() {
-		return get_sistema_puntuacion().get_puntaje_total();
-	}
-
-	@Override
-	public int get_monedas() {
-		return get_sistema_puntuacion().get_monedas();
-	}
-
-	@Override
-	public int get_vidas() {
-		return get_sistema_vidas().get_vidas();
-	}
 
 	@Override
 	public void visitar(Moneda moneda) {
@@ -313,4 +259,21 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
 		estado.consumir_estrella();
 	}
 
+	public void resetear_posicion() {
+		this.set_posicion(96, 600);
+	}
+	
+	public void finalizar_invulnerabilidad() {
+		estado.finalizar_invulnerabilidad();
+	}
+	public  boolean mata_tocando() {
+		return estado.mata_tocando();
+	}
+	public boolean rompe_bloque() {
+		return estado.rompe_bloque();
+	}
+	
+	public boolean colision_con_enemigo(Enemigo e) {
+		return estado.colision_con_enemigo(e);
+	}
 }

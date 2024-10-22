@@ -4,13 +4,18 @@ import entidades.BolaDeFuego;
 import entidades.Entidad;
 import entidades.enemigos.Enemigo;
 import entidades.mario.Mario;
+import entidades.mario.NormalMarioState;
 import fabricas.*;
 import gui.ControladorDeVistas;
 import niveles.GeneradorNivel;
 import niveles.Nivel;
+import ranking.Ranking;
 
+import java.awt.EventQueue;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JOptionPane;
 
 public class Juego {
 
@@ -20,18 +25,21 @@ public class Juego {
     public static final int DISPARAR = 15004;
 
     protected ControladorDeVistas controlador_vistas;
+    protected boolean reiniciando_nivel = false;
     protected Nivel nivel_actual;
     protected SpritesFactory fabrica_sprites;
     protected EntidadesFactory fabrica_entidades;
     protected Mapa mapa_nivel_actual;
     protected int tiempo_restante;
-    protected int contador_puntos;
-    protected boolean esta_ejecutando;
+    protected volatile boolean esta_ejecutando;
     protected Thread hilo_mario_movimiento;
     protected Thread hilo_enemigos_movimiento;
     protected volatile int direccion_mario;
     protected boolean observer_registrado = false;
     protected Colisionador controlador_colisiones;
+    protected int nivel_a_cargar;
+    protected Ranking ranking;
+    protected String nombre_jugador;
 
     public Juego() {
         iniciar();
@@ -44,7 +52,10 @@ public class Juego {
         fabrica_entidades = new EntidadesFactory(fabrica_sprites);
         controlador_vistas = new ControladorDeVistas(this);
         controlador_colisiones = new Colisionador(mapa_nivel_actual);
-        
+        nivel_a_cargar = 1;
+        ranking = new Ranking();
+        nombre_jugador = JOptionPane.showInputDialog(null, "Nombre del jugador: ", "Registrar jugador", JOptionPane.PLAIN_MESSAGE);
+
     }
 
     public synchronized void iniciar_hilos_movimiento() {
@@ -113,8 +124,27 @@ public class Juego {
         synchronized(mario) {
             mario.mover();
             if(mario.get_dimension() != null) { 
-                controlador_colisiones.verificar_colision_mario(mario); 
+                controlador_colisiones.verificar_colision_mario(mario);
+                mario.finalizar_invulnerabilidad();
+                if (controlador_colisiones.get_murio_mario() && !reiniciando_nivel) {
+                	reiniciar_nivel();
+                }
             }
+            
+            //cambiar nivel al llegar al castillo
+            if(mario.get_posicion_en_x() >= 4410) {
+            	nivel_a_cargar++;
+            	if(nivel_a_cargar > 3) {
+            		controlador_vistas.accionar_pantalla_victoria();
+            		actualizar_ranking();
+            		detener_hilos();
+            	} else {
+            		mapa_nivel_actual.resetear_mapa();
+            		cargar_datos(fabrica_entidades);
+            		mario.set_estado(new NormalMarioState(mario));
+            	}
+            }
+            
         }
     }
 
@@ -180,13 +210,51 @@ public class Juego {
 
     public void cargar_datos(EntidadesFactory generador) {
         nivel_actual = GeneradorNivel.cargar_nivel_y_mapa(
-            getClass().getResourceAsStream("/niveles/nivel-1.txt"),
+            getClass().getResourceAsStream("/niveles/nivel-"+nivel_a_cargar+".txt"),
             generador,
             mapa_nivel_actual
         );
-        fabrica_entidades = generador;
+        fabrica_entidades = generador;   
         registrar_observers(); 
         iniciar_hilos_movimiento();
+    }
+
+    public void reiniciar_nivel() {
+    	reiniciando_nivel = true;
+        nivel_actual = GeneradorNivel.cargar_nivel_y_mapa(
+                getClass().getResourceAsStream("/niveles/nivel-"+nivel_a_cargar+".txt"), fabrica_entidades, mapa_nivel_actual);
+
+        mapa_nivel_actual.resetear_mapa();
+        cargar_datos(fabrica_entidades);
+        
+        // Restablecer a Mario a su posición inicial
+        Mario mario = Mario.get_instancia();
+        mario.resetear_posicion();
+        mapa_nivel_actual.agregar_mario(mario);
+        
+        tiempo_restante = nivel_actual.get_tiempo_restante();
+        Mario.get_instancia().get_sistema_puntuacion().restar_puntos(Mario.get_instancia().get_puntaje()); 
+        controlador_colisiones.set_murio_mario(false);
+        controlador_vistas.refrescar();
+        reiniciando_nivel = false;
+    }
+
+    public void cargar_proximo_nivel() {
+        nivel_a_cargar++;
+        
+        nivel_actual = GeneradorNivel.cargar_nivel_y_mapa(
+        		getClass().getResourceAsStream("/niveles/nivel-"+nivel_a_cargar+".txt"), fabrica_entidades, mapa_nivel_actual);
+        
+        mapa_nivel_actual.resetear_mapa();
+        cargar_datos(fabrica_entidades);
+        
+        Mario mario = Mario.get_instancia();
+        mario.resetear_posicion();
+        mapa_nivel_actual.agregar_mario(mario);
+        
+        tiempo_restante = nivel_actual.get_tiempo_restante();
+        
+        controlador_vistas.refrescar();
     }
 
     private void registrar_observers() {
@@ -227,6 +295,43 @@ public class Juego {
     }
 
     public static void main(String[] args) {
-        new Juego();
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+              try {
+                new Juego();
+              } catch (Exception e) {
+                e.printStackTrace();
+              }
+            }
+          });
     }
+    
+    public void actualizar_ranking() {
+    	int contador_puntos = Mario.get_instancia().get_puntaje();
+    	
+        //Si no hay un input de nombre, se registra al jugador como invitado
+        if (nombre_jugador != null && !nombre_jugador.trim().isEmpty()) {
+        ranking.agregar_jugador(nombre_jugador, contador_puntos);
+        }
+        else {
+        	ranking.agregar_jugador("Invitado", contador_puntos);
+        }
+     }
+    
+    public void detener_hilos() {
+        esta_ejecutando = false;
+        
+        try {
+            if (hilo_mario_movimiento != null) {
+                hilo_mario_movimiento.join();
+            }
+            if (hilo_enemigos_movimiento != null) {
+                hilo_enemigos_movimiento.join();
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }    
+    
+    
 }

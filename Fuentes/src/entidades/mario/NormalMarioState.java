@@ -1,5 +1,6 @@
 package entidades.mario;
 
+import entidades.BolaDeFuego;
 import entidades.enemigos.Enemigo;
 
 public class NormalMarioState implements Mario.MarioState {
@@ -32,17 +33,48 @@ public class NormalMarioState implements Mario.MarioState {
     }
     
     public void actualizar_sprite() {
-    	System.out.println(mario.get_velocidad_x());
-        if (mario.get_velocidad_x() < 0) {
-        	mario.cambiar_sprite(mario.get_sprite_factory().get_mario_movimiento_izquierda());
-        } else if (mario.get_velocidad_x() > 0) {
-        	mario.cambiar_sprite(mario.get_sprite_factory().get_mario_movimiento_derecha());
-        } else if(mario.get_velocidad_x() == 0){
-        	mario.cambiar_sprite(mario.get_movimiento_derecha() ? mario.get_sprite_factory().get_mario_ocioso_derecha() : mario.get_sprite_factory().get_mario_ocioso_izquierda());
+    	if(mario.esta_saltando() || mario.get_velocidad_y() < 0) { // Saltando o cayendo (velocidad negativa)
+        	mario.cambiar_sprite(mario.get_movimiento_derecha() ?
+        			mario.get_sprite_factory().get_mario_saltando_derecha() : 
+        			mario.get_sprite_factory().get_mario_saltando_izquierda());
+        } else if (mario.get_velocidad_x() != 0 && !mario.esta_saltando()) {
+        	mario.cambiar_sprite(mario.get_movimiento_derecha() ? 
+                    mario.get_sprite_factory().get_mario_movimiento_derecha() : 
+                    mario.get_sprite_factory().get_mario_movimiento_izquierda());
+        } else {
+        	 mario.cambiar_sprite(mario.get_movimiento_derecha() ? 
+                     mario.get_sprite_factory().get_mario_ocioso_derecha() : 
+                     mario.get_sprite_factory().get_mario_ocioso_izquierda());
         }
-        //else if(mario.get_velocidad_en_y() > 0)
-        	//mario.cambiar_sprite(mario.get_movimiento_derecha() == 1 ? mario.get_sprite_factory().get_mario_saltando_derecha() : mario.get_sprite_factory().get_mario_saltando_izquierda());
     }
+
+	@Override
+	public void finalizar_invulnerabilidad() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean mata_tocando() {
+		return false;
+	}
+
+	@Override
+	public boolean rompe_bloque() {
+		return false;
+	}
+
+	@Override
+	public boolean colision_con_enemigo(Enemigo e) {
+		mario.get_sistema_puntuacion().sumar_puntos(mario.calcular_penalizacion_enemigo(e));
+        mario.get_sistema_vidas().quitar_vida();
+		return true;
+	}
+
+	@Override
+	public BolaDeFuego disparar() {
+		return null;
+	}
 
 }
 

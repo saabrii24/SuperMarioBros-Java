@@ -42,6 +42,7 @@ public class Mapa {
     public List<BolaDeFuego> get_entidades_proyectiles() {
         return entidades_proyectiles;
     }
+    
     public void agregar_mario(Mario mario) {
         this.mario = mario;
     }
@@ -79,11 +80,25 @@ public class Mapa {
     public void eliminar_bola_de_fuego(BolaDeFuego bola_de_fuego) {
     	entidades_proyectiles.remove(bola_de_fuego);
     }
-
+    
+    
     public void resetear_mapa() {
-        entidades_enemigo.clear();
-        entidades_plataforma.clear();
-        entidades_powerup.clear();
+        for (Enemigo enemigo : entidades_enemigo) enemigo.destruir();
+        	entidades_enemigo.clear();
+        
+        for (Plataforma plataforma : entidades_plataforma) plataforma.destruir();
+        	entidades_plataforma.clear();
+        
+        for (PowerUp powerup : entidades_powerup) powerup.destruir();
+        	entidades_powerup.clear();
+        
+        for (BolaDeFuego bolaDeFuego : entidades_proyectiles) bolaDeFuego.destruir();
+        	entidades_proyectiles.clear();
+        
+        if (mario != null) mario.destruir();
+        
+        
+
     }
 
     public boolean nivel_completado() {

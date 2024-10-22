@@ -67,18 +67,18 @@ public class PanelPantallaPrincipal extends JPanel {
     }
 
     protected void actualizar_icono_seleccion() {
-        int xOffset = (ConstantesVistas.PANEL_ANCHO / 2) - 240;
-        int yOffset = 0;
+        int x_offset = (ConstantesVistas.PANEL_ANCHO / 2) - 240;
+        int y_offset = 0;
 
         switch (opcion_actual) {
             case COMENZAR_JUEGO:
-                yOffset = ConstantesVistas.PANEL_ALTO - 320 + 10;
+            	y_offset = ConstantesVistas.PANEL_ALTO - 320 + 10;
                 break;
             case RANKING:
-                yOffset = ConstantesVistas.PANEL_ALTO - 255 + 10;
+            	y_offset = ConstantesVistas.PANEL_ALTO - 255 + 10;
                 break;
         }
-        icono_seleccion.setLocation(xOffset, yOffset);
+        icono_seleccion.setLocation(x_offset, y_offset);
     }
 
     protected void agregar_boton_iniciar() {
@@ -101,7 +101,7 @@ public class PanelPantallaPrincipal extends JPanel {
         boton_ayuda = new JButton(" ");
         transparentar_boton(boton_ayuda);
         boton_ayuda.setBounds(ConstantesVistas.PANEL_ANCHO - 180, 15, 150, 50);
-        boton_ayuda.addActionListener(e -> controlador_vistas.mostrar_pantalla_ayuda());
+        boton_ayuda.addActionListener(e -> controlador_vistas.accionar_pantalla_ayuda());
         add(boton_ayuda);
     }
 
@@ -148,7 +148,6 @@ public class PanelPantallaPrincipal extends JPanel {
     
     protected void mantener_seleccion(MenuOpciones opcion) {
         this.opcion_actual = opcion;
-        actualizar_icono_seleccion(); // Actualizar el icono de selección al seleccionar un personaje
-        
+        actualizar_icono_seleccion();
     }
 }

@@ -34,7 +34,80 @@ public abstract class SpritesFactory {
 	public Sprite get_mario_saltando_izquierda() {
 		return cargar_sprite("saltando_izquierda.png");
 	}
+	
+	public Sprite get_mario_star_ocioso_derecha() {
+        return cargar_sprite("star_ocioso_derecha.png");
+    }
+	
+	public Sprite get_mario_star_ocioso_izquierda() {
+        return cargar_sprite("star_ocioso_izquierda.png");
+    }
+	
+	public Sprite get_mario_star_movimiento_derecha() {
+        return cargar_sprite("star_movimiento_derecha.gif");
+    }
+	
+	public Sprite get_mario_star_movimiento_izquierda() {
+        return cargar_sprite("star_movimiento_izquierda.gif");
+    }
+	
+	public Sprite get_mario_star_saltando_derecha() {
+        return cargar_sprite("star_saltando_derecha.png");
+    }
+	
+	public Sprite get_mario_star_saltando_izquierda() {
+        return cargar_sprite("star_saltando_izquierda.png");
+    }
 
+	public Sprite get_supermario_ocioso_derecha() {
+		return cargar_sprite("supermario_ocioso_derecha.png");
+	}
+	
+	public Sprite get_supermario_ocioso_izquierda() {
+		return cargar_sprite("supermario_ocioso_izquierda.png");
+	}
+	
+	public Sprite get_supermario_movimiento_derecha() {
+		return cargar_sprite("supermario_movimiento_derecha.gif");
+	}
+	
+	public Sprite get_supermario_movimiento_izquierda() {
+		return cargar_sprite("supermario_movimiento_izquierda.gif");
+	}
+	
+	public Sprite get_supermario_saltando_derecha() {
+		return cargar_sprite("supermario_saltando_derecha.png");
+	}
+	
+	public Sprite get_supermario_saltando_izquierda() {
+		return cargar_sprite("supermario_saltando_izquierda.png");
+	}
+	
+	public Sprite get_supermario_star_ocioso_derecha() {
+		return cargar_sprite("supermario_star_ocioso_derecha.png");
+	}
+	
+	public Sprite get_supermario_star_ocioso_izquierda() {
+		return cargar_sprite("supermario_star_ocioso_izquierda.png");
+	}
+	
+	public Sprite get_supermario_star_movimiento_derecha() {
+		return cargar_sprite("supermario_star_movimiento_derecha.gif");
+	}
+	
+	public Sprite get_supermario_star_movimiento_izquierda() {
+		return cargar_sprite("supermario_star_movimiento_izquierda.gif");
+	}
+	
+	public Sprite get_supermario_star_saltando_derecha() {
+		return cargar_sprite("supermario_star_saltando_derecha.png");
+	}
+	
+	public Sprite get_supermario_star_saltando_izquierda() {
+		return cargar_sprite("supermario_star_saltando_izquierda.png");
+	}
+	
+	
     public Sprite get_goomba() {
         return cargar_sprite("goomba.gif");
     }
@@ -48,7 +121,7 @@ public abstract class SpritesFactory {
     }
 
     public Sprite get_piranha_plant() {
-        return cargar_sprite("pirania.png");
+        return cargar_sprite("piranha.gif");
     }
 
     public Sprite get_lakitu() {
@@ -56,26 +129,26 @@ public abstract class SpritesFactory {
     }
 
     public Sprite get_spiny_movimiento_derecha() {
-        return cargar_sprite("spiny.png");
+        return cargar_sprite("spiny.gif");
     }
     public Sprite get_spiny_movimiento_izquierda() {
-        return cargar_sprite("spiny.png");
+        return cargar_sprite("spiny.gif");
     }
 
     public Sprite get_buzzy_movimiento_derecha() {
-        return cargar_sprite("buzzy_izquierda.png");
+        return cargar_sprite("buzzy_izquierda.gif");
     }
     
     public Sprite get_buzzy_movimiento_izquierda() {
-        return cargar_sprite("buzzy_izquierda.png");
+        return cargar_sprite("buzzy_derecha.gif");
     }
 
     public Sprite get_super_champi() {
-        return cargar_sprite("super_champi.png");
+        return cargar_sprite("superchampi.png");
     }
 
     public Sprite get_flor_de_fuego() {
-        return cargar_sprite("flor_de_fuego.png");
+        return cargar_sprite("flor_de_fuego.gif");
     }
 
     public Sprite get_estrella() {
@@ -113,5 +186,8 @@ public abstract class SpritesFactory {
     public Sprite get_bola_de_fuego() {
         return cargar_sprite("bola_de_fuego.gif");
     }
-
+    
+    public Sprite get_imagen_mapa() {
+        return cargar_sprite("mapa.png");
+    }
 }

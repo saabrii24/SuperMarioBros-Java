@@ -1,3 +1,4 @@
+
 package logica;
 
 import gui.ConstantesVistas;

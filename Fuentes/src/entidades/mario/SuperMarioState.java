@@ -45,11 +45,13 @@ public class SuperMarioState implements Mario.MarioState {
         mario.cambiar_estado(new NormalMarioState(mario));
         return false; // Mario no mata al enemigo, pero tampoco no pierde una vida
     }
+    
     public boolean colision_con_enemigo(Enemigo enemigo) {
     	mario.get_sistema_puntuacion().sumar_puntos(mario.calcular_penalizacion_enemigo(enemigo));
     	mario.cambiar_estado(new NormalMarioState(mario));
     	return false;
     }
+    
 	@Override
 	public void finalizar_invulnerabilidad() {
 	}
@@ -58,7 +60,6 @@ public class SuperMarioState implements Mario.MarioState {
 		return true;
 	}
 	
-
 	@Override
 	public boolean mata_tocando() {
 		return false;

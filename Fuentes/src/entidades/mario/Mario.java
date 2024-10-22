@@ -205,8 +205,7 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
 		get_sistema_vidas().sumar_vida();
 	}
 
-
-    	int calcular_puntaje_enemigo(Enemigo enemigo) {
+    int calcular_puntaje_enemigo(Enemigo enemigo) {
         return switch (enemigo.getClass().getSimpleName()) {
             case "Goomba" -> 60;
             case "KoopaTroopa" -> 90;
@@ -240,17 +239,17 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
 	}
 
 	@Override
-	public void visitar(FlorDeFuego florDeFuego) {
+	public void visitar(FlorDeFuego flor_de_fuego) {
 		estado.consumir_flor_de_fuego();
 	}
 
 	@Override
-	public void visitar(SuperChampi superChampi) {
+	public void visitar(SuperChampi super_champi) {
 		estado.consumir_super_champi();
 	}
 
 	@Override
-	public void visitar(ChampiVerde champiVerde) {
+	public void visitar(ChampiVerde champi_verde) {
 		consumir_champi_verde();
 	}
 
@@ -266,9 +265,11 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
 	public void finalizar_invulnerabilidad() {
 		estado.finalizar_invulnerabilidad();
 	}
+	
 	public  boolean mata_tocando() {
 		return estado.mata_tocando();
 	}
+	
 	public boolean rompe_bloque() {
 		return estado.rompe_bloque();
 	}

@@ -13,10 +13,10 @@ public class Mapa {
 	
 	protected Juego mi_juego;
 	protected Mario mario;
-	protected CopyOnWriteArrayList<Enemigo> entidades_enemigo;
-	protected CopyOnWriteArrayList<PowerUp> entidades_powerup;
-	protected CopyOnWriteArrayList<Plataforma> entidades_plataforma;
-	protected CopyOnWriteArrayList<BolaDeFuego> entidades_proyectiles;
+	protected List<Enemigo> entidades_enemigo;
+	protected List<PowerUp> entidades_powerup;
+	protected List<Plataforma> entidades_plataforma;
+	protected List<BolaDeFuego> entidades_proyectiles;
 	
 	
 	public Mapa(Juego juego) {
@@ -63,7 +63,7 @@ public class Mapa {
         if (bola_de_fuego != null) {
             entidades_proyectiles.add(bola_de_fuego);
             Observer observer = mi_juego.controlador_vistas.registrar_entidad(bola_de_fuego);
-            mi_juego.controlador_vistas.reproducir_efecto("fireball");
+            reproducir_efecto("fireball");
             bola_de_fuego.registrar_observer(observer);
         }
     }
@@ -80,7 +80,6 @@ public class Mapa {
     public void eliminar_bola_de_fuego(BolaDeFuego bola_de_fuego) {
     	entidades_proyectiles.remove(bola_de_fuego);
     }
-    
     
     public void resetear_mapa() {
         for (Enemigo enemigo : entidades_enemigo) enemigo.destruir();

@@ -189,9 +189,7 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
         estado.actualizar_sprite();
     }
 
-	protected void cambiar_sprite(Sprite nuevo_sprite) {
-        this.sprite = nuevo_sprite;
-    }
+	protected void cambiar_sprite(Sprite nuevo_sprite) { this.sprite = nuevo_sprite; }
 
  // Métodos de interacción y puntaje
     
@@ -205,6 +203,7 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
 		get_sistema_vidas().sumar_vida();
 	}
 
+	// ----- IMPLEMENTAR CON VISITOR -----
     int calcular_puntaje_enemigo(Enemigo enemigo) {
         return switch (enemigo.getClass().getSimpleName()) {
             case "Goomba" -> 60;
@@ -224,57 +223,23 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
         };
     }
 
+    // ------------------------------------
+    
     public void caer_en_vacio() {
     	get_sistema_puntuacion().restar_puntos(15);
     	get_sistema_vidas().quitar_vida();
     }
 
-    public BolaDeFuego disparar() {
-        return estado.disparar();
-    }
-
-	@Override
-	public void visitar(Moneda moneda) {
-		consumir_moneda();
-	}
-
-	@Override
-	public void visitar(FlorDeFuego flor_de_fuego) {
-		estado.consumir_flor_de_fuego();
-	}
-
-	@Override
-	public void visitar(SuperChampi super_champi) {
-		estado.consumir_super_champi();
-	}
-
-	@Override
-	public void visitar(ChampiVerde champi_verde) {
-		consumir_champi_verde();
-	}
-
-	@Override
-	public void visitar(Estrella estrella) {
-		estado.consumir_estrella();
-	}
-
-	public void resetear_posicion() {
-		this.set_posicion(96, 600);
-	}
+	public void visitar(Moneda moneda) { consumir_moneda(); }
+	public void visitar(FlorDeFuego flor_de_fuego) { estado.consumir_flor_de_fuego(); }
+	public void visitar(SuperChampi super_champi) { estado.consumir_super_champi(); }
+	public void visitar(ChampiVerde champi_verde) { consumir_champi_verde(); }
+	public void visitar(Estrella estrella) { estado.consumir_estrella(); }
 	
-	public void finalizar_invulnerabilidad() {
-		estado.finalizar_invulnerabilidad();
-	}
-	
-	public  boolean mata_tocando() {
-		return estado.mata_tocando();
-	}
-	
-	public boolean rompe_bloque() {
-		return estado.rompe_bloque();
-	}
-	
-	public boolean colision_con_enemigo(Enemigo e) {
-		return estado.colision_con_enemigo(e);
-	}
+    public BolaDeFuego disparar() { return estado.disparar(); }
+    public void resetear_posicion() { this.set_posicion(96, 600); }
+	public void finalizar_invulnerabilidad() { estado.finalizar_invulnerabilidad(); }	
+	public  boolean mata_tocando() { return estado.mata_tocando(); }	
+	public boolean rompe_bloque() { return estado.rompe_bloque(); }
+	public boolean colision_con_enemigo(Enemigo e) { return estado.colision_con_enemigo(e); }
 }

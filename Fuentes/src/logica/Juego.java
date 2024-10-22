@@ -24,22 +24,24 @@ public class Juego {
     public static final int DERECHA = 15003;
     public static final int DISPARAR = 15004;
 
-    protected ControladorDeVistas controlador_vistas;
-    protected boolean reiniciando_nivel = false;
-    protected Nivel nivel_actual;
-    protected SpritesFactory fabrica_sprites;
-    protected EntidadesFactory fabrica_entidades;
-    protected Mapa mapa_nivel_actual;
-    protected int tiempo_restante;
-    protected volatile boolean esta_ejecutando;
     protected Thread hilo_mario_movimiento;
     protected Thread hilo_enemigos_movimiento;
-    protected volatile int direccion_mario;
-    protected boolean observer_registrado = false;
+    
+    protected SpritesFactory fabrica_sprites;
+    protected EntidadesFactory fabrica_entidades;
+    protected ControladorDeVistas controlador_vistas;
+    protected Nivel nivel_actual;
+    protected Mapa mapa_nivel_actual;
     protected Colisionador controlador_colisiones;
-    protected int nivel_a_cargar;
     protected Ranking ranking;
     protected String nombre_jugador;
+
+    protected boolean reiniciando_nivel = false;
+    protected int tiempo_restante;
+    protected volatile boolean esta_ejecutando;
+    protected volatile int direccion_mario;
+    protected boolean observer_registrado = false;
+    protected int nivel_a_cargar;
 
     public Juego() {
         iniciar();
@@ -57,6 +59,10 @@ public class Juego {
         nombre_jugador = JOptionPane.showInputDialog(null, "Nombre del jugador: ", "Registrar jugador", JOptionPane.PLAIN_MESSAGE);
 
     }
+    
+    public Nivel get_nivel_actual() { return nivel_actual; }
+    public Mapa get_mapa_nivel_actual() { return mapa_nivel_actual; }
+    public void reproducir_efecto(String efecto) { controlador_vistas.reproducir_efecto(efecto); }
 
     public synchronized void iniciar_hilos_movimiento() {
         if (esta_ejecutando) {
@@ -122,14 +128,14 @@ public class Juego {
     private void mover_mario() {
         Mario mario = Mario.get_instancia();
         synchronized(mario) {
-            mario.mover();
+            
             if(mario.get_dimension() != null) { 
                 controlador_colisiones.verificar_colision_mario(mario);
                 mario.finalizar_invulnerabilidad();
-                if (controlador_colisiones.get_murio_mario() && !reiniciando_nivel) {
-                	reiniciar_nivel();
-                }
+                if (controlador_colisiones.get_murio_mario() && !reiniciando_nivel) reiniciar_nivel();            
             }
+            
+            mario.mover();
             
             //cambiar nivel al llegar al castillo
             if(mario.get_posicion_en_x() >= 4410) {
@@ -152,9 +158,9 @@ public class Juego {
         List<Enemigo> enemigos = new ArrayList<>(mapa_nivel_actual.get_entidades_enemigo());
         for (Enemigo enemigo : enemigos) {
             synchronized(enemigo) {
-                try {
-                    enemigo.mover();
+                try {                 
                     controlador_colisiones.verificar_colision_enemigo(enemigo);
+                    enemigo.mover();
                 } catch (Exception e) {
                     // Si la entidad fue eliminada mientras iterábamos
                     continue;
@@ -167,9 +173,9 @@ public class Juego {
         List<BolaDeFuego> proyectiles = new ArrayList<>(mapa_nivel_actual.get_entidades_proyectiles());
         for (BolaDeFuego proyectil : proyectiles) {
             synchronized(proyectil) {
-                try {
-                    proyectil.mover();
+                try {                  
                     controlador_colisiones.verificar_colision_proyectil(proyectil);
+                    proyectil.mover();
                 } catch (Exception e) {
                     // Si el proyectil fue eliminado mientras iterábamos
                     continue;
@@ -188,9 +194,7 @@ public class Juego {
 
     private void notificar_observadores_mario() {
         Mario mario = Mario.get_instancia();
-        if (mario != null) {
-            mario.notificar_observer();
-        }
+        mario.notificar_observer();
     }
 
     private void notificar_observadores_entidades(List<? extends Entidad> entidades) {
@@ -272,26 +276,14 @@ public class Juego {
     }
 
     protected void registrar_observers_para_entidades(List<? extends Entidad> entidades) {
-        // Crear una copia de la lista para evitar ConcurrentModificationException
-        List<? extends Entidad> entidadesCopia = new ArrayList<>(entidades);
-        for (Entidad entidad : entidadesCopia) {
+        // Crea una copia de la lista para evitar ConcurrentModificationException
+        List<? extends Entidad> entidades_copia = new ArrayList<>(entidades);
+        for (Entidad entidad : entidades_copia) {
             synchronized(entidad) {
                 Observer observer = controlador_vistas.registrar_entidad(entidad);
                 entidad.registrar_observer(observer);
             }
         }
-    }
-
-    public Nivel get_nivel_actual() {
-        return nivel_actual;
-    }
-
-    public Mapa get_mapa_nivel_actual() {
-        return mapa_nivel_actual;
-    }
-
-    public void reproducir_efecto(String efecto) {
-        controlador_vistas.reproducir_efecto(efecto);
     }
 
     public static void main(String[] args) {

@@ -174,11 +174,6 @@ public class Colisionador {
         return limites_plataformas;
     }
     
-    public boolean get_murio_mario() {
-    	return murio_mario;
-    }
-    
-    public void set_murio_mario(boolean b) {
-    	murio_mario = b;
-    }
-    }
+    public boolean get_murio_mario() { return murio_mario; }    
+    public void set_murio_mario(boolean b) { murio_mario = b; }
+}

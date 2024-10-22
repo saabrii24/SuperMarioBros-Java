@@ -119,8 +119,7 @@ public class ControladorDeVistas implements ControladorJuegoVistaEntidades, Cont
                     case KeyEvent.VK_W:
                     case KeyEvent.VK_UP:
                     	Mario.get_instancia().saltar();
-                    	if(!Mario.get_instancia().esta_cayendo())
-                    		mi_juego.reproducir_efecto("jump-small");
+                    	//mi_juego.reproducir_efecto("jump-small");
                     	break;
                     case KeyEvent.VK_SPACE:
                     	long currentTime = System.currentTimeMillis();
@@ -155,7 +154,6 @@ public class ControladorDeVistas implements ControladorJuegoVistaEntidades, Cont
         });
     }
 
-
     public void accionar_pantalla_inicial() {
         ventana.setContentPane(panel_pantalla_principal);
         panel_pantalla_principal.setFocusable(true);
@@ -171,7 +169,7 @@ public class ControladorDeVistas implements ControladorJuegoVistaEntidades, Cont
         ventana.setContentPane(panel_pantalla_mapa);
         panel_pantalla_mapa.setFocusable(true);
         panel_pantalla_mapa.requestFocusInWindow(); 
-        sonido_juego.activar_sonido();
+        sonido_juego.desactivar_sonido();
         refrescar();
     }
     
@@ -180,7 +178,6 @@ public class ControladorDeVistas implements ControladorJuegoVistaEntidades, Cont
         refrescar();
     }
 
-    @Override
     public void accionar_pantalla_ranking() {
         ventana.setContentPane(panel_pantalla_ranking);
         refrescar();
@@ -204,36 +201,24 @@ public class ControladorDeVistas implements ControladorJuegoVistaEntidades, Cont
         return observer_entidad;
     }
 
-
-    @Override
     public Observer registrar_entidad(EntidadJugador entidad_jugador) {
     	Observer observer_jugador = panel_pantalla_mapa.incorporar_entidad_jugador(entidad_jugador, mi_juego.get_nivel_actual());
     	refrescar();
         return observer_jugador;
     }
 
-	@Override
 	public void accionar_pantalla_victoria() {
 		ventana.setContentPane(panel_pantalla_victoria);
         refrescar();
 	}
 
-	@Override
 	public void accionar_pantalla_derrota() {
 		ventana.setContentPane(panel_pantalla_derrota);
         refrescar();
 	}
 
-	public void notificar_eleccion(EntidadesFactory generador) {
-		mi_juego.cargar_datos(generador);
-	}
-
-	public PanelPantallaMapa get_pantalla_mapa() {
-		return panel_pantalla_mapa;
-	}
-
-	public void reproducir_efecto(String efecto) {
-		sonido_juego.reproducir_efecto(efecto);
-	}
+	public void notificar_eleccion(EntidadesFactory generador) { mi_juego.cargar_datos(generador); }
+	public PanelPantallaMapa get_pantalla_mapa() { return panel_pantalla_mapa; }
+	public void reproducir_efecto(String efecto) { sonido_juego.reproducir_efecto(efecto); }
 
 }

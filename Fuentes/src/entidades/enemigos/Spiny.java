@@ -14,7 +14,7 @@ public class Spiny extends Enemigo{
 		set_velocidad_en_x(3);
 	}
 
-    protected void actualizar_posicion() {
+	public void actualizar() {
         if (cayendo) {
             velocidad_en_y += GRAVEDAD;
             posicion_en_y -= velocidad_en_y;
@@ -33,20 +33,17 @@ public class Spiny extends Enemigo{
     }
 
     protected void mover_izquierda() {
-        this.velocidad_en_x = -3;
+        this.velocidad_en_x = -2;
         movimiento_derecha = false;
-        actualizar_posicion();
     }
 
     protected void mover_derecha() {
-        this.velocidad_en_x = 3;
+        this.velocidad_en_x = 2;
         movimiento_derecha = true;
-        actualizar_posicion();
     }
 
     protected void detener_movimiento() {
         this.velocidad_en_x = 0;
-        actualizar_posicion();
     }
 
 	private void actualizar_sprite() {

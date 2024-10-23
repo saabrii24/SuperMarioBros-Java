@@ -61,8 +61,7 @@ public abstract class ObserverGrafico extends JLabel implements Observer {
         int alto = this.getIcon().getIconHeight();
         setBounds(x, y, ancho, alto);
     }
-    
-    @Override
+
     public void paintComponent(Graphics g) {
         super.paintComponent(g); // Llama al método original para pintar la imagen
 

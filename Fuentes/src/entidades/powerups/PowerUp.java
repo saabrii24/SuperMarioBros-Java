@@ -21,4 +21,8 @@ public abstract class PowerUp extends Entidad{
             destruir();
         }
     }
+
+	public void actualizar() {
+		
+	}
 }

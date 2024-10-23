@@ -17,7 +17,6 @@ public class BolaDeFuego extends EntidadMovible {
     }
 
 	public void mover() {
-        this.actualizar_posicion();
         this.notificar_observer();
     }
     
@@ -29,7 +28,7 @@ public class BolaDeFuego extends EntidadMovible {
         }
     }
 
-    protected void actualizar_posicion() {
+    public void actualizar() {
         if (cayendo) {
             velocidad_en_y += GRAVEDAD;
             posicion_en_y -= velocidad_en_y;

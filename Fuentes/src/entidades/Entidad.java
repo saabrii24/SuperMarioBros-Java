@@ -53,7 +53,7 @@ public abstract class Entidad extends JComponent implements EntidadLogica {
         if (observer != null) observer.actualizar();
     }
 
-    // Métodos de colisiones
+    // Métodos de la hitbox
     public Rectangle get_limites() {
         return new Rectangle(
             (int)posicion_en_x, 
@@ -63,42 +63,43 @@ public abstract class Entidad extends JComponent implements EntidadLogica {
         );
     }
     
-    public Rectangle get_limites_superiores() {
-        return new Rectangle(
-            (int)posicion_en_x + dimension.width / 4, 
-            (int)posicion_en_y, 
-            dimension.width / 2, 
-            dimension.height / 4
-        );
-    }
-    
-    public Rectangle get_limites_inferiores() {
-        return new Rectangle(
-            (int)posicion_en_x + dimension.width / 4, 
-            (int)posicion_en_y + dimension.height - dimension.height / 4,
-            dimension.width / 2, 
-            dimension.height / 4
-        );
-    }
-    
-    public Rectangle get_limites_izquierda() {
-        return new Rectangle(
-            (int)posicion_en_x, 
-            (int)posicion_en_y + dimension.height / 4,
-            dimension.width / 8, 
-            dimension.height / 2
-        );
-    }
-    
-    public Rectangle get_limites_derecha() {
-        return new Rectangle(
-            (int)posicion_en_x + 7 * dimension.width / 8,
-            (int)posicion_en_y + dimension.height / 4,
-            dimension.width / 8, 
-            dimension.height / 2
-        );
-    }
+	public Rectangle get_limites_inferiores() {
+	    return new Rectangle(
+	        (int)posicion_en_x + dimension.width / 8,
+	        (int)posicion_en_y + dimension.height - dimension.height / 4,
+	        dimension.width * 3/4,
+	        dimension.height / 4
+	    );
+	}
+	
+	public Rectangle get_limites_superiores() {
+	    return new Rectangle(
+	        (int)posicion_en_x + dimension.width / 8,
+	        (int)posicion_en_y,
+	        dimension.width * 3/4,
+	        dimension.height / 4
+	    );
+	}
 
+	public Rectangle get_limites_izquierda() {
+	    return new Rectangle(
+	        (int)posicion_en_x,
+	        (int)posicion_en_y + dimension.height / 4,
+	        dimension.width / 4,
+	        dimension.height / 2
+	    );
+	}
+
+	public Rectangle get_limites_derecha() {
+	    return new Rectangle(
+	        (int)posicion_en_x + 3 * dimension.width / 4, 
+	        (int)posicion_en_y + dimension.height / 4,
+	        dimension.width / 4, 
+	        dimension.height / 2
+	    );
+	}
+
+	// Para borrar la entidad del mapa
     public void destruir() {
         destruida = true;
         if (observer != null) {

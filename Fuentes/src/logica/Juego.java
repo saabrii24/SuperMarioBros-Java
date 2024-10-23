@@ -32,7 +32,6 @@ public class Juego {
     protected ControladorDeVistas controlador_vistas;
     protected Nivel nivel_actual;
     protected Mapa mapa_nivel_actual;
-    protected Colisionador controlador_colisiones;
     protected Ranking ranking;
     protected String nombre_jugador;
 
@@ -53,7 +52,6 @@ public class Juego {
         Mario.get_instancia().set_fabrica_sprites(fabrica_sprites);
         fabrica_entidades = new EntidadesFactory(fabrica_sprites);
         controlador_vistas = new ControladorDeVistas(this);
-        controlador_colisiones = new Colisionador(mapa_nivel_actual);
         nivel_a_cargar = 1;
         ranking = new Ranking();
         nombre_jugador = JOptionPane.showInputDialog(null, "Nombre del jugador: ", "Registrar jugador", JOptionPane.PLAIN_MESSAGE);
@@ -128,15 +126,17 @@ public class Juego {
     private void mover_mario() {
         Mario mario = Mario.get_instancia();
         synchronized(mario) {
-            
             if(mario.get_dimension() != null) { 
-                controlador_colisiones.verificar_colision_mario(mario);
+            	
+            	mario.actualizar();
+            	mapa_nivel_actual.actualizar_entidades();
+
                 mario.finalizar_invulnerabilidad();
-                if (controlador_colisiones.get_murio_mario() && !reiniciando_nivel) reiniciar_nivel();            
+                if (mapa_nivel_actual.get_colisionador().get_murio_mario() && !reiniciando_nivel) reiniciar_nivel();            
             }
             
             mario.mover();
-            
+
             //cambiar nivel al llegar al castillo
             if(mario.get_posicion_en_x() >= 4410) {
             	nivel_a_cargar++;
@@ -159,7 +159,6 @@ public class Juego {
         for (Enemigo enemigo : enemigos) {
             synchronized(enemigo) {
                 try {                 
-                    controlador_colisiones.verificar_colision_enemigo(enemigo);
                     enemigo.mover();
                 } catch (Exception e) {
                     // Si la entidad fue eliminada mientras iterábamos
@@ -174,8 +173,9 @@ public class Juego {
         for (BolaDeFuego proyectil : proyectiles) {
             synchronized(proyectil) {
                 try {                  
-                    controlador_colisiones.verificar_colision_proyectil(proyectil);
+                    //controlador_colisiones.verificar_colision_proyectil(proyectil);
                     proyectil.mover();
+                    //proyectil.actualizar();
                 } catch (Exception e) {
                     // Si el proyectil fue eliminado mientras iterábamos
                     continue;
@@ -238,7 +238,7 @@ public class Juego {
         
         tiempo_restante = nivel_actual.get_tiempo_restante();
         Mario.get_instancia().get_sistema_puntuacion().restar_puntos(Mario.get_instancia().get_puntaje()); 
-        controlador_colisiones.set_murio_mario(false);
+        mapa_nivel_actual.get_colisionador().set_murio_mario(false);
         controlador_vistas.refrescar();
         reiniciando_nivel = false;
     }

@@ -12,7 +12,7 @@ public class Lakitu extends Enemigo{
 		//TO DO
 	}
 
-	protected void actualizar_posicion() {
+	public void actualizar() {
 		//TO DO
 	}
 

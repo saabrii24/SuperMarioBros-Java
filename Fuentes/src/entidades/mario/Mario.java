@@ -35,10 +35,6 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
     
     private boolean movimiento_horizontal_bloqueado;
     private boolean movimiento_vertical_bloqueado;
-
-    // Atributos de movimiento
-    private double velocidad_en_x;
-    private double velocidad_en_y;
     
     // Constructor privado del Singleton
     private Mario(double x, double y, Sprite sprite) {
@@ -69,18 +65,10 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
     	void consumir_flor_de_fuego();
     	void finalizar_invulnerabilidad();
 		void actualizar_sprite();
-		
     }
 
     // Getters
-    public double get_velocidad_x() { // Este getter es porque no anda el de entidad movible a la hora de actualizar los sprites de Mario
-    	return velocidad_en_x;
-    }
-    
-    public double get_velocidad_y() { // Este getter es porque no anda el de entidad movible a la hora de actualizar los sprites de Mario
-    	return velocidad_en_y;
-    }
-    
+   
     public SistemaPuntuacion get_sistema_puntuacion() { return sistema_puntuacion; }
     public SistemaVidas get_sistema_vidas() { return sistema_vidas; }
     public int get_direccion() { return direccion; }
@@ -138,35 +126,30 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
     private void mover_a_derecha() {
         velocidad_en_x = 5;
         movimiento_derecha = true;
-        actualizar_posicion();
     }
 
     private void mover_a_izquierda() {
         velocidad_en_x = -5;
         movimiento_derecha = false;
-        actualizar_posicion();
     }
 
     private void detener_movimiento_horizontal() {
         velocidad_en_x = 0;
-        actualizar_posicion();
     }
 
     private void detener_movimiento_vertical() {
     	velocidad_en_y = 0;
-    	actualizar_posicion();
     }
     
     public void saltar() {
         if (!saltando && contador_saltos < 1) {
-        	contador_saltos+= 1;
         	saltando = true;
-        	velocidad_en_y = -7; // Velocidad inicial del salto
-        	actualizar_posicion();
+        	contador_saltos++;
+        	velocidad_en_y = -8; // Velocidad inicial del salto
         }
     }
     
-    public void actualizar_posicion() {
+    public void actualizar() {
         if (cayendo) {
         	velocidad_en_y += EntidadMovible.GRAVEDAD;
             posicion_en_y -= velocidad_en_y;

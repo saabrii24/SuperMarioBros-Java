@@ -68,7 +68,8 @@ public class FireMarioState implements Mario.MarioState {
 	}
 
 	public BolaDeFuego disparar() {
-		return new BolaDeFuego(mario.get_posicion_en_x(), mario.get_posicion_en_y(), mario.get_sprite_factory().get_bola_de_fuego());
+		return new BolaDeFuego(mario.get_posicion_en_x(), mario.get_posicion_en_y()+26,
+				mario.get_sprite_factory().get_bola_de_fuego());
 	}
 	
 }

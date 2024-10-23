@@ -15,7 +15,7 @@ public class PiranhaPlant extends Enemigo{
 	}
 
 	@Override
-	protected void actualizar_posicion() {
+	public void actualizar() {
 		// TODO Auto-generated method stub
 		
 	}

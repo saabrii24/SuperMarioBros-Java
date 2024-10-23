@@ -17,5 +17,8 @@ public abstract class Plataforma extends Entidad{
             destruir();
         }
     }
-	
+	public void actualizar() {
+		
+	}
+
 }

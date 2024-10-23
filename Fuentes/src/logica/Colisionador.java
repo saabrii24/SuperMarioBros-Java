@@ -1,11 +1,9 @@
 package logica;
 
 import entidades.mario.Mario;
-import entidades.mario.NormalMarioState;
 import entidades.plataformas.Plataforma;
 import entidades.powerups.PowerUp;
 import entidades.BolaDeFuego;
-import entidades.Entidad;
 import entidades.EntidadMovible;
 import entidades.enemigos.Enemigo;
 
@@ -15,58 +13,95 @@ import java.util.ArrayList;
 
 public class Colisionador {
     private Mapa mapa;
-    boolean murio_mario = false;
+    private boolean murio_mario;
 
     public Colisionador(Mapa mapa) {
         this.mapa = mapa;
+        this.murio_mario = false;
     }
 
-    // Verifica colisiones para Mario
-    public synchronized void verificar_colision_mario(Mario mario) {
-        manejar_colision_con_plataformas(mario);
-        manejar_colision_con_enemigos(mario);
-        manejar_colision_con_power_up(mario);
-    }
-    
-    // Verifica colisiones con Power Ups
-    public synchronized void manejar_colision_con_power_up(Mario mario) {
-    	List<PowerUp> entidades_power_up= new ArrayList<>(mapa.get_entidades_powerup());
-		for(PowerUp power_up:entidades_power_up) {
-			if( mario.get_limites().intersects(power_up.get_limites())) {
-				power_up.aceptar(mario);
-				power_up.destruir(mapa);
-			}
-		}
-	}
-
-    // Verifica colisiones para Enemigos
-    public synchronized void verificar_colision_enemigo(Enemigo enemigo) {
-        manejar_colision_vertical(enemigo);
-        manejar_colision_horizontal(enemigo);
+    public void verificar_colisiones(Juego juego) {
+        Mario mario = Mario.get_instancia();
+        
+        // Verificar todas las colisiones en orden de prioridad
+        verificar_colisiones_con_plataformas(mario);
+        verificar_colisiones_con_enemigos(mario);
+        verificar_colisiones_con_powerups(mario);
+        verificar_colisiones_proyectiles();
     }
 
-    // Verifica colisiones para proyectiles (Bola de Fuego)
-    public synchronized void verificar_colision_proyectil(BolaDeFuego proyectil) {
-        if (colisiona_con_plataforma(proyectil.get_limites())) {
-            proyectil.destruir(mapa);
-        } else {
-            manejar_colision_con_enemigos(proyectil);
+    private void verificar_colisiones_con_plataformas(Mario mario) {
+        // Colisiones verticales
+    	verificar_colision_bajo_plataformas(mario);
+        verificar_colision_sobre_plataformas(mario);
+        
+        // Colisiones horizontales
+        verificar_colision_horizontal_con_plataformas(mario);
+        
+        // Colisiones de Enemigos con plataformas
+        for (Enemigo enemigo : mapa.get_entidades_enemigo()) {
+        	manejar_colision_vertical(enemigo);
+            manejar_colision_horizontal(enemigo);
         }
     }
 
-    // Manejo de colisiones entre el proyectil y los enemigos
-    private void manejar_colision_con_enemigos(BolaDeFuego proyectil) {
-        for (Enemigo enemigo : new ArrayList<>(mapa.get_entidades_enemigo())) {
-            if (proyectil.get_limites().intersects(enemigo.get_limites())) {
-                enemigo.destruir(mapa);
-                proyectil.destruir(mapa);
+    private void verificar_colision_bajo_plataformas(Mario mario) {
+        Rectangle limites_inferiores = mario.get_limites_inferiores();
+        boolean colision_detectada = false;
+
+        for (Plataforma plataforma : mapa.get_entidades_plataforma()) {
+            if (limites_inferiores.intersects(plataforma.get_limites_superiores())) {
+                colision_detectada = true;
+                mario.set_posicion_en_y(plataforma.get_posicion_en_y() - mario.get_dimension().height + 1);
+                mario.set_cayendo(true);
+                mario.set_velocidad_en_y(0);
+                if (mario.rompe_bloque()) {
+                    plataforma.destruir(mapa);
+                }
+                break;
+            }
+        }
+
+        if (!colision_detectada && !mario.esta_saltando()) {
+            mario.set_cayendo(true);
+        }
+    }
+
+    private void verificar_colision_sobre_plataformas(Mario mario) {
+        Rectangle limites_superiores = mario.get_limites_superiores();
+        
+        for (Plataforma plataforma : mapa.get_entidades_plataforma()) {
+            if (limites_superiores.intersects(plataforma.get_limites_inferiores())) {
+            	mario.set_contador_saltos(0);
+                mario.set_velocidad_en_y(0);  
+                mario.set_posicion_en_y(plataforma.get_posicion_en_y() + plataforma.get_dimension().height);
                 break;
             }
         }
     }
 
-    // Manejo de colisiones entre Mario y los enemigos
-    private void manejar_colision_con_enemigos(Mario mario) {
+    private void verificar_colision_horizontal_con_plataformas(Mario mario) {
+        boolean hacia_derecha = mario.get_movimiento_derecha();
+        Rectangle limites_laterales = hacia_derecha ? 
+            mario.get_limites_derecha() : mario.get_limites_izquierda();
+
+        for (Plataforma plataforma : mapa.get_entidades_plataforma()) {
+            Rectangle limites_plataforma = !hacia_derecha ? 
+                plataforma.get_limites_derecha() : plataforma.get_limites_izquierda();
+
+            if (limites_laterales.intersects(limites_plataforma)) {
+                mario.set_velocidad_en_x(0);
+                if (hacia_derecha) {
+                    mario.set_posicion_en_x(plataforma.get_posicion_en_x() - mario.get_dimension().width);
+                } else {
+                    mario.set_posicion_en_x(plataforma.get_posicion_en_x() + plataforma.get_dimension().width);
+                }
+                break;
+            }
+        }
+    }
+
+    private void verificar_colisiones_con_enemigos(Mario mario) {
         for (Enemigo enemigo : new ArrayList<>(mapa.get_entidades_enemigo())) {
         	if (mario.mata_tocando()) {
         		if (mario.get_limites().intersects(enemigo.get_limites())) {
@@ -89,6 +124,36 @@ public class Colisionador {
         }
     }
 
+    private void verificar_colisiones_con_powerups(Mario mario) {
+    	List<PowerUp> entidades_power_up= new ArrayList<>(mapa.get_entidades_powerup());
+		for(PowerUp power_up:entidades_power_up) {
+			if( mario.get_limites().intersects(power_up.get_limites())) {
+				power_up.aceptar(mario);
+				power_up.destruir(mapa);
+			}
+		}
+    }
+
+    private void verificar_colisiones_proyectiles() {
+        List<BolaDeFuego> proyectiles = new ArrayList<>(mapa.get_entidades_proyectiles());
+        for (BolaDeFuego proyectil : proyectiles) {
+            // Colisión con plataformas
+            if (colisiona_con_plataforma(proyectil.get_limites())) {
+                proyectil.destruir(mapa);
+                continue;
+            }
+
+            // Colisión con enemigos
+            for (Enemigo enemigo : new ArrayList<>(mapa.get_entidades_enemigo())) {
+                if (proyectil.get_limites().intersects(enemigo.get_limites())) {
+                    enemigo.destruir(mapa);
+                    proyectil.destruir(mapa);
+                    break;
+                }
+            }
+        }
+    }
+    
     // Manejo de colisiones verticales para entidades movibles
     private void manejar_colision_vertical(EntidadMovible entidad) {
         boolean colision_superior = colisiona_con_plataforma(entidad.get_limites_superiores());
@@ -105,75 +170,15 @@ public class Colisionador {
         }
     }
 
-    // Manejo de colisiones entre Mario y las plataformas
-    private void manejar_colision_con_plataformas(Mario mario) {
-        boolean colision_derecha = colisiona_con_plataforma(mario.get_limites_derecha());
-        boolean colision_izquierda = colisiona_con_plataforma(mario.get_limites_izquierda());
-        boolean colision_inferior = colisiona_con_plataforma(mario.get_limites_inferiores());
-
-        boolean colision_superior = colisiona_con_plataforma(mario.get_limites_superiores());
-
-        manejar_colision_horizontal_mario(mario, colision_derecha, colision_izquierda);
-        manejar_colision_vertical_mario(mario, colision_superior, colision_inferior);
-    }
-
-    private void manejar_colision_horizontal_mario(Mario mario, boolean colision_derecha, boolean colision_izquierda) {
-        if (colision_derecha || colision_izquierda) {
-            mario.bloquear_movimiento_horizontal();
-            mario.set_posicion_en_x(mario.get_posicion_en_x() + (colision_derecha ? -0.5 : 0.5));
-        } else {
-            mario.activar_movimiento_horizontal();
-        }
-    }
-
-    private void manejar_colision_vertical_mario(Mario mario, boolean colision_superior, boolean colision_inferior) {
-        if (colision_superior) {
-            mario.bloquear_movimiento_vertical();
-            mario.set_posicion_en_y(mario.get_posicion_en_y() + 0.5);
-            mario.set_contador_saltos(0);
-        } else {
-            mario.activar_movimiento_vertical();
-        }
-        if(colision_inferior) {
-        	 mario.bloquear_movimiento_vertical();
-             mario.set_posicion_en_y(mario.get_posicion_en_y() - 0.5);
-             if(mario.rompe_bloque()) {
-            	 romper_plataforma_debajo_de_mario(mario);
-            	
-             }
-        }
-    }
-    private void romper_plataforma_debajo_de_mario(Mario mario) {
-        List<Plataforma> plataformas = mapa.get_entidades_plataforma();
-        for (Plataforma plataforma : plataformas) {
-            if (plataforma.get_limites().intersects(mario.get_limites_inferiores())) {
-                plataforma.destruir(mapa); // Romper la plataforma
-                break;
-            }
-        }
-    }
-
-    // Verifica si hay colisión con cualquier plataforma
     private boolean colisiona_con_plataforma(Rectangle limites) {
-        for (Rectangle plataforma : obtener_limites_de_plataformas()) {
-            if (plataforma.intersects(limites)) {
+        for (Plataforma plataforma : mapa.get_entidades_plataforma()) {
+            if (plataforma.get_limites().intersects(limites)) {
                 return true;
             }
-            
         }
         return false;
     }
-    // Obtiene los límites de todas las plataformas en el mapa
-    private List<Rectangle> obtener_limites_de_plataformas() {
-        List<Rectangle> limites_plataformas = new ArrayList<>();
-        synchronized (mapa.get_entidades_plataforma()) {
-            for (var plataforma : mapa.get_entidades_plataforma()) {
-                limites_plataformas.add(plataforma.get_limites());
-            }
-        }
-        return limites_plataformas;
-    }
-    
+
     public boolean get_murio_mario() { return murio_mario; }    
-    public void set_murio_mario(boolean b) { murio_mario = b; }
+    public void set_murio_mario(boolean murio) { murio_mario = murio; }
 }

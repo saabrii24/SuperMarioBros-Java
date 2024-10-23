@@ -5,7 +5,7 @@ import fabricas.Sprite;
 
 public abstract class EntidadMovible extends Entidad implements Movible {
 
-	protected static final double GRAVEDAD = 0.15;
+	protected static final double GRAVEDAD = 0.25;
     protected double velocidad_en_x, velocidad_en_y;
     protected boolean cayendo, saltando, movimiento_derecha;
     protected int direccion;
@@ -54,6 +54,8 @@ public abstract class EntidadMovible extends Entidad implements Movible {
     public void set_direccion(int direccion) {
         this.direccion = direccion;
     }
+    
+    public void set_movimiento_derecha(boolean movimiento_derecha) { this.movimiento_derecha = movimiento_derecha; }
 
     public void set_saltando(boolean saltando) {
         this.saltando = saltando;
@@ -69,5 +71,5 @@ public abstract class EntidadMovible extends Entidad implements Movible {
 
     @Override
     public abstract void mover();
-    protected abstract void actualizar_posicion();
+    public abstract void actualizar();
 }

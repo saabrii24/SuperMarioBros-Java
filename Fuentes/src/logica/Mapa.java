@@ -17,6 +17,7 @@ public class Mapa {
 	protected List<PowerUp> entidades_powerup;
 	protected List<Plataforma> entidades_plataforma;
 	protected List<BolaDeFuego> entidades_proyectiles;
+	protected Colisionador colisionador;
 	
 	
 	public Mapa(Juego juego) {
@@ -25,8 +26,29 @@ public class Mapa {
         this.entidades_powerup = new CopyOnWriteArrayList<>();
         this.entidades_plataforma = new CopyOnWriteArrayList<>();
         this.entidades_proyectiles = new CopyOnWriteArrayList<>();
+        this.colisionador = new Colisionador(this);
 	}
+	
+    public void actualizar_entidades() {
+    
+        for (Enemigo enemigo : entidades_enemigo) {
+            enemigo.actualizar();
+        }
+        for (PowerUp powerup : entidades_powerup) {
+            powerup.actualizar();
+        }
+        for (Plataforma plataforma : entidades_plataforma) {
+            plataforma.actualizar();
+        }
+        for (BolaDeFuego proyectil : entidades_proyectiles) {
+            proyectil.actualizar();
+        }
 
+        colisionador.verificar_colisiones(mi_juego);
+    }
+    
+	public Colisionador get_colisionador() { return colisionador; }
+	
     public List<Enemigo> get_entidades_enemigo() {
         return entidades_enemigo;
     }
@@ -95,35 +117,12 @@ public class Mapa {
         	entidades_proyectiles.clear();
         
         if (mario != null) mario.destruir();
-        
-        
 
     }
 
     public boolean nivel_completado() {
 
     	return false;
-    }
-
-    public void chequear_colisiones() {
-        /*
-        for (Entidad entidad : entidades) {
-            if (entidad.matar_si_hay_colision(mario)) {
-                entidad.destruir();
-            }
-        }
-        */
-    }
-
-   // public void eliminar_entidad(Entidad entidad_a_eliminar) {
-    //    entidades.remove(entidad_a_eliminar);
-    //}
-    
-    public void actualizar_entidades() {
-        if (mario != null) {
-            mario.actualizar_posicion();
-        }
-        chequear_colisiones();
     }
     
     public void reproducir_efecto(String efecto) {

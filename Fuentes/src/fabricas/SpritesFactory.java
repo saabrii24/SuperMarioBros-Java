@@ -160,7 +160,7 @@ public abstract class SpritesFactory {
     }
 
     public Sprite get_moneda() {
-        return cargar_sprite("moneda.png");
+        return cargar_sprite("moneda.gif");
     }
 
     public Sprite get_bloque_solido() {
@@ -173,6 +173,10 @@ public abstract class SpritesFactory {
 
     public Sprite get_bloque_de_pregunta() {
         return cargar_sprite("bloque_de_pregunta.gif");
+    }
+    
+    public Sprite get_bloque_de_pregunta_destruido() {
+    	return cargar_sprite("bloque_de_pregunta_destruido.png");
     }
 
     public Sprite get_tuberias() {

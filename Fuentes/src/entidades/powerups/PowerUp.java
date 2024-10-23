@@ -3,6 +3,7 @@ package entidades.powerups;
 import entidades.Entidad;
 import fabricas.Sprite;
 import logica.Mapa;
+import logica.Observer;
 
 public abstract class PowerUp extends Entidad{
 
@@ -24,5 +25,15 @@ public abstract class PowerUp extends Entidad{
 
 	public void actualizar() {
 		
+	}
+
+	public void revelar() {
+		this.set_posicion_en_y(this.get_posicion_en_y() + 48);
+		observer.actualizar();
+		
+	}
+
+	public Observer get_observer() {
+		return observer;
 	}
 }

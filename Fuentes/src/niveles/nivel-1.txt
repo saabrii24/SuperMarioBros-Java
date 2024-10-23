@@ -40,8 +40,8 @@ Tiempo: 100
 	BloqueSolido: 336, 96
 	BloqueSolido: 384, 96
 	BloqueSolido: 432, 96
-	BloqueSolido: 480, 96
-	BloqueSolido: 528, 96
+	#BloqueSolido: 480, 96
+	#BloqueSolido: 528, 96
 	BloqueSolido: 576, 96
 	BloqueSolido: 624, 96
 	BloqueSolido: 672, 96
@@ -147,16 +147,16 @@ Tiempo: 100
 	BloqueSolido: 5376, 192
 	BloqueSolido: 5376, 240
 	BloqueSolido: 5376, 288
-	#Vacio: 480, 48
-	#Vacio: 480, 96
+	Vacio: 480, 0
+	Vacio: 480, 48
 	
-	BloqueDePregunta: 672, 288
+	BloqueDePreguntaConMoneda: 672, 288
 	LadrilloSolido: 864, 288
-	BloqueDePregunta: 912, 288
+	BloqueDePreguntaConSuperChampi: 912, 288
 	LadrilloSolido: 960, 288
-	BloqueDePregunta: 1008, 288
+	BloqueDePreguntaConFlorDeFuego: 1008, 288
 	LadrilloSolido: 1056, 288
-	BloqueDePregunta: 960, 480
+	BloqueDePreguntaConEstrella: 960, 480
 	
 
 # Definición del mapa

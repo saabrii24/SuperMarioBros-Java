@@ -18,6 +18,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class Juego {
+	private static Juego instancia_juego;
 
     public static final int SALTAR = 15000;
     public static final int IZQUIERDA = 15001;
@@ -42,8 +43,15 @@ public class Juego {
     protected boolean observer_registrado = false;
     protected int nivel_a_cargar;
 
-    public Juego() {
+    private Juego() {
         iniciar();
+    }
+    
+    public static Juego get_instancia() {
+        if (instancia_juego == null) {
+        	instancia_juego = new Juego();
+        }
+        return instancia_juego ;
     }
 
     private void iniciar() {
@@ -150,6 +158,10 @@ public class Juego {
             		mario.set_estado(new NormalMarioState(mario));
             	}
             }
+            if(mario.get_posicion_en_y() < 0) {
+            	mapa_nivel_actual.get_colisionador().set_murio_mario(true);
+            	mario.destruir();
+            }
             
         }
     }
@@ -189,7 +201,11 @@ public class Juego {
         notificar_observadores_entidades(mapa_nivel_actual.get_entidades_enemigo());
         notificar_observadores_entidades(mapa_nivel_actual.get_entidades_powerup());
         notificar_observadores_entidades(mapa_nivel_actual.get_entidades_proyectiles());
-        notificar_observadores_entidades(mapa_nivel_actual.get_entidades_plataforma());
+        notificar_observadores_entidades(mapa_nivel_actual.get_entidades_bloque_de_pregunta());
+        notificar_observadores_entidades(mapa_nivel_actual.get_entidades_bloque_solido());
+        notificar_observadores_entidades(mapa_nivel_actual.get_entidades_ladrillo_solido());
+        notificar_observadores_entidades(mapa_nivel_actual.get_entidades_tuberias());
+        notificar_observadores_entidades(mapa_nivel_actual.get_entidades_vacio());
     }
 
     private void notificar_observadores_mario() {
@@ -266,7 +282,11 @@ public class Juego {
         registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_enemigo());
         registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_proyectiles());
         registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_powerup());
-        registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_plataforma());
+        registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_bloque_de_pregunta());
+        registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_bloque_solido());
+        registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_ladrillo_solido());
+        registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_tuberias());
+        registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_vacio());
     }
 
     protected void registrar_observer_jugador(Mario jugador_mario) {
@@ -290,7 +310,7 @@ public class Juego {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
               try {
-                new Juego();
+                Juego.get_instancia();
               } catch (Exception e) {
                 e.printStackTrace();
               }
@@ -325,5 +345,8 @@ public class Juego {
         }
     }    
     
+    public SpritesFactory get_fabrica_sprites() {
+    	return fabrica_sprites;
+    }
     
 }

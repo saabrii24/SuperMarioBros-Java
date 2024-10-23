@@ -111,19 +111,30 @@ public class GeneradorNivel {
 				
 		//PLATAFORMAS
 			case "BloqueSolido":
-				mapa.agregar_plataforma(generador.get_bloque_solido(x, y));
+				mapa.agregar_bloque_solido(generador.get_bloque_solido(x, y));
 				break;
 			case "LadrilloSolido":
-				mapa.agregar_plataforma(generador.get_ladrillo_solido(x, y));
+				mapa.agregar_ladrillo_solido(generador.get_ladrillo_solido(x, y));
 				break;
-			case "BloqueDePregunta":
-				mapa.agregar_plataforma(generador.get_bloque_de_pregunta(x, y));
+			case "BloqueDePreguntaConMoneda":
+				mapa.agregar_bloque_de_pregunta(generador.get_bloque_de_pregunta(x, y, generador.get_moneda(x, y)));
 				break;
+			case "BloqueDePreguntaConChampiVerde" :
+				mapa.agregar_bloque_de_pregunta(generador.get_bloque_de_pregunta(x, y, generador.get_champi_verde(x, y)));
+				break;
+			case "BloqueDePreguntaConFlorDeFuego" :
+				mapa.agregar_bloque_de_pregunta(generador.get_bloque_de_pregunta(x, y, generador.get_flor_de_fuego(x, y)));
+				break;
+			case "BloqueDePreguntaConSuperChampi" : 
+				mapa.agregar_bloque_de_pregunta(generador.get_bloque_de_pregunta(x, y, generador.get_super_champi(x, y)));
+				break;
+			case "BloqueDePreguntaConEstrella" :
+				mapa.agregar_bloque_de_pregunta(generador.get_bloque_de_pregunta(x, y, generador.get_estrella(x, y)));
 			case "Vacio":
-				mapa.agregar_plataforma(generador.get_vacio(x, y));
+				mapa.agregar_vacio(generador.get_vacio(x, y));
 				break;
 			case "Tuberia":
-				mapa.agregar_plataforma(generador.get_tuberias(x, y));
+				mapa.agregar_tuberia(generador.get_tuberias(x, y));
 				
 		//POWERUPS
 			case "Moneda":

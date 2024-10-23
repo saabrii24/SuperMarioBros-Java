@@ -1,7 +1,12 @@
 package logica;
 
 import entidades.mario.Mario;
+import entidades.plataformas.BloqueDePregunta;
+import entidades.plataformas.BloqueSolido;
+import entidades.plataformas.LadrilloSolido;
 import entidades.plataformas.Plataforma;
+import entidades.plataformas.Tuberias;
+import entidades.plataformas.Vacio;
 import entidades.powerups.PowerUp;
 import entidades.BolaDeFuego;
 import entidades.EntidadMovible;
@@ -49,18 +54,39 @@ public class Colisionador {
         Rectangle limites_inferiores = mario.get_limites_inferiores();
         boolean colision_detectada = false;
 
-        for (Plataforma plataforma : mapa.get_entidades_plataforma()) {
-            if (limites_inferiores.intersects(plataforma.get_limites_superiores())) {
+        for (BloqueSolido bloque_solido : mapa.get_entidades_bloque_solido()) {
+            if (limites_inferiores.intersects(bloque_solido.get_limites_superiores())) {
                 colision_detectada = true;
-                mario.set_posicion_en_y(plataforma.get_posicion_en_y() - mario.get_dimension().height + 1);
+                mario.set_posicion_en_y(bloque_solido.get_posicion_en_y() - mario.get_dimension().height + 1);
+                mario.set_cayendo(true);
+                mario.set_velocidad_en_y(0);
+                break;
+            }
+        }
+        for (BloqueDePregunta pregunta : mapa.get_entidades_bloque_de_pregunta()) {
+            if (limites_inferiores.intersects(pregunta.get_limites_superiores())) {
+                colision_detectada = true;
+                mario.set_posicion_en_y(pregunta.get_posicion_en_y() - mario.get_dimension().height + 1);
+                mario.set_cayendo(true);
+                mario.set_velocidad_en_y(0);
+                pregunta.destruir(mapa);
+                break;
+            }
+        }
+        for (LadrilloSolido ladrillo : mapa.get_entidades_ladrillo_solido()) {
+            if (limites_inferiores.intersects(ladrillo.get_limites_superiores())) {
+                colision_detectada = true;
+                mario.set_posicion_en_y(ladrillo.get_posicion_en_y() - mario.get_dimension().height + 1);
                 mario.set_cayendo(true);
                 mario.set_velocidad_en_y(0);
                 if (mario.rompe_bloque()) {
-                    plataforma.destruir(mapa);
+                    ladrillo.destruir(mapa);
                 }
                 break;
             }
         }
+        
+        
 
         if (!colision_detectada && !mario.esta_saltando()) {
             mario.set_cayendo(true);
@@ -70,12 +96,42 @@ public class Colisionador {
     private void verificar_colision_sobre_plataformas(Mario mario) {
         Rectangle limites_superiores = mario.get_limites_superiores();
         
-        for (Plataforma plataforma : mapa.get_entidades_plataforma()) {
-            if (limites_superiores.intersects(plataforma.get_limites_inferiores())) {
+        for (BloqueSolido bloque_solido : mapa.get_entidades_bloque_solido()) {
+            if (limites_superiores.intersects(bloque_solido.get_limites_inferiores())) {
             	mario.set_contador_saltos(0);
                 mario.set_velocidad_en_y(0);  
-                mario.set_posicion_en_y(plataforma.get_posicion_en_y() + plataforma.get_dimension().height);
+                mario.set_posicion_en_y(bloque_solido.get_posicion_en_y() + bloque_solido.get_dimension().height);
                 break;
+            }
+        }
+        for (BloqueDePregunta pregunta : mapa.get_entidades_bloque_de_pregunta()) {
+            if (limites_superiores.intersects(pregunta.get_limites_inferiores())) {
+            	mario.set_contador_saltos(0);
+                mario.set_velocidad_en_y(0);  
+                mario.set_posicion_en_y(pregunta.get_posicion_en_y() + pregunta.get_dimension().height);
+                break;
+            }
+        }
+        for (LadrilloSolido ladrillo_solido : mapa.get_entidades_ladrillo_solido()) {
+            if (limites_superiores.intersects(ladrillo_solido.get_limites_inferiores())) {
+            	mario.set_contador_saltos(0);
+                mario.set_velocidad_en_y(0);  
+                mario.set_posicion_en_y(ladrillo_solido.get_posicion_en_y() + ladrillo_solido.get_dimension().height);
+                break;
+            }
+        }
+        
+        for (Tuberias tuberia : mapa.get_entidades_tuberias()) {
+            if (limites_superiores.intersects(tuberia.get_limites_inferiores())) {
+            	mario.set_contador_saltos(0);
+                mario.set_velocidad_en_y(0);  
+                mario.set_posicion_en_y(tuberia.get_posicion_en_y() + tuberia.get_dimension().height);
+                break;
+            }
+        }
+        for (Vacio vacio : mapa.get_entidades_vacio()) {
+            if (limites_superiores.intersects(vacio.get_limites_inferiores())) {
+            	mario.set_cayendo(true);
             }
         }
     }
@@ -85,21 +141,78 @@ public class Colisionador {
         Rectangle limites_laterales = hacia_derecha ? 
             mario.get_limites_derecha() : mario.get_limites_izquierda();
 
-        for (Plataforma plataforma : mapa.get_entidades_plataforma()) {
+        for (BloqueSolido bloque_solido : mapa.get_entidades_bloque_solido()) {
             Rectangle limites_plataforma = !hacia_derecha ? 
-                plataforma.get_limites_derecha() : plataforma.get_limites_izquierda();
+                bloque_solido.get_limites_derecha() : bloque_solido.get_limites_izquierda();
 
             if (limites_laterales.intersects(limites_plataforma)) {
                 mario.set_velocidad_en_x(0);
                 if (hacia_derecha) {
-                    mario.set_posicion_en_x(plataforma.get_posicion_en_x() - mario.get_dimension().width);
+                    mario.set_posicion_en_x(bloque_solido.get_posicion_en_x() - mario.get_dimension().width);
                 } else {
-                    mario.set_posicion_en_x(plataforma.get_posicion_en_x() + plataforma.get_dimension().width);
+                    mario.set_posicion_en_x(bloque_solido.get_posicion_en_x() + bloque_solido.get_dimension().width);
+                }
+                break;
+            }
+        }
+        for (BloqueDePregunta pregunta : mapa.get_entidades_bloque_de_pregunta()) {
+            Rectangle limites_plataforma = !hacia_derecha ? 
+                pregunta.get_limites_derecha() : pregunta.get_limites_izquierda();
+
+            if (limites_laterales.intersects(limites_plataforma)) {
+                mario.set_velocidad_en_x(0);
+                if (hacia_derecha) {
+                    mario.set_posicion_en_x(pregunta.get_posicion_en_x() - mario.get_dimension().width);
+                } else {
+                    mario.set_posicion_en_x(pregunta.get_posicion_en_x() + pregunta.get_dimension().width);
+                }
+                break;
+            }
+        }
+        for (LadrilloSolido ladrillo_solido : mapa.get_entidades_ladrillo_solido()) {
+            Rectangle limites_plataforma = !hacia_derecha ? 
+                ladrillo_solido.get_limites_derecha() : ladrillo_solido.get_limites_izquierda();
+
+            if (limites_laterales.intersects(limites_plataforma)) {
+                mario.set_velocidad_en_x(0);
+                if (hacia_derecha) {
+                    mario.set_posicion_en_x(ladrillo_solido.get_posicion_en_x() - mario.get_dimension().width);
+                } else {
+                    mario.set_posicion_en_x(ladrillo_solido.get_posicion_en_x() + ladrillo_solido.get_dimension().width);
+                }
+                break;
+            }
+        }
+        for (Tuberias tuberia : mapa.get_entidades_tuberias()) {
+            Rectangle limites_plataforma = !hacia_derecha ? 
+                tuberia.get_limites_derecha() : tuberia.get_limites_izquierda();
+
+            if (limites_laterales.intersects(limites_plataforma)) {
+                mario.set_velocidad_en_x(0);
+                if (hacia_derecha) {
+                    mario.set_posicion_en_x(tuberia.get_posicion_en_x() - mario.get_dimension().width);
+                } else {
+                    mario.set_posicion_en_x(tuberia.get_posicion_en_x() + tuberia.get_dimension().width);
+                }
+                break;
+            }
+        }
+        for (Vacio vacio : mapa.get_entidades_vacio()) {
+            Rectangle limites_plataforma = !hacia_derecha ? 
+                vacio.get_limites_derecha() : vacio.get_limites_izquierda();
+
+            if (limites_laterales.intersects(limites_plataforma)) {
+                mario.set_velocidad_en_x(0);
+                if (hacia_derecha) {
+                    mario.set_posicion_en_x(vacio.get_posicion_en_x() - mario.get_dimension().width);
+                } else {
+                    mario.set_posicion_en_x(vacio.get_posicion_en_x() + vacio.get_dimension().width);
                 }
                 break;
             }
         }
     }
+    
 
     private void verificar_colisiones_con_enemigos(Mario mario) {
         for (Enemigo enemigo : new ArrayList<>(mapa.get_entidades_enemigo())) {
@@ -171,10 +284,26 @@ public class Colisionador {
     }
 
     private boolean colisiona_con_plataforma(Rectangle limites) {
-        for (Plataforma plataforma : mapa.get_entidades_plataforma()) {
-            if (plataforma.get_limites().intersects(limites)) {
+        for (BloqueSolido bloque_solido : mapa.get_entidades_bloque_solido()) {
+            if (bloque_solido.get_limites().intersects(limites)) {
                 return true;
             }
+        }
+        for (BloqueDePregunta pregunta : mapa.get_entidades_bloque_de_pregunta()) {
+            if (pregunta.get_limites().intersects(limites)) {
+                return true;
+            }
+        }
+        for (LadrilloSolido ladrillo_solido : mapa.get_entidades_ladrillo_solido()) {
+            if (ladrillo_solido.get_limites().intersects(limites)) {
+                return true;
+            }
+        }
+        for (Tuberias tuberia : mapa.get_entidades_tuberias()) {
+            if (tuberia.get_limites().intersects(limites)) {
+                return true;
+            }
+        
         }
         return false;
     }

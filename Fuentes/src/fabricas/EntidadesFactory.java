@@ -78,9 +78,9 @@ public class EntidadesFactory {
         return new LadrilloSolido(x, y, sprite_ladrillo_solido);
     }
 
-    public BloqueDePregunta get_bloque_de_pregunta(int x, int y) {
+    public BloqueDePregunta get_bloque_de_pregunta(int x, int y, PowerUp powerup) {
         Sprite sprite_bloque_de_pregunta = fabrica_sprites.get_bloque_de_pregunta();
-        return new BloqueDePregunta(x, y, sprite_bloque_de_pregunta);
+        return new BloqueDePregunta(x, y, sprite_bloque_de_pregunta,powerup);
     }
 
     public Tuberias get_tuberias(int x, int y) {

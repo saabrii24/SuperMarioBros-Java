@@ -56,8 +56,6 @@ public class Juego {
         fabrica_entidades = new EntidadesFactory(fabrica_sprites);
         controlador_vistas = new ControladorDeVistas(this);
         nivel_a_cargar = 1;
-        ranking = new Ranking();
-        nombre_jugador = JOptionPane.showInputDialog(null, "Nombre del jugador: ", "Registrar jugador", JOptionPane.PLAIN_MESSAGE);
 
     }
     

@@ -36,13 +36,13 @@ public class Ranking implements Serializable {
         ranking.put(nombre, puntos);
 
         // Ordenar el ranking de mayor a menor puntaje
-        List<Map.Entry<String, Integer>> listaOrdenada = new ArrayList<>(ranking.entrySet());
-        listaOrdenada.sort((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()));
+        List<Map.Entry<String, Integer>> lista_ordenada = new ArrayList<>(ranking.entrySet());
+        lista_ordenada.sort((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()));
 
         // Limitar el ranking solo al top 5
         ranking.clear();
-        for (int i = 0; i < Math.min(5, listaOrdenada.size()); i++) {
-            Map.Entry<String, Integer> entry = listaOrdenada.get(i);
+        for (int i = 0; i < Math.min(5, lista_ordenada.size()); i++) {
+            Map.Entry<String, Integer> entry = lista_ordenada.get(i);
             ranking.put(entry.getKey(), entry.getValue());
         }
     }

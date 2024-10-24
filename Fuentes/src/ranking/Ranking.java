@@ -2,6 +2,7 @@ package ranking;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * La clase {@code Ranking} gestiona el sistema de clasificación de jugadores
@@ -19,7 +20,7 @@ public class Ranking implements Serializable {
      * Crea una instancia de {@code Ranking} con un mapa vacío para almacenar
      * los puntajes de los jugadores.
      */
-    public Ranking() {
+	public Ranking() {
         this.ranking = new LinkedHashMap<>();
     }
 
@@ -36,13 +37,13 @@ public class Ranking implements Serializable {
         ranking.put(nombre, puntos);
 
         // Ordenar el ranking de mayor a menor puntaje
-        List<Map.Entry<String, Integer>> listaOrdenada = new ArrayList<>(ranking.entrySet());
-        listaOrdenada.sort((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()));
+        List<Map.Entry<String, Integer>> lista_ordenada = new ArrayList<>(ranking.entrySet());
+        lista_ordenada.sort((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()));
 
         // Limitar el ranking solo al top 5
         ranking.clear();
-        for (int i = 0; i < Math.min(5, listaOrdenada.size()); i++) {
-            Map.Entry<String, Integer> entry = listaOrdenada.get(i);
+        for (int i = 0; i < Math.min(5, lista_ordenada.size()); i++) {
+            Map.Entry<String, Integer> entry = lista_ordenada.get(i);
             ranking.put(entry.getKey(), entry.getValue());
         }
     }
@@ -56,4 +57,5 @@ public class Ranking implements Serializable {
     public Map<String, Integer> get_sort_ranking() {
         return new LinkedHashMap<>(ranking);
     }
+    
 }

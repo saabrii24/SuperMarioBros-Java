@@ -1,4 +1,4 @@
-package gui.sonido;
+package gui;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;

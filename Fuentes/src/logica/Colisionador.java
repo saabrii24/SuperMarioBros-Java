@@ -4,7 +4,6 @@ import entidades.mario.Mario;
 import entidades.plataformas.BloqueDePregunta;
 import entidades.plataformas.BloqueSolido;
 import entidades.plataformas.LadrilloSolido;
-import entidades.plataformas.Plataforma;
 import entidades.plataformas.Tuberias;
 import entidades.plataformas.Vacio;
 import entidades.powerups.PowerUp;

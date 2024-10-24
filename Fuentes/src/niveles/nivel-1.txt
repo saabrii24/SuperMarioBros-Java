@@ -17,8 +17,8 @@ Tiempo: 100
 	Goomba: 700, 400
 	
 	# PowerUps
-	FlorDeFuego: 240, 144
-	Estrella: 290, 144
+	# FlorDeFuego: 240, 144
+	# Estrella: 290, 144
 	
 	# Plataformas
 
@@ -39,8 +39,13 @@ Tiempo: 100
 	BloqueSolido: 288, 96
 	BloqueSolido: 336, 96
 	BloqueSolido: 384, 96
+<<<<<<< HEAD
 	BloqueSolido: 432, 96
 	BloqueSolido: 480, 96
+=======
+	#BloqueSolido: 432, 96
+	#BloqueSolido: 480, 96
+>>>>>>> branch 'master' of https://github.com/2024-Proyectos-TdP-2C/p-comision-38.git
 	BloqueSolido: 528, 96
 	BloqueSolido: 576, 96
 	BloqueSolido: 624, 96
@@ -147,8 +152,12 @@ Tiempo: 100
 	BloqueSolido: 5376, 192
 	BloqueSolido: 5376, 240
 	BloqueSolido: 5376, 288
+<<<<<<< HEAD
 	#Vacio: 480, 0
 	#Vacio: 480, 48
+=======
+	Vacio: 432, 0
+>>>>>>> branch 'master' of https://github.com/2024-Proyectos-TdP-2C/p-comision-38.git
 	
 	BloqueDePreguntaConMoneda: 672, 288
 	LadrilloSolido: 864, 288
@@ -156,7 +165,7 @@ Tiempo: 100
 	LadrilloSolido: 960, 288
 	BloqueDePreguntaConFlorDeFuego: 1008, 288
 	LadrilloSolido: 1056, 288
-	BloqueDePreguntaConEstrella: 960, 480
+	BloqueDePreguntaConMoneda: 960, 480
 	
 
 # Definición del mapa

@@ -14,7 +14,6 @@ import entidades.powerups.PowerUpVisitor;
 import entidades.powerups.SuperChampi;
 import fabricas.Sprite;
 import fabricas.SpritesFactory;
-import logica.Mapa;
 
 public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisitor {
 	private static final long serialVersionUID = 1L;
@@ -211,6 +210,7 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
     public void caer_en_vacio() {
     	get_sistema_puntuacion().restar_puntos(15);
     	get_sistema_vidas().quitar_vida();
+    	
     }
 
 	public void visitar(Moneda moneda) { consumir_moneda(); }

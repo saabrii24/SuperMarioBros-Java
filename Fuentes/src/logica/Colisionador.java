@@ -4,7 +4,6 @@ import entidades.mario.Mario;
 import entidades.plataformas.BloqueDePregunta;
 import entidades.plataformas.BloqueSolido;
 import entidades.plataformas.LadrilloSolido;
-import entidades.plataformas.Plataforma;
 import entidades.plataformas.Tuberias;
 import entidades.plataformas.Vacio;
 import entidades.powerups.PowerUp;
@@ -132,6 +131,9 @@ public class Colisionador {
         for (Vacio vacio : mapa.get_entidades_vacio()) {
             if (limites_superiores.intersects(vacio.get_limites_inferiores())) {
             	mario.set_cayendo(true);
+            	murio_mario=true;
+            	mario.caer_en_vacio();
+            
             }
         }
     }

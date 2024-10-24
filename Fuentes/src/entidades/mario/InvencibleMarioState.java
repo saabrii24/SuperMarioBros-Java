@@ -53,7 +53,6 @@ public class InvencibleMarioState implements Mario.MarioState {
     }
 
     public void finalizar_invulnerabilidad() {
-    	System.out.println("entre aca");
         if (System.currentTimeMillis() - tiempo_inicio > DURACION_ESTRELLA) {
         	if (estado_anterior != null) {
         		mario.cambiar_estado(estado_anterior);

@@ -162,6 +162,8 @@ public class Juego {
             	mapa_nivel_actual.get_colisionador().set_murio_mario(true);
             	mario.destruir();
             }
+            if(mario.get_vidas()==0)
+            	controlador_vistas.accionar_pantalla_derrota();
             
         }
     }

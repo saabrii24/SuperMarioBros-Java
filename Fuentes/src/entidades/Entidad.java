@@ -11,7 +11,8 @@ import javax.swing.JComponent;
 import entidades.interfaces.EntidadLogica;
 
 public abstract class Entidad extends JComponent implements EntidadLogica {
-    protected Sprite sprite;
+	private static final long serialVersionUID = 1L;
+	protected Sprite sprite;
     protected double posicion_en_x, posicion_en_y;
     protected Dimension dimension;
     protected Observer observer;

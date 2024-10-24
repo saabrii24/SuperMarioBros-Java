@@ -131,9 +131,6 @@ public class Colisionador {
         for (Vacio vacio : mapa.get_entidades_vacio()) {
             if (limites_superiores.intersects(vacio.get_limites_inferiores())) {
             	mario.set_cayendo(true);
-            	murio_mario=true;
-            	mario.caer_en_vacio();
-            
             }
         }
     }

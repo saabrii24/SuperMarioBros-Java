@@ -160,6 +160,7 @@ public class Juego {
             }
             if(mario.get_posicion_en_y() < 0) {
             	mapa_nivel_actual.get_colisionador().set_murio_mario(true);
+            	mario.caer_en_vacio();
             	mario.destruir();
             }
             if(mario.get_vidas()==0)

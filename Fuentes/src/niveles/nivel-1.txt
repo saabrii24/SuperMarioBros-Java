@@ -161,7 +161,7 @@ Tiempo: 100
 	LadrilloSolido: 960, 288
 	BloqueDePreguntaConFlorDeFuego: 1008, 288
 	LadrilloSolido: 1056, 288
-	BloqueDePreguntaConMoneda: 960, 480
+	BloqueDePreguntaConEstrella: 960, 480
 	
 
 # Definición del mapa

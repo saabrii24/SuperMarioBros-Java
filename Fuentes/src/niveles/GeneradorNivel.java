@@ -130,11 +130,13 @@ public class GeneradorNivel {
 				break;
 			case "BloqueDePreguntaConEstrella" :
 				mapa.agregar_bloque_de_pregunta(generador.get_bloque_de_pregunta(x, y, generador.get_estrella(x, y)));
+				break;
 			case "Vacio":
 				mapa.agregar_vacio(generador.get_vacio(x, y));
 				break;
 			case "Tuberia":
 				mapa.agregar_tuberia(generador.get_tuberias(x, y));
+				break;
 				
 		//POWERUPS
 			case "Moneda":

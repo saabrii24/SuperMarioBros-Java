@@ -65,37 +65,39 @@ public abstract class ObserverGrafico extends JLabel implements Observer {
     public void paintComponent(Graphics g) {
         super.paintComponent(g); // Llama al método original para pintar la imagen
 
-        // Dibuja el contorno del rectángulo completo alrededor de la entidad
-        g.setColor(Color.RED);
-        Rectangle contorno = entidad_observada.get_limites();
-        g.drawRect((int) (contorno.x - entidad_observada.get_posicion_en_x()), 
-                   (int) (contorno.y - entidad_observada.get_posicion_en_y()), 
-                   contorno.width, contorno.height);
-
-        // Dibuja los rectángulos de colisión
-        g.setColor(Color.BLUE);
-        Rectangle inferiores = entidad_observada.get_limites_inferiores();
-        g.drawRect((int) (inferiores.x - entidad_observada.get_posicion_en_x()), 
-                   (int) (inferiores.y - entidad_observada.get_posicion_en_y()), 
-                   inferiores.width, inferiores.height);
-
-        g.setColor(Color.GREEN);
-        Rectangle superiores = entidad_observada.get_limites_superiores();
-        g.drawRect((int) (superiores.x - entidad_observada.get_posicion_en_x()), 
-                   (int) (superiores.y - entidad_observada.get_posicion_en_y()), 
-                   superiores.width, superiores.height);
-
-        g.setColor(Color.YELLOW);
-        Rectangle izquierda = entidad_observada.get_limites_izquierda();
-        g.drawRect((int) (izquierda.x - entidad_observada.get_posicion_en_x()), 
-                   (int) (izquierda.y - entidad_observada.get_posicion_en_y()), 
-                   izquierda.width, izquierda.height);
-
-        g.setColor(Color.MAGENTA);
-        Rectangle derecha = entidad_observada.get_limites_derecha();
-        g.drawRect((int) (derecha.x - entidad_observada.get_posicion_en_x()), 
-                   (int) (derecha.y - entidad_observada.get_posicion_en_y()), 
-                   derecha.width, derecha.height);
+        //----------------- Comentar para dejar de ver la hitbox ---------------------
+	        // Dibuja el contorno del rectángulo completo alrededor de la entidad
+	        g.setColor(Color.RED);
+	        Rectangle contorno = entidad_observada.get_limites();
+	        g.drawRect((int) (contorno.x - entidad_observada.get_posicion_en_x()), 
+	                   (int) (contorno.y - entidad_observada.get_posicion_en_y()), 
+	                   contorno.width, contorno.height);
+	
+	        // Dibuja los rectángulos de colisión
+	        g.setColor(Color.BLUE);
+	        Rectangle inferiores = entidad_observada.get_limites_inferiores();
+	        g.drawRect((int) (inferiores.x - entidad_observada.get_posicion_en_x()), 
+	                   (int) (inferiores.y - entidad_observada.get_posicion_en_y()), 
+	                   inferiores.width, inferiores.height);
+	
+	        g.setColor(Color.GREEN);
+	        Rectangle superiores = entidad_observada.get_limites_superiores();
+	        g.drawRect((int) (superiores.x - entidad_observada.get_posicion_en_x()), 
+	                   (int) (superiores.y - entidad_observada.get_posicion_en_y()), 
+	                   superiores.width, superiores.height);
+	
+	        g.setColor(Color.YELLOW);
+	        Rectangle izquierda = entidad_observada.get_limites_izquierda();
+	        g.drawRect((int) (izquierda.x - entidad_observada.get_posicion_en_x()), 
+	                   (int) (izquierda.y - entidad_observada.get_posicion_en_y()), 
+	                   izquierda.width, izquierda.height);
+	
+	        g.setColor(Color.MAGENTA);
+	        Rectangle derecha = entidad_observada.get_limites_derecha();
+	        g.drawRect((int) (derecha.x - entidad_observada.get_posicion_en_x()), 
+	                   (int) (derecha.y - entidad_observada.get_posicion_en_y()), 
+	                   derecha.width, derecha.height);
+	     // ------------------------------------------------------------------------------- */
     }
 
 }

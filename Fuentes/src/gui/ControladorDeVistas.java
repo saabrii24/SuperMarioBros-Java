@@ -11,7 +11,6 @@ import entidades.interfaces.EntidadJugador;
 import entidades.interfaces.EntidadLogica;
 import entidades.mario.Mario;
 import fabricas.EntidadesFactory;
-import gui.sonido.Sonido;
 import logica.*;
 
 public class ControladorDeVistas implements ControladorJuegoVistaEntidades, ControladorJuegoVistaPaneles {
@@ -119,7 +118,6 @@ public class ControladorDeVistas implements ControladorJuegoVistaEntidades, Cont
                     case KeyEvent.VK_W:
                     case KeyEvent.VK_UP:
                     	Mario.get_instancia().saltar();
-                    	//mi_juego.reproducir_efecto("jump-small");
                     	break;
                     case KeyEvent.VK_SPACE:
                     	long currentTime = System.currentTimeMillis();

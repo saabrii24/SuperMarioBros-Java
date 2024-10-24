@@ -429,7 +429,7 @@ public class Colisionador {
             // Colisión con enemigos
             for (Goomba goomba : new ArrayList<>(mapa.get_entidades_goomba())) {
                 if (koopa.get_limites().intersects(goomba.get_limites())) {
-                    goomba.destruir();
+                    goomba.destruir(mapa);
                     break;
                 }
             }
@@ -453,7 +453,7 @@ public class Colisionador {
             }
             for (Spiny spiny : new ArrayList<>(mapa.get_entidades_spiny())) {
                 if (koopa.get_limites().intersects(spiny.get_limites())) {
-                    spiny.destruir();
+                    spiny.destruir(mapa);
                     break;
                 }
             }

@@ -332,6 +332,11 @@ public class Juego {
 
     private void registrar_observers() {
         registrar_observer_jugador(Mario.get_instancia());
+        registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_bloque_de_pregunta());
+        registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_bloque_solido());
+        registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_ladrillo_solido());
+        registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_tuberias());
+        registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_vacio());
         registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_buzzy_beetle());
         registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_goomba());
         registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_koopa_troopa());
@@ -340,11 +345,7 @@ public class Juego {
         registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_spiny());
         registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_proyectiles());
         registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_powerup());
-        registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_bloque_de_pregunta());
-        registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_bloque_solido());
-        registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_ladrillo_solido());
-        registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_tuberias());
-        registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_vacio());
+
     }
 
     protected void registrar_observer_jugador(Mario jugador_mario) {

@@ -1,6 +1,9 @@
 package gui;
 
 import javax.swing.*;
+
+import ranking.Ranking;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -11,35 +14,21 @@ public class PanelPantallaRanking extends JPanel {
     private ControladorDeVistas controlador_vistas;
     private JLabel imagen_fondo;
     private JButton boton_volver;
-    private JTextField Nombre1;
-    private JTextField Puntos1;
-    private JTextField Nombre2;
-    private JTextField Puntos2;
-    private JTextField Nombre3;
-    private JTextField Puntos3;
-    private JTextField Nombre4;
-    private JTextField Puntos4;
-    private JTextField Nombre5;
-    private JTextField Puntos5;
+    private Ranking ranking;
 
     public PanelPantallaRanking(ControladorDeVistas controlador_vistas) {
         this.controlador_vistas = controlador_vistas;
         setSize(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
         setLayout(null);
-        
+        mostrar_ranking();
         agregar_imagen_fondo();
-        mostrar_ranking(); // Llamar a un método que muestra los puntajes
         agregar_boton_volver();
         volver_con_esc();
     }
 
-    protected void agregar_imagen_fondo() {
-        imagen_fondo = new JLabel();
-        ImageIcon icono_imagen = new ImageIcon(this.getClass().getResource("/assets/imagenes/pantalla-ranking.png")); // Reemplaza con tu imagen
-        Image imagen_escalada = icono_imagen.getImage().getScaledInstance(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO, Image.SCALE_SMOOTH);
-        Icon icono_imagen_escalado = new ImageIcon(imagen_escalada);
-        // Jugador 1
-        Nombre1 = new JTextField("Jugador 1");
+    private void mostrar_ranking() {
+    	// Jugador 1
+    	JTextField Nombre1 = new JTextField("Jugador 1");
         Nombre1.setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 30));
         Nombre1.setColumns(10);
         Nombre1.setBackground(new Color(236, 77, 0));
@@ -47,7 +36,7 @@ public class PanelPantallaRanking extends JPanel {
         Nombre1.setBounds(438, 118, 252, 38);
         add(Nombre1);
         
-        Puntos1 = new JTextField("1900");
+        JTextField Puntos1 = new JTextField("1900");
         Puntos1.setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 30));
         Puntos1.setBackground(new Color(236, 77, 0));
         Puntos1.setForeground(new Color(255, 255, 255));
@@ -56,7 +45,7 @@ public class PanelPantallaRanking extends JPanel {
         Puntos1.setColumns(10);
         
         // Jugador 2
-        Nombre2 = new JTextField("Jugador 2");
+        JTextField Nombre2 = new JTextField("Jugador 2");
         Nombre2.setForeground(Color.WHITE);
         Nombre2.setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 30));
         Nombre2.setColumns(10);
@@ -64,7 +53,7 @@ public class PanelPantallaRanking extends JPanel {
         Nombre2.setBounds(438, 164, 252, 38);
         add(Nombre2);
         
-        Puntos2 = new JTextField("1900");
+        JTextField Puntos2 = new JTextField("1900");
         Puntos2.setForeground(Color.WHITE);
         Puntos2.setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 30));
         Puntos2.setColumns(10);
@@ -73,7 +62,7 @@ public class PanelPantallaRanking extends JPanel {
         add(Puntos2);
         
         // Jugador 3
-        Nombre3 = new JTextField("Jugador 3");
+        JTextField Nombre3 = new JTextField("Jugador 3");
         Nombre3.setForeground(Color.WHITE);
         Nombre3.setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 30));
         Nombre3.setColumns(10);
@@ -81,7 +70,7 @@ public class PanelPantallaRanking extends JPanel {
         Nombre3.setBounds(438, 210, 252, 38);
         add(Nombre3);
         
-        Puntos3 = new JTextField("1900");
+        JTextField Puntos3 = new JTextField("1900");
         Puntos3.setForeground(Color.WHITE);
         Puntos3.setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 30));
         Puntos3.setColumns(10);
@@ -90,7 +79,7 @@ public class PanelPantallaRanking extends JPanel {
         add(Puntos3);
         
         // Jugador 4
-        Nombre4 = new JTextField("Jugador 4");
+        JTextField Nombre4 = new JTextField("Jugador 4");
         Nombre4.setForeground(Color.WHITE);
         Nombre4.setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 30));
         Nombre4.setColumns(10);
@@ -98,7 +87,7 @@ public class PanelPantallaRanking extends JPanel {
         Nombre4.setBounds(438, 256, 252, 38);
         add(Nombre4);
         
-        Puntos4 = new JTextField("1900");
+        JTextField Puntos4 = new JTextField("1900");
         Puntos4.setForeground(Color.WHITE);
         Puntos4.setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 30));
         Puntos4.setColumns(10);
@@ -107,7 +96,7 @@ public class PanelPantallaRanking extends JPanel {
         add(Puntos4);
         
         // Jugador 5
-        Nombre5 = new JTextField("Jugador 5");
+        JTextField Nombre5 = new JTextField("Jugador 5");
         Nombre5.setForeground(Color.WHITE);
         Nombre5.setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 30));
         Nombre5.setColumns(10);
@@ -115,19 +104,23 @@ public class PanelPantallaRanking extends JPanel {
         Nombre5.setBounds(438, 302, 252, 38);
         add(Nombre5);
         
-        Puntos5 = new JTextField("1900");
+        JTextField Puntos5 = new JTextField("1900");
         Puntos5.setForeground(Color.WHITE);
         Puntos5.setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 30));
         Puntos5.setColumns(10);
         Puntos5.setBackground(new Color(236, 77, 0));
         Puntos5.setBounds(743, 302, 142, 38);
         add(Puntos5);
+	}
+
+	protected void agregar_imagen_fondo() {
+        imagen_fondo = new JLabel();
+        ImageIcon icono_imagen = new ImageIcon(this.getClass().getResource("/assets/imagenes/pantalla-ranking.png")); // Reemplaza con tu imagen
+        Image imagen_escalada = icono_imagen.getImage().getScaledInstance(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO, Image.SCALE_SMOOTH);
+        Icon icono_imagen_escalado = new ImageIcon(imagen_escalada);
         imagen_fondo.setIcon(icono_imagen_escalado);
         imagen_fondo.setBounds(0, 0, 1280, 720);
         add(imagen_fondo);
-    }
-
-    protected void mostrar_ranking() {
     }
 
     protected void agregar_boton_volver() {

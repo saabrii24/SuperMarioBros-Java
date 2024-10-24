@@ -163,9 +163,10 @@ public class Juego {
             	mario.caer_en_vacio();
             	mario.destruir();
             }
-            if(mario.get_vidas()==0)
+            if(mario.get_vidas()==0) {
             	controlador_vistas.accionar_pantalla_derrota();
-            
+            	detener_hilos();
+            }
         }
     }
 
@@ -256,7 +257,6 @@ public class Juego {
         mapa_nivel_actual.agregar_mario(mario);
         
         tiempo_restante = nivel_actual.get_tiempo_restante();
-        Mario.get_instancia().get_sistema_puntuacion().restar_puntos(Mario.get_instancia().get_puntaje()); 
         mapa_nivel_actual.get_colisionador().set_murio_mario(false);
         controlador_vistas.refrescar();
         reiniciando_nivel = false;

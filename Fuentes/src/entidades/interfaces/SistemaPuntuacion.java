@@ -5,4 +5,5 @@ public interface SistemaPuntuacion {
     int get_puntaje_total();
     void sumar_moneda();
     int get_monedas();
+	void restar_puntos(int puntos);
 }

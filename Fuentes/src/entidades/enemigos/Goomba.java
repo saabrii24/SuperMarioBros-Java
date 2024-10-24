@@ -6,7 +6,6 @@ import logica.Mapa;
 public class Goomba extends Enemigo {
     public Goomba(int x, int y, Sprite sprite) {
         super(x, y, sprite);
-        set_velocidad_en_x(3);
     }
 
     public void actualizar() {
@@ -26,12 +25,12 @@ public class Goomba extends Enemigo {
     }
 
     protected void mover_izquierda() {
-        set_velocidad_en_x(-2);
+        set_velocidad_en_x(-1);
         movimiento_derecha = false;
     }
 
     protected void mover_derecha() {
-        set_velocidad_en_x(2);
+        set_velocidad_en_x(1);
         set_movimiento_derecha(true);
         movimiento_derecha = true;
     }

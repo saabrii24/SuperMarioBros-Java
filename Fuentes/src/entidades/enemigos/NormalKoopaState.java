@@ -1,18 +1,23 @@
 package entidades.enemigos;
 
 import entidades.enemigos.KoopaTroopa.KoopaState;
+import entidades.mario.Mario;
 import logica.Juego;
 
-public class AliveKoopaState implements KoopaState{
+public class NormalKoopaState implements KoopaState{
 	protected KoopaTroopa koopa;
 	
-	public AliveKoopaState (KoopaTroopa koopa) {
+	public NormalKoopaState (KoopaTroopa koopa) {
 		this.koopa = koopa;	
 	}
 	
 	@Override
 	public void cambiar_estado() {
-		koopa.set_estado(new DeadKoopaState(koopa));
+		koopa.set_estado(new HiddenKoopaState(koopa));
+		if(koopa.get_direccion() == 1)
+			Mario.get_instancia().set_posicion_en_x(Mario.get_instancia().get_posicion_en_x() - 48);
+		else 
+			Mario.get_instancia().set_posicion_en_x(Mario.get_instancia().get_posicion_en_x() + 48);
 	}
 
 	public void mover() {

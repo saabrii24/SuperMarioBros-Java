@@ -1,19 +1,11 @@
 package logica;
 
-import entidades.BolaDeFuego;
-import entidades.Entidad;
-import entidades.enemigos.BuzzyBeetle;
-import entidades.enemigos.Enemigo;
-import entidades.enemigos.Goomba;
-import entidades.enemigos.KoopaTroopa;
-import entidades.enemigos.Lakitu;
-import entidades.enemigos.Spiny;
-import entidades.mario.Mario;
-import entidades.mario.NormalMarioState;
+import entidades.*;
+import entidades.enemigos.*;
+import entidades.mario.*;
 import fabricas.*;
 import gui.ControladorDeVistas;
-import niveles.GeneradorNivel;
-import niveles.Nivel;
+import niveles.*;
 import ranking.Ranking;
 import java.awt.EventQueue;
 import java.util.ArrayList;

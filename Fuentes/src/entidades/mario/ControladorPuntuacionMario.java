@@ -27,4 +27,9 @@ public class ControladorPuntuacionMario implements SistemaPuntuacion {
     public int get_monedas() {
         return monedas;
     }
+
+	@Override
+	public void restar_puntos(int puntos) {
+		if(puntaje_acumulado >= 0) this.puntaje_acumulado -= puntos;
+	}
 }

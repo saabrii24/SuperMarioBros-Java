@@ -12,8 +12,7 @@ public class KoopaTroopa extends Enemigo {
     public KoopaTroopa(int x, int y, Sprite sprite) {
         super(x, y, sprite);
         this.sprites_factory = null;
-        set_velocidad_en_x(3);
-        estado_actual = new AliveKoopaState(this);
+        estado_actual = new NormalKoopaState(this);
     }
 
     public interface KoopaState {

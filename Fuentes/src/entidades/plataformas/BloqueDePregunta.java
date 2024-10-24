@@ -16,7 +16,6 @@ public class BloqueDePregunta extends Plataforma{
 	}
 	
 	public void destruir(Mapa mapa) {
-        	System.out.println("entre aca");
         	mapa.reproducir_efecto("kick");        
             this.set_sprite(Juego.get_instancia().get_fabrica_sprites().get_bloque_de_pregunta_destruido());
             contador_powerup++;

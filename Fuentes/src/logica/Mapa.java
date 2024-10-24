@@ -4,7 +4,13 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import entidades.BolaDeFuego;
+import entidades.enemigos.BuzzyBeetle;
 import entidades.enemigos.Enemigo;
+import entidades.enemigos.Goomba;
+import entidades.enemigos.KoopaTroopa;
+import entidades.enemigos.Lakitu;
+import entidades.enemigos.PiranhaPlant;
+import entidades.enemigos.Spiny;
 import entidades.mario.Mario;
 import entidades.plataformas.BloqueDePregunta;
 import entidades.plataformas.BloqueSolido;
@@ -18,7 +24,12 @@ public class Mapa {
 	
 	protected Juego mi_juego;
 	protected Mario mario;
-	protected List<Enemigo> entidades_enemigo;
+	protected List<Goomba> entidades_goomba;
+	protected List<BuzzyBeetle> entidades_buzzy_beetle;
+	protected List<KoopaTroopa> entidades_koopa_troopa;
+	protected List<Lakitu> entidades_lakitu;
+	protected List<PiranhaPlant> entidades_piranha_plant;
+	protected List<Spiny> entidades_spiny;
 	protected List<PowerUp> entidades_powerup;
 	protected List<BloqueSolido> entidades_bloque_solido;
 	protected List<BloqueDePregunta> entidades_bloque_de_pregunta;
@@ -31,7 +42,12 @@ public class Mapa {
 	
 	public Mapa(Juego juego) {
 		this.mi_juego = juego;
-        this.entidades_enemigo = new CopyOnWriteArrayList<>();
+        this.entidades_goomba = new CopyOnWriteArrayList<>();
+        this.entidades_buzzy_beetle = new CopyOnWriteArrayList<>();
+        this.entidades_lakitu = new CopyOnWriteArrayList<>();
+        this.entidades_koopa_troopa = new CopyOnWriteArrayList<>();
+        this.entidades_piranha_plant = new CopyOnWriteArrayList<>();
+        this.entidades_spiny = new CopyOnWriteArrayList<>();
         this.entidades_powerup = new CopyOnWriteArrayList<>();
         this.entidades_bloque_solido = new CopyOnWriteArrayList<>();
         this.entidades_bloque_de_pregunta = new CopyOnWriteArrayList<>();
@@ -44,8 +60,23 @@ public class Mapa {
 	
     public void actualizar_entidades() {
     
-        for (Enemigo enemigo : entidades_enemigo) {
-            enemigo.actualizar();
+        for (Goomba goomba : entidades_goomba) {
+            goomba.actualizar();
+        }
+        for (BuzzyBeetle buzzy : entidades_buzzy_beetle) {
+            buzzy.actualizar();
+        }
+        for (KoopaTroopa koopa : entidades_koopa_troopa) {
+            koopa.actualizar();
+        }
+        for (PiranhaPlant piranha : entidades_piranha_plant) {
+            piranha.actualizar();
+        }
+        for (Spiny spiny : entidades_spiny) {
+            spiny.actualizar();
+        }
+        for (Goomba goomba : entidades_goomba) {
+            goomba.actualizar();
         }
         for (PowerUp powerup : entidades_powerup) {
             powerup.actualizar();
@@ -75,8 +106,23 @@ public class Mapa {
     
 	public Colisionador get_colisionador() { return colisionador; }
 	
-    public List<Enemigo> get_entidades_enemigo() {
-        return entidades_enemigo;
+    public List<Goomba> get_entidades_goomba() {
+        return entidades_goomba;
+    }
+    public List<BuzzyBeetle> get_entidades_buzzy_beetle() {
+        return entidades_buzzy_beetle;
+    }
+    public List<Lakitu> get_entidades_lakitu() {
+        return entidades_lakitu;
+    }
+    public List<KoopaTroopa> get_entidades_koopa_troopa() {
+        return entidades_koopa_troopa;
+    }
+    public List<PiranhaPlant> get_entidades_piranha_plant() {
+        return entidades_piranha_plant;
+    }
+    public List<Spiny> get_entidades_spiny() {
+        return entidades_spiny;
     }
 
     public List<PowerUp> get_entidades_powerup() {
@@ -110,8 +156,23 @@ public class Mapa {
         this.mario = mario;
     }
     
-    public void agregar_enemigo(Enemigo enemigo) {
-    	entidades_enemigo.add(enemigo);
+    public void agregar_goomba(Goomba goomba) {
+    	entidades_goomba.add(goomba);
+    }
+    public void agregar_buzzy_beetle(BuzzyBeetle buzzy) {
+    	entidades_buzzy_beetle.add(buzzy);
+    }
+    public void agregar_koopa_troopa(KoopaTroopa koopa) {
+    	entidades_koopa_troopa.add(koopa);
+    }
+    public void agregar_lakitu(Lakitu laki) {
+    	entidades_lakitu.add(laki);
+    }
+    public void agregar_piranha_plant(PiranhaPlant piranha) {
+    	entidades_piranha_plant.add(piranha);
+    }
+    public void agregar_spiny(Spiny spiny) {
+    	entidades_spiny.add(spiny);
     }
     
     public void agregar_powerup(PowerUp powerup) {
@@ -146,9 +207,25 @@ public class Mapa {
         }
     }
     
-    public void eliminar_enemigo(Enemigo enemigo) {
-    	entidades_enemigo.remove(enemigo);
+    public void eliminar_goomba(Goomba goomba) {
+    	entidades_goomba.remove(goomba);
     }
+    public void eliminar_buzzy_beetle(BuzzyBeetle buzzy) {
+    	entidades_buzzy_beetle.remove(buzzy);
+    }
+    public void eliminar_koopa_troopa(KoopaTroopa koopa) {
+    	entidades_koopa_troopa.remove(koopa);
+    }
+    public void eliminar_lakitu(Lakitu lakitu) {
+    	entidades_lakitu.remove(lakitu);
+    }
+    public void eliminar_piranha_plant(PiranhaPlant piranha) {
+    	entidades_piranha_plant.remove(piranha);
+    }
+    public void eliminar_spiny(Spiny spiny) {
+    	entidades_spiny.remove(spiny);
+    }
+    
     public void eliminar_powerup(PowerUp powerup) {
     	entidades_powerup.remove(powerup);
     }
@@ -173,9 +250,24 @@ public class Mapa {
     }
     
     public void resetear_mapa() {
-        for (Enemigo enemigo : entidades_enemigo) enemigo.destruir();
-        	entidades_enemigo.clear();
-        
+        for (Goomba goomba : entidades_goomba) goomba.destruir();
+        	entidades_goomba.clear();
+        	
+        for (BuzzyBeetle buzzy : entidades_buzzy_beetle) buzzy.destruir();
+         	entidades_buzzy_beetle.clear();
+         	
+        for (KoopaTroopa koopa : entidades_koopa_troopa) koopa.destruir();
+         	entidades_koopa_troopa.clear();
+         
+        for (Lakitu lakitu : entidades_lakitu) lakitu.destruir();
+         	entidades_lakitu.clear();
+         
+        for (PiranhaPlant piranha : entidades_piranha_plant) piranha.destruir();
+         	entidades_piranha_plant.clear();
+         	
+        for (Spiny spiny : entidades_spiny) spiny.destruir();
+         	entidades_spiny.clear();
+         
         for (BloqueSolido bloque : entidades_bloque_solido) bloque.destruir();
         	entidades_bloque_solido.clear();
         

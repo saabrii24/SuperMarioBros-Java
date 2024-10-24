@@ -13,7 +13,7 @@ Tiempo: 100
 	# Enemigos
 	#Goomba: 288, 144
 	#Goomba: 384, 144
-	Koopa: 1056, 500
+	Koopa: 1056, 400
 	Goomba: 700, 400
 	
 	# PowerUps
@@ -40,8 +40,8 @@ Tiempo: 100
 	BloqueSolido: 336, 96
 	BloqueSolido: 384, 96
 	BloqueSolido: 432, 96
-	#BloqueSolido: 480, 96
-	#BloqueSolido: 528, 96
+	BloqueSolido: 480, 96
+	BloqueSolido: 528, 96
 	BloqueSolido: 576, 96
 	BloqueSolido: 624, 96
 	BloqueSolido: 672, 96
@@ -147,8 +147,8 @@ Tiempo: 100
 	BloqueSolido: 5376, 192
 	BloqueSolido: 5376, 240
 	BloqueSolido: 5376, 288
-	Vacio: 480, 0
-	Vacio: 480, 48
+	#Vacio: 480, 0
+	#Vacio: 480, 48
 	
 	BloqueDePreguntaConMoneda: 672, 288
 	LadrilloSolido: 864, 288

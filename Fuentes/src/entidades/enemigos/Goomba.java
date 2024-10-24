@@ -1,6 +1,7 @@
 package entidades.enemigos;
 
 import fabricas.Sprite;
+import logica.Mapa;
 
 public class Goomba extends Enemigo {
     public Goomba(int x, int y, Sprite sprite) {
@@ -37,6 +38,14 @@ public class Goomba extends Enemigo {
 
     protected void detener_movimiento() {
         set_velocidad_en_x(0);
+    }
+	public void destruir(Mapa mapa) {
+        if (!destruida) {
+        	mapa.reproducir_efecto("kick");
+            destruida = true;           
+            mapa.eliminar_goomba(this);
+            destruir();
+        }
     }
 }
 

@@ -3,6 +3,7 @@ package entidades.enemigos;
 import entidades.mario.Mario;
 import fabricas.Sprite;
 import fabricas.SpritesFactory;
+import logica.Mapa;
 
 public class Spiny extends Enemigo{
 	
@@ -44,6 +45,14 @@ public class Spiny extends Enemigo{
 
     protected void detener_movimiento() {
         this.velocidad_en_x = 0;
+    }
+	public void destruir(Mapa mapa) {
+        if (!destruida) {
+        	mapa.reproducir_efecto("kick");
+            destruida = true;           
+            mapa.eliminar_spiny(this);
+            destruir();
+        }
     }
 
 	private void actualizar_sprite() {

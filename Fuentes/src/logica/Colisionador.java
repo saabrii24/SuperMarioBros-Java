@@ -10,7 +10,13 @@ import entidades.plataformas.Vacio;
 import entidades.powerups.PowerUp;
 import entidades.BolaDeFuego;
 import entidades.EntidadMovible;
+import entidades.enemigos.BuzzyBeetle;
 import entidades.enemigos.Enemigo;
+import entidades.enemigos.Goomba;
+import entidades.enemigos.KoopaTroopa;
+import entidades.enemigos.Lakitu;
+import entidades.enemigos.PiranhaPlant;
+import entidades.enemigos.Spiny;
 
 import java.awt.Rectangle;
 import java.util.List;
@@ -44,10 +50,31 @@ public class Colisionador {
         verificar_colision_horizontal_con_plataformas(mario);
         
         // Colisiones de Enemigos con plataformas
-        for (Enemigo enemigo : mapa.get_entidades_enemigo()) {
-        	manejar_colision_vertical(enemigo);
-            manejar_colision_horizontal(enemigo);
+        for (BuzzyBeetle buzzy : mapa.get_entidades_buzzy_beetle()) {
+        	manejar_colision_vertical(buzzy);
+            manejar_colision_horizontal(buzzy);
         }
+        for (Enemigo koopa : mapa.get_entidades_koopa_troopa()) {
+        	manejar_colision_vertical(koopa);
+            manejar_colision_horizontal(koopa);
+        }
+        for (Spiny spiny : mapa.get_entidades_spiny()) {
+        	manejar_colision_vertical(spiny);
+            manejar_colision_horizontal(spiny);
+        }
+        for (PiranhaPlant piranha : mapa.get_entidades_piranha_plant()) {
+        	manejar_colision_vertical(piranha);
+            manejar_colision_horizontal(piranha);
+        }
+        for (Lakitu lakitu : mapa.get_entidades_lakitu()) {
+        	manejar_colision_vertical(lakitu);
+            manejar_colision_horizontal(lakitu);
+        }
+        for (Goomba goomba : mapa.get_entidades_goomba()) {
+        	manejar_colision_vertical(goomba);
+            manejar_colision_horizontal(goomba);
+        }
+
     }
 
     private void verificar_colision_bajo_plataformas(Mario mario) {
@@ -215,24 +242,118 @@ public class Colisionador {
     
 
     private void verificar_colisiones_con_enemigos(Mario mario) {
-        for (Enemigo enemigo : new ArrayList<>(mapa.get_entidades_enemigo())) {
+        for (Goomba goomba : new ArrayList<>(mapa.get_entidades_goomba())) {
         	if (mario.mata_tocando()) {
-        		if (mario.get_limites().intersects(enemigo.get_limites())) {
-        			enemigo.destruir(mapa);
+        		if (mario.get_limites().intersects(goomba.get_limites())) {
+        			goomba.destruir(mapa);
         		}
         	}
-            if (mario.get_limites_superiores().intersects(enemigo.get_limites_inferiores())) {
-                enemigo.destruir(mapa);
+            if (mario.get_limites_superiores().intersects(goomba.get_limites_inferiores())) {
+                goomba.destruir(mapa);
                 break;
             }
-            if (mario.get_limites_derecha().intersects(enemigo.get_limites()) || mario.get_limites_izquierda().intersects(enemigo.get_limites())) {
-            	if(mario.colision_con_enemigo(enemigo)) {
+            if (mario.get_limites_derecha().intersects(goomba.get_limites()) || mario.get_limites_izquierda().intersects(goomba.get_limites())) {
+            	if(mario.colision_con_enemigo(goomba)) {
             		murio_mario = true;
             	}
             	else {
             		murio_mario = false;
-            		enemigo.destruir(mapa);
+            		goomba.destruir(mapa);
             	}
+            }
+        }
+        for (KoopaTroopa koopa : new ArrayList<>(mapa.get_entidades_koopa_troopa())) {
+            if (mario.mata_tocando() && mario.get_limites().intersects(koopa.get_limites())) {
+                koopa.destruir(mapa);
+            }
+            if (mario.get_limites_superiores().intersects(koopa.get_limites_inferiores())) {
+                koopa.cambiar_estado();
+                mario.set_posicion_en_y(mario.get_posicion_en_y() + 50);;
+                break;
+            }
+            if (mario.get_limites_derecha().intersects(koopa.get_limites()) || mario.get_limites_izquierda().intersects(koopa.get_limites())) {
+                if (mario.colision_con_enemigo(koopa)) {
+                    murio_mario = true;
+                } else {
+                    murio_mario = false;
+                    koopa.cambiar_estado();
+                }
+            }
+        }
+
+        // Manejo de colisiones con BuzzyBeetle
+        for (BuzzyBeetle buzzy : new ArrayList<>(mapa.get_entidades_buzzy_beetle())) {
+            if (mario.mata_tocando() && mario.get_limites().intersects(buzzy.get_limites())) {
+                buzzy.destruir(mapa);
+            }
+            if (mario.get_limites_superiores().intersects(buzzy.get_limites_inferiores())) {
+                buzzy.destruir(mapa);
+                break;
+            }
+            if (mario.get_limites_derecha().intersects(buzzy.get_limites()) || mario.get_limites_izquierda().intersects(buzzy.get_limites())) {
+                if (mario.colision_con_enemigo(buzzy) && !mario.mata_tocando()) {
+                    murio_mario = true;
+                } else {
+                    murio_mario = false;
+                    buzzy.destruir(mapa);
+                }
+            }
+        }
+
+        // Manejo de colisiones con PiranhaPlant
+        for (PiranhaPlant piranha : new ArrayList<>(mapa.get_entidades_piranha_plant())) {
+            if (mario.mata_tocando() && mario.get_limites().intersects(piranha.get_limites())) {
+                piranha.destruir(mapa);
+            }
+            if (mario.get_limites_superiores().intersects(piranha.get_limites_inferiores())) {
+                piranha.destruir(mapa);
+                break;
+            }
+            if (mario.get_limites_derecha().intersects(piranha.get_limites()) || mario.get_limites_izquierda().intersects(piranha.get_limites())) {
+                if (mario.colision_con_enemigo(piranha)) {
+                    murio_mario = true;
+                } else {
+                    murio_mario = false;
+                    piranha.destruir(mapa);
+                }
+            }
+        }
+
+        // Manejo de colisiones con Lakitu
+        for (Lakitu lakitu : new ArrayList<>(mapa.get_entidades_lakitu())) {
+            if (mario.mata_tocando() && mario.get_limites().intersects(lakitu.get_limites())) {
+                lakitu.destruir(mapa);
+            }
+            if (mario.get_limites_superiores().intersects(lakitu.get_limites_inferiores()) && !mario.mata_tocando()) {
+                lakitu.destruir(mapa);
+                break;
+            }
+            if (mario.get_limites_derecha().intersects(lakitu.get_limites()) || mario.get_limites_izquierda().intersects(lakitu.get_limites())) {
+                if (mario.colision_con_enemigo(lakitu)) {
+                    murio_mario = true;
+                } else {
+                    murio_mario = false;
+                    lakitu.destruir(mapa);
+                }
+            }
+        }
+
+        // Manejo de colisiones con Spiny
+        for (Spiny spiny : new ArrayList<>(mapa.get_entidades_spiny())) {
+            if (mario.mata_tocando() && mario.get_limites().intersects(spiny.get_limites())) {
+                spiny.destruir(mapa);
+            }
+            if (mario.get_limites_superiores().intersects(spiny.get_limites_inferiores())) {
+                murio_mario = true;
+                break;
+            }
+            if (mario.get_limites_derecha().intersects(spiny.get_limites()) || mario.get_limites_izquierda().intersects(spiny.get_limites())) {
+                if (mario.colision_con_enemigo(spiny)) {
+                    murio_mario = true;
+                } else {
+                    murio_mario = false;
+                    spiny.destruir(mapa);
+                }
             }
         }
     }
@@ -249,6 +370,7 @@ public class Colisionador {
 
     private void verificar_colisiones_proyectiles() {
         List<BolaDeFuego> proyectiles = new ArrayList<>(mapa.get_entidades_proyectiles());
+        List<KoopaTroopa> koopas = new ArrayList<>(mapa.get_entidades_koopa_troopa());
         for (BolaDeFuego proyectil : proyectiles) {
             // Colisión con plataformas
             if (colisiona_con_plataforma(proyectil.get_limites())) {
@@ -257,10 +379,82 @@ public class Colisionador {
             }
 
             // Colisión con enemigos
-            for (Enemigo enemigo : new ArrayList<>(mapa.get_entidades_enemigo())) {
-                if (proyectil.get_limites().intersects(enemigo.get_limites())) {
-                    enemigo.destruir(mapa);
+            for (Goomba goomba : new ArrayList<>(mapa.get_entidades_goomba())) {
+                if (proyectil.get_limites().intersects(goomba.get_limites())) {
+                    goomba.destruir();
                     proyectil.destruir(mapa);
+                    break;
+                }
+            }
+            for (BuzzyBeetle buzzy : new ArrayList<>(mapa.get_entidades_buzzy_beetle())) {
+                if (proyectil.get_limites().intersects(buzzy.get_limites())) {
+                    buzzy.destruir();
+                    proyectil.destruir(mapa);
+                    break;
+                }
+            }
+            for (KoopaTroopa koopa : new ArrayList<>(mapa.get_entidades_koopa_troopa())) {
+                if (proyectil.get_limites().intersects(koopa.get_limites())) {
+                    koopa.destruir(mapa);
+                    proyectil.destruir(mapa);
+                    break;
+                }
+            }
+            for (Lakitu lakitu : new ArrayList<>(mapa.get_entidades_lakitu())) {
+                if (proyectil.get_limites().intersects(lakitu.get_limites())) {
+                    lakitu.destruir(mapa);
+                    proyectil.destruir(mapa);
+                    break;
+                }
+            }
+            for (PiranhaPlant piranha : new ArrayList<>(mapa.get_entidades_piranha_plant())) {
+                if (proyectil.get_limites().intersects(piranha.get_limites())) {
+                    piranha.destruir(mapa);
+                    proyectil.destruir(mapa);
+                    break;
+                }
+            }
+            for (Spiny spiny : new ArrayList<>(mapa.get_entidades_spiny())) {
+                if (proyectil.get_limites().intersects(spiny.get_limites())) {
+                    spiny.destruir();
+                    proyectil.destruir(mapa);
+                    break;
+                }
+            }
+        }
+        // Colisiones con Koopa Troopa en modo proyectil
+        for (KoopaTroopa koopa : koopas) {
+            if (!koopa.mata_tocando()) {
+                continue; // Si no está en modo proyectil, no hace nada
+            }
+            // Colisión con enemigos
+            for (Goomba goomba : new ArrayList<>(mapa.get_entidades_goomba())) {
+                if (koopa.get_limites().intersects(goomba.get_limites())) {
+                    goomba.destruir();
+                    break;
+                }
+            }
+            for (BuzzyBeetle buzzy : new ArrayList<>(mapa.get_entidades_buzzy_beetle())) {
+                if (koopa.get_limites().intersects(buzzy.get_limites())) {
+                    buzzy.destruir();
+                    break;
+                }
+            }
+            for (Lakitu lakitu : new ArrayList<>(mapa.get_entidades_lakitu())) {
+                if (koopa.get_limites().intersects(lakitu.get_limites())) {
+                    lakitu.destruir(mapa);
+                    break;
+                }
+            }
+            for (PiranhaPlant piranha : new ArrayList<>(mapa.get_entidades_piranha_plant())) {
+                if (koopa.get_limites().intersects(piranha.get_limites())) {
+                    piranha.destruir(mapa);
+                    break;
+                }
+            }
+            for (Spiny spiny : new ArrayList<>(mapa.get_entidades_spiny())) {
+                if (koopa.get_limites().intersects(spiny.get_limites())) {
+                    spiny.destruir();
                     break;
                 }
             }

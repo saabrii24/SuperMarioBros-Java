@@ -3,6 +3,7 @@ package entidades.enemigos;
 import entidades.mario.Mario;
 import fabricas.Sprite;
 import fabricas.SpritesFactory;
+import logica.Mapa;
 
 public class BuzzyBeetle extends Enemigo{
 
@@ -54,5 +55,13 @@ public class BuzzyBeetle extends Enemigo{
                 sprites_factory.get_buzzy_movimiento_izquierda());
 		}
 	}
+	public void destruir(Mapa mapa) {
+        if (!destruida) {
+        	mapa.reproducir_efecto("kick");
+            destruida = true;           
+            mapa.eliminar_buzzy_beetle(this);
+            destruir();
+        }
+    }
 
 }

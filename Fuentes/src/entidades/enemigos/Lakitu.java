@@ -1,6 +1,7 @@
 package entidades.enemigos;
 
 import fabricas.Sprite;
+import logica.Mapa;
 
 public class Lakitu extends Enemigo{
 
@@ -15,5 +16,13 @@ public class Lakitu extends Enemigo{
 	public void actualizar() {
 		//TO DO
 	}
+	public void destruir(Mapa mapa) {
+        if (!destruida) {
+        	mapa.reproducir_efecto("kick");
+            destruida = true;           
+            mapa.eliminar_lakitu(this);
+            destruir();
+        }
+    }
 
 }

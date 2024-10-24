@@ -91,22 +91,22 @@ public class GeneradorNivel {
 		switch (tipo_de_entidad) {
 		//ENEMIGOS
 			case "Goomba":
-				mapa.agregar_enemigo(generador.get_goomba(x, y));
+				mapa.agregar_goomba(generador.get_goomba(x, y));
 				break;
 			case "Koopa":
-				mapa.agregar_enemigo(generador.get_koopa_troopa(x, y));
+				mapa.agregar_koopa_troopa(generador.get_koopa_troopa(x, y));
 				break;
 			case "Spiny":
-				mapa.agregar_enemigo(generador.get_spiny(x, y));
+				mapa.agregar_spiny(generador.get_spiny(x, y));
 				break;
 			case "Lakitu":
-				mapa.agregar_enemigo(generador.get_lakitu(x, y));
+				mapa.agregar_lakitu(generador.get_lakitu(x, y));
 				break;
 			case "Piranha":
-				mapa.agregar_enemigo(generador.get_piranha_plant(x, y));
+				mapa.agregar_piranha_plant(generador.get_piranha_plant(x, y));
 				break;
 			case "Buzzy":
-				mapa.agregar_enemigo(generador.get_buzzy_beetle(x, y));
+				mapa.agregar_buzzy_beetle(generador.get_buzzy_beetle(x, y));
 				break;
 				
 		//PLATAFORMAS

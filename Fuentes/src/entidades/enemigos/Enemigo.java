@@ -10,12 +10,4 @@ public abstract class Enemigo extends EntidadMovible{
 		super(x, y, sprite);
 	}
 
-	public void destruir(Mapa mapa) {
-        if (!destruida) {
-        	mapa.reproducir_efecto("kick");
-            destruida = true;           
-            mapa.eliminar_enemigo(this);
-            destruir();
-        }
-    }
 }

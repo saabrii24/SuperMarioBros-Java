@@ -1,6 +1,7 @@
 package entidades.enemigos;
 
 import fabricas.Sprite;
+import logica.Mapa;
 
 public class PiranhaPlant extends Enemigo{
 
@@ -19,5 +20,13 @@ public class PiranhaPlant extends Enemigo{
 		// TODO Auto-generated method stub
 		
 	}
+	public void destruir(Mapa mapa) {
+        if (!destruida) {
+        	mapa.reproducir_efecto("kick");
+            destruida = true;           
+            mapa.eliminar_piranha_plant(this);
+            destruir();
+        }
+    }
 
 }

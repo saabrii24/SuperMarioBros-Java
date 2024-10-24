@@ -119,6 +119,9 @@ public abstract class SpritesFactory {
     public Sprite get_koopa_movimiento_izquierda() {
         return cargar_sprite("koopa_izquierda.gif");
     }
+    public Sprite get_koopa_escondido() {
+    	return cargar_sprite("koopa_escondido.png");
+    }
 
     public Sprite get_piranha_plant() {
         return cargar_sprite("piranha.gif");

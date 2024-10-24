@@ -2,7 +2,12 @@ package logica;
 
 import entidades.BolaDeFuego;
 import entidades.Entidad;
+import entidades.enemigos.BuzzyBeetle;
 import entidades.enemigos.Enemigo;
+import entidades.enemigos.Goomba;
+import entidades.enemigos.KoopaTroopa;
+import entidades.enemigos.Lakitu;
+import entidades.enemigos.Spiny;
 import entidades.mario.Mario;
 import entidades.mario.NormalMarioState;
 import fabricas.*;
@@ -10,11 +15,9 @@ import gui.ControladorDeVistas;
 import niveles.GeneradorNivel;
 import niveles.Nivel;
 import ranking.Ranking;
-
 import java.awt.EventQueue;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JOptionPane;
 
 public class Juego {
@@ -113,7 +116,12 @@ public class Juego {
 
             mover_enemigos();
             mover_proyectiles();
-            notificar_observadores_entidades(mapa_nivel_actual.get_entidades_enemigo());
+            notificar_observadores_entidades(mapa_nivel_actual.get_entidades_goomba());
+            notificar_observadores_entidades(mapa_nivel_actual.get_entidades_buzzy_beetle());
+            notificar_observadores_entidades(mapa_nivel_actual.get_entidades_koopa_troopa());
+            notificar_observadores_entidades(mapa_nivel_actual.get_entidades_lakitu());
+            notificar_observadores_entidades(mapa_nivel_actual.get_entidades_piranha_plant());
+            notificar_observadores_entidades(mapa_nivel_actual.get_entidades_spiny());
             controlador_vistas.get_pantalla_mapa().repaint();
 
             controlar_fps(tiempo_actual, tiempo_por_frame);
@@ -167,11 +175,56 @@ public class Juego {
     }
 
     private void mover_enemigos() {
-        List<Enemigo> enemigos = new ArrayList<>(mapa_nivel_actual.get_entidades_enemigo());
-        for (Enemigo enemigo : enemigos) {
-            synchronized(enemigo) {
+        List<Goomba> goombas = new ArrayList<>(mapa_nivel_actual.get_entidades_goomba());
+        List<BuzzyBeetle> buzzys = new ArrayList<>(mapa_nivel_actual.get_entidades_buzzy_beetle());
+        List<KoopaTroopa> koopas = new ArrayList<>(mapa_nivel_actual.get_entidades_koopa_troopa());
+        List<Lakitu> lakitus = new ArrayList<>(mapa_nivel_actual.get_entidades_lakitu());
+        List<Spiny> spinys = new ArrayList<>(mapa_nivel_actual.get_entidades_spiny());
+        
+        for (Goomba goomba : goombas) {
+            synchronized(goomba) {
                 try {                 
-                    enemigo.mover();
+                    goomba.mover();
+                } catch (Exception e) {
+                    // Si la entidad fue eliminada mientras iterábamos
+                    continue;
+                }
+            }
+        }
+        for (BuzzyBeetle buzzy : buzzys) {
+            synchronized(buzzy) {
+                try {                 
+                    buzzy.mover();
+                } catch (Exception e) {
+                    // Si la entidad fue eliminada mientras iterábamos
+                    continue;
+                }
+            }
+        }
+        for (KoopaTroopa koopa : koopas) {
+            synchronized(koopa) {
+                try {
+                		koopa.mover();
+                } catch (Exception e) {
+                    // Si la entidad fue eliminada mientras iterábamos
+                    continue;
+                }
+            }
+        }
+        for (Lakitu lakitu : lakitus) {
+            synchronized(lakitu) {
+                try {                 
+                    lakitu.mover();
+                } catch (Exception e) {
+                    // Si la entidad fue eliminada mientras iterábamos
+                    continue;
+                }
+            }
+        }
+        for (Spiny spiny : spinys) {
+            synchronized(spiny) {
+                try {                 
+                    spiny.mover();
                 } catch (Exception e) {
                     // Si la entidad fue eliminada mientras iterábamos
                     continue;
@@ -198,7 +251,12 @@ public class Juego {
 
     public void notificar_observadores() {
         notificar_observadores_mario();
-        notificar_observadores_entidades(mapa_nivel_actual.get_entidades_enemigo());
+        notificar_observadores_entidades(mapa_nivel_actual.get_entidades_buzzy_beetle());
+        notificar_observadores_entidades(mapa_nivel_actual.get_entidades_koopa_troopa());
+        notificar_observadores_entidades(mapa_nivel_actual.get_entidades_goomba());
+        notificar_observadores_entidades(mapa_nivel_actual.get_entidades_lakitu());
+        notificar_observadores_entidades(mapa_nivel_actual.get_entidades_piranha_plant());
+        notificar_observadores_entidades(mapa_nivel_actual.get_entidades_spiny());
         notificar_observadores_entidades(mapa_nivel_actual.get_entidades_powerup());
         notificar_observadores_entidades(mapa_nivel_actual.get_entidades_proyectiles());
         notificar_observadores_entidades(mapa_nivel_actual.get_entidades_bloque_de_pregunta());
@@ -279,7 +337,12 @@ public class Juego {
 
     private void registrar_observers() {
         registrar_observer_jugador(Mario.get_instancia());
-        registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_enemigo());
+        registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_buzzy_beetle());
+        registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_goomba());
+        registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_koopa_troopa());
+        registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_lakitu());
+        registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_piranha_plant());
+        registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_spiny());
         registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_proyectiles());
         registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_powerup());
         registrar_observers_para_entidades(mapa_nivel_actual.get_entidades_bloque_de_pregunta());

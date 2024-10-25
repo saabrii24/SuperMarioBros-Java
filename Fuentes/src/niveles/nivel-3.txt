@@ -21,14 +21,22 @@ Tiempo: 100
 	Estrella: 336, 480
 	
 	# Plataformas
-	BloqueSolido: 336, 144
-	BloqueSolido: 720, 144
-
+	BloqueDePregunta: 672, 288
+	LadrilloSolido: 864, 288
+	BloqueDePregunta: 912, 288
+	LadrilloSolido: 960, 288
+	BloqueDePregunta: 1008, 288
+	LadrilloSolido: 1056, 288
+	BloqueDePregunta: 960, 480
+	
+	# Bloques del suelo y límites del mapa
 	BloqueSolido: -48, 96
 	BloqueSolido: -48, 144
 	BloqueSolido: -48, 192
 	BloqueSolido: -48, 240
 	BloqueSolido: -48, 288
+	BloqueSolido: -48, 336
+	BloqueSolido: -48, 384
 	BloqueSolido: 0, 96
 	BloqueSolido: 48, 96
 	BloqueSolido: 96, 96
@@ -142,21 +150,6 @@ Tiempo: 100
 	BloqueSolido: 5280, 96
 	BloqueSolido: 5328, 96
 	BloqueSolido: 5376, 96
-	BloqueSolido: 5376, 144
-	BloqueSolido: 5376, 192
-	BloqueSolido: 5376, 240
-	BloqueSolido: 5376, 288
-	#Vacio: 480, 48
-	#Vacio: 480, 96
-	
-	BloqueDePregunta: 672, 288
-	LadrilloSolido: 864, 288
-	BloqueDePregunta: 912, 288
-	LadrilloSolido: 960, 288
-	BloqueDePregunta: 1008, 288
-	LadrilloSolido: 1056, 288
-	BloqueDePregunta: 960, 480
-	
 
 # Definición del mapa
 Mapa: (crear)

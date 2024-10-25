@@ -5,7 +5,7 @@ import fabricas.Sprite;
 
 public abstract class EntidadMovible extends Entidad implements Movible {
 
-	protected static final double GRAVEDAD = 0.25;
+	protected static final double GRAVEDAD = 0.3;
     protected double velocidad_en_x, velocidad_en_y;
     protected boolean cayendo, saltando, movimiento_derecha;
     protected int direccion;

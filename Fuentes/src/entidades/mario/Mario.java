@@ -133,6 +133,7 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
     }
 
     private void detener_movimiento_horizontal() {
+    	//System.out.println("X: " + posicion_en_x + " - Y: " + posicion_en_y); <- Para diagramar entidades en nivel
         velocidad_en_x = 0;
     }
 
@@ -144,7 +145,7 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
         if (!saltando && contador_saltos < 1) {
         	saltando = true;
         	contador_saltos++;
-        	velocidad_en_y = -8; // Velocidad inicial del salto
+        	velocidad_en_y = -10; // Velocidad inicial del salto
         }
     }
     

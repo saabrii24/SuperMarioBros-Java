@@ -304,7 +304,7 @@ public class Colisionador {
             if (mario.mata_tocando() && mario.get_limites().intersects(piranha.get_limites())) {
                 piranha.destruir(mapa);
             }
-            if (mario.get_limites_superiores().intersects(piranha.get_limites_inferiores())) {
+            if (mario.get_limites_superiores().intersects(piranha.get_limites_inferiores()) && !mario.mata_tocando()) {
                 murio_mario=true;
                 break;
             }

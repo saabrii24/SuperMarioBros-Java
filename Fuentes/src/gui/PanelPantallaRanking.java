@@ -7,6 +7,9 @@ import ranking.Ranking;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 
 public class PanelPantallaRanking extends JPanel {
 
@@ -27,99 +30,114 @@ public class PanelPantallaRanking extends JPanel {
     }
 
     private void mostrar_ranking() {
-    	// Probando ranking, despues borrar
-    	Ranking ranking = new Ranking();
-    	ranking.agregar_jugador("Tree", 30);
-    	ranking.agregar_jugador("Six", 5);
-    	ranking.agregar_jugador("One", 50);
-    	ranking.agregar_jugador("Five", 10);
-    	ranking.agregar_jugador("Two", 40);
-    	ranking.agregar_jugador("Four", 20);
+    	ranking = new Ranking();
     	
+    	// Recuperar ranking
+    	try {
+    		FileInputStream file_input_stream = new FileInputStream("./ranking.tdp");
+    		ObjectInputStream object_input_stream = new ObjectInputStream(file_input_stream);
+			ranking = (Ranking) object_input_stream.readObject();
+			object_input_stream.close(); 
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+      
     	// Jugador 1
-    	JTextField Nombre1 = new JTextField(ranking.get_ranking().get(0).get_nombre());
-        Nombre1.setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 30));
-        Nombre1.setColumns(10);
-        Nombre1.setBackground(new Color(236, 77, 0));
-        Nombre1.setForeground(new Color(255, 255, 255));
-        Nombre1.setBounds(438, 118, 252, 38);
-        add(Nombre1);
-        
-        JTextField Puntos1 = new JTextField(ranking.get_ranking().get(0).get_puntos().toString());
-        Puntos1.setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 30));
-        Puntos1.setBackground(new Color(236, 77, 0));
-        Puntos1.setForeground(new Color(255, 255, 255));
-        Puntos1.setBounds(743, 118, 142, 38);
-        add(Puntos1);
-        Puntos1.setColumns(10);
+    	if(ranking.get_ranking().size()>0) {
+	    	JTextField Nombre1 = new JTextField(ranking.get_ranking().get(0).get_nombre());
+	        Nombre1.setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 30));
+	        Nombre1.setColumns(10);
+	        Nombre1.setBackground(new Color(236, 77, 0));
+	        Nombre1.setForeground(new Color(255, 255, 255));
+	        Nombre1.setBounds(438, 118, 252, 38);
+	        add(Nombre1);
+	        
+	        JTextField Puntos1 = new JTextField(ranking.get_ranking().get(0).get_puntos().toString());
+	        Puntos1.setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 30));
+	        Puntos1.setBackground(new Color(236, 77, 0));
+	        Puntos1.setForeground(new Color(255, 255, 255));
+	        Puntos1.setBounds(743, 118, 142, 38);
+	        add(Puntos1);
+	        Puntos1.setColumns(10);
+    	}
         
         // Jugador 2
-        JTextField Nombre2 = new JTextField(ranking.get_ranking().get(1).get_nombre());
-        Nombre2.setForeground(Color.WHITE);
-        Nombre2.setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 30));
-        Nombre2.setColumns(10);
-        Nombre2.setBackground(new Color(236, 77, 0));
-        Nombre2.setBounds(438, 164, 252, 38);
-        add(Nombre2);
-        
-        JTextField Puntos2 = new JTextField(ranking.get_ranking().get(1).get_puntos().toString());
-        Puntos2.setForeground(Color.WHITE);
-        Puntos2.setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 30));
-        Puntos2.setColumns(10);
-        Puntos2.setBackground(new Color(236, 77, 0));
-        Puntos2.setBounds(743, 164, 142, 38);
-        add(Puntos2);
+    	if(ranking.get_ranking().size()>1) {
+	        JTextField Nombre2 = new JTextField(ranking.get_ranking().get(1).get_nombre());
+	        Nombre2.setForeground(Color.WHITE);
+	        Nombre2.setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 30));
+	        Nombre2.setColumns(10);
+	        Nombre2.setBackground(new Color(236, 77, 0));
+	        Nombre2.setBounds(438, 164, 252, 38);
+	        add(Nombre2);
+	        
+	        JTextField Puntos2 = new JTextField(ranking.get_ranking().get(1).get_puntos().toString());
+	        Puntos2.setForeground(Color.WHITE);
+	        Puntos2.setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 30));
+	        Puntos2.setColumns(10);
+	        Puntos2.setBackground(new Color(236, 77, 0));
+	        Puntos2.setBounds(743, 164, 142, 38);
+	        add(Puntos2);
+    	}
         
         // Jugador 3
-        JTextField Nombre3 = new JTextField(ranking.get_ranking().get(2).get_nombre());
-        Nombre3.setForeground(Color.WHITE);
-        Nombre3.setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 30));
-        Nombre3.setColumns(10);
-        Nombre3.setBackground(new Color(236, 77, 0));
-        Nombre3.setBounds(438, 210, 252, 38);
-        add(Nombre3);
-        
-        JTextField Puntos3 = new JTextField(ranking.get_ranking().get(2).get_puntos().toString());
-        Puntos3.setForeground(Color.WHITE);
-        Puntos3.setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 30));
-        Puntos3.setColumns(10);
-        Puntos3.setBackground(new Color(236, 77, 0));
-        Puntos3.setBounds(743, 210, 142, 38);
-        add(Puntos3);
-        
+    	if(ranking.get_ranking().size()>2) {
+	        JTextField Nombre3 = new JTextField(ranking.get_ranking().get(2).get_nombre());
+	        Nombre3.setForeground(Color.WHITE);
+	        Nombre3.setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 30));
+	        Nombre3.setColumns(10);
+	        Nombre3.setBackground(new Color(236, 77, 0));
+	        Nombre3.setBounds(438, 210, 252, 38);
+	        add(Nombre3);
+	        
+	        JTextField Puntos3 = new JTextField(ranking.get_ranking().get(2).get_puntos().toString());
+	        Puntos3.setForeground(Color.WHITE);
+	        Puntos3.setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 30));
+	        Puntos3.setColumns(10);
+	        Puntos3.setBackground(new Color(236, 77, 0));
+	        Puntos3.setBounds(743, 210, 142, 38);
+	        add(Puntos3);
+    	}
+	        
         // Jugador 4
-        JTextField Nombre4 = new JTextField(ranking.get_ranking().get(3).get_nombre());
-        Nombre4.setForeground(Color.WHITE);
-        Nombre4.setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 30));
-        Nombre4.setColumns(10);
-        Nombre4.setBackground(new Color(236, 77, 0));
-        Nombre4.setBounds(438, 256, 252, 38);
-        add(Nombre4);
-        
-        JTextField Puntos4 = new JTextField(ranking.get_ranking().get(3).get_puntos().toString());
-        Puntos4.setForeground(Color.WHITE);
-        Puntos4.setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 30));
-        Puntos4.setColumns(10);
-        Puntos4.setBackground(new Color(236, 77, 0));
-        Puntos4.setBounds(743, 256, 142, 38);
-        add(Puntos4);
+    	if(ranking.get_ranking().size()>3) {
+	        JTextField Nombre4 = new JTextField(ranking.get_ranking().get(3).get_nombre());
+	        Nombre4.setForeground(Color.WHITE);
+	        Nombre4.setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 30));
+	        Nombre4.setColumns(10);
+	        Nombre4.setBackground(new Color(236, 77, 0));
+	        Nombre4.setBounds(438, 256, 252, 38);
+	        add(Nombre4);
+	        
+	        JTextField Puntos4 = new JTextField(ranking.get_ranking().get(3).get_puntos().toString());
+	        Puntos4.setForeground(Color.WHITE);
+	        Puntos4.setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 30));
+	        Puntos4.setColumns(10);
+	        Puntos4.setBackground(new Color(236, 77, 0));
+	        Puntos4.setBounds(743, 256, 142, 38);
+	        add(Puntos4);
+    	}
         
         // Jugador 5
-        JTextField Nombre5 = new JTextField(ranking.get_ranking().get(4).get_nombre());
-        Nombre5.setForeground(Color.WHITE);
-        Nombre5.setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 30));
-        Nombre5.setColumns(10);
-        Nombre5.setBackground(new Color(236, 77, 0));
-        Nombre5.setBounds(438, 302, 252, 38);
-        add(Nombre5);
-        
-        JTextField Puntos5 = new JTextField(ranking.get_ranking().get(4).get_puntos().toString());
-        Puntos5.setForeground(Color.WHITE);
-        Puntos5.setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 30));
-        Puntos5.setColumns(10);
-        Puntos5.setBackground(new Color(236, 77, 0));
-        Puntos5.setBounds(743, 302, 142, 38);
-        add(Puntos5);
+    	if(ranking.get_ranking().size()>4) {
+	        JTextField Nombre5 = new JTextField(ranking.get_ranking().get(4).get_nombre());
+	        Nombre5.setForeground(Color.WHITE);
+	        Nombre5.setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 30));
+	        Nombre5.setColumns(10);
+	        Nombre5.setBackground(new Color(236, 77, 0));
+	        Nombre5.setBounds(438, 302, 252, 38);
+	        add(Nombre5);
+	        
+	        JTextField Puntos5 = new JTextField(ranking.get_ranking().get(4).get_puntos().toString());
+	        Puntos5.setForeground(Color.WHITE);
+	        Puntos5.setFont(new Font("Lucida Sans Typewriter", Font.BOLD, 30));
+	        Puntos5.setColumns(10);
+	        Puntos5.setBackground(new Color(236, 77, 0));
+	        Puntos5.setBounds(743, 302, 142, 38);
+	        add(Puntos5);
+    	}
 	}
 
 	protected void agregar_imagen_fondo() {

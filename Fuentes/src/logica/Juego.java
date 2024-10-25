@@ -8,8 +8,16 @@ import gui.ControladorDeVistas;
 import niveles.*;
 import ranking.Ranking;
 import java.awt.EventQueue;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
 import javax.swing.JOptionPane;
 
 public class Juego {
@@ -28,7 +36,6 @@ public class Juego {
     protected ControladorDeVistas controlador_vistas;
     protected Nivel nivel_actual;
     protected Mapa mapa_nivel_actual;
-    protected Ranking ranking;
     protected String nombre_jugador;
 
     protected boolean reiniciando_nivel = false;
@@ -56,7 +63,6 @@ public class Juego {
         fabrica_entidades = new EntidadesFactory(fabrica_sprites);
         controlador_vistas = new ControladorDeVistas(this);
         nivel_a_cargar = 1;
-
     }
     
     public Nivel get_nivel_actual() { return nivel_actual; }
@@ -376,15 +382,40 @@ public class Juego {
     }
     
     public void actualizar_ranking() {
-    	int contador_puntos = Mario.get_instancia().get_puntaje();
+    	// Recuperar ranking
+    	Ranking ranking = new Ranking();
+    	try {
+    		FileInputStream file_input_stream = new FileInputStream("./ranking.tdp");
+    		ObjectInputStream object_input_stream = new ObjectInputStream(file_input_stream);
+			ranking = (Ranking) object_input_stream.readObject();
+			object_input_stream.close(); 
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     	
-        //Si no hay un input de nombre, se registra al jugador como invitado
-        if (nombre_jugador != null && !nombre_jugador.trim().isEmpty()) {
-        ranking.agregar_jugador(nombre_jugador, contador_puntos);
-        }
-        else {
-        	ranking.agregar_jugador("Invitado", contador_puntos);
-        }
+    	// Guardar jugador
+    	try (Scanner sn = new Scanner(System.in)) {
+			int contador_puntos = Mario.get_instancia().get_puntaje();
+			System.out.println("Ingerese su nombre: ");
+			nombre_jugador= sn.next();
+			ranking.agregar_jugador(nombre_jugador, contador_puntos);
+		}
+    	
+    	// Guardar el ranking
+    	try {
+	    	FileOutputStream file_output_stream = new FileOutputStream("./ranking.tdp");
+	    	ObjectOutputStream object_output_stream = new ObjectOutputStream(file_output_stream);
+	      	object_output_stream.writeObject(ranking);
+	      	object_output_stream.flush();
+	      	object_output_stream.close();
+    	}catch(FileNotFoundException e) {
+    		e.printStackTrace();
+    	} catch (IOException e) {
+			e.printStackTrace();
+		}
+        
      }
     
     public void detener_hilos() {

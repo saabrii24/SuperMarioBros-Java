@@ -2,7 +2,6 @@ package ranking;
 
 import java.io.Serializable;
 import java.util.*;
-import java.util.Map.Entry;
 
 /**
  * La clase {@code Ranking} gestiona el sistema de clasificación de jugadores
@@ -12,50 +11,39 @@ import java.util.Map.Entry;
 public class Ranking implements Serializable {
 
     /**
-     * Mapa que almacena el nombre de los jugadores y sus puntajes asociados.
+     * ArrayList que almacenan los jugadores.
      */
-    protected final Map<String, Integer> ranking;
+    protected final List<Jugador> ranking;
 
     /**
-     * Crea una instancia de {@code Ranking} con un mapa vacío para almacenar
+     * Crea una instancia de {@code Ranking} con un ArrayList vacío para almacenar
      * los puntajes de los jugadores.
      */
 	public Ranking() {
-        this.ranking = new LinkedHashMap<>();
+        this.ranking = new ArrayList<>(5);
     }
 
     /**
-     * Agrega un jugador al ranking o actualiza su puntaje si ya existe.
-     * Luego, ordena el ranking en orden descendente según los puntajes y
-     * mantiene solo el top 5 de jugadores con los puntajes más altos.
+     * Agrega un jugador al ranking
      *
      * @param nombre El nombre del jugador.
      * @param puntos El puntaje obtenido por el jugador.
      */
     public void agregar_jugador(String nombre, int puntos) {
-        // Agregar o actualizar el puntaje del jugador
-        ranking.put(nombre, puntos);
-
-        // Ordenar el ranking de mayor a menor puntaje
-        List<Map.Entry<String, Integer>> lista_ordenada = new ArrayList<>(ranking.entrySet());
-        lista_ordenada.sort((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()));
-
-        // Limitar el ranking solo al top 5
-        ranking.clear();
-        for (int i = 0; i < Math.min(5, lista_ordenada.size()); i++) {
-            Map.Entry<String, Integer> entry = lista_ordenada.get(i);
-            ranking.put(entry.getKey(), entry.getValue());
-        }
+        ranking.add(new Jugador(nombre, puntos));
+        // Para ordenar
+        ranking.sort((o1, o2) -> o1.compareTo(o2));
+        ranking.sort(Collections.reverseOrder());
     }
 
     /**
      * Obtiene el ranking ordenado de jugadores con sus puntajes.
      * El ranking está limitado a los 5 puntajes más altos.
      *
-     * @return Un mapa ordenado con el top 5 de jugadores y sus puntajes.
+     * @return Una lista ordenado con el top 5 de jugadores.
      */
-    public Map<String, Integer> get_sort_ranking() {
-        return new LinkedHashMap<>(ranking);
+    public List<Jugador> get_ranking() {
+        return ranking;
     }
     
 }

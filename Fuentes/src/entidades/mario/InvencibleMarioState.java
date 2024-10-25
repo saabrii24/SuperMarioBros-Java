@@ -16,11 +16,11 @@ public class InvencibleMarioState implements Mario.MarioState {
     }
     
     public void actualizar_sprite() {
-    	if(mario.esta_saltando() || mario.get_velocidad_y() < 0) { // Saltando o cayendo (velocidad negativa)
+    	if(mario.esta_saltando() || mario.get_velocidad_en_y() < 0) { // Saltando o cayendo (velocidad negativa)
         	mario.cambiar_sprite(mario.get_movimiento_derecha() ?
         			mario.get_sprite_factory().get_mario_star_saltando_derecha() : 
         			mario.get_sprite_factory().get_mario_star_saltando_izquierda());
-        } else if (mario.get_velocidad_x() != 0 && !mario.esta_saltando()) {
+        } else if (mario.get_velocidad_en_x() != 0 && !mario.esta_saltando()) {
         	mario.cambiar_sprite(mario.get_movimiento_derecha() ? 
                     mario.get_sprite_factory().get_mario_star_movimiento_derecha() : 
                     mario.get_sprite_factory().get_mario_star_movimiento_izquierda());

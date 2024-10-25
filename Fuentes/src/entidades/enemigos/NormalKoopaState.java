@@ -34,7 +34,6 @@ public class NormalKoopaState implements KoopaState{
             	Juego.get_instancia().get_fabrica_sprites().get_koopa_movimiento_derecha():
             		Juego.get_instancia().get_fabrica_sprites().get_koopa_movimiento_izquierda()));
         }
-		
 	}
 
 	@Override

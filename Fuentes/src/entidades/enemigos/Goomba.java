@@ -10,10 +10,10 @@ public class Goomba extends Enemigo {
 
     public void actualizar() {
         if (esta_cayendo()) {
-            set_velocidad_en_y(get_velocidad_y() + GRAVEDAD);
-            set_posicion_en_y(get_posicion_en_y() - get_velocidad_y());
+            set_velocidad_en_y(get_velocidad_en_y() + GRAVEDAD);
+            set_posicion_en_y(get_posicion_en_y() - get_velocidad_en_y());
         }
-        set_posicion_en_x(get_posicion_en_x() + get_velocidad_x());
+        set_posicion_en_x(get_posicion_en_x() + get_velocidad_en_x());
     }
 
     public void mover() {

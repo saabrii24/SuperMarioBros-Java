@@ -5,8 +5,8 @@ public interface Movible {
     void set_velocidad(double vx, double vy);
 	void set_velocidad_en_y(double vy);
 	void set_velocidad_en_x(double vx);
-	double get_velocidad_x();
-    double get_velocidad_y();
+	double get_velocidad_en_x();
+    double get_velocidad_en_y();
 	void set_cayendo(boolean esta_cayendo);
 	void set_direccion(int i);
 }

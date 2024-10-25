@@ -24,6 +24,7 @@ public class HiddenKoopaState implements KoopaState {
 	public void mover() {
 		koopa.set_velocidad_en_x(0);
 	}
+	
 	public void actualizar_sprite() {
 		koopa.cambiar_sprite(Juego.get_instancia().get_fabrica_sprites().get_koopa_escondido());
 	}

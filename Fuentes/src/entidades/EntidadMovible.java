@@ -36,12 +36,12 @@ public abstract class EntidadMovible extends Entidad implements Movible {
     }
 
     @Override
-    public double get_velocidad_x() {
+    public double get_velocidad_en_x() {
         return velocidad_en_x;
     }
 
     @Override
-    public double get_velocidad_y() {
+    public double get_velocidad_en_y() {
         return velocidad_en_y;
     }
 

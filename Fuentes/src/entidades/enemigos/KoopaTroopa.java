@@ -7,11 +7,9 @@ import logica.Mapa;
 
 public class KoopaTroopa extends Enemigo {
 	protected KoopaState estado_actual;
-    private SpritesFactory sprites_factory;
-
+	
     public KoopaTroopa(int x, int y, Sprite sprite) {
         super(x, y, sprite);
-        this.sprites_factory = null;
         estado_actual = new NormalKoopaState(this);
     }
 
@@ -31,10 +29,8 @@ public class KoopaTroopa extends Enemigo {
 
         set_posicion_en_x(get_posicion_en_x() + velocidad_en_x);
 
-        if (Mario.get_instancia() != null && Mario.get_instancia().get_sprite_factory() != null) {
-            sprites_factory = Mario.get_instancia().get_sprite_factory();
-            actualizar_sprite();
-        }
+        actualizar_sprite();
+
     }
 
     public void mover() {

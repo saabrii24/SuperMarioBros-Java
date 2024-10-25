@@ -62,6 +62,7 @@ public class ControladorNivel {
         registrar_observers_para_entidades(juego.get_mapa_nivel_actual().get_entidades_bloque_de_pregunta());
         registrar_observers_para_entidades(juego.get_mapa_nivel_actual().get_entidades_bloque_solido());
         registrar_observers_para_entidades(juego.get_mapa_nivel_actual().get_entidades_ladrillo_solido());
+        registrar_observers_para_entidades(juego.get_mapa_nivel_actual().get_entidades_powerup());
         registrar_observers_para_entidades(juego.get_mapa_nivel_actual().get_entidades_tuberias());
         registrar_observers_para_entidades(juego.get_mapa_nivel_actual().get_entidades_vacio());
         registrar_observers_para_entidades(juego.get_mapa_nivel_actual().get_entidades_buzzy_beetle());
@@ -71,7 +72,6 @@ public class ControladorNivel {
         registrar_observers_para_entidades(juego.get_mapa_nivel_actual().get_entidades_piranha_plant());
         registrar_observers_para_entidades(juego.get_mapa_nivel_actual().get_entidades_spiny());
         registrar_observers_para_entidades(juego.get_mapa_nivel_actual().get_entidades_proyectiles());
-        registrar_observers_para_entidades(juego.get_mapa_nivel_actual().get_entidades_powerup());
     }
 
     private void registrar_observer_jugador(Mario mario) {

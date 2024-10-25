@@ -115,6 +115,7 @@ public class ControladorEntidades {
         notificar_lista_entidades(mapa.get_entidades_spiny());
     }
     
+    /*
     public void notificar_observadores_entidades() {
         Mapa mapa = juego.get_mapa_nivel_actual();
         notificar_lista_entidades(mapa.get_entidades_buzzy_beetle());
@@ -131,11 +132,12 @@ public class ControladorEntidades {
         notificar_lista_entidades(mapa.get_entidades_tuberias());
         notificar_lista_entidades(mapa.get_entidades_vacio());
     }
+    */
 
     private void notificar_lista_entidades(List<? extends Entidad> entidades) {
         // Crear una copia de la lista para evitar ConcurrentModificationException
-        List<? extends Entidad> entidadesCopia = new ArrayList<>(entidades);
-        for (Entidad entidad : entidadesCopia) {
+        List<? extends Entidad> entidades_copia = new ArrayList<>(entidades);
+        for (Entidad entidad : entidades_copia) {
             synchronized(entidad) {
                 try {
                     entidad.notificar_observer();

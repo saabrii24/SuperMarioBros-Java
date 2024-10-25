@@ -65,7 +65,7 @@ public class Juego {
 		controlador_nivel.cargar_datos(generador);
 	}
 
-    // Getters necesarios
+    // Getters
     public Nivel get_nivel_actual() { return nivel_actual; }
     public Mapa get_mapa_nivel_actual() { return mapa_nivel_actual; }
     public SpritesFactory get_fabrica_sprites() { return fabrica_sprites; }

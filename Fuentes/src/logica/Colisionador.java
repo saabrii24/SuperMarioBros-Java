@@ -244,10 +244,12 @@ public class Colisionador {
         for (Goomba goomba : new ArrayList<>(mapa.get_entidades_goomba())) {
         	if (mario.mata_tocando()) {
         		if (mario.get_limites().intersects(goomba.get_limites())) {
+        			mario.get_sistema_puntuacion().sumar_puntos(goomba.calcular_puntaje());
         			goomba.destruir(mapa);
         		}
         	}
             if (mario.get_limites_superiores().intersects(goomba.get_limites_inferiores())) {
+            	mario.get_sistema_puntuacion().sumar_puntos(goomba.calcular_puntaje());
                 goomba.destruir(mapa);
                 break;
             }
@@ -268,7 +270,7 @@ public class Colisionador {
             }
             if (mario.get_limites_superiores().intersects(koopa.get_limites_inferiores())) {
                 koopa.cambiar_estado();
-                mario.set_posicion_en_y(mario.get_posicion_en_y() + 50);;
+                mario.set_posicion_en_y(mario.get_posicion_en_y() + 50);
                 break;
             }
             if (mario.get_limites_derecha().intersects(koopa.get_limites()) || mario.get_limites_izquierda().intersects(koopa.get_limites())) {
@@ -285,6 +287,7 @@ public class Colisionador {
         // Manejo de colisiones con BuzzyBeetle
         for (BuzzyBeetle buzzy : new ArrayList<>(mapa.get_entidades_buzzy_beetle())) {
             if (mario.mata_tocando() && mario.get_limites().intersects(buzzy.get_limites())) {
+            	mario.get_sistema_puntuacion().sumar_puntos(buzzy.calcular_puntaje());
                 buzzy.destruir(mapa);
             }
             if (mario.get_limites_superiores().intersects(buzzy.get_limites_inferiores())) {
@@ -305,6 +308,7 @@ public class Colisionador {
         // Manejo de colisiones con PiranhaPlant
         for (PiranhaPlant piranha : new ArrayList<>(mapa.get_entidades_piranha_plant())) {
             if (mario.mata_tocando() && mario.get_limites().intersects(piranha.get_limites())) {
+            	mario.get_sistema_puntuacion().sumar_puntos(piranha.calcular_puntaje());
                 piranha.destruir(mapa);
             }
             if (mario.get_limites_superiores().intersects(piranha.get_limites_inferiores()) && !mario.mata_tocando()) {
@@ -325,6 +329,7 @@ public class Colisionador {
         // Manejo de colisiones con Lakitu
         for (Lakitu lakitu : new ArrayList<>(mapa.get_entidades_lakitu())) {
             if (mario.mata_tocando() && mario.get_limites().intersects(lakitu.get_limites())) {
+            	mario.get_sistema_puntuacion().sumar_puntos(lakitu.calcular_puntaje());
                 lakitu.destruir(mapa);
             }
             if (mario.get_limites_superiores().intersects(lakitu.get_limites_inferiores()) && !mario.mata_tocando()) {
@@ -443,30 +448,35 @@ public class Colisionador {
             // Colisión con enemigos
             for (Goomba goomba : new ArrayList<>(mapa.get_entidades_goomba())) {
                 if (koopa.get_limites().intersects(goomba.get_limites())) {
+                	mario.get_sistema_puntuacion().sumar_puntos(goomba.calcular_puntaje());
                     goomba.destruir(mapa);
                     break;
                 }
             }
             for (BuzzyBeetle buzzy : new ArrayList<>(mapa.get_entidades_buzzy_beetle())) {
                 if (koopa.get_limites().intersects(buzzy.get_limites())) {
+                	mario.get_sistema_puntuacion().sumar_puntos(buzzy.calcular_puntaje());
                     buzzy.destruir();
                     break;
                 }
             }
             for (Lakitu lakitu : new ArrayList<>(mapa.get_entidades_lakitu())) {
                 if (koopa.get_limites().intersects(lakitu.get_limites())) {
+                	mario.get_sistema_puntuacion().sumar_puntos(lakitu.calcular_puntaje());
                     lakitu.destruir(mapa);
                     break;
                 }
             }
             for (PiranhaPlant piranha : new ArrayList<>(mapa.get_entidades_piranha_plant())) {
                 if (koopa.get_limites().intersects(piranha.get_limites())) {
+                	mario.get_sistema_puntuacion().sumar_puntos(piranha.calcular_puntaje());
                     piranha.destruir(mapa);
                     break;
                 }
             }
             for (Spiny spiny : new ArrayList<>(mapa.get_entidades_spiny())) {
                 if (koopa.get_limites().intersects(spiny.get_limites())) {
+                	mario.get_sistema_puntuacion().sumar_puntos(spiny.calcular_puntaje());
                     spiny.destruir(mapa);
                     break;
                 }

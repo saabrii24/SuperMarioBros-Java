@@ -2,7 +2,6 @@ package logica;
 
 import java.awt.EventQueue;
 
-import entidades.mario.ControladorPuntuacionMario;
 import entidades.mario.Mario;
 import fabricas.Dominio1Factory;
 import fabricas.EntidadesFactory;
@@ -72,6 +71,7 @@ public class Juego {
     public SpritesFactory get_fabrica_sprites() { return fabrica_sprites; }
     public void reproducir_efecto(String efecto) { controlador_vistas.reproducir_efecto(efecto); }
 	public ControladorDeVistas get_controlador_vistas() { return controlador_vistas; }
+	public ControladorNivel get_controlador_nivel() { return controlador_nivel; }
 	
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {

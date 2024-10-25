@@ -1,6 +1,7 @@
 package entidades.mario;
 
 import entidades.interfaces.SistemaVidas;
+import logica.Juego;
 
 public class ControladorVidasMario implements SistemaVidas {
 	protected int vidas;
@@ -14,6 +15,10 @@ public class ControladorVidasMario implements SistemaVidas {
     }
 
     public void quitar_vida() {
+    	if(vidas > 1)
+    		Juego.get_instancia().reproducir_efecto("mariodie");
+    	else
+    		Juego.get_instancia().reproducir_efecto("gameover");
         if (esta_vivo()) vidas--;
     }
 

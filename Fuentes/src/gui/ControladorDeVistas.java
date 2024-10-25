@@ -167,7 +167,7 @@ public class ControladorDeVistas implements ControladorJuegoVistaEntidades, Cont
         ventana.setContentPane(panel_pantalla_mapa);
         panel_pantalla_mapa.setFocusable(true);
         panel_pantalla_mapa.requestFocusInWindow(); 
-        sonido_juego.desactivar_sonido();
+        sonido_juego.activar_sonido();
         refrescar();
     }
     

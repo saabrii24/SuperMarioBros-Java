@@ -8,8 +8,9 @@ package niveles;
 public class Nivel {
     protected final int posicion_inicial_jugador_x;
     protected final int posicion_inicial_jugador_y;
-    protected final int tiempo;
+    protected final int tiempo_inicial;
     protected final int numero_de_nivel;
+    protected volatile int tiempo_restante;
 
     /**
      * Constructor para la clase {@code Nivel}, que utiliza un objeto {@code Builder} para
@@ -18,31 +19,36 @@ public class Nivel {
     public Nivel(Builder builder) {
         this.posicion_inicial_jugador_x = builder.posicion_inicial_jugador_x;
         this.posicion_inicial_jugador_y = builder.posicion_inicial_jugador_y;
-        this.tiempo = builder.tiempo;
+        this.tiempo_inicial = builder.tiempo;
+        this.tiempo_restante = builder.tiempo;
         this.numero_de_nivel = builder.numero_de_nivel;
     }
 
     // Getters
-    /** @return La posición inicial del jugador en X. */
     public int get_posicion_inicial_jugador_x() { return posicion_inicial_jugador_x; }
-    
-    /** @return La posición inicial del jugador en Y. */
     public int get_posicion_inicial_jugador_y() { return posicion_inicial_jugador_y; }
-    
-    /** @return El límite de tiempo en segundos. */
-    public int get_tiempo_restante() { return tiempo; }
-    
-    /** @return El número del nivel. */
+    public int get_tiempo_inicial() { return tiempo_inicial; }
+    public int get_tiempo_restante() { return tiempo_restante; }
     public int get_numero_de_nivel() { return numero_de_nivel; }
+    public synchronized void set_tiempo_restante(int tiempo) {
+        this.tiempo_restante = tiempo;
+    }
 
-    /** @return Una cadena que representa el estado del nivel. */
+    public synchronized boolean decrementar_tiempo() {
+        if (tiempo_restante > 0) {
+            tiempo_restante--;
+            return true;
+        }
+        return false;
+    }
+    
     @Override
     public String toString() {
         return "Nivel {" +
                "Numero de Nivel=" + numero_de_nivel +
                ", Posicion Inicial X=" + posicion_inicial_jugador_x +
                ", Posicion Inicial Y=" + posicion_inicial_jugador_y +
-               ", Tiempo=" + tiempo +
+               ", Tiempo=" + tiempo_inicial +
                '}';
     }
 

@@ -14,6 +14,7 @@ import entidades.powerups.PowerUpVisitor;
 import entidades.powerups.SuperChampi;
 import fabricas.Sprite;
 import fabricas.SpritesFactory;
+import logica.Juego;
 
 public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisitor {
 	private static final long serialVersionUID = 1L;
@@ -76,7 +77,7 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
 	public boolean esta_saltando() { return saltando; }	
 	public SpritesFactory get_sprite_factory() { return sprites_factory; }
     public int get_contador_saltos() { return contador_saltos;  }
-	public int get_puntaje() { return get_sistema_puntuacion().get_puntaje_total(); }
+	public int get_puntaje() { return (get_sistema_puntuacion().get_puntaje_total() + get_sistema_puntuacion().get_puntaje_nivel_actual()); }
 	public int get_monedas() { return get_sistema_puntuacion().get_monedas(); }
 	public int get_vidas() { return get_sistema_vidas().get_vidas(); }
     
@@ -140,6 +141,7 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
     
     public void saltar() {
         if (!saltando && contador_saltos < 1) {
+        	Juego.get_instancia().reproducir_efecto("jump-small");
         	saltando = true;
         	contador_saltos++;
         	velocidad_en_y = -10; // Velocidad inicial del salto
@@ -174,11 +176,13 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
  // Métodos de interacción y puntaje
     
     public void consumir_moneda() {
+    	Juego.get_instancia().reproducir_efecto("coin");
     	get_sistema_puntuacion().sumar_puntos(5);
     	get_sistema_puntuacion().sumar_moneda();
 	}
 
     public void consumir_champi_verde() {
+    	Juego.get_instancia().reproducir_efecto("powerup");
 		get_sistema_puntuacion().sumar_puntos(100);
 		get_sistema_vidas().sumar_vida();
 	}
@@ -190,10 +194,10 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
     }
 
 	public void visitar(Moneda moneda) { consumir_moneda(); }
-	public void visitar(FlorDeFuego flor_de_fuego) { estado.consumir_flor_de_fuego(); }
-	public void visitar(SuperChampi super_champi) { estado.consumir_super_champi(); }
+	public void visitar(FlorDeFuego flor_de_fuego) { estado.consumir_flor_de_fuego(); Juego.get_instancia().reproducir_efecto("powerup");}
+	public void visitar(SuperChampi super_champi) { estado.consumir_super_champi(); Juego.get_instancia().reproducir_efecto("powerup");}
 	public void visitar(ChampiVerde champi_verde) { consumir_champi_verde(); }
-	public void visitar(Estrella estrella) { estado.consumir_estrella(); }
+	public void visitar(Estrella estrella) { estado.consumir_estrella(); Juego.get_instancia().reproducir_efecto("powerup");}
 	
     public BolaDeFuego disparar() { return estado.disparar(); }
     public void resetear_posicion() { this.set_posicion(96, 600); }

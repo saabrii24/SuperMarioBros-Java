@@ -2,7 +2,7 @@
 Nivel: 1
 
 # Tiempo límite en segundos
-Tiempo: 100
+Tiempo: 50
 
 # Creación de las entidades
 	

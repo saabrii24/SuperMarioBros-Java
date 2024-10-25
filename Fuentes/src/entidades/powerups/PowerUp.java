@@ -2,6 +2,7 @@ package entidades.powerups;
 
 import entidades.Entidad;
 import fabricas.Sprite;
+import logica.Juego;
 import logica.Mapa;
 import logica.Observer;
 
@@ -28,9 +29,9 @@ public abstract class PowerUp extends Entidad{
 	}
 
 	public void revelar() {
+		Juego.get_instancia().reproducir_efecto("powerup_appears");
 		this.set_posicion_en_y(this.get_posicion_en_y() + 48);
-		observer.actualizar();
-		
+		observer.actualizar();	
 	}
 
 	public Observer get_observer() {

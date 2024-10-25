@@ -95,10 +95,11 @@ public class ControladorNivel {
     }
 
     public void incrementar_nivel() {
-        // Transfiere el puntaje del nivel al acumulado y resetea el puntaje del nivel
+    	Juego.get_instancia().reproducir_efecto("stage_clear");
         Mario.get_instancia().get_sistema_puntuacion().pasar_nivel();
         nivel_actual++;
-        cargar_datos(juego.fabrica_entidades); // Cargar el siguiente nivel
+        
+        cargar_datos(juego.fabrica_entidades); 
     }
 
     public int get_nivel_actual() {

@@ -305,14 +305,14 @@ public class Colisionador {
                 piranha.destruir(mapa);
             }
             if (mario.get_limites_superiores().intersects(piranha.get_limites_inferiores())) {
-                piranha.destruir(mapa);
+                murio_mario=true;
                 break;
             }
             if (mario.get_limites_derecha().intersects(piranha.get_limites()) || mario.get_limites_izquierda().intersects(piranha.get_limites())) {
                 if (mario.colision_con_enemigo(piranha)) {
                     murio_mario = true;
                 } else {
-                    murio_mario = false;
+                    murio_mario = true;
                     piranha.destruir(mapa);
                 }
             }

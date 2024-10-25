@@ -1,4 +1,3 @@
-
 # Archivo de configuración del Nivel 1
 Nivel: 1
 
@@ -11,27 +10,42 @@ Tiempo: 100
 	Mario: 96, 600
 	
 	# Enemigos
-	#Goomba: 288, 144
-	#Goomba: 384, 144
+	Goomba: 1500, 200
+	Goomba: 1300, 250
 	Koopa: 1056, 400
 	Goomba: 700, 400
-	Tuberia: 1200, 144
 	Piranha: 1224, 240
+	Piranha: 3192, 240
 	
 	# PowerUps
-	# FlorDeFuego: 240, 144
-	# Estrella: 290, 144
+	Moneda: 336,240
 	
 	# Plataformas
-
+	BloqueSolido: 1600,144
+	BloqueSolido: 1600,192
+	BloqueSolido: 1744,144
+	BloqueSolido: 1744,192
+	BloqueSolido: 1744,240
+	BloqueSolido: 1920,144
+	BloqueSolido: 1920,192
+	BloqueSolido: 1920,240
+	BloqueSolido: 1920,288
+	LadrilloSolido: 2112,432
+	BloqueSolido: 2304,144
+	BloqueSolido: 2304,192
+	BloqueSolido: 2304,240
+	BloqueSolido: 2304,288
+	LadrilloSolido: 2352,528
+	LadrilloSolido: 2400,528
+	LadrilloSolido: 2448,528
+	LadrilloSolido: 2688,384
+	LadrilloSolido: 2736,384
+	LadrilloSolido: 2784,384
+	LadrilloSolido: 2832,384
+	LadrilloSolido: 2880,384
+	LadrilloSolido: 2784,528
 	BloqueSolido: 336, 144
 	BloqueSolido: 816, 144
-	
-	BloqueSolido: -48, 96
-	BloqueSolido: -48, 144
-	BloqueSolido: -48, 192
-	BloqueSolido: -48, 240
-	BloqueSolido: -48, 288
 	BloqueSolido: 0, 96
 	BloqueSolido: 48, 96
 	BloqueSolido: 96, 96
@@ -43,8 +57,6 @@ Tiempo: 100
 	BloqueSolido: 384, 96
 	BloqueSolido: 432, 96
 	BloqueSolido: 480, 96
-	#BloqueSolido: 432, 96
-	#BloqueSolido: 480, 96
 	BloqueSolido: 528, 96
 	BloqueSolido: 576, 96
 	BloqueSolido: 624, 96
@@ -75,13 +87,6 @@ Tiempo: 100
 	BloqueSolido: 1824, 96
 	BloqueSolido: 1872, 96
 	BloqueSolido: 1920, 96
-	BloqueSolido: 1968, 96
-	BloqueSolido: 2016, 96
-	BloqueSolido: 2064, 96
-	BloqueSolido: 2112, 96
-	BloqueSolido: 2160, 96
-	BloqueSolido: 2208, 96
-	BloqueSolido: 2256, 96
 	BloqueSolido: 2304, 96
 	BloqueSolido: 2352, 96
 	BloqueSolido: 2400, 96
@@ -151,17 +156,20 @@ Tiempo: 100
 	BloqueSolido: 5376, 192
 	BloqueSolido: 5376, 240
 	BloqueSolido: 5376, 288
-	#Vacio: 480, 0
-	#Vacio: 480, 48
-	Vacio: 432, 0
-	
+	Vacio: 1967, 0
+	Vacio: 2060, 0
+	Vacio: 2153, 0
+	Vacio: 2207, 0
+	Tuberia: 3168,144
+	Tuberia: 1200, 144
 	BloqueDePreguntaConMoneda: 672, 288
 	LadrilloSolido: 864, 288
 	BloqueDePreguntaConSuperChampi: 912, 288
 	LadrilloSolido: 960, 288
 	BloqueDePreguntaConFlorDeFuego: 1008, 288
+	BloqueDePreguntaConFlorDeFuego:2784,528
 	LadrilloSolido: 1056, 288
-	BloqueDePreguntaConEstrella: 960, 480
+	BloqueDePreguntaConEstrella: 960, 432
 	
 
 # Definición del mapa

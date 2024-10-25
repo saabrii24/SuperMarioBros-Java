@@ -257,6 +257,7 @@ public class Colisionador {
             	}
             	else {
             		murio_mario = false;
+                    mario.get_sistema_puntuacion().sumar_puntos(goomba.calcular_puntaje());
             		goomba.destruir(mapa);
             	}
             }
@@ -275,6 +276,7 @@ public class Colisionador {
                     murio_mario = true;
                 } else {
                     murio_mario = false;
+                    mario.get_sistema_puntuacion().sumar_puntos(koopa.calcular_puntaje());
                     koopa.cambiar_estado();
                 }
             }
@@ -294,6 +296,7 @@ public class Colisionador {
                     murio_mario = true;
                 } else {
                     murio_mario = false;
+                    mario.get_sistema_puntuacion().sumar_puntos(buzzy.calcular_puntaje());
                     buzzy.destruir(mapa);
                 }
             }
@@ -313,6 +316,7 @@ public class Colisionador {
                     murio_mario = true;
                 } else {
                     murio_mario = true;
+                    mario.get_sistema_puntuacion().sumar_puntos(piranha.calcular_puntaje());
                     piranha.destruir(mapa);
                 }
             }
@@ -332,6 +336,7 @@ public class Colisionador {
                     murio_mario = true;
                 } else {
                     murio_mario = false;
+                    mario.get_sistema_puntuacion().sumar_puntos(lakitu.calcular_puntaje());
                     lakitu.destruir(mapa);
                 }
             }
@@ -340,6 +345,7 @@ public class Colisionador {
         // Manejo de colisiones con Spiny
         for (Spiny spiny : new ArrayList<>(mapa.get_entidades_spiny())) {
             if (mario.mata_tocando() && mario.get_limites().intersects(spiny.get_limites())) {
+                mario.get_sistema_puntuacion().sumar_puntos(spiny.calcular_puntaje());
                 spiny.destruir(mapa);
             }
             if (mario.get_limites_superiores().intersects(spiny.get_limites_inferiores())) {
@@ -351,6 +357,7 @@ public class Colisionador {
                     murio_mario = true;
                 } else {
                     murio_mario = false;
+                    mario.get_sistema_puntuacion().sumar_puntos(spiny.calcular_puntaje());
                     spiny.destruir(mapa);
                 }
             }
@@ -370,6 +377,7 @@ public class Colisionador {
     private void verificar_colisiones_proyectiles() {
         List<BolaDeFuego> proyectiles = new ArrayList<>(mapa.get_entidades_proyectiles());
         List<KoopaTroopa> koopas = new ArrayList<>(mapa.get_entidades_koopa_troopa());
+        Mario mario = Mario.get_instancia();
         for (BolaDeFuego proyectil : proyectiles) {
             // Colisión con plataformas
             if (colisiona_con_plataforma(proyectil.get_limites())) {
@@ -381,6 +389,7 @@ public class Colisionador {
             for (Goomba goomba : new ArrayList<>(mapa.get_entidades_goomba())) {
                 if (proyectil.get_limites().intersects(goomba.get_limites())) {
                     goomba.destruir();
+                    mario.get_sistema_puntuacion().sumar_puntos(goomba.calcular_puntaje());
                     proyectil.destruir(mapa);
                     break;
                 }
@@ -388,6 +397,7 @@ public class Colisionador {
             for (BuzzyBeetle buzzy : new ArrayList<>(mapa.get_entidades_buzzy_beetle())) {
                 if (proyectil.get_limites().intersects(buzzy.get_limites())) {
                     buzzy.destruir();
+                    mario.get_sistema_puntuacion().sumar_puntos(buzzy.calcular_puntaje());
                     proyectil.destruir(mapa);
                     break;
                 }
@@ -395,6 +405,7 @@ public class Colisionador {
             for (KoopaTroopa koopa : new ArrayList<>(mapa.get_entidades_koopa_troopa())) {
                 if (proyectil.get_limites().intersects(koopa.get_limites())) {
                     koopa.destruir(mapa);
+                    mario.get_sistema_puntuacion().sumar_puntos(koopa.calcular_puntaje());
                     proyectil.destruir(mapa);
                     break;
                 }
@@ -402,6 +413,7 @@ public class Colisionador {
             for (Lakitu lakitu : new ArrayList<>(mapa.get_entidades_lakitu())) {
                 if (proyectil.get_limites().intersects(lakitu.get_limites())) {
                     lakitu.destruir(mapa);
+                    mario.get_sistema_puntuacion().sumar_puntos(lakitu.calcular_puntaje());
                     proyectil.destruir(mapa);
                     break;
                 }
@@ -409,6 +421,7 @@ public class Colisionador {
             for (PiranhaPlant piranha : new ArrayList<>(mapa.get_entidades_piranha_plant())) {
                 if (proyectil.get_limites().intersects(piranha.get_limites())) {
                     piranha.destruir(mapa);
+                    mario.get_sistema_puntuacion().sumar_puntos(piranha.calcular_puntaje());
                     proyectil.destruir(mapa);
                     break;
                 }
@@ -416,6 +429,7 @@ public class Colisionador {
             for (Spiny spiny : new ArrayList<>(mapa.get_entidades_spiny())) {
                 if (proyectil.get_limites().intersects(spiny.get_limites())) {
                     spiny.destruir();
+                    mario.get_sistema_puntuacion().sumar_puntos(spiny.calcular_puntaje());
                     proyectil.destruir(mapa);
                     break;
                 }

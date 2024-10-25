@@ -65,8 +65,8 @@ public class NormalMarioState implements Mario.MarioState {
 	}
 
 	@Override
-	public boolean colision_con_enemigo(Enemigo e) {
-		mario.get_sistema_puntuacion().sumar_puntos(mario.calcular_penalizacion_enemigo(e));
+	public boolean colision_con_enemigo(Enemigo enemigo) {
+		mario.get_sistema_puntuacion().restar_puntos(enemigo.calcular_penalizacion());
         mario.get_sistema_vidas().quitar_vida();
 		return true;
 	}

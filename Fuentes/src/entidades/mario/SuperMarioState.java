@@ -47,7 +47,7 @@ public class SuperMarioState implements Mario.MarioState {
     }
     
     public boolean colision_con_enemigo(Enemigo enemigo) {
-    	mario.get_sistema_puntuacion().sumar_puntos(mario.calcular_penalizacion_enemigo(enemigo));
+    	mario.get_sistema_puntuacion().restar_puntos(enemigo.calcular_penalizacion());
     	mario.cambiar_estado(new NormalMarioState(mario));
     	return false;
     }
@@ -66,8 +66,7 @@ public class SuperMarioState implements Mario.MarioState {
 	}
 
 	@Override
-	public BolaDeFuego disparar() {
-		
+	public BolaDeFuego disparar() {	
 		return null;
 	}
 }

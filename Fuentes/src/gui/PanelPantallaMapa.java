@@ -70,22 +70,21 @@ public class PanelPantallaMapa extends JPanel {
     public Observer incorporar_entidad_jugador(EntidadJugador entidad_jugador, Nivel nivel) {
         ObserverJugador observer_jugador = new ObserverJugador(this, entidad_jugador);
         imagen_fondo.add(observer_jugador);
-        actualizar_info_jugador(entidad_jugador, nivel);
+        actualizar_labels_informacion(entidad_jugador, nivel);
         return observer_jugador;
     }
 
-    protected void actualizar_info_jugador(EntidadJugador jugador, Nivel nivel) {
-        actualizar_labels_informacion(jugador, nivel);
-        actualizar_scroll_hacia_jugador(jugador);
-    }
-
-    protected void actualizar_labels_informacion(EntidadJugador jugador, Nivel nivel) {
+    public void actualizar_labels_informacion(EntidadJugador jugador, Nivel nivel) {
         label_puntaje.setText("  Puntos: " + texto_con_cantidad_digitos(jugador.get_puntaje(), 4) + "  ");
         label_monedas.setText("Monedas: " + texto_con_cantidad_digitos(jugador.get_monedas(), 3) + "  ");
         label_nivel.setText("Nivel: " + nivel.get_numero_de_nivel() + "-3   ");
         label_tiempo.setText("Tiempo: " + texto_con_cantidad_digitos(nivel.get_tiempo_restante(), 3) + "  ");
         label_vidas.setText("Vidas: " + jugador.get_vidas());
+        
+        panel_informacion.revalidate();
+        panel_informacion.repaint();
     }
+
 
     protected String texto_con_cantidad_digitos(int numero, int digitos) {
         String formato = "%0" + digitos + "d";

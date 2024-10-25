@@ -40,6 +40,10 @@ public class PiranhaPlant extends Enemigo {
         set_posicion_en_y(get_posicion_en_y() + velocidad_actual);   
     }
 
+    public int calcular_puntaje() { return 30; }
+
+    public int calcular_penalizacion() { return 30; }    
+    
     @Override
     public boolean esta_cayendo() {
         return false;

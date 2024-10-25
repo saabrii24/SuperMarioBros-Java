@@ -1,5 +1,6 @@
 package entidades.powerups;
 
+import entidades.mario.Mario;
 import fabricas.Sprite;
 
 public class Moneda extends PowerUp{

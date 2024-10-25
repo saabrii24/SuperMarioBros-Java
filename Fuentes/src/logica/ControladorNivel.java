@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import entidades.Entidad;
+import entidades.mario.ControladorPuntuacionMario;
 import entidades.mario.Mario;
 import fabricas.EntidadesFactory;
 import niveles.GeneradorNivel;
@@ -94,7 +95,10 @@ public class ControladorNivel {
     }
 
     public void incrementar_nivel() {
+        // Transfiere el puntaje del nivel al acumulado y resetea el puntaje del nivel
+        Mario.get_instancia().get_sistema_puntuacion().pasar_nivel();
         nivel_actual++;
+        cargar_datos(juego.fabrica_entidades); // Cargar el siguiente nivel
     }
 
     public int get_nivel_actual() {

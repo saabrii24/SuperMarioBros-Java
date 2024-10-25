@@ -10,4 +10,7 @@ public abstract class Enemigo extends EntidadMovible{
 		super(x, y, sprite);
 	}
 
+	public abstract int calcular_puntaje();
+	public abstract int calcular_penalizacion();
+	
 }

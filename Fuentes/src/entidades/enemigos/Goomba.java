@@ -15,6 +15,19 @@ public class Goomba extends Enemigo {
         }
         set_posicion_en_x(get_posicion_en_x() + get_velocidad_en_x());
     }
+    
+	public void destruir(Mapa mapa) {
+        if (!destruida) {
+        	mapa.reproducir_efecto("kick");
+            destruida = true;           
+            mapa.eliminar_goomba(this);
+            destruir();
+        }
+    }
+
+    public int calcular_puntaje() { return 60; }
+
+    public int calcular_penalizacion() { return 30; }
 
     public void mover() {
         switch (direccion) {
@@ -38,13 +51,6 @@ public class Goomba extends Enemigo {
     protected void detener_movimiento() {
         set_velocidad_en_x(0);
     }
-	public void destruir(Mapa mapa) {
-        if (!destruida) {
-        	mapa.reproducir_efecto("kick");
-            destruida = true;           
-            mapa.eliminar_goomba(this);
-            destruir();
-        }
-    }
+   
 }
 

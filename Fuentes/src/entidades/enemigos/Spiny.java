@@ -21,6 +21,14 @@ public class Spiny extends Enemigo{
         posicion_en_x += velocidad_en_x;
         actualizar_sprite();
     }
+	
+    public int calcular_puntaje() {
+        return 60;
+    }
+    
+    public int calcular_penalizacion() {
+        return 30;
+    }
 
     public void mover() {
         switch (direccion) {

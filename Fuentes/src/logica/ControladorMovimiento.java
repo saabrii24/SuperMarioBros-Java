@@ -1,9 +1,12 @@
 package logica;
 
+import entidades.mario.Mario;
+
 public class ControladorMovimiento {
     private final Juego juego;
     private Thread hilo_mario_movimiento;
     private Thread hilo_enemigos_movimiento;
+    private Thread hilo_actualizacion_informacion;
     private volatile boolean esta_ejecutando;
 
     public ControladorMovimiento(Juego juego) {
@@ -16,6 +19,7 @@ public class ControladorMovimiento {
 
         iniciar_hilo_movimiento_mario();
         iniciar_hilo_movimiento_enemigos();
+        iniciar_hilo_actualizacion_informacion();
     }
 
     private void iniciar_hilo_movimiento_mario() {
@@ -26,6 +30,11 @@ public class ControladorMovimiento {
     private void iniciar_hilo_movimiento_enemigos() {
         hilo_enemigos_movimiento = new Thread(this::bucle_movimiento_entidades);
         hilo_enemigos_movimiento.start();
+    }
+    
+    private void iniciar_hilo_actualizacion_informacion() {
+        hilo_actualizacion_informacion = new Thread(this::bucle_actualizacion_informacion);
+        hilo_actualizacion_informacion.start();
     }
 
     private void bucle_movimiento_jugador() {
@@ -57,6 +66,17 @@ public class ControladorMovimiento {
         }
     }
 
+    private void bucle_actualizacion_informacion() {
+        while (esta_ejecutando) {
+            try {
+                juego.get_controlador_vistas().get_pantalla_mapa().actualizar_labels_informacion(Mario.get_instancia(), juego.get_nivel_actual());
+                Thread.sleep(100); // Actualización cada 100 ms
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
+
     private void controlar_fps(long tiempo_actual, double tiempo_por_frame) {
         long tiempo_restante = (long) tiempo_por_frame - (System.nanoTime() - tiempo_actual);
         if (tiempo_restante > 0) {
@@ -77,6 +97,9 @@ public class ControladorMovimiento {
             }
             if (hilo_enemigos_movimiento != null) {
                 hilo_enemigos_movimiento.join();
+            }
+            if (hilo_actualizacion_informacion != null) {
+            	hilo_actualizacion_informacion.join();
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();

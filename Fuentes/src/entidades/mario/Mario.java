@@ -32,7 +32,6 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
     private int contador_saltos = 0;
     private boolean movimiento_derecha;
     
-    private boolean movimiento_horizontal_bloqueado;
     private boolean movimiento_vertical_bloqueado;
     
     // Constructor privado del Singleton
@@ -48,7 +47,7 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
     // Singleton: Obtiene la instancia de Mario
     public static Mario get_instancia() {
         if (instancia_mario == null) {
-        	instancia_mario = new Mario(96, 150, null);
+        	instancia_mario = new Mario(96, 240, null);
         }
         return instancia_mario;
     }
@@ -96,7 +95,6 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
     }
 
     public void bloquear_movimiento_horizontal() {
-        movimiento_horizontal_bloqueado = true;
         detener_movimiento_horizontal();
     }
     public void bloquear_movimiento_vertical() {
@@ -104,7 +102,6 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
     	detener_movimiento_vertical();
     }
     public void activar_movimiento_horizontal() {
-        movimiento_horizontal_bloqueado = false;
     }
     public void activar_movimiento_vertical() {
     	movimiento_vertical_bloqueado = false;
@@ -163,8 +160,8 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
             posicion_en_y -= velocidad_en_y;
 
             if (velocidad_en_y <= 0) {
-                saltando = false; // Deja de saltar
-                cayendo = true;   // Comienza a caer
+                saltando = false;
+                cayendo = true;
             }
         }
 
@@ -176,38 +173,16 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
 
  // Métodos de interacción y puntaje
     
-    private void consumir_moneda() {
+    public void consumir_moneda() {
     	get_sistema_puntuacion().sumar_puntos(5);
     	get_sistema_puntuacion().sumar_moneda();
 	}
 
-	private void consumir_champi_verde() {
+    public void consumir_champi_verde() {
 		get_sistema_puntuacion().sumar_puntos(100);
 		get_sistema_vidas().sumar_vida();
 	}
 
-	// ----- IMPLEMENTAR CON VISITOR -----
-    int calcular_puntaje_enemigo(Enemigo enemigo) {
-        return switch (enemigo.getClass().getSimpleName()) {
-            case "Goomba" -> 60;
-            case "KoopaTroopa" -> 90;
-            case "PiranhaPlant", "BuzzyBeetle" -> 30;
-            case "Lakitu", "Spiny" -> 60;
-            default -> 0;
-        };
-    }
-
-    int calcular_penalizacion_enemigo(Enemigo enemigo) {
-        return switch (enemigo.getClass().getSimpleName()) {
-            case "Goomba", "PiranhaPlant", "Spiny" -> -30;
-            case "KoopaTroopa" -> -45;
-            case "BuzzyBeetle" -> -15;
-            default -> 0;
-        };
-    }
-
-    // ------------------------------------
-    
     public void caer_en_vacio() {
     	get_sistema_puntuacion().restar_puntos(15);
     	get_sistema_vidas().quitar_vida();

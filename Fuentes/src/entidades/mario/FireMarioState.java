@@ -62,7 +62,7 @@ public class FireMarioState implements Mario.MarioState {
 
 	@Override
 	public boolean colision_con_enemigo(Enemigo enemigo) {
-		mario.get_sistema_puntuacion().sumar_puntos(mario.calcular_penalizacion_enemigo(enemigo));
+		mario.get_sistema_puntuacion().restar_puntos(enemigo.calcular_penalizacion());
     	mario.cambiar_estado(new NormalMarioState(mario));
     	return false;
 	}

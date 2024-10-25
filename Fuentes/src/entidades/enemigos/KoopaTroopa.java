@@ -28,10 +28,13 @@ public class KoopaTroopa extends Enemigo {
         }
 
         set_posicion_en_x(get_posicion_en_x() + velocidad_en_x);
-
         actualizar_sprite();
-
+        
     }
+    
+    public int calcular_puntaje() { return 90; }
+    
+    public int calcular_penalizacion() { return 45; }
 
     public void mover() {
     	estado_actual.mover();

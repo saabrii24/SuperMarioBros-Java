@@ -28,7 +28,7 @@ public class SuperMarioState implements Mario.MarioState {
 	
 	public void consumir_estrella() {
 		mario.get_sistema_puntuacion().sumar_puntos(30);
-		mario.cambiar_estado(new InvencibleMarioState(mario));
+		mario.cambiar_estado(new InvencibleMarioState(mario,this));
 	}
 
 	public void consumir_super_champi() {

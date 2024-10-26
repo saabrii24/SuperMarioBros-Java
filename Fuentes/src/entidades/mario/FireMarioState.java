@@ -11,7 +11,7 @@ public class FireMarioState implements Mario.MarioState {
     }
 	
 	public void consumir_estrella() {
-		mario.cambiar_estado(new InvencibleMarioState(mario));
+		mario.cambiar_estado(new InvencibleMarioState(mario,this));
 		mario.get_sistema_puntuacion().sumar_puntos(30);
 	}
 

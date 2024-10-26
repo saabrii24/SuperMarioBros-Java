@@ -24,7 +24,6 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
 
     // Atributos de estado y puntaje
     private MarioState estado;
-    private MarioState estado_anterior;
     private final SistemaPuntuacion sistema_puntuacion;
     private final SistemaVidas sistema_vidas;
     private SpritesFactory sprites_factory;
@@ -71,7 +70,6 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
     public SistemaPuntuacion get_sistema_puntuacion() { return sistema_puntuacion; }
     public SistemaVidas get_sistema_vidas() { return sistema_vidas; }
     public int get_direccion() { return direccion; }
-    public MarioState get_estado_anterior() { return estado_anterior; }
     public int get_direccion_mario() { return movimiento_derecha ? 1 : -1; } 
 	public boolean get_movimiento_derecha() { return movimiento_derecha; }
 	public boolean esta_saltando() { return saltando; }	
@@ -87,11 +85,9 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
     public void set_velocidad_en_x_mario(double vel) { velocidad_en_x = vel; }
     public void set_contador_saltos(int c) { contador_saltos = c; }
     public void set_estado(MarioState state) { estado = state; }
-    public void set_estado_anterior (MarioState state) { estado_anterior = state; }
 
     // Métodos de estado y movimiento
     public void cambiar_estado(MarioState nuevo_estado) {
-        set_estado_anterior(this.estado);
         set_estado(nuevo_estado);
     }
 

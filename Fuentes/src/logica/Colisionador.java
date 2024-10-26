@@ -316,10 +316,10 @@ public class Colisionador {
                 break;
             }
             if (mario.get_limites_derecha().intersects(piranha.get_limites()) || mario.get_limites_izquierda().intersects(piranha.get_limites())) {
-                if (mario.colision_con_enemigo(piranha)) {
+                if (mario.colision_con_enemigo(piranha) && !mario.mata_tocando()) {
                     murio_mario = true;
                 } else {
-                    murio_mario = true;
+                    murio_mario = false;
                     mario.get_sistema_puntuacion().sumar_puntos(piranha.calcular_puntaje());
                     piranha.destruir(mapa);
                 }

@@ -2,6 +2,7 @@ package entidades.mario;
 
 import entidades.BolaDeFuego;
 import entidades.enemigos.Enemigo;
+import entidades.mario.Mario.MarioState;
 
 public class InvencibleMarioState implements Mario.MarioState {
     private Mario mario;
@@ -9,9 +10,9 @@ public class InvencibleMarioState implements Mario.MarioState {
     private long tiempo_inicio;
     private static final long DURACION_ESTRELLA = 5000;
 
-    public InvencibleMarioState(Mario mario) {
+    public InvencibleMarioState(Mario mario, MarioState estado_anterior) {
         this.mario = mario;
-        this.estado_anterior = mario.get_estado_anterior();
+        this.estado_anterior = estado_anterior;
         this.tiempo_inicio = System.currentTimeMillis();
     }
     

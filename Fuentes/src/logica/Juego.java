@@ -49,7 +49,7 @@ public class Juego {
         fabrica_entidades = new EntidadesFactory(fabrica_sprites);
         
         // Inicializar controladores
-        controlador_ranking = new ControladorRanking(this);
+        controlador_ranking = new ControladorRanking();
         controlador_vistas = new ControladorDeVistas(this);
         controlador_movimiento = new ControladorMovimiento(this);
         controlador_entidades = new ControladorEntidades(this);

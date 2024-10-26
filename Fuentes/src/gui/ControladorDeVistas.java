@@ -36,7 +36,7 @@ public class ControladorDeVistas implements ControladorJuegoVistaEntidades, Cont
         panel_pantalla_principal = new PanelPantallaPrincipal(this);
         panel_pantalla_mapa = new PanelPantallaMapa();
         panel_pantalla_ayuda = new PanelPantallaAyuda(this); 
-        this.controlador_ranking = new ControladorRanking(juego);
+        this.controlador_ranking = new ControladorRanking();
         panel_pantalla_ranking = new PanelPantallaRanking(this, juego.get_controlador_ranking()); 
         panel_pantalla_modo_de_juego = new PanelPantallaModoDeJuego(this);
         panel_pantalla_derrota = new PanelPantallaDerrota(this);

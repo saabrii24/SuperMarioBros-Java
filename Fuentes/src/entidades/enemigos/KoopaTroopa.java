@@ -1,8 +1,6 @@
 package entidades.enemigos;
 
-import entidades.mario.Mario;
 import fabricas.Sprite;
-import fabricas.SpritesFactory;
 import logica.Mapa;
 
 public class KoopaTroopa extends Enemigo {

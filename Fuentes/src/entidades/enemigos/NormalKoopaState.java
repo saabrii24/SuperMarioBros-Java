@@ -13,11 +13,12 @@ public class NormalKoopaState implements KoopaState{
 	
 	@Override
 	public void cambiar_estado() {
-		koopa.set_estado(new HiddenKoopaState(koopa));
-		if(koopa.get_direccion() == 1)
-			Mario.get_instancia().set_posicion_en_x(Mario.get_instancia().get_posicion_en_x() - 48);
+		koopa.set_estado(new ProjectileKoopaState(koopa));
+		if(koopa.get_direccion() == 1) 
+			Mario.get_instancia().set_posicion_en_x(Mario.get_instancia().get_posicion_en_x() - 96);
 		else 
-			Mario.get_instancia().set_posicion_en_x(Mario.get_instancia().get_posicion_en_x() + 48);
+			Mario.get_instancia().set_posicion_en_x(Mario.get_instancia().get_posicion_en_x() + 96);
+		 System.out.println("cambio estado projecctile");
 	}
 
 	public void mover() {

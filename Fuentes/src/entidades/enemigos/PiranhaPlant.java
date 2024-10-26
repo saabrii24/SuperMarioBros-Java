@@ -3,7 +3,7 @@ import fabricas.Sprite;
 import logica.Mapa;
 
 public class PiranhaPlant extends Enemigo {
-    private static final double VELOCIDAD_VERTICAL = 0.2;
+    private static final double VELOCIDAD_VERTICAL = 0.5;
     private int posicion_inicial_y;
     private static final int DISTANCIA_MAXIMA = 96;
     private boolean moviendo_arriba = true;

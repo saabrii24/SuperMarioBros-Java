@@ -265,23 +265,23 @@ public class Colisionador {
             }
         }
         for (KoopaTroopa koopa : new ArrayList<>(mapa.get_entidades_koopa_troopa())) {
-            if (mario.mata_tocando() && mario.get_limites().intersects(koopa.get_limites())) {
-                koopa.destruir(mapa);
-            }
-            if (mario.get_limites_superiores().intersects(koopa.get_limites_inferiores())) {
-                koopa.cambiar_estado();
-                mario.set_posicion_en_y(mario.get_posicion_en_y() + 50);
-                break;
-            }
-            if (mario.get_limites_derecha().intersects(koopa.get_limites()) || mario.get_limites_izquierda().intersects(koopa.get_limites())) {
-                if (mario.colision_con_enemigo(koopa)) {
-                    murio_mario = true;
-                } else {
-                    murio_mario = false;
-                    mario.get_sistema_puntuacion().sumar_puntos(koopa.calcular_puntaje());
-                    koopa.cambiar_estado();
-                }
-            }
+        	 if (!koopa.esta_destruida()) { 
+	            if (mario.mata_tocando() && mario.get_limites().intersects(koopa.get_limites())) {
+	                koopa.destruir(mapa);
+	                mario.get_sistema_puntuacion().actualizar_puntaje(koopa.calcular_puntaje());
+	            }
+	            if (mario.get_limites_superiores().intersects(koopa.get_limites_inferiores())) {
+	                koopa.cambiar_estado();	
+	                mario.set_posicion(mario.get_posicion_en_x()+48, mario.get_posicion_en_y()+48);
+	                break;
+	            }
+	            if (mario.get_limites_derecha().intersects(koopa.get_limites()) || mario.get_limites_izquierda().intersects(koopa.get_limites())) {
+	                if (mario.colision_con_enemigo(koopa)) 
+	                    murio_mario = true;
+	            	}
+        	   }
+	           
+        	 
         }
 
         // Manejo de colisiones con BuzzyBeetle

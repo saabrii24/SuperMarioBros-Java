@@ -8,7 +8,7 @@ public class InvencibleMarioState implements Mario.MarioState {
     private Mario mario;
     private Mario.MarioState estado_anterior;
     private long tiempo_inicio;
-    private static final long DURACION_ESTRELLA = 5000;
+    private static final long DURACION_ESTRELLA = 10000;
 
     public InvencibleMarioState(Mario mario, MarioState estado_anterior) {
         this.mario = mario;

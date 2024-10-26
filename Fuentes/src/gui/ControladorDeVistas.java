@@ -11,6 +11,7 @@ import entidades.interfaces.EntidadJugador;
 import entidades.interfaces.EntidadLogica;
 import entidades.mario.Mario;
 import fabricas.EntidadesFactory;
+import fabricas.SpritesFactory;
 import logica.*;
 
 public class ControladorDeVistas implements ControladorJuegoVistaEntidades, ControladorJuegoVistaPaneles {
@@ -28,15 +29,12 @@ public class ControladorDeVistas implements ControladorJuegoVistaEntidades, Cont
     protected boolean sonido_activo = true;
     private long tiempo_ultimo_proyectil = 0;
     private static final long PROYECTIL_COOLDOWN = 1000; 
-    private ControladorRanking controlador_ranking;
-
     
     public ControladorDeVistas(Juego juego) {
         mi_juego = juego;
         panel_pantalla_principal = new PanelPantallaPrincipal(this);
-        panel_pantalla_mapa = new PanelPantallaMapa();
+        panel_pantalla_mapa = new PanelPantallaMapa(null);
         panel_pantalla_ayuda = new PanelPantallaAyuda(this); 
-        this.controlador_ranking = new ControladorRanking();
         panel_pantalla_ranking = new PanelPantallaRanking(this, juego.get_controlador_ranking()); 
         panel_pantalla_modo_de_juego = new PanelPantallaModoDeJuego(this);
         panel_pantalla_derrota = new PanelPantallaDerrota(this);
@@ -217,7 +215,13 @@ public class ControladorDeVistas implements ControladorJuegoVistaEntidades, Cont
         refrescar();
 	}
 
-	public void notificar_eleccion(EntidadesFactory generador) { mi_juego.cargar_datos(generador); }
+	public void notificar_eleccion(SpritesFactory fabrica_sprites) { 
+		panel_pantalla_mapa.set_dominio(fabrica_sprites);
+		panel_pantalla_mapa.actualizar_panel_mapa(panel_pantalla_mapa.get_layered_pane());
+        generador = new EntidadesFactory(fabrica_sprites);
+		mi_juego.cargar_datos(generador); 
+	}
+	
 	public PanelPantallaMapa get_pantalla_mapa() { return panel_pantalla_mapa; }
 	public void reproducir_efecto(String efecto) { sonido_juego.reproducir_efecto(efecto); }
 

@@ -67,7 +67,7 @@ public class ControladorRanking implements Serializable {
             set_ranking((Ranking) object_input_stream.readObject());
 
         } catch (FileNotFoundException e) {
-            System.err.println("Archivo no encontrado. Se creará uno nuevo.");
+            //Si archivo no encontrado, se crea un nuevo ranking.");
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -77,10 +77,7 @@ public class ControladorRanking implements Serializable {
     private void guardar_ranking() {
         try (FileOutputStream file_output_stream = new FileOutputStream(ruta_archivo);
              ObjectOutputStream object_output_stream = new ObjectOutputStream(file_output_stream)) {
-
         	object_output_stream.writeObject(ranking);
-            System.out.println("Ranking guardado exitosamente.");
-
         } catch (IOException e) {
             e.printStackTrace();
         }

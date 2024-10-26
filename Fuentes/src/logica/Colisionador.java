@@ -291,6 +291,7 @@ public class Colisionador {
                 buzzy.destruir(mapa);
             }
             if (mario.get_limites_superiores().intersects(buzzy.get_limites_inferiores())) {
+            	mario.get_sistema_puntuacion().sumar_puntos(buzzy.calcular_puntaje());
                 buzzy.destruir(mapa);
                 break;
             }

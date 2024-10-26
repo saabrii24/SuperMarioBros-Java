@@ -12,8 +12,7 @@ public class ControladorNivel {
     private final Juego juego;
     private boolean reiniciando_nivel;
     private int nivel_actual;
-    private int tiempo_restante;
-
+    
     public ControladorNivel(Juego juego) {
         this.juego = juego;
         this.nivel_actual = 1;
@@ -45,7 +44,7 @@ public class ControladorNivel {
 
         resetear_mario();
 
-        tiempo_restante = juego.nivel_actual.get_tiempo_restante();
+        juego.nivel_actual.get_tiempo_restante();
         juego.get_mapa_nivel_actual().get_colisionador().set_murio_mario(false);
         juego.controlador_vistas.refrescar();
         reiniciando_nivel = false;

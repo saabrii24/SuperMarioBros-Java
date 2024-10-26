@@ -166,8 +166,7 @@ public class PanelPantallaModoDeJuego extends JPanel {
                 return;
         }
         Mario.get_instancia().set_fabrica_sprites(fabrica_sprites);
-        generador = new EntidadesFactory(fabrica_sprites);
-        controlador_vistas.notificar_eleccion(generador);
+        controlador_vistas.notificar_eleccion(fabrica_sprites);
         controlador_vistas.accionar_pantalla_mapa();
     }
 }

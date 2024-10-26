@@ -13,6 +13,7 @@ public class BloqueDePregunta extends Plataforma{
 	public BloqueDePregunta(int x, int y, Sprite sprite, PowerUp powerup) {
 		super(x, y, sprite);
 		this.powerup = powerup;
+		powerup.set_envuelto(true);
 	}
 	
 	public void destruir(Mapa mapa) {

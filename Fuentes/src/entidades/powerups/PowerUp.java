@@ -8,19 +8,25 @@ import logica.Observer;
 
 public abstract class PowerUp extends Entidad{
 
-	private static final long serialVersionUID = 1L;
+	protected boolean envuelto;
 	
 	public PowerUp(int x, int y, Sprite sprite) {
 		super(x, y, sprite);
+		envuelto = false;
 	}
 	
 	public abstract void aceptar(PowerUpVisitor visitador);
 	
 	public void destruir(Mapa mapa) {
-        if (!destruida) {
-            destruida = true;           
-            mapa.eliminar_powerup(this);  
-            destruir();
+        if (!destruida)
+        	if(!envuelto) {
+	            destruida = true;           
+	            mapa.eliminar_powerup(this);  
+	            destruir();
+        	}else {
+        		destruida = true;           
+                mapa.eliminar_powerup(this);  
+                destruir();
         }
     }
 
@@ -36,5 +42,12 @@ public abstract class PowerUp extends Entidad{
 
 	public Observer get_observer() {
 		return observer;
+	}
+
+	public boolean get_envuelto() {
+		return envuelto;
+	}
+	public void set_envuelto(boolean envuelto) {
+		this.envuelto = envuelto;
 	}
 }

@@ -92,9 +92,11 @@ public class Mapa {
     public void agregar_tuberia(Tuberias tuberia) { entidades_tuberias.add(tuberia); }
     public void agregar_vacio(Vacio vacio) { entidades_vacio.add(vacio); }
     public void agregar_powerup(PowerUp powerup) { 
-        entidades_powerup.add(powerup);
-        Observer observer = Juego.get_instancia().controlador_vistas.registrar_entidad(powerup);
-        powerup.registrar_observer(observer);
+    	if(powerup.get_envuelto()) {
+	        entidades_powerup.add(powerup);
+	        Observer observer = Juego.get_instancia().controlador_vistas.registrar_entidad(powerup);
+	        powerup.registrar_observer(observer);
+    	} else entidades_powerup.add(powerup);
     }
     public void agregar_bola_de_fuego(BolaDeFuego bola_de_fuego) {
         if (bola_de_fuego != null) {

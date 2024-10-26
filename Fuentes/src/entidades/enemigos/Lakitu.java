@@ -1,6 +1,8 @@
 package entidades.enemigos;
 
+import entidades.mario.Mario;
 import fabricas.Sprite;
+import logica.Juego;
 import logica.Mapa;
 
 public class Lakitu extends Enemigo{
@@ -10,11 +12,13 @@ public class Lakitu extends Enemigo{
 	}
 
 	public void mover() {
-		//TO DO
+		lanzar_spinys(Juego.get_instancia().get_mapa_nivel_actual());
 	}
-
+	private void lanzar_spinys(Mapa mapa) {
+		mapa.agregar_spiny(new Spiny((int) this.get_posicion_en_x() + 10, (int) this.get_posicion_en_y(), Juego.get_instancia().get_fabrica_sprites().get_spiny_movimiento_izquierda()));
+		observer.actualizar();
+	}
 	public void actualizar() {
-		//TO DO
 	}
 	
     public int calcular_puntaje() {
@@ -33,5 +37,11 @@ public class Lakitu extends Enemigo{
             destruir();
         }
     }
+
+	public void lanzar_spiny(Mapa mapa) {
+		Spiny spiny = new Spiny ((int) this.get_posicion_en_x() + 10, (int )this.get_posicion_en_y(), Mario.get_instancia().get_sprite_factory().get_spiny_movimiento_izquierda());
+		mapa.agregar_spiny(spiny);	
+		spiny.registrar_observer(Juego.get_instancia().get_controlador_vistas().registrar_entidad(spiny));
+	}
 
 }

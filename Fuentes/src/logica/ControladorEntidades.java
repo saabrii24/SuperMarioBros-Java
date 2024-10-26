@@ -6,6 +6,7 @@ import java.util.List;
 import entidades.BolaDeFuego;
 import entidades.Entidad;
 import entidades.EntidadMovible;
+import entidades.enemigos.Lakitu;
 import entidades.mario.Mario;
 import entidades.mario.NormalMarioState;
 
@@ -59,11 +60,16 @@ public class ControladorEntidades {
             Mario.get_instancia().set_estado(new NormalMarioState(Mario.get_instancia()));
         }
     }
-
     private void mario_cae_al_vacio(Mario mario) {
         juego.get_mapa_nivel_actual().get_colisionador().set_murio_mario(true);
         mario.caer_en_vacio();
         mario.destruir();
+    }
+    
+    public void lakitu_dispara() {
+    	for (Lakitu laki : juego.get_mapa_nivel_actual().get_entidades_lakitu()) {
+    		laki.lanzar_spiny(juego.get_mapa_nivel_actual());
+    	}
     }
 
     public void mover_enemigos() {

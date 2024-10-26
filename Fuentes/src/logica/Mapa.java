@@ -119,7 +119,7 @@ public class Mapa {
     public void eliminar_vacio(Vacio vacio) { entidades_vacio.remove(vacio); }
     public void eliminar_bola_de_fuego(BolaDeFuego bola_de_fuego) { entidades_proyectiles.remove(bola_de_fuego); }
 
-    public void resetear_mapa() {
+    public void barrer_mapa() {
         for (Goomba goomba : entidades_goomba) goomba.destruir(); 
         entidades_goomba.clear();
         for (BuzzyBeetle buzzy : entidades_buzzy_beetle) buzzy.destruir(); 

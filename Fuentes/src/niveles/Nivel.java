@@ -42,16 +42,6 @@ public class Nivel {
         return false;
     }
     
-    @Override
-    public String toString() {
-        return "Nivel {" +
-               "Numero de Nivel=" + numero_de_nivel +
-               ", Posicion Inicial X=" + posicion_inicial_jugador_x +
-               ", Posicion Inicial Y=" + posicion_inicial_jugador_y +
-               ", Tiempo=" + tiempo_inicial +
-               '}';
-    }
-
     /**
      * Clase interna {@code Builder} que implementa el patrón Builder para construir instancias de
      * {@code Nivel} con configuraciones específicas.
@@ -62,38 +52,21 @@ public class Nivel {
         private int tiempo;
         private int numero_de_nivel;
 
-        /**
-         * Establece el número del nivel.
-         * @param numero_de_nivel El número del nivel en el juego.
-         */
         public Nivel.Builder set_nivel_actual(int numero_de_nivel) { 
             this.numero_de_nivel = numero_de_nivel; 
             return this; 
         }
 
-        /**
-         * Establece la posición inicial del jugador en el eje X.
-         * @param posicion_inicial_jugador_x La posición inicial del jugador en X.
-         */
         public Nivel.Builder set_posicion_en_x_inicial(int posicion_inicial_jugador_x) { 
             this.posicion_inicial_jugador_x = posicion_inicial_jugador_x; 
             return this; 
         }
 
-        /**
-         * Establece la posición inicial del jugador en el eje Y.
-         * @param posicion_inicial_jugador_y La posición inicial del jugador en Y.
-         */
         public Nivel.Builder set_posicion_en_y_inicial(int posicion_inicial_jugador_y) { 
             this.posicion_inicial_jugador_y = posicion_inicial_jugador_y; 
             return this; 
         }
 
-        /**
-         * Establece el límite de tiempo en segundos para completar el nivel.
-         * @param tiempo El límite de tiempo en segundos.
-         * @throws IllegalArgumentException si el tiempo es negativo.
-         */
         public Nivel.Builder set_tiempo_limite(int tiempo) {
             if (tiempo < 0) { throw new IllegalArgumentException("El tiempo no puede ser negativo."); }
             this.tiempo = tiempo;

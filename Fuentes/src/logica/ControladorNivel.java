@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import entidades.Entidad;
-import entidades.mario.ControladorPuntuacionMario;
 import entidades.mario.Mario;
 import fabricas.EntidadesFactory;
 import niveles.GeneradorNivel;
@@ -21,12 +20,13 @@ public class ControladorNivel {
     }
 
     public void cargar_datos(EntidadesFactory generador) {
+    	juego.get_mapa_nivel_actual().barrer_mapa();
         juego.nivel_actual = GeneradorNivel.cargar_nivel_y_mapa(
             getClass().getResourceAsStream("/niveles/nivel-" + nivel_actual + ".txt"),
             generador,
             juego.mapa_nivel_actual
         );
-        
+
         juego.fabrica_entidades = generador;
         registrar_observers();
         juego.iniciar_hilos_movimiento();
@@ -41,11 +41,10 @@ public class ControladorNivel {
             juego.mapa_nivel_actual
         );
 
-        juego.get_mapa_nivel_actual().resetear_mapa();
         cargar_datos(juego.fabrica_entidades);
-        
+
         resetear_mario();
-        
+
         tiempo_restante = juego.nivel_actual.get_tiempo_restante();
         juego.get_mapa_nivel_actual().get_colisionador().set_murio_mario(false);
         juego.controlador_vistas.refrescar();
@@ -54,6 +53,8 @@ public class ControladorNivel {
 
     private void resetear_mario() {
         Mario mario = Mario.get_instancia();
+        mario.get_sistema_puntuacion().resetear_monedas(nivel_actual);
+        mario.get_sistema_puntuacion().resetear_puntos(nivel_actual);
         mario.resetear_posicion();
         juego.get_mapa_nivel_actual().agregar_mario(mario);
     }
@@ -83,7 +84,7 @@ public class ControladorNivel {
     private void registrar_observers_para_entidades(List<? extends Entidad> entidades) {
         List<? extends Entidad> entidades_copia = new ArrayList<>(entidades);
         for (Entidad entidad : entidades_copia) {
-            synchronized(entidad) {
+            synchronized (entidad) {
                 Observer observer = juego.controlador_vistas.registrar_entidad(entidad);
                 entidad.registrar_observer(observer);
             }
@@ -95,11 +96,11 @@ public class ControladorNivel {
     }
 
     public void incrementar_nivel() {
-    	Juego.get_instancia().reproducir_efecto("stage_clear");
+        Juego.get_instancia().reproducir_efecto("stage_clear");
         Mario.get_instancia().get_sistema_puntuacion().pasar_nivel();
         nivel_actual++;
-        
-        cargar_datos(juego.fabrica_entidades); 
+
+        cargar_datos(juego.fabrica_entidades);
     }
 
     public int get_nivel_actual() {

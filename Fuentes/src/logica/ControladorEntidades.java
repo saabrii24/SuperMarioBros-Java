@@ -55,7 +55,6 @@ public class ControladorEntidades {
             juego.controlador_ranking.actualizar_ranking(Mario.get_instancia().get_puntaje());
             juego.detener_hilos();
         } else {
-            juego.get_mapa_nivel_actual().resetear_mapa();
             juego.controlador_nivel.cargar_datos(juego.fabrica_entidades);
             Mario.get_instancia().set_estado(new NormalMarioState(Mario.get_instancia()));
         }
@@ -115,25 +114,6 @@ public class ControladorEntidades {
         notificar_lista_entidades(mapa.get_entidades_spiny());
     }
     
-    /*
-    public void notificar_observadores_entidades() {
-        Mapa mapa = juego.get_mapa_nivel_actual();
-        notificar_lista_entidades(mapa.get_entidades_buzzy_beetle());
-        notificar_lista_entidades(mapa.get_entidades_koopa_troopa());
-        notificar_lista_entidades(mapa.get_entidades_goomba());
-        notificar_lista_entidades(mapa.get_entidades_lakitu());
-        notificar_lista_entidades(mapa.get_entidades_piranha_plant());
-        notificar_lista_entidades(mapa.get_entidades_spiny());
-        notificar_lista_entidades(mapa.get_entidades_powerup());
-        notificar_lista_entidades(mapa.get_entidades_proyectiles());
-        notificar_lista_entidades(mapa.get_entidades_bloque_de_pregunta());
-        notificar_lista_entidades(mapa.get_entidades_bloque_solido());
-        notificar_lista_entidades(mapa.get_entidades_ladrillo_solido());
-        notificar_lista_entidades(mapa.get_entidades_tuberias());
-        notificar_lista_entidades(mapa.get_entidades_vacio());
-    }
-    */
-
     private void notificar_lista_entidades(List<? extends Entidad> entidades) {
         // Crear una copia de la lista para evitar ConcurrentModificationException
         List<? extends Entidad> entidades_copia = new ArrayList<>(entidades);

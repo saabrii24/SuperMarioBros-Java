@@ -47,4 +47,12 @@ public class ControladorPuntuacionMario implements SistemaPuntuacion {
 		this.puntaje_acumulado += puntos;
 	}
 
+	public void resetear_monedas(int nivel_actual) {
+		monedas = 0;
+	}
+	
+	public void resetear_puntos(int nivel_actual) {
+		puntaje_nivel_actual = 0;
+	}
+
 }

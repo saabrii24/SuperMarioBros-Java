@@ -10,10 +10,14 @@ Tiempo: 40
 	Mario: 96, 432
 	
 	# Enemigos
-	#Goomba: 288, 144
-	#Goomba: 384, 144
+	Goomba: 720, 240
+	Goomba: 1008, 240
+	Goomba: 1104, 240
+	Goomba: 1632, 240
+	Goomba: 1488, 240
 	Spiny: 1056, 500
 	Spiny: 700, 400
+	Koopa: 2160, 240
 	
 	# PowerUps
 	Estrella: 240, 480

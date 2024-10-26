@@ -18,8 +18,8 @@ public class ControladorPuntuacionMario implements SistemaPuntuacion {
     }
     
     public void restar_puntos(int puntos) {
-        if (puntaje_acumulado >= 0 && puntaje_nivel_actual >= 0) 
-        	this.puntaje_acumulado -= puntos;
+        puntaje_acumulado = Math.max(puntaje_acumulado - puntos, 0);
+        puntaje_nivel_actual = Math.max(puntaje_nivel_actual - puntos, 0);
     }
 
     public int get_puntaje_total() {
@@ -39,20 +39,21 @@ public class ControladorPuntuacionMario implements SistemaPuntuacion {
     }
 
     public void pasar_nivel() {
-    	actualizar_puntaje(puntaje_nivel_actual);
+        actualizar_puntaje(puntaje_nivel_actual);
         puntaje_nivel_actual = 0;
     }
 
     public void actualizar_puntaje(int puntos) {
-		this.puntaje_acumulado += puntos;
-	}
+        if (puntos >= 0) { 
+            this.puntaje_acumulado += puntos;
+        }
+    }
 
-	public void resetear_monedas(int nivel_actual) {
-		monedas = 0;
-	}
-	
-	public void resetear_puntos(int nivel_actual) {
-		puntaje_nivel_actual = 0;
-	}
-
+    public void resetear_monedas(int nivel_actual) {
+        monedas = 0;
+    }
+    
+    public void resetear_puntos(int nivel_actual) {
+        puntaje_nivel_actual = 0;
+    }
 }

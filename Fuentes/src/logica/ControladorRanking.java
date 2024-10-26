@@ -1,41 +1,73 @@
 package logica;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.Scanner;
-
 import ranking.Ranking;
 
-public class ControladorRanking {
+public class ControladorRanking implements Serializable {
+
+    private static final long serialVersionUID = -6203851574103194125L;
+    private final Juego juego;
     private final String ruta_archivo;
-    
-    public ControladorRanking() {
-        this("./ranking.tdp"); // ruta por defecto
+    protected Ranking ranking;
+
+    public ControladorRanking(Juego juego) {
+        this("./ranking.tdp", juego); // Ruta por defecto
     }
-    
-    public ControladorRanking(String ruta_archivo) {
+
+    public ControladorRanking(String ruta_archivo, Juego juego) {
+        this.juego = juego;
         this.ruta_archivo = ruta_archivo;
+        cargar_ranking(); // Deserializa el archivo (carga el ranking guardado)
+
+        if (this.ranking == null) { // Si no se pudo cargar, crea un nuevo ranking
+            this.ranking = new Ranking();
+        }
+    }
+
+    public Ranking get_ranking() {
+        return ranking;
+    }
+
+    public void set_ranking(Ranking ranking) {
+        this.ranking = ranking;
     }
 
     public void actualizar_ranking(int puntaje) {
-        Ranking ranking = cargar_ranking();
+        if (ranking == null) {
+            ranking = new Ranking();
+        }
+
         String nombre_jugador = solicitar_nombre_jugador();
         ranking.agregar_jugador(nombre_jugador, puntaje);
-        guardar_ranking(ranking);
+        guardar_ranking(); // Guarda el ranking actualizado
     }
 
-    private Ranking cargar_ranking() {
-        Ranking ranking = new Ranking();
-        try (FileInputStream file_input_stream = new FileInputStream(ruta_archivo);
-             ObjectInputStream object_input_stream = new ObjectInputStream(file_input_stream)) {
-            ranking = (Ranking) object_input_stream.readObject();
+    // Método para deserializar el ranking (cargar desde archivo)
+    public void cargar_ranking() {
+        try (FileInputStream fileInputStream = new FileInputStream(ruta_archivo);
+             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
+
+            set_ranking((Ranking) objectInputStream.readObject());
+
+        } catch (FileNotFoundException e) {
+            System.err.println("Archivo no encontrado. Se creará uno nuevo.");
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return ranking;
+    }
+
+    // Método para serializar el ranking (guardar en archivo)
+    private void guardar_ranking() {
+        try (FileOutputStream fileOutputStream = new FileOutputStream(ruta_archivo);
+             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
+
+            objectOutputStream.writeObject(ranking);
+            System.out.println("Ranking guardado exitosamente.");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private String solicitar_nombre_jugador() {
@@ -45,15 +77,5 @@ public class ControladorRanking {
             nombre_jugador = scanner.next();
         }
         return nombre_jugador;
-    }
-
-    private void guardar_ranking(Ranking ranking) {
-        try (FileOutputStream file_output_stream = new FileOutputStream(ruta_archivo);
-             ObjectOutputStream object_output_stream = new ObjectOutputStream(file_output_stream)) {
-            object_output_stream.writeObject(ranking);
-            object_output_stream.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

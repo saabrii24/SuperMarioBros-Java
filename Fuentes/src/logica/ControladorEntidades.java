@@ -49,8 +49,8 @@ public class ControladorEntidades {
     }
 
     private void manejar_cambio_nivel() {
-        juego.controlador_nivel.incrementar_nivel();
-        if(juego.controlador_nivel.get_nivel_actual() > 3) {
+    	juego.controlador_nivel.incrementar_nivel();
+    	if(juego.controlador_nivel.get_nivel_actual() > 3) {
             juego.controlador_vistas.accionar_pantalla_victoria();
             juego.controlador_ranking.actualizar_ranking(Mario.get_instancia().get_puntaje());
             juego.detener_hilos();

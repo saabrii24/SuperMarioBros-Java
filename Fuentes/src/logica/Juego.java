@@ -8,6 +8,7 @@ import fabricas.EntidadesFactory;
 import fabricas.SpritesFactory;
 import gui.ControladorDeVistas;
 import niveles.Nivel;
+import ranking.Ranking;
 
 public class Juego {
     private static Juego instancia_juego;
@@ -23,6 +24,7 @@ public class Juego {
     protected Mapa mapa_nivel_actual;
     protected String nombre_jugador;
 
+    
     protected ControladorMovimiento controlador_movimiento;
     protected ControladorEntidades controlador_entidades;
     protected ControladorNivel controlador_nivel;
@@ -40,17 +42,19 @@ public class Juego {
     }
 
     private void iniciar() {
+    	
         mapa_nivel_actual = new Mapa(this);
         fabrica_sprites = new Dominio1Factory();
         Mario.get_instancia().set_fabrica_sprites(fabrica_sprites);
         fabrica_entidades = new EntidadesFactory(fabrica_sprites);
-        controlador_vistas = new ControladorDeVistas(this);
         
         // Inicializar controladores
+        controlador_ranking = new ControladorRanking(this);
+        controlador_vistas = new ControladorDeVistas(this);
         controlador_movimiento = new ControladorMovimiento(this);
         controlador_entidades = new ControladorEntidades(this);
         controlador_nivel = new ControladorNivel(this);
-        controlador_ranking = new ControladorRanking();
+        
     }
 
     public void iniciar_hilos_movimiento() {
@@ -72,7 +76,8 @@ public class Juego {
     public void reproducir_efecto(String efecto) { controlador_vistas.reproducir_efecto(efecto); }
 	public ControladorDeVistas get_controlador_vistas() { return controlador_vistas; }
 	public ControladorNivel get_controlador_nivel() { return controlador_nivel; }
-	
+	public ControladorRanking get_controlador_ranking() { return controlador_ranking; }
+
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
             try {

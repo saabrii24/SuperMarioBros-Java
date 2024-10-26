@@ -28,6 +28,7 @@ public class ControladorDeVistas implements ControladorJuegoVistaEntidades, Cont
     protected boolean sonido_activo = true;
     private long tiempo_ultimo_proyectil = 0;
     private static final long PROYECTIL_COOLDOWN = 1000; 
+    private ControladorRanking controlador_ranking;
 
     
     public ControladorDeVistas(Juego juego) {
@@ -35,7 +36,8 @@ public class ControladorDeVistas implements ControladorJuegoVistaEntidades, Cont
         panel_pantalla_principal = new PanelPantallaPrincipal(this);
         panel_pantalla_mapa = new PanelPantallaMapa();
         panel_pantalla_ayuda = new PanelPantallaAyuda(this); 
-        panel_pantalla_ranking = new PanelPantallaRanking(this); 
+        this.controlador_ranking = new ControladorRanking(juego);
+        panel_pantalla_ranking = new PanelPantallaRanking(this, juego.get_controlador_ranking()); 
         panel_pantalla_modo_de_juego = new PanelPantallaModoDeJuego(this);
         panel_pantalla_derrota = new PanelPantallaDerrota(this);
         panel_pantalla_victoria = new PanelPantallaVictoria(this);

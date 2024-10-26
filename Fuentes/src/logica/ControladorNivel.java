@@ -96,11 +96,13 @@ public class ControladorNivel {
     }
 
     public void incrementar_nivel() {
+    	
         Juego.get_instancia().reproducir_efecto("stage_clear");
         Mario.get_instancia().get_sistema_puntuacion().pasar_nivel();
         nivel_actual++;
 
-        cargar_datos(juego.fabrica_entidades);
+        if(nivel_actual <= 3)
+        	cargar_datos(juego.fabrica_entidades);
     }
 
     public int get_nivel_actual() {

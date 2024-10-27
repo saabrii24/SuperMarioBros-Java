@@ -17,8 +17,9 @@ public class ControladorVidasMario implements SistemaVidas {
     public void quitar_vida() {
     	if(vidas > 1)
     		Juego.get_instancia().reproducir_efecto("mariodie");
-    	else
+    	else {
     		Juego.get_instancia().reproducir_efecto("gameover");
+    	}
         if (esta_vivo()) vidas--;
     }
 

@@ -206,11 +206,14 @@ public class ControladorDeVistas implements ControladorJuegoVistaEntidades, Cont
     }
 
 	public void accionar_pantalla_victoria() {
+		sonido_juego.reproducir_efecto("stage_clear");
+		sonido_juego.detener_musica_de_fondo();
 		ventana.setContentPane(panel_pantalla_victoria);
         refrescar();
 	}
 
 	public void accionar_pantalla_derrota() {
+		sonido_juego.detener_musica_de_fondo();
 		ventana.setContentPane(panel_pantalla_derrota);
         refrescar();
 	}

@@ -10,24 +10,13 @@ Tiempo: 20
 	Mario: 96, 432
 	
 	# Enemigos
-	#Goomba: 288, 144
-	#Goomba: 384, 144
-	#SLakitu: 1056, 500
-	Buzzy: 700, 400
+
 	
 	# PowerUps
-	Estrella: 240, 480
-	Estrella: 288, 480
-	Estrella: 336, 480
+
 	
 	# Plataformas
-	BloqueDePregunta: 672, 288
-	LadrilloSolido: 864, 288
-	BloqueDePregunta: 912, 288
-	LadrilloSolido: 960, 288
-	BloqueDePregunta: 1008, 288
-	LadrilloSolido: 1056, 288
-	BloqueDePregunta: 960, 480
+
 	
 	# Bloques del suelo y límites del mapa
 	BloqueSolido: -48, 96

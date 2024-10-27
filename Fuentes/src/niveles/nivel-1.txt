@@ -13,7 +13,7 @@ Tiempo: 50
 	Goomba: 720, 240
 	Goomba: 1008, 240
 	Koopa: 1208, 240
-	//Lakitu: 1056, 500
+	Lakitu: 1056, 500
 	Goomba: 1104, 240
 	Goomba: 1632, 240
 	Goomba: 1488, 240

@@ -50,17 +50,18 @@ public class ControladorEntidades {
     }
 
     private void manejar_cambio_nivel() {
-    	juego.controlador_nivel.set_nivel_actual(juego.controlador_nivel.get_nivel_actual()+1);
-    	if(juego.controlador_nivel.get_nivel_actual() > 3) {
+        juego.controlador_nivel.set_nivel_actual(juego.controlador_nivel.get_nivel_actual()+1);
+        if(juego.controlador_nivel.get_nivel_actual() > 3) {
+            juego.controlador_movimiento.terminar_juego();
             juego.controlador_vistas.accionar_pantalla_victoria();
             juego.controlador_ranking.actualizar_ranking(Mario.get_instancia().get_puntaje());
-            juego.detener_hilos();
         } else {
-        	juego.controlador_nivel.incrementar_nivel();
+            juego.controlador_nivel.incrementar_nivel();
             juego.controlador_nivel.cargar_datos(juego.fabrica_entidades);
             Mario.get_instancia().set_estado(new NormalMarioState(Mario.get_instancia()));
         }
     }
+    
     private void mario_cae_al_vacio(Mario mario) {
         juego.get_mapa_nivel_actual().get_colisionador().set_murio_mario(true);
         mario.caer_en_vacio();

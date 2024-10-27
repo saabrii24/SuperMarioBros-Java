@@ -2,8 +2,9 @@ package logica;
 
 import java.awt.Image;
 import java.io.*;
-import javax.swing.ImageIcon; // Importa ImageIcon para los iconos personalizados
-import javax.swing.JOptionPane; // Importa JOptionPane para las entradas gráficas
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import ranking.Jugador;
 import ranking.Ranking;
@@ -15,7 +16,7 @@ public class ControladorRanking implements Serializable {
     protected Ranking ranking;
 
     public ControladorRanking() {
-        this("./ranking.tdp");
+        this("./src/ranking/ranking.tdp");
     }
 
     public ControladorRanking(String ruta_archivo) {
@@ -88,23 +89,29 @@ public class ControladorRanking implements Serializable {
         Image imagen_escalada = icono_mario.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);
         ImageIcon icono_mario_chiquito = new ImageIcon(imagen_escalada);
 
+        JFrame frame = new JFrame();
+        frame.setUndecorated(true);
+        frame.setLocationRelativeTo(null);
+        frame.setLocation(frame.getX(), frame.getY() - 150);
+        frame.setVisible(true);
+
         String nombre_jugador = (String) JOptionPane.showInputDialog(
-            null, 
-            "Ingrese su nombre:", 
-            "Nombre del Jugador", 
-            JOptionPane.PLAIN_MESSAGE, 
-            icono_mario_chiquito, 
-            null, 
-            null 
+            frame,
+            "Ingrese su nombre:",
+            "Nombre del Jugador",
+            JOptionPane.PLAIN_MESSAGE,
+            icono_mario_chiquito,
+            null,
+            null
         );
+
+        frame.dispose();
 
         if (nombre_jugador == null || nombre_jugador.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "El nombre no puede estar vacío. Intente nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
             return solicitar_nombre_jugador(); // Pide el nombre nuevamente
         }
-
         return nombre_jugador;
     }
-
 
 }

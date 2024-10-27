@@ -12,16 +12,17 @@ public class ControladorMovimiento {
     private Thread hilo_informacion_y_tiempo;
     private Thread hilo_lakitu;
     private volatile boolean esta_ejecutando;
+    private volatile boolean juego_terminado;
 
     public ControladorMovimiento(Juego juego) {
         this.juego = juego;
+        this.juego_terminado = false;
     }
 
     public synchronized void iniciar_hilos() {
         if (esta_ejecutando) return;
         esta_ejecutando = true;
- 
-        // Iniciar nuevos hilos
+    
         iniciar_hilo_movimiento_mario();
         iniciar_hilo_movimiento_enemigos();
         iniciar_hilo_informacion_y_tiempo();
@@ -92,20 +93,23 @@ public class ControladorMovimiento {
     private void bucle_informacion_y_tiempo() {
         long ultimo_segundo = System.currentTimeMillis();
         
-        while (esta_ejecutando) {
+        while (esta_ejecutando && !juego_terminado) {
             try {
                 Nivel nivel_actual = juego.get_nivel_actual();
                 Mario mario = Mario.get_instancia();
                 
+                if (nivel_actual == null) {
+                    Thread.sleep(100);
+                    continue;
+                }
+
                 long tiempo_actual = System.currentTimeMillis();
                 if (tiempo_actual - ultimo_segundo >= 1000) {
-                    if (nivel_actual != null) {
-                        ultimo_segundo = tiempo_actual;
-                        boolean tiempo_vigente = nivel_actual.decrementar_tiempo();
-                        if (!tiempo_vigente) {
-                            reiniciar_nivel_y_timer();
-                            continue; 
-                        }
+                    ultimo_segundo = tiempo_actual;
+                    boolean tiempo_vigente = nivel_actual.decrementar_tiempo();
+                    if (!tiempo_vigente && !juego_terminado) {
+                        reiniciar_nivel_y_timer();
+                        continue;
                     }
                 }
 
@@ -114,7 +118,7 @@ public class ControladorMovimiento {
                         .actualizar_labels_informacion(mario, nivel_actual);
                 });
 
-                Thread.sleep(100); // Actualización cada 100ms
+                Thread.sleep(100);
                 
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
@@ -123,9 +127,14 @@ public class ControladorMovimiento {
         }
     }
     
+    public void terminar_juego() {
+        juego_terminado = true;
+        detener_hilos();
+    }
+
     private void reiniciar_nivel_y_timer() {
-       // detener_hilos();
-       
+        if (juego_terminado) return; // No reiniciar si el juego terminó
+        
         EventQueue.invokeLater(() -> {
             Mario.get_instancia().get_sistema_vidas().quitar_vida();
             esta_ejecutando = false;

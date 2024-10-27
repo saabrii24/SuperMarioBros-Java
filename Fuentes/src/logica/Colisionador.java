@@ -274,12 +274,12 @@ public class Colisionador {
                     // Hacemos que el caparazón empiece a moverse
                     koopa.cambiar_estado();
                     // Hacer que Mario rebote un poco
-                    mario.set_velocidad_en_y(-12);
+                    mario.set_velocidad_en_y(-6);
                 } else {
                     // Si Koopa está normal, lo convertimos en caparazón
                     koopa.cambiar_estado();
                     // Hacer que Mario rebote un poco
-                    mario.set_velocidad_en_y(-12);
+                    mario.set_velocidad_en_y(-6);
                 }
                 break;
             }

@@ -64,7 +64,7 @@ public class PiranhaPlant extends Enemigo {
             mapa.reproducir_efecto("kick");
             destruida = true;
             mapa.eliminar_piranha_plant(this);
-            destruir();
+            eliminar_del_mapa();
         }
     }
 }

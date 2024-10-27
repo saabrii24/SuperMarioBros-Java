@@ -20,6 +20,7 @@ import fabricas.Dominio1Factory;
 import fabricas.Dominio2Factory;
 import fabricas.EntidadesFactory;
 import fabricas.SpritesFactory;
+import logica.Juego;
 
 public class PanelPantallaModoDeJuego extends JPanel {
 
@@ -165,7 +166,8 @@ public class PanelPantallaModoDeJuego extends JPanel {
             default:
                 return;
         }
-        Mario.get_instancia().set_fabrica_sprites(fabrica_sprites);
+        // Usar el nuevo método para cambiar el dominio
+        Juego.get_instancia().cambiar_dominio(fabrica_sprites);
         controlador_vistas.notificar_eleccion(fabrica_sprites);
         controlador_vistas.accionar_pantalla_mapa();
     }

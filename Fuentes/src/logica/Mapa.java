@@ -4,15 +4,19 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import entidades.BolaDeFuego;
+import entidades.EntidadMovible;
 import entidades.enemigos.*;
+import entidades.interfaces.EntidadLogica;
 import entidades.mario.Mario;
 import entidades.plataformas.*;
 import entidades.powerups.PowerUp;
+import fabricas.SpritesFactory;
 
 public class Mapa {
 
     protected Juego mi_juego;
     protected Mario mario;
+    
     protected List<Goomba> entidades_goomba;
     protected List<BuzzyBeetle> entidades_buzzy_beetle;
     protected List<KoopaTroopa> entidades_koopa_troopa;
@@ -122,39 +126,48 @@ public class Mapa {
     public void eliminar_bola_de_fuego(BolaDeFuego bola_de_fuego) { entidades_proyectiles.remove(bola_de_fuego); }
 
     public void barrer_mapa() {
-        for (Goomba goomba : entidades_goomba) goomba.destruir(); 
+        for (Goomba goomba : entidades_goomba) goomba.eliminar_del_mapa(); 
         entidades_goomba.clear();
-        for (BuzzyBeetle buzzy : entidades_buzzy_beetle) buzzy.destruir(); 
+        for (BuzzyBeetle buzzy : entidades_buzzy_beetle) buzzy.eliminar_del_mapa(); 
         entidades_buzzy_beetle.clear();
-        for (KoopaTroopa koopa : entidades_koopa_troopa) koopa.destruir(); 
+        for (KoopaTroopa koopa : entidades_koopa_troopa) koopa.eliminar_del_mapa(); 
         entidades_koopa_troopa.clear();
-        for (Lakitu lakitu : entidades_lakitu) lakitu.destruir(); 
+        for (Lakitu lakitu : entidades_lakitu) lakitu.eliminar_del_mapa(); 
         entidades_lakitu.clear();
-        for (PiranhaPlant piranha : entidades_piranha_plant) piranha.destruir(); 
+        for (PiranhaPlant piranha : entidades_piranha_plant) piranha.eliminar_del_mapa(); 
         entidades_piranha_plant.clear();
-        for (Spiny spiny : entidades_spiny) spiny.destruir(); 
+        for (Spiny spiny : entidades_spiny) spiny.eliminar_del_mapa(); 
         entidades_spiny.clear();
-        for (PowerUp powerup : entidades_powerup) powerup.destruir(); 
+        for (PowerUp powerup : entidades_powerup) powerup.eliminar_del_mapa(); 
         entidades_powerup.clear();
-        for (BloqueSolido bloque_solido : entidades_bloque_solido) bloque_solido.destruir(); 
+        for (BloqueSolido bloque_solido : entidades_bloque_solido) bloque_solido.eliminar_del_mapa(); 
         entidades_bloque_solido.clear();
-        for (BloqueDePregunta bloque_pregunta : entidades_bloque_de_pregunta) bloque_pregunta.destruir(); 
+        for (BloqueDePregunta bloque_pregunta : entidades_bloque_de_pregunta) bloque_pregunta.eliminar_del_mapa(); 
         entidades_bloque_de_pregunta.clear();
-        for (LadrilloSolido ladrillo_solido : entidades_ladrillo_solido) ladrillo_solido.destruir(); 
+        for (LadrilloSolido ladrillo_solido : entidades_ladrillo_solido) ladrillo_solido.eliminar_del_mapa(); 
         entidades_ladrillo_solido.clear();
-        for (Tuberias tuberia : entidades_tuberias) tuberia.destruir(); 
+        for (Tuberias tuberia : entidades_tuberias) tuberia.eliminar_del_mapa(); 
         entidades_tuberias.clear();
-        for (Vacio vacio : entidades_vacio) vacio.destruir(); 
+        for (Vacio vacio : entidades_vacio) vacio.eliminar_del_mapa(); 
         entidades_vacio.clear();
-        for (BolaDeFuego proyectil : entidades_proyectiles) proyectil.destruir(); 
+        for (BolaDeFuego proyectil : entidades_proyectiles) proyectil.eliminar_del_mapa(); 
         entidades_proyectiles.clear();
         
         if (mario != null) {
-        	mario.destruir();
+        	mario.eliminar_del_mapa();
         	mario = null;
         }
     }
 
     public void reproducir_efecto(String efecto) { mi_juego.reproducir_efecto(efecto); }
+
+    public void actualizar_fabrica_sprites(SpritesFactory nueva_fabrica) {
+        for (KoopaTroopa koopa : entidades_koopa_troopa)
+        	koopa.actualizar_fabrica_sprites(nueva_fabrica);
+        for (Spiny spiny : entidades_spiny)
+        	spiny.actualizar_fabrica_sprites(nueva_fabrica);
+        for (BuzzyBeetle buzzy : entidades_buzzy_beetle)
+        	buzzy.actualizar_fabrica_sprites(nueva_fabrica);
+    }
 
 }

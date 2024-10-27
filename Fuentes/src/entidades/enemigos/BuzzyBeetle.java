@@ -66,7 +66,7 @@ public class BuzzyBeetle extends Enemigo{
         	mapa.reproducir_efecto("kick");
             destruida = true;           
             mapa.eliminar_buzzy_beetle(this);
-            destruir();
+            eliminar_del_mapa();
         }
     }
 

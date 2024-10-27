@@ -22,11 +22,11 @@ public abstract class PowerUp extends Entidad{
         	if(!envuelto) {
 	            destruida = true;           
 	            mapa.eliminar_powerup(this);  
-	            destruir();
+	            eliminar_del_mapa();
         	}else {
         		destruida = true;           
                 mapa.eliminar_powerup(this);  
-                destruir();
+                eliminar_del_mapa();
         }
     }
 

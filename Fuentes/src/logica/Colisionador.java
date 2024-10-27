@@ -422,7 +422,7 @@ public class Colisionador {
             // Colisión con enemigos
             for (Goomba goomba : new ArrayList<>(mapa.get_entidades_goomba())) {
                 if (proyectil.get_limites().intersects(goomba.get_limites())) {
-                    goomba.destruir();
+                    goomba.eliminar_del_mapa();
                     mario.get_sistema_puntuacion().sumar_puntos(goomba.calcular_puntaje());
                     proyectil.destruir(mapa);
                     break;
@@ -430,7 +430,7 @@ public class Colisionador {
             }
             for (BuzzyBeetle buzzy : new ArrayList<>(mapa.get_entidades_buzzy_beetle())) {
                 if (proyectil.get_limites().intersects(buzzy.get_limites())) {
-                    buzzy.destruir();
+                    buzzy.eliminar_del_mapa();
                     mario.get_sistema_puntuacion().sumar_puntos(buzzy.calcular_puntaje());
                     proyectil.destruir(mapa);
                     break;
@@ -462,7 +462,7 @@ public class Colisionador {
             }
             for (Spiny spiny : new ArrayList<>(mapa.get_entidades_spiny())) {
                 if (proyectil.get_limites().intersects(spiny.get_limites())) {
-                    spiny.destruir();
+                    spiny.eliminar_del_mapa();
                     mario.get_sistema_puntuacion().sumar_puntos(spiny.calcular_puntaje());
                     proyectil.destruir(mapa);
                     break;
@@ -485,7 +485,7 @@ public class Colisionador {
             for (BuzzyBeetle buzzy : new ArrayList<>(mapa.get_entidades_buzzy_beetle())) {
                 if (koopa.get_limites().intersects(buzzy.get_limites())) {
                 	mario.get_sistema_puntuacion().sumar_puntos(buzzy.calcular_puntaje());
-                    buzzy.destruir();
+                    buzzy.eliminar_del_mapa();
                     break;
                 }
             }

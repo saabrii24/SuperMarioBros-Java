@@ -101,10 +101,10 @@ public abstract class Entidad extends JComponent implements EntidadLogica {
 	}
 
 	// Para borrar la entidad del mapa
-    public void destruir() {
+    public void eliminar_del_mapa() {
         destruida = true;
         if (observer != null) {
-            observer.notificar_destruir();
+            observer.notificar_eliminar_del_mapa();
         }
     }
 }

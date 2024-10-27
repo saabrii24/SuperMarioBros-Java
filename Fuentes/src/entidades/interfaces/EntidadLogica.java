@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 
 import fabricas.Sprite;
+import fabricas.SpritesFactory;
 
 public interface EntidadLogica {
 	Sprite get_sprite();

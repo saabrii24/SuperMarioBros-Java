@@ -24,7 +24,7 @@ public class BolaDeFuego extends EntidadMovible {
         if (!destruida) {
             destruida = true;           
             mapa.eliminar_bola_de_fuego(this);  
-            destruir();
+            eliminar_del_mapa();
         }
     }
 

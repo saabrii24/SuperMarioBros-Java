@@ -65,7 +65,7 @@ public class ControladorEntidades {
     private void mario_cae_al_vacio(Mario mario) {
         juego.get_mapa_nivel_actual().get_colisionador().set_murio_mario(true);
         mario.caer_en_vacio();
-        mario.destruir();
+        mario.eliminar_del_mapa();
     }
     
     public void lakitu_dispara() {

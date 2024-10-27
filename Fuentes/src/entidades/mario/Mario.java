@@ -47,7 +47,7 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
     // Singleton: Obtiene la instancia de Mario
     public static Mario get_instancia() {
         if (instancia_mario == null) {
-        	instancia_mario = new Mario(96, 240, null);
+        	instancia_mario = new Mario(96, 432, null);
         }
         return instancia_mario;
     }
@@ -98,8 +98,7 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
     	movimiento_vertical_bloqueado = true;
     	detener_movimiento_vertical();
     }
-    public void activar_movimiento_horizontal() {
-    }
+
     public void activar_movimiento_vertical() {
     	movimiento_vertical_bloqueado = false;
     }
@@ -196,7 +195,7 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
 	public void visitar(Estrella estrella) { estado.consumir_estrella(); Juego.get_instancia().reproducir_efecto("powerup");}
 	
     public BolaDeFuego disparar() { return estado.disparar(); }
-    public void resetear_posicion() { this.set_posicion(96, 600); }
+    public void resetear_posicion() { this.set_posicion(96, 432); }
 	public void finalizar_invulnerabilidad() { estado.finalizar_invulnerabilidad(); }	
 	public  boolean mata_tocando() { return estado.mata_tocando(); }	
 	public boolean rompe_bloque() { return estado.rompe_bloque(); }

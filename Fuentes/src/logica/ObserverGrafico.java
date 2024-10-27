@@ -25,7 +25,7 @@ public abstract class ObserverGrafico extends JLabel implements Observer {
         actualizar_posicion_tamano();
     }
     
-    public void notificar_destruir() {
+    public void notificar_eliminar_del_mapa() {
         setIcon(null); 
         setVisible(false); 
     }

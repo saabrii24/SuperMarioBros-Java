@@ -56,7 +56,7 @@ public class KoopaTroopa extends Enemigo {
         	mapa.reproducir_efecto("kick");
             destruida = true;           
             mapa.eliminar_koopa_troopa(this);
-            destruir();
+            eliminar_del_mapa();
         }
     }
 

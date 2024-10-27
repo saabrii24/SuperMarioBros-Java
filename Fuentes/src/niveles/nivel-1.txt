@@ -7,7 +7,7 @@ Tiempo: 50
 # Creación de las entidades
 	
 	# Mario (x,y)
-	Mario: 96, 400
+	Mario: 96, 432
 	
 	# Enemigos
 	Goomba: 720, 240

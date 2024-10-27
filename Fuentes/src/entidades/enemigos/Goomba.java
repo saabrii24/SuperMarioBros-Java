@@ -21,7 +21,7 @@ public class Goomba extends Enemigo {
         	mapa.reproducir_efecto("kick");
             destruida = true;           
             mapa.eliminar_goomba(this);
-            destruir();
+            eliminar_del_mapa();
         }
     }
 

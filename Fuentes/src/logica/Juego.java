@@ -44,9 +44,6 @@ public class Juego {
     private void iniciar() {
     	
         mapa_nivel_actual = new Mapa(this);
-        fabrica_sprites = new Dominio1Factory();
-        Mario.get_instancia().set_fabrica_sprites(fabrica_sprites);
-        fabrica_entidades = new EntidadesFactory(fabrica_sprites);
         
         // Inicializar controladores
         controlador_ranking = new ControladorRanking();
@@ -68,6 +65,15 @@ public class Juego {
 	public void cargar_datos(EntidadesFactory generador) {
 		controlador_nivel.cargar_datos(generador);
 	}
+	
+    public void cambiar_dominio(SpritesFactory nueva_fabrica) {
+        this.fabrica_sprites = nueva_fabrica;
+        Mario.get_instancia().set_fabrica_sprites(nueva_fabrica);
+        // Actualizar todas las entidades existentes con la nueva fábrica
+        if (mapa_nivel_actual != null) {
+            mapa_nivel_actual.actualizar_fabrica_sprites(nueva_fabrica);
+        }
+    }
 
     // Getters
     public Nivel get_nivel_actual() { return nivel_actual; }

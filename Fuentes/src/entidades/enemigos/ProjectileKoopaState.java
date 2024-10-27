@@ -1,7 +1,6 @@
 package entidades.enemigos;
 
 import entidades.enemigos.KoopaTroopa.KoopaState;
-import entidades.mario.Mario;
 import logica.Juego;
 
 public class ProjectileKoopaState implements KoopaState {
@@ -13,9 +12,6 @@ public class ProjectileKoopaState implements KoopaState {
 
 	@Override
 	public void cambiar_estado() {	
-		Mario.get_instancia().get_sistema_puntuacion().sumar_puntos(koopa.calcular_puntaje());
-		koopa.destruir();
-		
 	}
 	@Override
 	public void actualizar_sprite() {
@@ -32,12 +28,12 @@ public class ProjectileKoopaState implements KoopaState {
 	}
 	
     protected void mover_izquierda() {
-        koopa.set_velocidad_en_x(-3);
+        koopa.set_velocidad_en_x(-10);
         koopa.set_movimiento_derecha(false);
     }
 
     protected void mover_derecha() {
-        koopa.set_velocidad_en_x(3);
+        koopa.set_velocidad_en_x(10);
         koopa.set_movimiento_derecha(true);
     }
 
@@ -48,6 +44,6 @@ public class ProjectileKoopaState implements KoopaState {
 
 	@Override
 	public boolean mata_tocando() {
-		return false;
+		return true;
 	}
 }

@@ -265,23 +265,51 @@ public class Colisionador {
             }
         }
         for (KoopaTroopa koopa : new ArrayList<>(mapa.get_entidades_koopa_troopa())) {
-        	 if (!koopa.esta_destruida()) { 
-	            if (mario.mata_tocando() && mario.get_limites().intersects(koopa.get_limites())) {
-	                koopa.destruir(mapa);
-	                mario.get_sistema_puntuacion().actualizar_puntaje(koopa.calcular_puntaje());
-	            }
-	            if (mario.get_limites_superiores().intersects(koopa.get_limites_inferiores())) {
-	                koopa.cambiar_estado();	
-	                mario.set_posicion(mario.get_posicion_en_x()+48, mario.get_posicion_en_y()+48);
-	                break;
-	            }
-	            if (mario.get_limites_derecha().intersects(koopa.get_limites()) || mario.get_limites_izquierda().intersects(koopa.get_limites())) {
-	                if (mario.colision_con_enemigo(koopa)) 
-	                    murio_mario = true;
-	            	}
-        	   }
-	           
-        	 
+            if (mario.mata_tocando() && mario.get_limites().intersects(koopa.get_limites())) {
+                koopa.destruir(mapa);
+            }
+            if (mario.get_limites_superiores().intersects(koopa.get_limites_inferiores())) {
+                // Si Koopa ya está en estado de proyectil (caparazón)
+                if (!koopa.mata_tocando()) {
+                    // Hacemos que el caparazón empiece a moverse
+                    koopa.cambiar_estado();
+                    // Hacer que Mario rebote un poco
+                    mario.set_velocidad_en_y(-12);
+                } else {
+                    // Si Koopa está normal, lo convertimos en caparazón
+                    koopa.cambiar_estado();
+                    // Hacer que Mario rebote un poco
+                    mario.set_velocidad_en_y(-12);
+                }
+                break;
+            }
+            if (mario.get_limites_derecha().intersects(koopa.get_limites()) || 
+                mario.get_limites_izquierda().intersects(koopa.get_limites())) {
+                
+                // Si Koopa está en estado normal
+                if (koopa.mata_tocando()) {
+                    if (mario.colision_con_enemigo(koopa)) {
+                        murio_mario = true;
+                    } else {
+                        murio_mario = false;
+                        mario.get_sistema_puntuacion().sumar_puntos(koopa.calcular_puntaje());
+                        koopa.cambiar_estado();
+                    }
+                } else {
+                    // Si Koopa está en estado de caparazón y está quieto
+                    if (koopa.get_velocidad_en_x() == 0) {
+                        // Hacer que el caparazón se mueva en la dirección del golpe
+                        int direccion = mario.get_limites_derecha().intersects(koopa.get_limites()) ? 1 : -1;
+                        koopa.set_direccion(direccion);
+                        koopa.cambiar_estado();
+                    } else {
+                        // Si el caparazón está en movimiento, Mario muere
+                        if (mario.colision_con_enemigo(koopa)) {
+                            murio_mario = true;
+                        }
+                    }
+                }
+            }
         }
 
         // Manejo de colisiones con BuzzyBeetle

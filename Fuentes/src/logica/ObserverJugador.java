@@ -3,6 +3,7 @@ package logica;
 import entidades.interfaces.EntidadJugador;
 import gui.PanelPantallaMapa;
 
+@SuppressWarnings("serial")
 public class ObserverJugador extends ObserverGrafico{
 	
 	private PanelPantallaMapa panel_pantalla_mapa;

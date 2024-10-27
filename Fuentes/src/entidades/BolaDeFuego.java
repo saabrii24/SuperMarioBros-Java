@@ -4,6 +4,7 @@ import entidades.mario.Mario;
 import fabricas.Sprite;
 import logica.Mapa;
 
+@SuppressWarnings("serial")
 public class BolaDeFuego extends EntidadMovible {
 	protected int direccion_mario;
 	

@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.File;
 import logica.ControladorRanking;
 import ranking.Jugador;
-import ranking.Ranking;
 
 public class PanelPantallaRanking extends JPanel {
 

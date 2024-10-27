@@ -6,7 +6,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import entidades.BolaDeFuego;
 import entidades.EntidadMovible;
 import entidades.enemigos.*;
-import entidades.interfaces.EntidadLogica;
 import entidades.mario.Mario;
 import entidades.plataformas.*;
 import entidades.powerups.PowerUp;

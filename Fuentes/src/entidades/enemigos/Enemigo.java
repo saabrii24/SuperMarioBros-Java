@@ -4,6 +4,7 @@ import entidades.EntidadMovible;
 import fabricas.Sprite;
 import logica.Mapa;
 
+@SuppressWarnings("serial")
 public abstract class Enemigo extends EntidadMovible{
 	
 	public Enemigo(int x, int y, Sprite sprite) {

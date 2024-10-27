@@ -1,10 +1,10 @@
 package entidades.enemigos;
 
 import fabricas.Sprite;
-import fabricas.SpritesFactory;
 import logica.Juego;
 import logica.Mapa;
 
+@SuppressWarnings("serial")
 public class Spiny extends Enemigo{
 
 	public Spiny(int x, int y, Sprite sprite) {

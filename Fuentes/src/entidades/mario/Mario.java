@@ -16,8 +16,8 @@ import fabricas.Sprite;
 import fabricas.SpritesFactory;
 import logica.Juego;
 
+@SuppressWarnings("serial")
 public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisitor {
-    private static final long serialVersionUID = 1L;
     private static final double VELOCIDAD_LATERAL = 5.0;
     private static final double VELOCIDAD_SALTO = -10.0;
     private static final int VIDAS_INICIALES = 3;

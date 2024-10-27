@@ -3,6 +3,7 @@ package entidades.enemigos;
 import fabricas.Sprite;
 import logica.Mapa;
 
+@SuppressWarnings("serial")
 public class KoopaTroopa extends Enemigo {
 	protected KoopaState estado_actual;
 	

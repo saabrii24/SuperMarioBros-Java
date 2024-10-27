@@ -3,6 +3,7 @@ package ranking;
 import java.io.Serializable;
 
 public class Jugador implements Comparable<Jugador>, Serializable{
+	private static final long serialVersionUID = 2557974393300832482L;
 	private String nombre;
 	private Integer puntos;
 	

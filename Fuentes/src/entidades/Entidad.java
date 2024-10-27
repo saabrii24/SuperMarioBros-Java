@@ -1,18 +1,17 @@
 package entidades;
 
 import fabricas.Sprite;
-import logica.Mapa;
 import logica.Observer;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;
-
 import javax.swing.JComponent;
 
 import entidades.interfaces.EntidadLogica;
 
+@SuppressWarnings("serial")
 public abstract class Entidad extends JComponent implements EntidadLogica {
-	private static final long serialVersionUID = 1L;
+
 	protected Sprite sprite;
     protected double posicion_en_x, posicion_en_y;
     protected Dimension dimension;

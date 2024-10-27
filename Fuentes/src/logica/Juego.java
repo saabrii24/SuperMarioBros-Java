@@ -3,12 +3,10 @@ package logica;
 import java.awt.EventQueue;
 
 import entidades.mario.Mario;
-import fabricas.Dominio1Factory;
 import fabricas.EntidadesFactory;
 import fabricas.SpritesFactory;
 import gui.ControladorDeVistas;
 import niveles.Nivel;
-import ranking.Ranking;
 
 public class Juego {
     private static Juego instancia_juego;

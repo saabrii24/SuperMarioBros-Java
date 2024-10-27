@@ -1,13 +1,12 @@
 package entidades.enemigos;
 
 import fabricas.Sprite;
-import fabricas.SpritesFactory;
 import logica.Juego;
 import logica.Mapa;
 
+@SuppressWarnings("serial")
 public class BuzzyBeetle extends Enemigo{
 
-    
 	public BuzzyBeetle(int x, int y, Sprite sprite) {
 		super(x, y, sprite);
 		set_velocidad_en_x(3);

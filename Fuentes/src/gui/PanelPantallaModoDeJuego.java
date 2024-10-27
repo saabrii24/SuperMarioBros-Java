@@ -4,22 +4,9 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import javax.swing.*;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.InputMap;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.KeyStroke;
-
-import entidades.mario.Mario;
-import fabricas.Dominio1Factory;
-import fabricas.Dominio2Factory;
-import fabricas.EntidadesFactory;
-import fabricas.SpritesFactory;
+import fabricas.*;
 import logica.Juego;
 
 public class PanelPantallaModoDeJuego extends JPanel {
@@ -32,7 +19,6 @@ public class PanelPantallaModoDeJuego extends JPanel {
     private JButton boton_luigi; 
     private JButton boton_volver; 
     private MenuOpciones opcion_actual;
-    private EntidadesFactory generador;
 
     public enum MenuOpciones {
         MARIO,

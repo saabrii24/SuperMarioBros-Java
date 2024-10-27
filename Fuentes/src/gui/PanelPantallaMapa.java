@@ -95,15 +95,7 @@ public class PanelPantallaMapa extends JPanel {
             if (sprites_factory != null) {
                 Sprite mapa_segun_dominio = sprites_factory.get_imagen_mapa();
                 icono_imagen = cargar_imagen(mapa_segun_dominio.get_ruta_imagen());
-            }
-            
-            if (icono_imagen == null || icono_imagen.getImageLoadStatus() != MediaTracker.COMPLETE) {
-                icono_imagen = cargar_imagen("/assets/imagenes/mario-pantalla-mapa.png");
-                if (icono_imagen == null) {
-                    throw new IOException("No se pudo cargar ninguna imagen de fondo");
-                }
-            }
-            
+            }            
             configurar_panel_con_imagen(panel, icono_imagen);
             
         } catch (Exception e) {
@@ -186,7 +178,7 @@ public class PanelPantallaMapa extends JPanel {
         this.sprites_factory = sprites_factory;
     }
 
-    // Métodos protegidos de configuración de UI
+    // Métodos protegidos de configuración de GUI
 
     protected String texto_con_cantidad_digitos(int numero, int digitos) {
         String formato = "%0" + digitos + "d";

@@ -31,23 +31,19 @@ public class ControladorNivel {
         juego.iniciar_hilos_movimiento();
     }
 
-    public void reiniciar_nivel() {
+    public void reiniciar_datos_nivel() {
         reiniciando_nivel = true;
         
-        juego.nivel_actual = GeneradorNivel.cargar_nivel_y_mapa(
-            getClass().getResourceAsStream("/niveles/nivel-" + nivel_actual + ".txt"),
-            juego.fabrica_entidades,
-            juego.mapa_nivel_actual
-        );
+        try {
+            cargar_datos(juego.fabrica_entidades);
+            resetear_mario();
 
-        cargar_datos(juego.fabrica_entidades);
-
-        resetear_mario();
-
-        juego.nivel_actual.get_tiempo_restante();
-        juego.get_mapa_nivel_actual().get_colisionador().set_murio_mario(false);
-        juego.controlador_vistas.refrescar();
-        reiniciando_nivel = false;
+            juego.get_mapa_nivel_actual().get_colisionador().set_murio_mario(false);
+            juego.controlador_vistas.refrescar();
+            
+        } finally {
+            reiniciando_nivel = false;
+        }
     }
 
     private void resetear_mario() {
@@ -98,7 +94,7 @@ public class ControladorNivel {
     	
         Juego.get_instancia().reproducir_efecto("stage_clear");
         Mario.get_instancia().get_sistema_puntuacion().pasar_nivel();
-        nivel_actual++;
+        
 
         if(nivel_actual <= 3)
         	cargar_datos(juego.fabrica_entidades);
@@ -107,4 +103,8 @@ public class ControladorNivel {
     public int get_nivel_actual() {
         return nivel_actual;
     }
+
+	public void set_nivel_actual(int nivel_actual) {
+		this.nivel_actual = nivel_actual;
+	}
 }

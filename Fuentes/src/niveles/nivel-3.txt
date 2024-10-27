@@ -2,7 +2,7 @@
 Nivel: 3
 
 # Tiempo límite en segundos
-Tiempo: 30
+Tiempo: 20
 
 # Creación de las entidades
 	
@@ -12,7 +12,7 @@ Tiempo: 30
 	# Enemigos
 	#Goomba: 288, 144
 	#Goomba: 384, 144
-	Lakitu: 1056, 500
+	#SLakitu: 1056, 500
 	Buzzy: 700, 400
 	
 	# PowerUps

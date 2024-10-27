@@ -15,12 +15,12 @@ public class ControladorRanking implements Serializable {
     protected Ranking ranking;
 
     public ControladorRanking() {
-        this("./ranking.tdp"); // Ruta por defecto
+        this("./ranking.tdp");
     }
 
     public ControladorRanking(String ruta_archivo) {
         this.ruta_archivo = ruta_archivo;
-        cargar_ranking(); // Deserializa el archivo (carga el ranking guardado)
+        cargar_ranking();
 
         if (this.ranking == null) { // Si no se pudo cargar, crea un nuevo ranking
             this.ranking = new Ranking();

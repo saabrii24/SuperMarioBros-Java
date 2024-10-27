@@ -20,13 +20,14 @@ public class ControladorMovimiento {
     public synchronized void iniciar_hilos() {
         if (esta_ejecutando) return;
         esta_ejecutando = true;
-
+ 
+        // Iniciar nuevos hilos
         iniciar_hilo_movimiento_mario();
         iniciar_hilo_movimiento_enemigos();
         iniciar_hilo_informacion_y_tiempo();
         iniciar_hilo_lakitu();
     }
-
+    
     private void iniciar_hilo_movimiento_mario() {
         hilo_mario_movimiento = new Thread(this::bucle_movimiento_jugador);
         hilo_mario_movimiento.start();
@@ -108,7 +109,6 @@ public class ControladorMovimiento {
                     }
                 }
 
-                // Actualizar la interfaz con toda la información
                 EventQueue.invokeLater(() -> {
                     juego.get_controlador_vistas().get_pantalla_mapa()
                         .actualizar_labels_informacion(mario, nivel_actual);
@@ -124,15 +124,21 @@ public class ControladorMovimiento {
     }
     
     private void reiniciar_nivel_y_timer() {
+       // detener_hilos();
+       
         EventQueue.invokeLater(() -> {
-        	Mario.get_instancia().get_sistema_vidas().quitar_vida();
-            juego.get_controlador_nivel().reiniciar_nivel();
+            Mario.get_instancia().get_sistema_vidas().quitar_vida();
+            esta_ejecutando = false;
+            juego.get_controlador_nivel().reiniciar_datos_nivel();
+            
             if (juego.get_nivel_actual() != null) {
                 juego.get_nivel_actual().set_tiempo_restante(
                     juego.get_nivel_actual().get_tiempo_inicial()
                 );
             }
-            detener_hilos();
+
+            esta_ejecutando = true; 
+            iniciar_hilos();
         });
     }
 
@@ -150,21 +156,21 @@ public class ControladorMovimiento {
     public void detener_hilos() {
         esta_ejecutando = false;
         
-        try {
-            if (hilo_mario_movimiento != null) {
-                hilo_mario_movimiento.join();
+        Thread[] hilos = {
+            hilo_mario_movimiento,
+            hilo_enemigos_movimiento,
+            hilo_informacion_y_tiempo,
+            hilo_lakitu
+        };
+        
+        for (Thread hilo : hilos) {
+            if (hilo != null && hilo.isAlive()) {
+                try {
+                    hilo.join(1000); // Timeout de 1 segundo
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
             }
-            if (hilo_enemigos_movimiento != null) {
-                hilo_enemigos_movimiento.join();
-            }
-            if (hilo_informacion_y_tiempo != null) {
-                hilo_informacion_y_tiempo.join();
-            }
-            if(hilo_lakitu != null) {
-            	hilo_lakitu.join();
-            }
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
         }
     }
 }

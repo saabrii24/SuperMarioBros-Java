@@ -8,6 +8,7 @@ import entidades.plataformas.Tuberias;
 import entidades.plataformas.Vacio;
 import entidades.powerups.PowerUp;
 import entidades.BolaDeFuego;
+import entidades.Entidad;
 import entidades.EntidadMovible;
 import entidades.enemigos.BuzzyBeetle;
 import entidades.enemigos.Enemigo;
@@ -32,8 +33,6 @@ public class Colisionador {
 
     public void verificar_colisiones(Juego juego) {
         Mario mario = Mario.get_instancia();
-        
-        // Verificar todas las colisiones en orden de prioridad
         verificar_colisiones_con_plataformas(mario);
         verificar_colisiones_con_enemigos(mario);
         verificar_colisiones_con_powerups(mario);
@@ -41,39 +40,29 @@ public class Colisionador {
     }
 
     private void verificar_colisiones_con_plataformas(Mario mario) {
-        // Colisiones verticales
-    	verificar_colision_bajo_plataformas(mario);
+        verificar_colision_bajo_plataformas(mario);
         verificar_colision_sobre_plataformas(mario);
-        
-        // Colisiones horizontales
         verificar_colision_horizontal_con_plataformas(mario);
-        
-        // Colisiones de Enemigos con plataformas
-        for (BuzzyBeetle buzzy : mapa.get_entidades_buzzy_beetle()) {
-        	manejar_colision_vertical(buzzy);
-            manejar_colision_horizontal(buzzy);
+        verificar_colisiones_plataformas_enemigos();
+    }
+    
+    private void verificar_colisiones_plataformas_enemigos() {
+        List<EntidadMovible> enemigos = obtener_todos_enemigos();
+        for (EntidadMovible enemigo : enemigos) {
+            manejar_colision_vertical(enemigo);
+            manejar_colision_horizontal(enemigo);
         }
-        for (Enemigo koopa : mapa.get_entidades_koopa_troopa()) {
-        	manejar_colision_vertical(koopa);
-            manejar_colision_horizontal(koopa);
-        }
-        for (Spiny spiny : mapa.get_entidades_spiny()) {
-        	manejar_colision_vertical(spiny);
-            manejar_colision_horizontal(spiny);
-        }
-        for (PiranhaPlant piranha : mapa.get_entidades_piranha_plant()) {
-        	manejar_colision_vertical(piranha);
-            manejar_colision_horizontal(piranha);
-        }
-        for (Lakitu lakitu : mapa.get_entidades_lakitu()) {
-        	manejar_colision_vertical(lakitu);
-            manejar_colision_horizontal(lakitu);
-        }
-        for (Goomba goomba : mapa.get_entidades_goomba()) {
-        	manejar_colision_vertical(goomba);
-            manejar_colision_horizontal(goomba);
-        }
+    }
 
+    private List<EntidadMovible> obtener_todos_enemigos() {
+        List<EntidadMovible> enemigos = new ArrayList<>();
+        enemigos.addAll(mapa.get_entidades_buzzy_beetle());
+        enemigos.addAll(mapa.get_entidades_koopa_troopa());
+        enemigos.addAll(mapa.get_entidades_spiny());
+        enemigos.addAll(mapa.get_entidades_piranha_plant());
+        enemigos.addAll(mapa.get_entidades_lakitu());
+        enemigos.addAll(mapa.get_entidades_goomba());
+        return enemigos;
     }
 
     private void verificar_colision_bajo_plataformas(Mario mario) {
@@ -95,7 +84,7 @@ public class Colisionador {
                 mario.set_posicion_en_y(pregunta.get_posicion_en_y() - mario.get_dimension().height + 1);
                 mario.set_cayendo(true);
                 mario.set_velocidad_en_y(0);
-                pregunta.destruir(mapa);
+                if(mario.get_contador_saltos() == 1) pregunta.destruir(mapa);
                 break;
             }
         }
@@ -105,14 +94,12 @@ public class Colisionador {
                 mario.set_posicion_en_y(ladrillo.get_posicion_en_y() - mario.get_dimension().height + 1);
                 mario.set_cayendo(true);
                 mario.set_velocidad_en_y(0);
-                if (mario.rompe_bloque()) {
+                if (mario.rompe_bloque() && mario.get_contador_saltos() == 1) {
                     ladrillo.destruir(mapa);
                 }
                 break;
             }
         }
-        
-        
 
         if (!colision_detectada && !mario.esta_saltando()) {
             mario.set_cayendo(true);
@@ -121,45 +108,25 @@ public class Colisionador {
 
     private void verificar_colision_sobre_plataformas(Mario mario) {
         Rectangle limites_superiores = mario.get_limites_superiores();
-        
-        for (BloqueSolido bloque_solido : mapa.get_entidades_bloque_solido()) {
-            if (limites_superiores.intersects(bloque_solido.get_limites_inferiores())) {
-            	mario.set_contador_saltos(0);
-                mario.set_velocidad_en_y(0);  
-                mario.set_posicion_en_y(bloque_solido.get_posicion_en_y() + bloque_solido.get_dimension().height);
+        List<Entidad> plataformas = obtener_todas_plataformas();
+
+        for (Entidad plataforma : plataformas) {
+            if (limites_superiores.intersects(plataforma.get_limites_inferiores())) {
+                mario.set_contador_saltos(0);
+                mario.set_velocidad_en_y(0);
+                mario.set_posicion_en_y(plataforma.get_posicion_en_y() + plataforma.get_dimension().height);
                 break;
             }
         }
-        for (BloqueDePregunta pregunta : mapa.get_entidades_bloque_de_pregunta()) {
-            if (limites_superiores.intersects(pregunta.get_limites_inferiores())) {
-            	mario.set_contador_saltos(0);
-                mario.set_velocidad_en_y(0);  
-                mario.set_posicion_en_y(pregunta.get_posicion_en_y() + pregunta.get_dimension().height);
-                break;
-            }
-        }
-        for (LadrilloSolido ladrillo_solido : mapa.get_entidades_ladrillo_solido()) {
-            if (limites_superiores.intersects(ladrillo_solido.get_limites_inferiores())) {
-            	mario.set_contador_saltos(0);
-                mario.set_velocidad_en_y(0);  
-                mario.set_posicion_en_y(ladrillo_solido.get_posicion_en_y() + ladrillo_solido.get_dimension().height);
-                break;
-            }
-        }
-        
-        for (Tuberias tuberia : mapa.get_entidades_tuberias()) {
-            if (limites_superiores.intersects(tuberia.get_limites_inferiores())) {
-            	mario.set_contador_saltos(0);
-                mario.set_velocidad_en_y(0);  
-                mario.set_posicion_en_y(tuberia.get_posicion_en_y() + tuberia.get_dimension().height);
-                break;
-            }
-        }
-        for (Vacio vacio : mapa.get_entidades_vacio()) {
-            if (limites_superiores.intersects(vacio.get_limites_inferiores())) {
-            	mario.set_cayendo(true);
-            }
-        }
+    }
+    
+    private List<Entidad> obtener_todas_plataformas() {
+        List<Entidad> plataformas = new ArrayList<>();
+        plataformas.addAll(mapa.get_entidades_bloque_solido());
+        plataformas.addAll(mapa.get_entidades_bloque_de_pregunta());
+        plataformas.addAll(mapa.get_entidades_ladrillo_solido());
+        plataformas.addAll(mapa.get_entidades_tuberias());
+        return plataformas;
     }
 
     private void verificar_colision_horizontal_con_plataformas(Mario mario) {

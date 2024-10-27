@@ -1,6 +1,7 @@
 package entidades;
 
 import fabricas.Sprite;
+import logica.Mapa;
 import logica.Observer;
 
 import java.awt.Dimension;
@@ -107,4 +108,5 @@ public abstract class Entidad extends JComponent implements EntidadLogica {
             observer.notificar_eliminar_del_mapa();
         }
     }
+
 }

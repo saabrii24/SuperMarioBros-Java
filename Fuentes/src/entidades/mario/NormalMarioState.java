@@ -48,30 +48,25 @@ public class NormalMarioState implements Mario.MarioState {
         }
     }
 
-	@Override
 	public void finalizar_invulnerabilidad() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public boolean mata_tocando() {
 		return false;
 	}
 
-	@Override
 	public boolean rompe_bloque() {
 		return false;
 	}
 
-	@Override
 	public boolean colision_con_enemigo(Enemigo enemigo) {
 		mario.get_sistema_puntuacion().restar_puntos(enemigo.calcular_penalizacion());
         mario.get_sistema_vidas().quitar_vida();
 		return true;
 	}
 
-	@Override
 	public BolaDeFuego disparar() {
 		return null;
 	}

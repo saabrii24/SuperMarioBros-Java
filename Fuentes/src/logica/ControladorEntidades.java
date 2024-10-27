@@ -22,7 +22,7 @@ public class ControladorEntidades {
         synchronized(mario) {
             if(mario.get_dimension() != null) {
                 mario.actualizar();
-                juego.get_mapa_nivel_actual().actualizar_entidades();
+                juego.get_mapa_nivel_actual().actualizar_entidades_movibles();
                 mario.finalizar_invulnerabilidad();
                 
                 if (juego.get_mapa_nivel_actual().get_colisionador().get_murio_mario() && 

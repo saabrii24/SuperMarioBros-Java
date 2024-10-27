@@ -50,20 +50,22 @@ public class Mapa {
         this.colisionador = new Colisionador(this);
     }
 
-    public void actualizar_entidades() {
-        for (Goomba goomba : entidades_goomba) goomba.actualizar();
-        for (BuzzyBeetle buzzy : entidades_buzzy_beetle) buzzy.actualizar();
-        for (KoopaTroopa koopa : entidades_koopa_troopa) koopa.actualizar();
-        for (PiranhaPlant piranha : entidades_piranha_plant) piranha.actualizar();
-        for (Spiny spiny : entidades_spiny) spiny.actualizar();
-        for (PowerUp powerup : entidades_powerup) powerup.actualizar();
-        for (BloqueSolido bloque_solido : entidades_bloque_solido) bloque_solido.actualizar();
-        for (BloqueDePregunta bloque_pregunta : entidades_bloque_de_pregunta) bloque_pregunta.actualizar();
-        for (LadrilloSolido ladrillo_solido : entidades_ladrillo_solido) ladrillo_solido.actualizar();
-        for (Tuberias tuberia : entidades_tuberias) tuberia.actualizar();
-        for (Vacio vacio : entidades_vacio) vacio.actualizar();
-        for (BolaDeFuego proyectil : entidades_proyectiles) proyectil.actualizar();
+    public void actualizar_entidades_movibles() {
+        for (EntidadMovible entidad : get_entidades_movibles()) {
+            entidad.actualizar();
+        }
         colisionador.verificar_colisiones(mi_juego);
+    }
+
+    private List<EntidadMovible> get_entidades_movibles() {
+        List<EntidadMovible> entidades_movibles = new CopyOnWriteArrayList<>();
+        entidades_movibles.addAll(entidades_goomba);
+        entidades_movibles.addAll(entidades_buzzy_beetle);
+        entidades_movibles.addAll(entidades_koopa_troopa);
+        entidades_movibles.addAll(entidades_piranha_plant);
+        entidades_movibles.addAll(entidades_spiny);
+        entidades_movibles.addAll(entidades_proyectiles);
+        return entidades_movibles;
     }
 
     public Colisionador get_colisionador() { return colisionador; }
@@ -126,17 +128,14 @@ public class Mapa {
     public void eliminar_bola_de_fuego(BolaDeFuego bola_de_fuego) { entidades_proyectiles.remove(bola_de_fuego); }
 
     public void barrer_mapa() {
-        for (Goomba goomba : entidades_goomba) goomba.eliminar_del_mapa(); 
+        for (EntidadMovible entidad : get_entidades_movibles()) {
+            entidad.eliminar_del_mapa();
+        }
         entidades_goomba.clear();
-        for (BuzzyBeetle buzzy : entidades_buzzy_beetle) buzzy.eliminar_del_mapa(); 
         entidades_buzzy_beetle.clear();
-        for (KoopaTroopa koopa : entidades_koopa_troopa) koopa.eliminar_del_mapa(); 
         entidades_koopa_troopa.clear();
-        for (Lakitu lakitu : entidades_lakitu) lakitu.eliminar_del_mapa(); 
         entidades_lakitu.clear();
-        for (PiranhaPlant piranha : entidades_piranha_plant) piranha.eliminar_del_mapa(); 
         entidades_piranha_plant.clear();
-        for (Spiny spiny : entidades_spiny) spiny.eliminar_del_mapa(); 
         entidades_spiny.clear();
         for (PowerUp powerup : entidades_powerup) powerup.eliminar_del_mapa(); 
         entidades_powerup.clear();

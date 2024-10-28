@@ -6,7 +6,7 @@ import logica.Juego;
 import logica.Mapa;
 
 @SuppressWarnings("serial")
-public class BloqueDePregunta extends Plataforma{
+public class BloqueDePregunta extends Plataforma {
 	private PowerUp powerup;
 	int contador_powerup = 0;
 

@@ -314,12 +314,23 @@ public class Colisionador {
             }
         }   
     }
-    
-    private void manejar_colision_vertical(EntidadMovible entidad) {
-        boolean colision_superior = colisiona_con_plataforma(entidad.get_limites_superiores());
-        entidad.set_cayendo(!colision_superior);
-        entidad.set_velocidad_en_y(colision_superior ? 0 : 5);
+
+    private void manejar_colision_vertical(EntidadMovible enemigo) {
+        Rectangle limites_inferiores = enemigo.get_limites_superiores();
+
+        for (Entidad plataforma : obtener_todas_plataformas()) {
+            if (limites_inferiores.intersects(plataforma.get_limites_inferiores())) {
+                ajustar_posicion_enemigo_sobre_plataforma(enemigo, plataforma);
+                break;
+            }
+        }
     }
+
+    private void ajustar_posicion_enemigo_sobre_plataforma(EntidadMovible enemigo, Entidad plataforma) {
+        enemigo.set_velocidad_en_y(0);
+        enemigo.set_posicion_en_y(plataforma.get_posicion_en_y() + plataforma.get_dimension().height);
+    }
+
 
     private void manejar_colision_horizontal(EntidadMovible entidad) {
         if (colisiona_con_plataforma(entidad.get_limites_derecha())) {

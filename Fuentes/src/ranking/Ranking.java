@@ -7,10 +7,10 @@ import java.util.*;
  * La clase {@code Ranking} gestiona el sistema de clasificación de jugadores
  * y mantiene el top 5 de puntajes más altos registrados en el juego.
  */
-@SuppressWarnings("serial")
 public class Ranking implements Serializable {
 
-    protected List<Jugador> ranking;
+	private static final long serialVersionUID = -8353261000686192762L;
+	protected List<Jugador> ranking;
 
 	public Ranking() {
         this.ranking = new ArrayList<>(5);
@@ -23,13 +23,9 @@ public class Ranking implements Serializable {
         ranking.sort(Collections.reverseOrder());
     }
 
-    public List<Jugador> get_ranking() {
-        return ranking;
-    }
+    public List<Jugador> get_ranking() { return ranking; }
 
-    public int size() {
-        return ranking.size();
-    }
+    public int size() { return ranking.size(); }
 
     public Jugador get(int i) {
         if (i >= 0 && i < ranking.size()) {

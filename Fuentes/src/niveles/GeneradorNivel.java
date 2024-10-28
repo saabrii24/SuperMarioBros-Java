@@ -73,8 +73,7 @@ public class GeneradorNivel {
 	/**
 	 * Procesa la creación de una entidad basada en su tipo y su posición.
 	 *
-	 * @param tipoEntidad Tipo de entidad a crear (ej. Goomba, Koopa, Estrella,
-	 *                    etc.).
+	 * @param tipoEntidad Tipo de entidad a crear (ej. Goomba, Koopa, Estrella, etc.).
 	 * @param valor       Coordenadas de la entidad en formato "x, y".
 	 * @param generador   Generador de entidades (SpritesFactory).
 	 * @param mapa        Mapa del nivel.

@@ -2,7 +2,6 @@ package entidades.enemigos;
 import fabricas.Sprite;
 import logica.Mapa;
 
-@SuppressWarnings("serial")
 public class PiranhaPlant extends Enemigo {
     private static final double VELOCIDAD_VERTICAL = 0.4;
     private int posicion_inicial_y;

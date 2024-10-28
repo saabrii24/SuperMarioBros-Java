@@ -5,14 +5,11 @@ import logica.Observer;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;
-import javax.swing.JComponent;
 
 import entidades.interfaces.EntidadLogica;
 
-@SuppressWarnings("serial")
-public abstract class Entidad extends JComponent implements EntidadLogica {
-
-	protected Sprite sprite;
+public abstract class Entidad implements EntidadLogica {
+    protected Sprite sprite;
     protected double posicion_en_x, posicion_en_y;
     protected Dimension dimension;
     protected Observer observer;
@@ -22,9 +19,7 @@ public abstract class Entidad extends JComponent implements EntidadLogica {
         this.sprite = sprite;
         this.posicion_en_x = posicion_en_x;
         this.posicion_en_y = posicion_en_y;
-        this.dimension = (sprite != null) ? 
-            new Dimension(sprite.get_ancho(), sprite.get_alto()) : 
-            new Dimension(0, 0);
+        this.dimension = (sprite != null) ? new Dimension(sprite.get_ancho(), sprite.get_alto()) : new Dimension(0, 0);
     }
 
     // Getters básicos

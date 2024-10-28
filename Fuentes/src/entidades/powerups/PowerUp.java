@@ -6,7 +6,6 @@ import logica.Juego;
 import logica.Mapa;
 import logica.Observer;
 
-@SuppressWarnings("serial")
 public abstract class PowerUp extends Entidad{
 
 	protected boolean envuelto;

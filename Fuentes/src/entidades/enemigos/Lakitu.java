@@ -5,7 +5,6 @@ import fabricas.Sprite;
 import logica.Juego;
 import logica.Mapa;
 
-@SuppressWarnings("serial")
 public class Lakitu extends Enemigo{
 
 	public Lakitu(int x, int y, Sprite sprite) {

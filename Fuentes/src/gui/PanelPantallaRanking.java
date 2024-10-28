@@ -35,7 +35,7 @@ public class PanelPantallaRanking extends JPanel {
 
         int yPosition = 118;
         for (int i = 0; i < Math.min(5, controlador_ranking.get_ranking().size()); i++) {
-            Jugador jugador = controlador_ranking.get_ranking().get(i);
+            Jugador jugador = controlador_ranking.get_ranking().get_jugador_posicion(i);
 
             JLabel nombre = crear_label(jugador.get_nombre(), 445, yPosition, 252, 38);
             JLabel puntos = crear_label(jugador.get_puntos().toString(), 750, yPosition, 142, 38);
@@ -43,11 +43,10 @@ public class PanelPantallaRanking extends JPanel {
             add(nombre);
             add(puntos);
 
-            yPosition += 46; // Ajuste para la siguiente fila
+            yPosition += 46;
         }
     }
 
-    // Método auxiliar para crear los campos de texto
     private JLabel crear_label(String texto, int x, int y, int ancho, int alto) {
         JLabel label = new JLabel(texto);
         label.setFont(tipografia);

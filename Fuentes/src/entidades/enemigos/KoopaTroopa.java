@@ -5,11 +5,11 @@ import logica.Mapa;
 
 @SuppressWarnings("serial")
 public class KoopaTroopa extends Enemigo {
-	protected KoopaState estado_actual;
+	protected KoopaState estado;
 	
     public KoopaTroopa(int x, int y, Sprite sprite) {
         super(x, y, sprite);
-        estado_actual = new NormalKoopaState(this);
+        estado = new NormalKoopaState(this);
     }
 
     public interface KoopaState {
@@ -36,7 +36,7 @@ public class KoopaTroopa extends Enemigo {
     public int calcular_penalizacion() { return 45; }
 
     public void mover() {
-    	estado_actual.mover();
+    	estado.mover();
     }
 
     protected void mover_izquierda() {
@@ -62,16 +62,16 @@ public class KoopaTroopa extends Enemigo {
     }
 
     private void actualizar_sprite() {
-    	estado_actual.actualizar_sprite();
+    	estado.actualizar_sprite();
     }
     public void cambiar_sprite(Sprite sprite) {
     	this.sprite = sprite;
     }
     public void set_estado(KoopaState estado) {
-    	estado_actual = estado;
+    	this.estado = estado;
     }
     public KoopaState get_estado() {
-    	return estado_actual;
+    	return estado;
     }
     public int get_direccion() {
     	return direccion;
@@ -83,13 +83,13 @@ public class KoopaTroopa extends Enemigo {
     	return movimiento_derecha;
     }
     public boolean en_movimiento() {
-    	return estado_actual.en_movimiento();
+    	return estado.en_movimiento();
     }
     public boolean mata_tocando() {
-    	return estado_actual.mata_tocando();
+    	return estado.mata_tocando();
     }
     public void cambiar_estado() {
-    	estado_actual.cambiar_estado();
+    	estado.cambiar_estado();
     }
     
 }

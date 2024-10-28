@@ -27,7 +27,7 @@ public class Ranking implements Serializable {
 
     public int size() { return ranking.size(); }
 
-    public Jugador get(int i) {
+    public Jugador get_jugador_posicion(int i) {
         if (i >= 0 && i < ranking.size()) {
             return ranking.get(i);
         } else {

@@ -16,5 +16,5 @@ public class Jugador implements Comparable<Jugador>, Serializable{
 	public Integer get_puntos() { return puntos; }
 
 	@Override
-	public int compareTo(Jugador o) { return this.puntos.compareTo(o.get_puntos()); }
+	public int compareTo(Jugador otro_jugador) { return this.puntos.compareTo(otro_jugador.get_puntos()); }
 }

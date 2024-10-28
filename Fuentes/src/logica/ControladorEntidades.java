@@ -78,7 +78,6 @@ public class ControladorEntidades {
         mover_lista_entidades(juego.get_mapa_nivel_actual().get_entidades_goomba());
         mover_lista_entidades(juego.get_mapa_nivel_actual().get_entidades_buzzy_beetle());
         mover_lista_entidades(juego.get_mapa_nivel_actual().get_entidades_koopa_troopa());
-        mover_lista_entidades(juego.get_mapa_nivel_actual().get_entidades_lakitu());
         mover_lista_entidades(juego.get_mapa_nivel_actual().get_entidades_spiny());
     }
 

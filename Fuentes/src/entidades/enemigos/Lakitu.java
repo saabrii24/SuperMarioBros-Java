@@ -13,12 +13,8 @@ public class Lakitu extends Enemigo{
 	}
 
 	public void mover() {
-		lanzar_spinys(Juego.get_instancia().get_mapa_nivel_actual());
 	}
-	private void lanzar_spinys(Mapa mapa) {
-		mapa.agregar_spiny(new Spiny((int) this.get_posicion_en_x() + 10, (int) this.get_posicion_en_y(), Juego.get_instancia().get_fabrica_sprites().get_spiny_movimiento_izquierda()));
-		observer.actualizar();
-	}
+
 	public void actualizar() {
 	}
 	
@@ -40,9 +36,11 @@ public class Lakitu extends Enemigo{
     }
 
 	public void lanzar_spiny(Mapa mapa) {
-		Spiny spiny = new Spiny ((int) this.get_posicion_en_x() + 10, (int )this.get_posicion_en_y(), Mario.get_instancia().get_sprite_factory().get_spiny_movimiento_izquierda());
-		mapa.agregar_spiny(spiny);	
-		spiny.registrar_observer(Juego.get_instancia().get_controlador_vistas().registrar_entidad(spiny));
+		if(mapa.get_entidades_spiny().size() < 10) {
+			Spiny spiny = new Spiny ((int) this.get_posicion_en_x() + 10, (int )this.get_posicion_en_y(), Mario.get_instancia().get_sprite_factory().get_spiny_movimiento_izquierda());
+			mapa.agregar_spiny(spiny);	
+			spiny.registrar_observer(Juego.get_instancia().get_controlador_vistas().registrar_entidad(spiny));
+		}
 	}
 
 }

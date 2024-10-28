@@ -43,6 +43,7 @@ public class ControladorMovimiento {
         hilo_informacion_y_tiempo = new Thread(this::bucle_informacion_y_tiempo);
         hilo_informacion_y_tiempo.start();
     }
+    
     private void iniciar_hilo_lakitu() {
     	hilo_lakitu = new Thread(this::bucle_lakitu);
     	hilo_lakitu.start();

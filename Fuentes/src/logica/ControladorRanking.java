@@ -13,7 +13,7 @@ public class ControladorRanking implements Serializable {
 
     private static final long serialVersionUID = -6203851574103194125L;
     private final String ruta_archivo;
-    protected Ranking ranking;
+    private Ranking ranking;
 
     public ControladorRanking() {
         this("./src/ranking/ranking.tdp");
@@ -48,7 +48,6 @@ public class ControladorRanking implements Serializable {
         }
     }
 
-    // Método para verificar si el puntaje puede entrar en el ranking
     private boolean puede_entrar_en_ranking(int puntaje) {
         if (ranking.get_ranking().size() < 5) { // Si el ranking tiene menos de 5 jugadores, siempre puede entrar
             return true;
@@ -58,7 +57,6 @@ public class ControladorRanking implements Serializable {
         Jugador jugador_menor = ranking.get_ranking().get(ranking.get_ranking().size() - 1);
         return puntaje > jugador_menor.get_puntos(); // Comparar el puntaje
     }
-
 
     // Método para deserializar el ranking (cargar desde archivo)
     public void cargar_ranking() {

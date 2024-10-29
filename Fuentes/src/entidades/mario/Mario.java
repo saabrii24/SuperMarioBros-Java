@@ -83,7 +83,7 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
     public int get_direccion_mario() { return movimiento_derecha ? 1 : -1; }
     public boolean get_movimiento_derecha() { return movimiento_derecha; }
     public boolean esta_saltando() { return saltando; }
-    public SpritesFactory get_sprite_factory() { return sprites_factory; }
+    public SpritesFactory get_fabrica_sprites() { return sprites_factory; }
     public int get_contador_saltos() { return contador_saltos; }
     public int get_puntaje() { return sistema_puntuacion.get_puntaje_total() + sistema_puntuacion.get_puntaje_nivel_actual(); }
     public int get_monedas() { return sistema_puntuacion.get_monedas_total() + sistema_puntuacion.get_monedas_nivel_actual(); }

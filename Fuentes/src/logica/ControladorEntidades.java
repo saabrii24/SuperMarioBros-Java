@@ -43,6 +43,7 @@ public class ControladorEntidades {
         if(mario.get_posicion_en_y() < 0) {
             mario_cae_al_vacio(mario);
         }
+        
         if(mario.get_vidas() == 0) {
             juego.controlador_vistas.accionar_pantalla_derrota();
             juego.detener_hilos();

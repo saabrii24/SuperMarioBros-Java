@@ -64,6 +64,7 @@ public class Mapa {
         entidades_movibles.addAll(entidades_piranha_plant);
         entidades_movibles.addAll(entidades_spiny);
         entidades_movibles.addAll(entidades_proyectiles);
+        entidades_movibles.addAll(entidades_lakitu);
         return entidades_movibles;
     }
 

@@ -48,6 +48,7 @@ public abstract class SpritesFactory {
     public Sprite get_lakitu() { return cargar_sprite("lakitu.png"); }
     public Sprite get_spiny_movimiento_derecha() { return cargar_sprite("spiny_derecha.gif"); }
     public Sprite get_spiny_movimiento_izquierda() { return cargar_sprite("spiny_izquierda.gif"); }
+	public Sprite get_spiny_cayendo() {return cargar_sprite("spiny_cargando.gif");}
     public Sprite get_buzzy_movimiento_derecha() { return cargar_sprite("buzzy_derecha.gif"); }
     public Sprite get_buzzy_movimiento_izquierda() { return cargar_sprite("buzzy_izquierda.gif"); }
 

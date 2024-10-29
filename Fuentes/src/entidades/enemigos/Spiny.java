@@ -60,7 +60,8 @@ public class Spiny extends Enemigo{
     }
 
 	private void actualizar_sprite() {
-		if (velocidad_en_x != 0) {
+		if(velocidad_en_y > 0.4) set_sprite(Juego.get_instancia().get_fabrica_sprites().get_spiny_cayendo());
+		else if (velocidad_en_x != 0) {
             set_sprite(movimiento_derecha ? 
             	Juego.get_instancia().get_fabrica_sprites().get_spiny_movimiento_derecha() : 
             	Juego.get_instancia().get_fabrica_sprites().get_spiny_movimiento_izquierda());

@@ -10,7 +10,6 @@ public class ControladorMovimiento {
     private Thread hilo_mario_movimiento;
     private Thread hilo_enemigos_movimiento;
     private Thread hilo_informacion_y_tiempo;
-    private Thread hilo_lakitu;
     private volatile boolean esta_ejecutando;
     private volatile boolean juego_terminado;
 
@@ -26,7 +25,6 @@ public class ControladorMovimiento {
         iniciar_hilo_movimiento_mario();
         iniciar_hilo_movimiento_enemigos();
         iniciar_hilo_informacion_y_tiempo();
-        iniciar_hilo_lakitu();
     }
     
     private void iniciar_hilo_movimiento_mario() {
@@ -42,24 +40,6 @@ public class ControladorMovimiento {
     private void iniciar_hilo_informacion_y_tiempo() {
         hilo_informacion_y_tiempo = new Thread(this::bucle_informacion_y_tiempo);
         hilo_informacion_y_tiempo.start();
-    }
-    
-    private void iniciar_hilo_lakitu() {
-    	hilo_lakitu = new Thread(this::bucle_lakitu);
-    	hilo_lakitu.start();
-    }
-    
-    private void bucle_lakitu(){
-    	while(esta_ejecutando) {
-    		 try {
-                 Thread.sleep(3000);
-                 juego.controlador_entidades.lakitu_dispara();
-                 
-             } catch (InterruptedException e) {
-                 Thread.currentThread().interrupt();
-                 break;
-             }
-    	}
     }
 
     private void bucle_movimiento_jugador() {
@@ -170,7 +150,6 @@ public class ControladorMovimiento {
             hilo_mario_movimiento,
             hilo_enemigos_movimiento,
             hilo_informacion_y_tiempo,
-            hilo_lakitu
         };
         
         for (Thread hilo : hilos) {

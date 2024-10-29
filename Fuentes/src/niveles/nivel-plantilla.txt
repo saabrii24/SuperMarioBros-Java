@@ -1,8 +1,8 @@
-# Archivo de configuración del Nivel 2
-Nivel: 2
+# Archivo de configuración del Nivel X
+Nivel: X
 
 # Tiempo límite en segundos
-Tiempo: 40
+Tiempo: 20
 
 # Creación de las entidades
 	
@@ -17,7 +17,7 @@ Tiempo: 40
 	
 	# Plataformas
 
-
+	
 	# Bloques del suelo y límites del mapa
 	BloqueSolido: -48, 96
 	BloqueSolido: -48, 144

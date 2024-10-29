@@ -10,13 +10,15 @@ Tiempo: 40
 	Mario: 96, 432
 	
 	# Enemigos
-
+	Goomba: 480, 432
 	
 	# PowerUps
-
+	Moneda: 528, 384
 	
 	# Plataformas
-
+	BloqueDePreguntaConMoneda: 144, 288
+	BloqueDePreguntaConMoneda: 192, 288
+	BloqueDePreguntaConMoneda: 240, 288
 
 	# Bloques del suelo y límites del mapa
 	BloqueSolido: -48, 96

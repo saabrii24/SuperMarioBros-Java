@@ -65,7 +65,7 @@ public abstract class ObserverGrafico extends JLabel implements Observer {
     public void paintComponent(Graphics g) {
         super.paintComponent(g); // Llama al método original para pintar la imagen
 
-        //----------------- Comentar para dejar de ver la hitbox ---------------------
+        /*/----------------- Comentar para dejar de ver la hitbox ---------------------
 	        // Dibuja el contorno del rectángulo completo alrededor de la entidad
 	        g.setColor(Color.RED);
 	        Rectangle contorno = entidad_observada.get_limites();

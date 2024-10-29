@@ -44,7 +44,7 @@ public class Juego {
         mapa_nivel_actual = new Mapa(this);
         
         // Inicializar controladores
-        controlador_ranking = new ControladorRanking();
+        controlador_ranking = new ControladorRanking(this);
         controlador_vistas = new ControladorDeVistas(this);
         controlador_movimiento = new ControladorMovimiento(this);
         controlador_entidades = new ControladorEntidades(this);

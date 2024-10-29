@@ -6,17 +6,18 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import ranking.Jugador;
-import ranking.Ranking;
+import ranking.*;
 
 public class ControladorRanking implements Serializable {
 
     private static final long serialVersionUID = -6203851574103194125L;
     private final String ruta_archivo;
     private Ranking ranking;
+    private Juego juego;
 
-    public ControladorRanking() {
+    public ControladorRanking(Juego juego) {
         this("./src/ranking/ranking.tdp");
+        this.juego = juego;
     }
 
     public ControladorRanking(String ruta_archivo) {
@@ -45,6 +46,9 @@ public class ControladorRanking implements Serializable {
             String nombre_jugador = solicitar_nombre_jugador();
             ranking.agregar_jugador(nombre_jugador, puntaje);
             guardar_ranking();
+            
+            //Revisar, porque si se intenta volver a jugar se rompe, además no actualiza correctamente.
+            juego.get_controlador_vistas().accionar_pantalla_ranking();
         }
     }
 

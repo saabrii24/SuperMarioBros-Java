@@ -45,8 +45,8 @@ public class ControladorEntidades {
         }
         if(mario.get_vidas() == 0) {
             juego.controlador_vistas.accionar_pantalla_derrota();
-            juego.controlador_ranking.actualizar_ranking(Mario.get_instancia().get_puntaje());
             juego.detener_hilos();
+            juego.controlador_ranking.actualizar_ranking(Mario.get_instancia().get_puntaje());
         }
     }
 
@@ -56,10 +56,10 @@ public class ControladorEntidades {
             juego.controlador_movimiento.terminar_juego();
             juego.controlador_vistas.accionar_pantalla_victoria();
             juego.controlador_ranking.actualizar_ranking(Mario.get_instancia().get_puntaje());
-        } else { 	
-        	juego.controlador_nivel.incrementar_nivel();
-	        juego.controlador_nivel.cargar_datos(juego.fabrica_entidades);
-	        Mario.get_instancia().set_estado(new NormalMarioState(Mario.get_instancia()));
+        } else {
+            juego.controlador_nivel.incrementar_nivel();
+            juego.controlador_nivel.cargar_datos(juego.fabrica_entidades);
+            Mario.get_instancia().set_estado(new NormalMarioState(Mario.get_instancia()));
         }
     }
     

@@ -41,13 +41,12 @@ public class Colisionador {
         }
     }
 
+    //Omitimos a piraña plant y lakitu porque no necesita detectar colisiones con plataformas
     private List<EntidadMovible> obtener_todos_enemigos() {
         List<EntidadMovible> enemigos = new ArrayList<>();
         enemigos.addAll(mapa.get_entidades_buzzy_beetle());
         enemigos.addAll(mapa.get_entidades_koopa_troopa());
         enemigos.addAll(mapa.get_entidades_spiny());
-        enemigos.addAll(mapa.get_entidades_piranha_plant());
-        enemigos.addAll(mapa.get_entidades_lakitu());
         enemigos.addAll(mapa.get_entidades_goomba());
         return enemigos;
     }

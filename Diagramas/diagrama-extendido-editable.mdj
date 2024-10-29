@@ -26,7 +26,6 @@
 							"_parent": {
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
-							"fillColor": "#FFFFFF00",
 							"font": "Arial;13;0",
 							"left": 1168,
 							"top": 1744,
@@ -39,7 +38,6 @@
 							"_parent": {
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
-							"fillColor": "#FFFFFF00",
 							"font": "Arial;13;0",
 							"left": 32,
 							"top": 2136,
@@ -52,7 +50,6 @@
 							"_parent": {
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
-							"fillColor": "#FFFFFF00",
 							"font": "Arial;13;0",
 							"left": 32,
 							"top": 1744,
@@ -65,7 +62,6 @@
 							"_parent": {
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
-							"fillColor": "#FFFFFF00",
 							"font": "Arial;13;0",
 							"left": 40,
 							"top": 792,
@@ -78,7 +74,6 @@
 							"_parent": {
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
-							"fillColor": "#FFFFFF00",
 							"font": "Arial;13;0",
 							"left": 1168,
 							"top": 2376,
@@ -91,7 +86,6 @@
 							"_parent": {
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
-							"fillColor": "#FFFFFF00",
 							"font": "Arial;13;0",
 							"left": 32,
 							"top": 2376,
@@ -104,7 +98,6 @@
 							"_parent": {
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
-							"fillColor": "#FF602B00",
 							"font": "Arial;13;0",
 							"left": 32,
 							"top": 3928,
@@ -117,7 +110,6 @@
 							"_parent": {
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
-							"fillColor": "#FFFFFF00",
 							"font": "Arial;13;0",
 							"left": 32,
 							"top": 3440,
@@ -130,7 +122,6 @@
 							"_parent": {
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
-							"fillColor": "#FFFFFF00",
 							"font": "Arial;13;0",
 							"left": 32,
 							"top": 3704,
@@ -24559,13 +24550,30 @@
 											"height": 13,
 											"text": "-ranking: Ranking",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAGS1lovwEYg7xs=",
+											"_parent": {
+												"$ref": "AAAAAAGS1URbLYYhiHk="
+											},
+											"model": {
+												"$ref": "AAAAAAGS1lovW0YdPjA="
+											},
+											"font": "Arial;13;0",
+											"left": 1701,
+											"top": 571,
+											"width": 282.2421875,
+											"height": 13,
+											"text": "-juego: Juego",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 1696,
 									"top": 521,
 									"width": 292.2421875,
-									"height": 53
+									"height": 68
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -24588,10 +24596,10 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1701,
-											"top": 579,
+											"top": 594,
 											"width": 282.2421875,
 											"height": 13,
-											"text": "+ControladorRanking()",
+											"text": "+ControladorRanking(juego: Juego)",
 											"horizontalAlignment": 0
 										},
 										{
@@ -24605,7 +24613,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1701,
-											"top": 594,
+											"top": 609,
 											"width": 282.2421875,
 											"height": 13,
 											"text": "+ControladorRanking(ruta_archivo: String)",
@@ -24622,7 +24630,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1701,
-											"top": 609,
+											"top": 624,
 											"width": 282.2421875,
 											"height": 13,
 											"text": "+get_ranking(): Ranking",
@@ -24639,7 +24647,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1701,
-											"top": 624,
+											"top": 639,
 											"width": 282.2421875,
 											"height": 13,
 											"text": "+set_ranking(ranking: Ranking): void",
@@ -24656,7 +24664,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1701,
-											"top": 639,
+											"top": 654,
 											"width": 282.2421875,
 											"height": 13,
 											"text": "+actualizar_ranking(puntaje: int): void",
@@ -24673,7 +24681,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1701,
-											"top": 654,
+											"top": 669,
 											"width": 282.2421875,
 											"height": 13,
 											"text": "+puede_entrar_en_ranking(puntaje: int): boolean",
@@ -24690,7 +24698,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1701,
-											"top": 669,
+											"top": 684,
 											"width": 282.2421875,
 											"height": 13,
 											"text": "+cargar_ranking(): void",
@@ -24707,7 +24715,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1701,
-											"top": 684,
+											"top": 699,
 											"width": 282.2421875,
 											"height": 13,
 											"text": "-guardar_ranking(): void",
@@ -24724,7 +24732,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1701,
-											"top": 699,
+											"top": 714,
 											"width": 282.2421875,
 											"height": 13,
 											"text": "-solicitar_nombre_jugador(): string",
@@ -24733,7 +24741,7 @@
 									],
 									"font": "Arial;13;0",
 									"left": 1696,
-									"top": 574,
+									"top": 589,
 									"width": 292.2421875,
 									"height": 143
 								},
@@ -24775,7 +24783,7 @@
 							"left": 1696,
 							"top": 496,
 							"width": 292.2421875,
-							"height": 221,
+							"height": 236,
 							"nameCompartment": {
 								"$ref": "AAAAAAGS1URbLYYcRTg="
 							},
@@ -44090,6 +44098,18 @@
 							"type": {
 								"$ref": "AAAAAAGSALiKRr5M5uE="
 							}
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAGS1lovW0YdPjA=",
+							"_parent": {
+								"$ref": "AAAAAAGS1URbLYYZcy4="
+							},
+							"name": "juego",
+							"visibility": "private",
+							"type": {
+								"$ref": "AAAAAAGSALVDO7v6jmE="
+							}
 						}
 					],
 					"operations": [
@@ -44099,7 +44119,20 @@
 							"_parent": {
 								"$ref": "AAAAAAGS1URbLYYZcy4="
 							},
-							"name": "ControladorRanking"
+							"name": "ControladorRanking",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGS1lon0EYbIBI=",
+									"_parent": {
+										"$ref": "AAAAAAGS1U77TId+MUM="
+									},
+									"name": "juego",
+									"type": {
+										"$ref": "AAAAAAGSALVDO7v6jmE="
+									}
+								}
+							]
 						},
 						{
 							"_type": "UMLOperation",

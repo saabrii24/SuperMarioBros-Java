@@ -219,6 +219,7 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
 	}
 
     public void caer_en_vacio() {
+    	cambiar_estado(new NormalMarioState(Mario.get_instancia()));
     	get_sistema_puntuacion().restar_puntos(15);
     	get_sistema_vidas().quitar_vida();
     	

@@ -283,7 +283,7 @@ public class Colisionador {
             if (colisiona_con_plataforma(proyectil.get_limites())) {
                 proyectil.destruir(mapa);
                 continue;
-            }
+            }   
             verificar_colision_proyectil_enemigos(proyectil);
         }
     }
@@ -293,6 +293,14 @@ public class Colisionador {
             if (proyectil.get_limites().intersects(enemigo.get_limites())) {
                 ((Enemigo) enemigo).destruir(mapa);
                 Mario.get_instancia().get_sistema_puntuacion().sumar_puntos(((Enemigo) enemigo).calcular_puntaje());
+                proyectil.destruir(mapa);
+                break;
+            }
+        }
+        for (PiranhaPlant piranha : new ArrayList<>(mapa.get_entidades_piranha_plant())) {
+            if (proyectil.get_limites().intersects(piranha.get_limites())) {
+                Mario.get_instancia().get_sistema_puntuacion().sumar_puntos(piranha.calcular_puntaje());
+                piranha.destruir(mapa);
                 proyectil.destruir(mapa);
                 break;
             }

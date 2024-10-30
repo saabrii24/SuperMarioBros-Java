@@ -29,6 +29,31 @@ public class PanelPantallaRanking extends JPanel {
         agregar_boton_volver();
         volver_con_esc();
     }
+    
+    public void actualizar_ranking() {
+        // Removemos todos los componentes excepto el fondo
+        Component fondo = null;
+        for (Component comp : getComponents()) {
+            if (comp == imagen_fondo) {
+                fondo = comp;
+            }
+        }
+        removeAll();
+        
+        // Volvemos a agregar los elementos en el orden correcto
+        mostrar_ranking();
+        agregar_boton_volver();
+        
+        // Si teníamos un fondo, lo agregamos al final para que quede detrás
+        if (fondo != null) {
+            add(imagen_fondo);
+        } else {
+            agregar_imagen_fondo();
+        }
+        
+        revalidate();
+        repaint();
+    }
 
     public void mostrar_ranking() {
         controlador_ranking.cargar_ranking();
@@ -52,18 +77,30 @@ public class PanelPantallaRanking extends JPanel {
         label.setFont(tipografia);
         label.setForeground(Color.WHITE);
         label.setBounds(x, y, ancho, alto);
-        label.setOpaque(false); // Para hacer el fondo transparente
+        label.setOpaque(false);
         return label;
     }
 
-	protected void agregar_imagen_fondo() {
-        imagen_fondo = new JLabel();
-        ImageIcon icono_imagen = new ImageIcon(this.getClass().getResource("/assets/imagenes/pantalla-ranking.png")); // Reemplaza con tu imagen
-        Image imagen_escalada = icono_imagen.getImage().getScaledInstance(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO, Image.SCALE_SMOOTH);
-        Icon icono_imagen_escalado = new ImageIcon(imagen_escalada);
-        imagen_fondo.setIcon(icono_imagen_escalado);
-        imagen_fondo.setBounds(0, 0, 1280, 720);
-        add(imagen_fondo);
+    protected void agregar_imagen_fondo() {
+        if (imagen_fondo == null) {
+            imagen_fondo = new JLabel();
+        }
+        
+        ImageIcon icono_imagen = new ImageIcon(this.getClass().getResource("/assets/imagenes/pantalla-ranking.png"));
+        if (icono_imagen.getImageLoadStatus() == MediaTracker.COMPLETE) {
+            Image imagen_escalada = icono_imagen.getImage().getScaledInstance(
+                ConstantesVistas.PANEL_ANCHO, 
+                ConstantesVistas.PANEL_ALTO, 
+                Image.SCALE_SMOOTH
+            );
+            imagen_fondo.setIcon(new ImageIcon(imagen_escalada));
+            imagen_fondo.setBounds(0, 0, ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
+            
+            // Aseguramos que el fondo esté en la capa más baja
+            setComponentZOrder(imagen_fondo, getComponentCount() - 1);
+        } else {
+            System.err.println("Error al cargar la imagen de fondo del ranking");
+        }
     }
 
     protected void agregar_boton_volver() {
@@ -78,7 +115,6 @@ public class PanelPantallaRanking extends JPanel {
     }
     
     private void volver_con_esc() {
-        // Acción para volver a la pantalla inicial
         Action volver_action = new AbstractAction() {
 			private static final long serialVersionUID = 1L;
 
@@ -88,7 +124,6 @@ public class PanelPantallaRanking extends JPanel {
             }
         };
         
-        // Asigna la acción a la tecla 'Esc'
         InputMap inputMap = getInputMap(WHEN_IN_FOCUSED_WINDOW);
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "volver");
         getActionMap().put("volver", volver_action);

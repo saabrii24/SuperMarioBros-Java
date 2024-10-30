@@ -237,4 +237,27 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
 	public  boolean mata_tocando() { return estado.mata_tocando(); }	
 	public boolean rompe_bloque() { return estado.rompe_bloque(); }
 	public boolean colision_con_enemigo(Enemigo enemigo) { return estado.colision_con_enemigo(enemigo); }
+
+	public void reiniciar() {
+	    resetear_posicion();
+	    
+	    this.sistema_puntuacion = new ControladorPuntuacionMario();
+	    this.sistema_vidas = new ControladorVidasMario(VIDAS_INICIALES);
+	    
+	    // Reinicia estado de movimiento
+	    this.movimiento_derecha = true;
+	    this.movimiento_vertical_bloqueado = false;
+	    this.contador_saltos = 0;
+	    this.direccion = 0;
+	    this.velocidad_en_x = 0;
+	    this.velocidad_en_y = 0;
+	    this.saltando = false;
+	    this.cayendo = false;
+
+	    set_estado(new NormalMarioState(this));
+
+	    if (sprites_factory != null) {
+	        estado.actualizar_sprite();
+	    }
+	}
 }

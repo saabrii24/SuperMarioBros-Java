@@ -110,11 +110,15 @@ public class ControladorMovimiento {
     
     public void terminar_juego() {
         juego_terminado = true;
+        esta_ejecutando = false;
         detener_hilos();
+        hilo_mario_movimiento = null;
+        hilo_enemigos_movimiento = null;
+        hilo_informacion_y_tiempo = null;
     }
 
     private void reiniciar_nivel_y_timer() {
-        if (juego_terminado) return; // No reiniciar si el juego terminó
+        if (juego_terminado) return;
         
         EventQueue.invokeLater(() -> {
             Mario.get_instancia().get_sistema_vidas().quitar_vida();
@@ -162,4 +166,5 @@ public class ControladorMovimiento {
             }
         }
     }
+
 }

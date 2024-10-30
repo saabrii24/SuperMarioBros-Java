@@ -43,7 +43,7 @@ public class Juego {
     	
         mapa_nivel_actual = new Mapa(this);
         
-        // Inicializar controladores
+        // Inicializa controladores
         controlador_ranking = new ControladorRanking(this);
         controlador_vistas = new ControladorDeVistas(this);
         controlador_movimiento = new ControladorMovimiento(this);
@@ -67,7 +67,6 @@ public class Juego {
     public void cambiar_dominio(SpritesFactory nueva_fabrica) {
         this.fabrica_sprites = nueva_fabrica;
         Mario.get_instancia().set_fabrica_sprites(nueva_fabrica);
-        // Actualizar todas las entidades existentes con la nueva fábrica
         if (mapa_nivel_actual != null) {
             mapa_nivel_actual.actualizar_fabrica_sprites(nueva_fabrica);
         }
@@ -81,6 +80,7 @@ public class Juego {
 	public ControladorDeVistas get_controlador_vistas() { return controlador_vistas; }
 	public ControladorNivel get_controlador_nivel() { return controlador_nivel; }
 	public ControladorRanking get_controlador_ranking() { return controlador_ranking; }
+	public ControladorMovimiento get_controlador_movimiento() { return controlador_movimiento; }
 
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
@@ -91,6 +91,20 @@ public class Juego {
             }
         });
     }
+    
+    public void reiniciar_juego() {
+        if (controlador_movimiento != null) {
+            controlador_movimiento.terminar_juego();
+        }
+        
+        Mario.get_instancia().reiniciar();
+        
+        controlador_movimiento = new ControladorMovimiento(this);
+        controlador_entidades = new ControladorEntidades(this);
+        controlador_nivel = new ControladorNivel(this);
+        
+        mapa_nivel_actual = new Mapa(this);
+        nivel_actual = null;
+    }
 
 }
-

@@ -37,6 +37,19 @@ public class ControladorRanking implements Serializable {
         this.ranking = ranking;
     }
 
+    private boolean puede_entrar_en_ranking(int puntaje) {
+        if (puntaje <= 0) {
+            return false;
+        }
+
+        if (ranking.get_ranking().size() < 5) { 
+            return true;
+        }
+        
+        Jugador jugador_menor = ranking.get_ranking().get(ranking.get_ranking().size() - 1);
+        return puntaje > jugador_menor.get_puntos();
+    }
+
     public void actualizar_ranking(int puntaje) {
         if (ranking == null) {
             ranking = new Ranking();
@@ -47,19 +60,11 @@ public class ControladorRanking implements Serializable {
             ranking.agregar_jugador(nombre_jugador, puntaje);
             guardar_ranking();
             
-            //Revisar, porque si se intenta volver a jugar se rompe, además no actualiza correctamente.
-            juego.get_controlador_vistas().accionar_pantalla_ranking();
+            // Aseguramos que el panel de ranking se actualice correctamente
+            if (juego != null && juego.get_controlador_vistas() != null) {
+                juego.get_controlador_vistas().accionar_pantalla_ranking();
+            }
         }
-    }
-
-    private boolean puede_entrar_en_ranking(int puntaje) {
-        if (ranking.get_ranking().size() < 5) { // Si el ranking tiene menos de 5 jugadores, siempre puede entrar
-            return true;
-        }
-        
-        // Obtener el puntaje más bajo en el ranking
-        Jugador jugador_menor = ranking.get_ranking().get(ranking.get_ranking().size() - 1);
-        return puntaje > jugador_menor.get_puntos(); // Comparar el puntaje
     }
 
     // Método para deserializar el ranking (cargar desde archivo)

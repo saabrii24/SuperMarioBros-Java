@@ -18,7 +18,6 @@ public class Ranking implements Serializable {
 
     public void agregar_jugador(String nombre, int puntos) {
         ranking.add(new Jugador(nombre, puntos));
-        // Para ordenar
         ranking.sort((o1, o2) -> o1.compareTo(o2));
         ranking.sort(Collections.reverseOrder());
     }

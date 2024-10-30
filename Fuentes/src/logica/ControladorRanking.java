@@ -18,12 +18,12 @@ public class ControladorRanking implements Serializable {
     public ControladorRanking(Juego juego) {
         this("./src/ranking/ranking.tdp");
         this.juego = juego;
+        cargar_ranking();
     }
 
     public ControladorRanking(String ruta_archivo) {
         this.ruta_archivo = ruta_archivo;
         cargar_ranking();
-
         if (this.ranking == null) {
             this.ranking = new Ranking();
         }
@@ -68,15 +68,17 @@ public class ControladorRanking implements Serializable {
 
     // Método para deserializar el ranking (cargar desde archivo)
     public void cargar_ranking() {
-        try (FileInputStream file_input_stream = new FileInputStream(ruta_archivo);
-             ObjectInputStream object_input_stream = new ObjectInputStream(file_input_stream)) {
-
-            set_ranking((Ranking) object_input_stream.readObject());
-
-        } catch (FileNotFoundException e) {
-            //Si archivo no encontrado, se crea un nuevo ranking.");
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+        File file = new File(ruta_archivo);
+        if (file.exists()) {
+            try (FileInputStream file_input_stream = new FileInputStream(ruta_archivo);
+                 ObjectInputStream object_input_stream = new ObjectInputStream(file_input_stream)) {
+                set_ranking((Ranking) object_input_stream.readObject());
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        } else {
+            this.ranking = new Ranking();
+            guardar_ranking();
         }
     }
 

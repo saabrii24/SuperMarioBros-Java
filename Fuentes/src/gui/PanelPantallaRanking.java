@@ -85,7 +85,7 @@ public class PanelPantallaRanking extends JPanel {
         if (imagen_fondo == null) {
             imagen_fondo = new JLabel();
         }
-        
+
         ImageIcon icono_imagen = new ImageIcon(this.getClass().getResource("/assets/imagenes/pantalla-ranking.png"));
         if (icono_imagen.getImageLoadStatus() == MediaTracker.COMPLETE) {
             Image imagen_escalada = icono_imagen.getImage().getScaledInstance(
@@ -95,9 +95,7 @@ public class PanelPantallaRanking extends JPanel {
             );
             imagen_fondo.setIcon(new ImageIcon(imagen_escalada));
             imagen_fondo.setBounds(0, 0, ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
-            
-            // Aseguramos que el fondo esté en la capa más baja
-            setComponentZOrder(imagen_fondo, getComponentCount() - 1);
+            add(imagen_fondo);
         } else {
             System.err.println("Error al cargar la imagen de fondo del ranking");
         }

@@ -39,14 +39,13 @@ public class FireMarioState implements Mario.MarioState {
 
     public boolean rompe_bloque() { return true; }
     public boolean mata_tocando() { return false; }
-    public boolean colision_con_enemigo(Enemigo enemigo) {
-        mario.get_sistema_puntuacion().restar_puntos(enemigo.calcular_penalizacion());
-        mario.cambiar_estado(new NormalMarioState(mario));
-        return false;
-    }
+	public boolean colision_con_enemigo(Enemigo enemigo) {
+	    mario.cambiar_estado(new InvulnerableMarioState(mario));
+	    return false;
+	}
 
 	public void consumir_estrella() {
-		mario.cambiar_estado(new InvencibleMarioState(mario,this));
+		mario.cambiar_estado(new StarMarioState(mario,this));
 		mario.get_sistema_puntuacion().sumar_puntos(30);
 	}
 

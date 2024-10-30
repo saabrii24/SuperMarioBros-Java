@@ -39,7 +39,7 @@ public class NormalMarioState implements Mario.MarioState {
 
     public void consumir_estrella() {
     	mario.get_sistema_puntuacion().sumar_puntos(20);
-    	mario.cambiar_estado(new InvencibleMarioState(mario,this));
+    	mario.cambiar_estado(new StarMarioState(mario,this));
 	}
 
 	public void consumir_super_champi() {

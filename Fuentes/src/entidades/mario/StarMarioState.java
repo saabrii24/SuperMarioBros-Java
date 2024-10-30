@@ -4,13 +4,13 @@ import entidades.BolaDeFuego;
 import entidades.enemigos.Enemigo;
 import logica.Juego;
 
-public class InvencibleMarioState implements Mario.MarioState {
+public class StarMarioState implements Mario.MarioState {
     private Mario mario;
     private Mario.MarioState estado_anterior;
     private long tiempo_inicio;
     private static final long DURACION_ESTRELLA = 10000;
 
-    public InvencibleMarioState(Mario mario, Mario.MarioState estado_anterior) {
+    public StarMarioState(Mario mario, Mario.MarioState estado_anterior) {
         this.mario = mario;
         this.estado_anterior = estado_anterior;
         this.tiempo_inicio = System.currentTimeMillis();

@@ -30,7 +30,7 @@ public class SuperMarioState implements Mario.MarioState {
     
 	public void consumir_estrella() {
 		mario.get_sistema_puntuacion().sumar_puntos(30);
-		mario.cambiar_estado(new InvencibleMarioState(mario,this));
+		mario.cambiar_estado(new StarMarioState(mario,this));
 	}
 
 	public void consumir_super_champi() {
@@ -42,11 +42,10 @@ public class SuperMarioState implements Mario.MarioState {
 		mario.cambiar_estado(new FireMarioState(mario));
 	}
 
-    public boolean colision_con_enemigo(Enemigo enemigo) {
-        mario.get_sistema_puntuacion().restar_puntos(enemigo.calcular_penalizacion());
-        mario.cambiar_estado(new NormalMarioState(mario));
-        return false;
-    }
+	public boolean colision_con_enemigo(Enemigo enemigo) {
+	    mario.cambiar_estado(new InvulnerableMarioState(mario));
+	    return false;
+	}
 
     public boolean rompe_bloque() { return true; }
     public boolean mata_tocando() { return false; }

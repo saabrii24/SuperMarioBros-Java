@@ -37,6 +37,9 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
         inicializar_componentes();
     }
     
+    public MarioState get_estado() {
+    	return estado;
+    }
     private void inicializar_componentes() {
         this.sistema_puntuacion = new ControladorPuntuacionMario();
         this.sistema_vidas = new ControladorVidasMario(VIDAS_INICIALES);

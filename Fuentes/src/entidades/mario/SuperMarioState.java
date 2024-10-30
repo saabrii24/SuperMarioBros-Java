@@ -55,29 +55,48 @@ public class SuperMarioState implements Mario.MarioState {
 	public void finalizar_invulnerabilidad() {}
 	
 	public int colision_con_enemigo(BuzzyBeetle buzzy){
-		return 0;
-		
+		int valor=0;
+		if(mario.get_limites_superiores().intersects(buzzy.get_limites_inferiores()))
+			valor=1;
+		else 
+			valor=-1;
+		return valor;
 	}
 	
 	public int colision_con_enemigo(Goomba goomba) {
-		return 0;
+		int valor=0;
+		if(mario.get_limites_superiores().intersects(goomba.get_limites_inferiores()))
+			valor=1;
+		else 
+			valor=-1;
+		return valor;
 		
 	}
 	
 	public int colision_con_enemigo(KoopaTroopa koopa) {
-		return 0;
+		int valor=0;
+		if(mario.get_limites_superiores().intersects(koopa.get_limites_inferiores()))
+			valor=koopa.cambiar_estado();
+		else
+			valor=-1;
+		return valor;
 	}
 	
 	public int colision_con_enemigo(Lakitu lakitu) {
-		return 0;
+		int valor=0;
+		if(mario.get_limites_superiores().intersects(lakitu.get_limites_inferiores()))
+			valor=1;
+		else 
+			valor=-1;
+		return valor;
 	}
 	
 	public int colision_con_enemigo(PiranhaPlant piranha) {
-		return 0;
+		return -1;
 	}
 	
 	public int colision_con_enemigo(Spiny spiny) {
-		return 0;
+		return -1;
 	}
 }
 

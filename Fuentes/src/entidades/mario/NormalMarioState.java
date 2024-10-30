@@ -79,6 +79,8 @@ public class NormalMarioState implements Mario.MarioState {
 		int valor=0;
 		if(mario.get_limites_superiores().intersects(koopa.get_limites_inferiores()))
 			valor=koopa.cambiar_estado();
+		else 
+			valor=-1;
 		return valor;
 	}
 	

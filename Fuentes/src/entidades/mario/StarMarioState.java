@@ -57,28 +57,28 @@ public class StarMarioState implements Mario.MarioState {
 	}
 	
 	public int colision_con_enemigo(BuzzyBeetle buzzy){
-		return 0;
+		return 1;
 		
 	}
 	
 	public int colision_con_enemigo(Goomba goomba) {
-		return 0;
+		return 1;
 		
 	}
 	
 	public int colision_con_enemigo(KoopaTroopa koopa) {
-		return 0;
+		return 1;
 	}
 	
 	public int colision_con_enemigo(Lakitu lakitu) {
-		return 0;
+		return 1;
 	}
 	
 	public int colision_con_enemigo(PiranhaPlant piranha) {
-		return 0;
+		return 1;
 	}
 	
 	public int colision_con_enemigo(Spiny spiny) {
-		return 0;
+		return 1;
 	}
 }

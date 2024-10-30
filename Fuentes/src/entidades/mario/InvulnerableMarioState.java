@@ -2,12 +2,13 @@ package entidades.mario;
 
 import entidades.BolaDeFuego;
 import entidades.enemigos.Enemigo;
+import logica.Juego;
 
 public class InvulnerableMarioState implements Mario.MarioState {
     private Mario mario;
     private Mario.MarioState estado_anterior;
     private long tiempo_inicio;
-    private static final long DURACION_INVULNERABLE = 2000; // 2 segundos
+    private static final long DURACION_INVULNERABLE = 1000; // 2 segundos
 
     public InvulnerableMarioState(Mario mario) {
         this.mario = mario;
@@ -17,7 +18,19 @@ public class InvulnerableMarioState implements Mario.MarioState {
     }
 
     public void actualizar_sprite() {
-        estado_anterior.actualizar_sprite();
+        if (mario.esta_saltando()) {
+            mario.cambiar_sprite(mario.get_movimiento_derecha() ? 
+            	Juego.get_instancia().get_fabrica_sprites().get_mario_star_saltando_derecha() : 
+            	Juego.get_instancia().get_fabrica_sprites().get_mario_star_saltando_izquierda());
+        } else if (mario.esta_en_movimiento()) {
+            mario.cambiar_sprite(mario.get_movimiento_derecha() ? 
+            	Juego.get_instancia().get_fabrica_sprites().get_mario_star_movimiento_derecha() : 
+                Juego.get_instancia().get_fabrica_sprites().get_mario_star_movimiento_izquierda());
+        } else {
+            mario.cambiar_sprite(mario.get_movimiento_derecha() ? 
+            	Juego.get_instancia().get_fabrica_sprites().get_mario_star_ocioso_derecha() : 
+            	Juego.get_instancia().get_fabrica_sprites().get_mario_star_ocioso_izquierda());
+        }
     }
 
     public boolean colision_con_enemigo(Enemigo enemigo) {

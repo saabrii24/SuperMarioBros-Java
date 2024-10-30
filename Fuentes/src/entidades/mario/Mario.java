@@ -6,12 +6,7 @@ import entidades.enemigos.Enemigo;
 import entidades.interfaces.EntidadJugador;
 import entidades.interfaces.SistemaPuntuacion;
 import entidades.interfaces.SistemaVidas;
-import entidades.powerups.ChampiVerde;
-import entidades.powerups.Estrella;
-import entidades.powerups.FlorDeFuego;
-import entidades.powerups.Moneda;
-import entidades.powerups.PowerUpVisitor;
-import entidades.powerups.SuperChampi;
+import entidades.powerups.*;
 import fabricas.Sprite;
 import logica.Juego;
 
@@ -102,6 +97,7 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
 
     @Override
     public void mover() {
+    	//System.out.println(posicion_en_x + " - " + posicion_en_y);
         if (!movimiento_vertical_bloqueado) {
             if (direccion == 1) mover_a_derecha();
             else if (direccion == -1) mover_a_izquierda();

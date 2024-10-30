@@ -61,13 +61,13 @@ public class ControladorNivel {
         registrar_observers_para_entidades(juego.get_mapa_nivel_actual().get_entidades_ladrillo_solido());
         registrar_observers_para_entidades(juego.get_mapa_nivel_actual().get_entidades_powerup());
         registrar_observers_para_entidades(juego.get_mapa_nivel_actual().get_entidades_tuberias());
-        registrar_observers_para_entidades(juego.get_mapa_nivel_actual().get_entidades_vacio());
         registrar_observers_para_entidades(juego.get_mapa_nivel_actual().get_entidades_buzzy_beetle());
         registrar_observers_para_entidades(juego.get_mapa_nivel_actual().get_entidades_goomba());
         registrar_observers_para_entidades(juego.get_mapa_nivel_actual().get_entidades_koopa_troopa());
         registrar_observers_para_entidades(juego.get_mapa_nivel_actual().get_entidades_lakitu());
         registrar_observers_para_entidades(juego.get_mapa_nivel_actual().get_entidades_piranha_plant());
         registrar_observers_para_entidades(juego.get_mapa_nivel_actual().get_entidades_spiny());
+        registrar_observers_para_entidades(juego.get_mapa_nivel_actual().get_entidades_vacio());
         registrar_observers_para_entidades(juego.get_mapa_nivel_actual().get_entidades_proyectiles());
     }
 

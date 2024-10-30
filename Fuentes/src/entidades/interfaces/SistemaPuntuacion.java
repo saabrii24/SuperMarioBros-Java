@@ -9,8 +9,8 @@ public interface SistemaPuntuacion {
     void sumar_moneda();
     int get_monedas_total();
     int get_monedas_nivel_actual();
-    void pasar_nivel();
     void actualizar_puntaje(int puntos);
     void resetear_monedas(int nivel_actual);
     void resetear_puntos(int nivel_actual);
+	void pasar_nivel();
 }

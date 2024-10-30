@@ -32,10 +32,21 @@ public class Colisionador {
         verificar_colision_horizontal_con_plataformas(mario);
         verificar_colisiones_plataformas_enemigos();
     }
+    /*
+     * colision enemigos plataforma ta
+     * colision mario enemigos ta
+     * colision mario pu ta
+     * 
+     * 
+     * colision mario plataforma no ta aun
+     * lista generales(borrar obtener_todos_enemigos y obtener_todo_plataformas)
+     * 
+     */
     
+    //este ya esta, borrar obtener_todos_enemigos
     private void verificar_colisiones_plataformas_enemigos() {
         List<Enemigo> enemigos = obtener_todos_enemigos();
-        for (EntidadMovible enemigo : enemigos) {
+        for (Enemigo enemigo : enemigos) {
             manejar_colision_vertical(enemigo);
             manejar_colision_horizontal(enemigo);
         }
@@ -94,9 +105,9 @@ public class Colisionador {
 
 	private void verificar_colision_sobre_plataformas(Mario mario) {
         Rectangle limites_superiores = mario.get_limites_superiores();
-        List<Entidad> plataformas = obtener_todas_plataformas();
+        List<Plataforma> plataformas = obtener_todas_plataformas();
 
-        for (Entidad plataforma : plataformas) {
+        for (Plataforma plataforma : plataformas) {
             if (limites_superiores.intersects(plataforma.get_limites_inferiores())) {
             	ajustar_posicion_mario_sobre_plataforma(mario, plataforma);
                 break;
@@ -110,8 +121,8 @@ public class Colisionador {
         mario.set_posicion_en_y(plataforma.get_posicion_en_y() + plataforma.get_dimension().height);
     }
     
-    private List<Entidad> obtener_todas_plataformas() {
-        List<Entidad> plataformas = new ArrayList<>();
+    private List<Plataforma> obtener_todas_plataformas() {
+        List<Plataforma> plataformas = new ArrayList<>();
         plataformas.addAll(mapa.get_entidades_bloque_solido());
         plataformas.addAll(mapa.get_entidades_bloque_de_pregunta());
         plataformas.addAll(mapa.get_entidades_ladrillo_solido());
@@ -143,6 +154,7 @@ public class Colisionador {
         }
 	}
 
+    //este ya esta, borrar obtener_todos_enemigos
     private void verificar_colisiones_con_enemigos(Mario mario) {
     	int valor=0;
     	for(Enemigo enemigo: obtener_todos_enemigos()) {
@@ -159,7 +171,7 @@ public class Colisionador {
     		}
     	}
     }
-  
+    //este ya esta
     private void verificar_colisiones_con_powerups(Mario mario) {
         for (PowerUp power_up : new ArrayList<>(mapa.get_entidades_powerup())) {
             if (mario.get_limites().intersects(power_up.get_limites())) {
@@ -202,7 +214,7 @@ public class Colisionador {
             }
         }
     }
-    
+    //leerlo bien y ver que hacer
     private void verificar_colisiones_koopa_proyectil() {
         Mario mario = Mario.get_instancia();
         for (KoopaTroopa koopa : new ArrayList<>(mapa.get_entidades_koopa_troopa())) {
@@ -217,37 +229,39 @@ public class Colisionador {
             }
         }   
     }
-
-    private void manejar_colision_vertical(EntidadMovible enemigo) {
+    //este ya esta, borrar obtener_todas_plataformas
+    private void manejar_colision_vertical(Enemigo enemigo) {
         Rectangle limites_inferiores = enemigo.get_limites_superiores();
 
-        for (Entidad plataforma : obtener_todas_plataformas()) {
-            if (limites_inferiores.intersects(plataforma.get_limites_inferiores())) {
-                ajustar_posicion_enemigo_sobre_plataforma(enemigo, plataforma);
-                break;
-            }
-        }
+        for (Plataforma plataforma : obtener_todas_plataformas()) {
+        	if(plataforma.aceptar(enemigo)) {
+	            if (limites_inferiores.intersects(plataforma.get_limites_inferiores())) {
+	                ajustar_posicion_enemigo_sobre_plataforma(enemigo, plataforma);
+	                break;
+	            }
+	        }
+	     }
     }
-
+    //este no se toca
     private void ajustar_posicion_enemigo_sobre_plataforma(EntidadMovible enemigo, Entidad plataforma) {
         enemigo.set_velocidad_en_y(0);
         enemigo.set_posicion_en_y(plataforma.get_posicion_en_y() + plataforma.get_dimension().height);
     }
 
-
-    private void manejar_colision_horizontal(EntidadMovible entidad) {
+    //este ya esta
+    private void manejar_colision_horizontal(Enemigo entidad) {
         if (colisiona_con_plataforma(entidad.get_limites_derecha())) {
             entidad.set_direccion(-1);
         } else if (colisiona_con_plataforma(entidad.get_limites_izquierda())) {
             entidad.set_direccion(1);
         }
     }
-
+    //este no se toca,por ahora
     private boolean colisiona_con_plataforma(Rectangle limites) {
         return obtener_todas_plataformas().stream()
             .anyMatch(plataforma -> plataforma.get_limites().intersects(limites));
     }
-
+    //no se toca
     public boolean get_murio_mario() { return murio_mario; }    
     public void set_murio_mario(boolean murio) { murio_mario = murio; }
 }

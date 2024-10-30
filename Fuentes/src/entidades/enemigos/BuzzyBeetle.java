@@ -1,5 +1,6 @@
 package entidades.enemigos;
 
+import entidades.plataformas.Plataforma;
 import fabricas.Sprite;
 import logica.Juego;
 import logica.Mapa;
@@ -70,6 +71,12 @@ public class BuzzyBeetle extends Enemigo{
 
 	public int aceptar(EnemigosVisitor visitador) {
 		return visitador.visitar(this);
+	}
+
+
+	@Override
+	public boolean visitar(Plataforma platadorma) {
+		return true;
 	}
 
 }

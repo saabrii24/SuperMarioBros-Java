@@ -67,4 +67,8 @@ public class PiranhaPlant extends Enemigo {
             eliminar_del_mapa();
         }
     }
+    
+    public int aceptar(EnemigosVisitor visitador) {
+		return visitador.visitar(this);
+	}
 }

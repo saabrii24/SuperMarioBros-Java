@@ -1,7 +1,7 @@
 package entidades.mario;
 
 import entidades.BolaDeFuego;
-import entidades.enemigos.Enemigo;
+import entidades.enemigos.*;
 import logica.Juego;
 
 public class NormalMarioState implements Mario.MarioState {
@@ -54,4 +54,48 @@ public class NormalMarioState implements Mario.MarioState {
 
 	@Override
 	public void finalizar_invulnerabilidad() {}
+	
+
+	public int colision_con_enemigo(BuzzyBeetle buzzy){
+		int valor=0;
+		if(mario.get_limites_superiores().intersects(buzzy.get_limites_inferiores()))
+			valor=1;
+		else 
+			valor=-1;
+		return valor;
+	}
+	
+	public int colision_con_enemigo(Goomba goomba) {
+		int valor=0;
+		if(mario.get_limites_superiores().intersects(goomba.get_limites_inferiores()))
+			valor=1;
+		else 
+			valor=-1;
+		return valor;
+		
+	}
+	
+	public int colision_con_enemigo(KoopaTroopa koopa) {
+		int valor=0;
+		if(mario.get_limites_superiores().intersects(koopa.get_limites_inferiores()))
+			valor=koopa.cambiar_estado();
+		return valor;
+	}
+	
+	public int colision_con_enemigo(Lakitu lakitu) {
+		int valor=0;
+		if(mario.get_limites_superiores().intersects(lakitu.get_limites_inferiores()))
+			valor=1;
+		else 
+			valor=-1;
+		return valor;
+	}
+	
+	public int colision_con_enemigo(PiranhaPlant piranha) {
+		return -1;
+	}
+	
+	public int colision_con_enemigo(Spiny spiny) {
+		return -1;
+	}
 }

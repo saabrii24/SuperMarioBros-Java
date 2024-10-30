@@ -1,7 +1,7 @@
 package entidades.mario;
 
 import entidades.BolaDeFuego;
-import entidades.enemigos.Enemigo;
+import entidades.enemigos.*;
 import logica.Juego;
 
 public class SuperMarioState implements Mario.MarioState {
@@ -53,5 +53,31 @@ public class SuperMarioState implements Mario.MarioState {
 
 	@Override
 	public void finalizar_invulnerabilidad() {}
+	
+	public int colision_con_enemigo(BuzzyBeetle buzzy){
+		return 0;
+		
+	}
+	
+	public int colision_con_enemigo(Goomba goomba) {
+		return 0;
+		
+	}
+	
+	public int colision_con_enemigo(KoopaTroopa koopa) {
+		return 0;
+	}
+	
+	public int colision_con_enemigo(Lakitu lakitu) {
+		return 0;
+	}
+	
+	public int colision_con_enemigo(PiranhaPlant piranha) {
+		return 0;
+	}
+	
+	public int colision_con_enemigo(Spiny spiny) {
+		return 0;
+	}
 }
 

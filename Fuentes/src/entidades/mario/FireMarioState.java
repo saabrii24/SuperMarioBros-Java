@@ -1,7 +1,13 @@
 package entidades.mario;
 
 import entidades.BolaDeFuego;
+import entidades.enemigos.BuzzyBeetle;
 import entidades.enemigos.Enemigo;
+import entidades.enemigos.Goomba;
+import entidades.enemigos.KoopaTroopa;
+import entidades.enemigos.Lakitu;
+import entidades.enemigos.PiranhaPlant;
+import entidades.enemigos.Spiny;
 import logica.Juego;
 
 public class FireMarioState implements Mario.MarioState {
@@ -59,7 +65,31 @@ public class FireMarioState implements Mario.MarioState {
 
 	@Override
 	public void finalizar_invulnerabilidad() {
-		// TODO Auto-generated method stub
+	}
+	
+	public int colision_con_enemigo(BuzzyBeetle buzzy){
+		return 0;
 		
+	}
+	
+	public int colision_con_enemigo(Goomba goomba) {
+		return 0;
+		
+	}
+	
+	public int colision_con_enemigo(KoopaTroopa koopa) {
+		return 0;
+	}
+	
+	public int colision_con_enemigo(Lakitu lakitu) {
+		return 0;
+	}
+	
+	public int colision_con_enemigo(PiranhaPlant piranha) {
+		return 0;
+	}
+	
+	public int colision_con_enemigo(Spiny spiny) {
+		return 0;
 	}
 }

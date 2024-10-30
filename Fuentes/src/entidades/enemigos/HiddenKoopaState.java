@@ -1,4 +1,3 @@
-
 package entidades.enemigos;
 
 import entidades.mario.Mario;
@@ -10,11 +9,12 @@ public class HiddenKoopaState implements KoopaTroopa.KoopaState {
     public HiddenKoopaState(KoopaTroopa koopa) { this.koopa = koopa; }
 
     @Override
-    public void cambiar_estado() {
+    public int cambiar_estado() {
         koopa.set_estado(new ProjectileKoopaState(koopa));
         Mario mario = Mario.get_instancia();
         int ajuste_posicion = (koopa.get_direccion() == 1) ? -48 : 48;
         mario.set_posicion_en_x(mario.get_posicion_en_x() + ajuste_posicion);
+        return 0;
     }
 
     @Override

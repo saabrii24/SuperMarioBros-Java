@@ -2,7 +2,7 @@ package entidades.mario;
 
 import entidades.BolaDeFuego;
 import entidades.EntidadMovible;
-import entidades.enemigos.Enemigo;
+import entidades.enemigos.*;
 import entidades.interfaces.EntidadJugador;
 import entidades.interfaces.SistemaPuntuacion;
 import entidades.interfaces.SistemaVidas;
@@ -10,7 +10,7 @@ import entidades.powerups.*;
 import fabricas.Sprite;
 import logica.Juego;
 
-public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisitor {
+public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisitor,EnemigosVisitor {
     private static final double VELOCIDAD_LATERAL = 5.0;
     private static final double VELOCIDAD_SALTO = -10.0;
     private static final int VIDAS_INICIALES = 3;
@@ -65,6 +65,12 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
     	void consumir_flor_de_fuego();
     	void finalizar_invulnerabilidad();
 		void actualizar_sprite();
+		int colision_con_enemigo(BuzzyBeetle buzzy);
+		int colision_con_enemigo(Goomba goomba);
+		int colision_con_enemigo(KoopaTroopa koopa);
+		int colision_con_enemigo(Lakitu lakitu);
+		int colision_con_enemigo(PiranhaPlant piranha);
+		int colision_con_enemigo(Spiny spiny);
     }
 
     // Getters
@@ -94,7 +100,7 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
     }
 
     public void activar_movimiento_vertical() { movimiento_vertical_bloqueado = false; }
-
+    
     @Override
     public void mover() {
     	//System.out.println(posicion_en_x + " - " + posicion_en_y);
@@ -219,5 +225,29 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
 	public boolean esta_en_movimiento() { return (direccion == 1 || direccion == -1); }
 
 	public void set_contador_saltos(int i) { contador_saltos = i; }
+
+	public int visitar(BuzzyBeetle buzzy) {
+		return estado.colision_con_enemigo(buzzy);
+	}
+
+	public int visitar(Goomba goomba) {
+		return estado.colision_con_enemigo(goomba);
+	}
+
+	public int visitar(KoopaTroopa koopa) {
+		return estado.colision_con_enemigo(koopa);
+	}
+
+	public int visitar(Lakitu lakitu) {
+		return estado.colision_con_enemigo(lakitu);
+	}
+
+	public int visitar(PiranhaPlant piranha) {
+		return estado.colision_con_enemigo(piranha);
+	}
+
+	public int visitar(Spiny spiny) {
+		return estado.colision_con_enemigo(spiny);
+	}
 
 }

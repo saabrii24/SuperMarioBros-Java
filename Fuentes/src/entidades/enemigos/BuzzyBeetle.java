@@ -68,4 +68,8 @@ public class BuzzyBeetle extends Enemigo{
         }
     }
 
+	public int aceptar(EnemigosVisitor visitador) {
+		return visitador.visitar(this);
+	}
+
 }

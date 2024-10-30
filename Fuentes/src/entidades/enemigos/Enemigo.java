@@ -13,5 +13,6 @@ public abstract class Enemigo extends EntidadMovible{
 	public abstract int calcular_puntaje();
 	public abstract int calcular_penalizacion();
 	public abstract void destruir(Mapa mapa);
+	public abstract int aceptar(EnemigosVisitor visitador);
 	
 }

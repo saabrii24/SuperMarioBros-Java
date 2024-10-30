@@ -14,7 +14,7 @@ public class KoopaTroopa extends Enemigo {
     public interface KoopaState {
         void actualizar_sprite();
         void mover();
-        void cambiar_estado();
+        int cambiar_estado();
         boolean en_movimiento();
         boolean mata_tocando();
     }
@@ -61,5 +61,9 @@ public class KoopaTroopa extends Enemigo {
 
     public boolean mata_tocando() { return estado.mata_tocando(); }
 
-    public void cambiar_estado() { estado.cambiar_estado(); }
+    public int cambiar_estado() { return estado.cambiar_estado(); }
+    
+    public int aceptar(EnemigosVisitor visitador) {
+		return visitador.visitar(this);
+	}
 }

@@ -52,5 +52,7 @@ public class Goomba extends Enemigo {
         set_velocidad_en_x(0);
     }
    
+    public int aceptar(EnemigosVisitor visitador) {
+		return visitador.visitar(this);
+	}
 }
-

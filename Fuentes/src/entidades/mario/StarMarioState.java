@@ -3,6 +3,7 @@ package entidades.mario;
 import entidades.BolaDeFuego;
 import entidades.enemigos.Enemigo;
 import logica.Juego;
+import entidades.enemigos.*;
 
 public class StarMarioState implements Mario.MarioState {
     private Mario mario;
@@ -53,5 +54,31 @@ public class StarMarioState implements Mario.MarioState {
 
 	public void consumir_flor_de_fuego() {
 		mario.get_sistema_puntuacion().sumar_puntos(50);
+	}
+	
+	public int colision_con_enemigo(BuzzyBeetle buzzy){
+		return 0;
+		
+	}
+	
+	public int colision_con_enemigo(Goomba goomba) {
+		return 0;
+		
+	}
+	
+	public int colision_con_enemigo(KoopaTroopa koopa) {
+		return 0;
+	}
+	
+	public int colision_con_enemigo(Lakitu lakitu) {
+		return 0;
+	}
+	
+	public int colision_con_enemigo(PiranhaPlant piranha) {
+		return 0;
+	}
+	
+	public int colision_con_enemigo(Spiny spiny) {
+		return 0;
 	}
 }

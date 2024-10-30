@@ -68,4 +68,7 @@ public class Spiny extends Enemigo{
 		}
 	}
 
+	public int aceptar(EnemigosVisitor visitador) {
+		return visitador.visitar(this);
+	}
 }

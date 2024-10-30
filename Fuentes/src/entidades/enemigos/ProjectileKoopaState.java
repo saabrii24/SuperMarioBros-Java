@@ -8,7 +8,9 @@ public class ProjectileKoopaState implements KoopaTroopa.KoopaState {
     public ProjectileKoopaState(KoopaTroopa koopa) { this.koopa = koopa; }
 
     @Override
-    public void cambiar_estado() {}
+    public int cambiar_estado() {
+    	return -1;
+    }
 
     @Override
     public void actualizar_sprite() {

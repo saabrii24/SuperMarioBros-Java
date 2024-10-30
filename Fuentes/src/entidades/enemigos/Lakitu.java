@@ -50,4 +50,7 @@ public class Lakitu extends Enemigo{
 		spiny.registrar_observer(Juego.get_instancia().get_controlador_vistas().registrar_entidad(spiny));
 	}
 
+	public int aceptar(EnemigosVisitor visitador) {
+		return visitador.visitar(this);
+	}
 }

@@ -34,7 +34,7 @@ public class Colisionador {
     }
     
     private void verificar_colisiones_plataformas_enemigos() {
-        List<EntidadMovible> enemigos = obtener_todos_enemigos();
+        List<Enemigo> enemigos = obtener_todos_enemigos();
         for (EntidadMovible enemigo : enemigos) {
             manejar_colision_vertical(enemigo);
             manejar_colision_horizontal(enemigo);
@@ -42,12 +42,14 @@ public class Colisionador {
     }
 
     //Omitimos a piraña plant y lakitu porque no necesita detectar colisiones con plataformas
-    private List<EntidadMovible> obtener_todos_enemigos() {
-        List<EntidadMovible> enemigos = new ArrayList<>();
+    private List<Enemigo> obtener_todos_enemigos() {
+        List<Enemigo> enemigos = new ArrayList<>();
         enemigos.addAll(mapa.get_entidades_buzzy_beetle());
         enemigos.addAll(mapa.get_entidades_koopa_troopa());
         enemigos.addAll(mapa.get_entidades_spiny());
         enemigos.addAll(mapa.get_entidades_goomba());
+        enemigos.addAll(mapa.get_entidades_piranha_plant());
+        enemigos.addAll(mapa.get_entidades_lakitu());
         return enemigos;
     }
 
@@ -142,6 +144,23 @@ public class Colisionador {
 	}
 
     private void verificar_colisiones_con_enemigos(Mario mario) {
+    	int valor=0;
+    	for(Enemigo enemigo: obtener_todos_enemigos()) {
+    		if(mario.get_limites().intersects(enemigo.get_limites())) {
+    			valor=enemigo.aceptar(mario);
+    			if(valor==1) {
+    				mario.get_sistema_puntuacion().sumar_puntos(enemigo.calcular_puntaje());
+    				enemigo.destruir(mapa);
+    			}
+    			else
+    				if(valor==-1) {
+    					murio_mario=true;
+    					mario.colision_con_enemigo(enemigo);
+    				}
+    		}
+    	}
+    }
+  /*  private void verificar_colisiones_con_enemigos(Mario mario) {
         verificar_colisiones_con_goombas(mario);
         verificar_colisiones_con_koopa_troopas(mario);
         verificar_colisiones_con_buzzy_beetles(mario);
@@ -263,7 +282,7 @@ public class Colisionador {
         return mario.get_limites_derecha().intersects(enemigo.get_limites()) || 
                mario.get_limites_izquierda().intersects(enemigo.get_limites());
     }
-
+*/
     private void verificar_colisiones_con_powerups(Mario mario) {
         for (PowerUp power_up : new ArrayList<>(mapa.get_entidades_powerup())) {
             if (mario.get_limites().intersects(power_up.get_limites())) {

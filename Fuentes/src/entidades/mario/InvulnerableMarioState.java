@@ -1,14 +1,14 @@
 package entidades.mario;
 
 import entidades.BolaDeFuego;
-import entidades.enemigos.Enemigo;
+import entidades.enemigos.*;
 import logica.Juego;
 
 public class InvulnerableMarioState implements Mario.MarioState {
     private Mario mario;
     private Mario.MarioState estado_anterior;
     private long tiempo_inicio;
-    private static final long DURACION_INVULNERABLE = 1000; // 2 segundos
+    private static final long DURACION_INVULNERABLE = 1000; // 1 segundo
 
     public InvulnerableMarioState(Mario mario) {
         this.mario = mario;
@@ -16,7 +16,7 @@ public class InvulnerableMarioState implements Mario.MarioState {
         this.tiempo_inicio = System.currentTimeMillis();
         mario.set_estado(this);
     }
-
+//ESTO
     public void actualizar_sprite() {
         if (mario.esta_saltando()) {
             mario.cambiar_sprite(mario.get_movimiento_derecha() ? 
@@ -53,4 +53,29 @@ public class InvulnerableMarioState implements Mario.MarioState {
     public void consumir_estrella() { estado_anterior.consumir_estrella(); }
     public void consumir_super_champi() { estado_anterior.consumir_super_champi(); }
     public void consumir_flor_de_fuego() { estado_anterior.consumir_flor_de_fuego(); }
+
+
+    public int colision_con_enemigo(BuzzyBeetle buzzy){
+		return 0;
+	}
+	
+	public int colision_con_enemigo(Goomba goomba) {
+		return 0;
+	}
+	
+	public int colision_con_enemigo(KoopaTroopa koopa) {
+		return 0;
+	}
+	
+	public int colision_con_enemigo(Lakitu lakitu) {
+		return 0;
+	}
+	
+	public int colision_con_enemigo(PiranhaPlant piranha) {
+		return 0;
+	}
+	
+	public int colision_con_enemigo(Spiny spiny) {
+		return 0;
+	}
 }

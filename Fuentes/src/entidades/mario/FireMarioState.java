@@ -5,6 +5,8 @@ import entidades.enemigos.Enemigo;
 
 public class FireMarioState implements Mario.MarioState {
     private Mario mario;
+    private static final long PROYECTIL_COOLDOWN = 1000;
+    private long tiempo_ultimo_proyectil = 0;
 
     public FireMarioState(Mario mario) {
         this.mario = mario;
@@ -67,9 +69,19 @@ public class FireMarioState implements Mario.MarioState {
     	return false;
 	}
 
-	public BolaDeFuego disparar() {
-		return new BolaDeFuego(mario.get_posicion_en_x(), mario.get_posicion_en_y()+26,
-				mario.get_fabrica_sprites().get_bola_de_fuego());
-	}
+	@Override
+    public BolaDeFuego disparar() {
+        long tiempo_actual = System.currentTimeMillis();
+        if (tiempo_actual - tiempo_ultimo_proyectil >= PROYECTIL_COOLDOWN) {
+            tiempo_ultimo_proyectil = tiempo_actual;
+            // Crear y retornar la bola de fuego con la posición y dirección de Mario
+            return new BolaDeFuego(
+                mario.get_posicion_en_x(), 
+                mario.get_posicion_en_y()+26,
+                mario.get_fabrica_sprites().get_bola_de_fuego()
+            );
+        }
+        return null;
+    }
 	
 }

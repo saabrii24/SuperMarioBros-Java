@@ -12,6 +12,7 @@ import javax.swing.Timer;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
+import entidades.BolaDeFuego;
 import entidades.interfaces.EntidadJugador;
 import entidades.interfaces.EntidadLogica;
 import entidades.mario.Mario;
@@ -32,8 +33,6 @@ public class ControladorDeVistas implements ControladorJuegoVistaEntidades, Cont
     protected EntidadesFactory generador;
     protected Sonido sonido_juego;
     protected boolean sonido_activo = true;
-    private long tiempo_ultimo_proyectil = 0;
-    private static final long PROYECTIL_COOLDOWN = 1000; 
     private Set<Integer> teclas_presionadas;
     private Timer game_timer;
     private static final int FRAME_DELAY = 16;
@@ -108,12 +107,35 @@ public class ControladorDeVistas implements ControladorJuegoVistaEntidades, Cont
 
         // Procesar disparo
         if (teclas_presionadas.contains(KeyEvent.VK_SPACE)) {
-            long currentTime = System.currentTimeMillis();
-            if (currentTime - tiempo_ultimo_proyectil >= PROYECTIL_COOLDOWN) {
-                mi_juego.get_mapa_nivel_actual().agregar_bola_de_fuego(Mario.get_instancia().disparar());
-                tiempo_ultimo_proyectil = currentTime;
+            BolaDeFuego proyectil = Mario.get_instancia().disparar();
+            if (proyectil != null) {
+                mi_juego.get_mapa_nivel_actual().agregar_bola_de_fuego(proyectil);
             }
         }
+    }
+    
+    protected void registrar_oyente_panel_mapa() {
+        panel_pantalla_mapa.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent evento) {
+                teclas_presionadas.add(evento.getKeyCode());
+                
+                if (evento.getKeyCode() == KeyEvent.VK_M) {
+                    if (!sonido_activo) {
+                        sonido_juego.activar_sonido();
+                        sonido_activo = true;
+                    } else {
+                        sonido_juego.detener_musica_de_fondo();
+                        sonido_activo = false;
+                    }
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent evento) {
+                teclas_presionadas.remove(evento.getKeyCode());
+            }
+        });
     }
 
     protected void registrar_oyente_panel_principal() {
@@ -150,31 +172,6 @@ public class ControladorDeVistas implements ControladorJuegoVistaEntidades, Cont
                     	panel_pantalla_modo_de_juego.ejecutar_accion_seleccionada();
                         break;
                 }
-            }
-        });
-    }
-    
-    protected void registrar_oyente_panel_mapa() {
-        panel_pantalla_mapa.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent evento) {
-                teclas_presionadas.add(evento.getKeyCode());
-                
-                // Manejar teclas que no necesitan actualización continua
-                if (evento.getKeyCode() == KeyEvent.VK_M) {
-                    if (!sonido_activo) {
-                        sonido_juego.activar_sonido();
-                        sonido_activo = true;
-                    } else {
-                        sonido_juego.detener_musica_de_fondo();
-                        sonido_activo = false;
-                    }
-                }
-            }
-
-            @Override
-            public void keyReleased(KeyEvent evento) {
-                teclas_presionadas.remove(evento.getKeyCode());
             }
         });
     }
@@ -260,9 +257,5 @@ public class ControladorDeVistas implements ControladorJuegoVistaEntidades, Cont
 	
 	public PanelPantallaMapa get_pantalla_mapa() { return panel_pantalla_mapa; }
 	public void reproducir_efecto(String efecto) { sonido_juego.reproducir_efecto(efecto); }
-
-	public PanelPantallaRanking get_panel_pantalla_ranking() {
-		return panel_pantalla_ranking;
-	}
 
 }

@@ -93,11 +93,11 @@ public class ControladorDeVistas implements ControladorJuegoVistaEntidades, Cont
     private void procesar_input() {
         // Procesar movimiento horizontal
         if (teclas_presionadas.contains(KeyEvent.VK_A) || teclas_presionadas.contains(KeyEvent.VK_LEFT)) {
-            Mario.get_instancia().set_direccion_mario(-1);
+            Mario.get_instancia().set_direccion(-1);
         } else if (teclas_presionadas.contains(KeyEvent.VK_D) || teclas_presionadas.contains(KeyEvent.VK_RIGHT)) {
-            Mario.get_instancia().set_direccion_mario(1);
+            Mario.get_instancia().set_direccion(1);
         } else {
-            Mario.get_instancia().set_direccion_mario(0);
+            Mario.get_instancia().set_direccion(0);
         }
 
         // Procesar salto

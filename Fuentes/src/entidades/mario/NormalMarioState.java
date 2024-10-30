@@ -2,6 +2,7 @@ package entidades.mario;
 
 import entidades.BolaDeFuego;
 import entidades.enemigos.Enemigo;
+import logica.Juego;
 
 public class NormalMarioState implements Mario.MarioState {
     private Mario mario;
@@ -9,6 +10,32 @@ public class NormalMarioState implements Mario.MarioState {
     public NormalMarioState(Mario mario) {
         this.mario = mario;
     }
+
+    public void actualizar_sprite() {
+        if (mario.esta_saltando()) {
+            mario.cambiar_sprite(mario.get_movimiento_derecha() ? 
+            	Juego.get_instancia().get_fabrica_sprites().get_mario_saltando_derecha() : 
+            	Juego.get_instancia().get_fabrica_sprites().get_mario_saltando_izquierda());
+        } else if (mario.esta_en_movimiento()) {
+            mario.cambiar_sprite(mario.get_movimiento_derecha() ? 
+            	Juego.get_instancia().get_fabrica_sprites().get_mario_movimiento_derecha() : 
+            	Juego.get_instancia().get_fabrica_sprites().get_mario_movimiento_izquierda());
+        } else {
+            mario.cambiar_sprite(mario.get_movimiento_derecha() ? 
+            	Juego.get_instancia().get_fabrica_sprites().get_mario_ocioso_derecha() : 
+            	Juego.get_instancia().get_fabrica_sprites().get_mario_ocioso_izquierda());
+        }
+    }
+
+    public boolean colision_con_enemigo(Enemigo enemigo) {
+        mario.get_sistema_puntuacion().restar_puntos(enemigo.calcular_penalizacion());
+        mario.get_sistema_vidas().quitar_vida();
+        return true;
+    }
+
+    public boolean rompe_bloque() { return false; }
+    public boolean mata_tocando() { return false; }
+    public BolaDeFuego disparar() { return null; }
 
     public void consumir_estrella() {
     	mario.get_sistema_puntuacion().sumar_puntos(20);
@@ -25,51 +52,9 @@ public class NormalMarioState implements Mario.MarioState {
     	mario.cambiar_estado(new FireMarioState(mario));
 	}
 
-    public boolean matar_si_hay_colision(Enemigo enemigo) {
-        // En estado normal, Mario muere si colisiona con un enemigo
-        mario.get_sistema_vidas().quitar_vida();
-        mario.cambiar_estado(new NormalMarioState(mario));
-        return false; // Mario no mata al enemigo
-    }
-    
-    public void actualizar_sprite() {
-    	if(mario.get_contador_saltos() == 1 ||  mario.get_velocidad_en_y() < 0 || mario.get_velocidad_en_y() > 0.4) { // Saltando o cayendo (velocidad negativa)
-        	mario.cambiar_sprite(mario.get_movimiento_derecha() ?
-        			mario.get_fabrica_sprites().get_mario_saltando_derecha() : 
-        			mario.get_fabrica_sprites().get_mario_saltando_izquierda());
-        } else if (mario.get_velocidad_en_x() != 0 && !mario.esta_saltando()) {
-        	mario.cambiar_sprite(mario.get_movimiento_derecha() ? 
-                    mario.get_fabrica_sprites().get_mario_movimiento_derecha() : 
-                    mario.get_fabrica_sprites().get_mario_movimiento_izquierda());
-        } else {
-        	 mario.cambiar_sprite(mario.get_movimiento_derecha() ? 
-                     mario.get_fabrica_sprites().get_mario_ocioso_derecha() : 
-                     mario.get_fabrica_sprites().get_mario_ocioso_izquierda());
-        }
-    }
-
+	@Override
 	public void finalizar_invulnerabilidad() {
 		// TODO Auto-generated method stub
 		
 	}
-
-	public boolean mata_tocando() {
-		return false;
-	}
-
-	public boolean rompe_bloque() {
-		return false;
-	}
-
-	public boolean colision_con_enemigo(Enemigo enemigo) {
-		mario.get_sistema_puntuacion().restar_puntos(enemigo.calcular_penalizacion());
-        mario.get_sistema_vidas().quitar_vida();
-		return true;
-	}
-
-	public BolaDeFuego disparar() {
-		return null;
-	}
-
 }
-

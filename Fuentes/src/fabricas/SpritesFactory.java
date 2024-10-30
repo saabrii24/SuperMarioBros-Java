@@ -56,7 +56,7 @@ public abstract class SpritesFactory {
     public Sprite get_super_champi() { return cargar_sprite("superchampi.png"); }
     public Sprite get_flor_de_fuego() { return cargar_sprite("flor_de_fuego.gif"); }
     public Sprite get_estrella() { return cargar_sprite("estrella.gif"); }
-    public Sprite get_champi_verde() { return cargar_sprite("champi_verde.png"); }
+    public Sprite get_champi_verde() { return cargar_sprite("champiverde.png"); }
     public Sprite get_moneda() { return cargar_sprite("moneda.gif"); }
 
     // Bloques y elementos del escenario

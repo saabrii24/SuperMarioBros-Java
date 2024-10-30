@@ -66,7 +66,6 @@ public class Juego {
 	
     public void cambiar_dominio(SpritesFactory nueva_fabrica) {
         this.fabrica_sprites = nueva_fabrica;
-        Mario.get_instancia().set_fabrica_sprites(nueva_fabrica);
         if (mapa_nivel_actual != null) {
             mapa_nivel_actual.actualizar_fabrica_sprites(nueva_fabrica);
         }

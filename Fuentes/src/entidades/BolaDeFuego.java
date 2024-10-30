@@ -9,7 +9,8 @@ public class BolaDeFuego extends EntidadMovible {
 	
     public BolaDeFuego(double x, double y, Sprite sprite) {
         super(x, y, sprite);
-        direccion_mario = Mario.get_instancia().get_direccion_mario();
+        System.out.println(Mario.get_instancia().get_direccion());
+        direccion_mario = Mario.get_instancia().get_direccion();
         this.set_direccion(direccion_mario);
         this.set_velocidad_en_x(direccion_mario == 1 ? 10 : -10);
         set_cayendo(false);

@@ -26,7 +26,7 @@ public class FireMarioState implements Mario.MarioState {
 	}
 
     public void disparar_bola_de_fuego() {
-        mario.disparar(); // Mario lanza una bola de fuego
+        mario.disparar();
     }
 
 	@Override
@@ -47,10 +47,7 @@ public class FireMarioState implements Mario.MarioState {
     }
 
 	@Override
-	public void finalizar_invulnerabilidad() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void finalizar_invulnerabilidad() {}
 
 	@Override
 	public boolean mata_tocando() {
@@ -74,9 +71,7 @@ public class FireMarioState implements Mario.MarioState {
         long tiempo_actual = System.currentTimeMillis();
         if (tiempo_actual - tiempo_ultimo_proyectil >= PROYECTIL_COOLDOWN) {
             tiempo_ultimo_proyectil = tiempo_actual;
-            // Crear y retornar la bola de fuego con la posición y dirección de Mario
-            return new BolaDeFuego(
-                mario.get_posicion_en_x(), 
+            return new BolaDeFuego(mario.get_posicion_en_x(), 
                 mario.get_posicion_en_y()+26,
                 mario.get_fabrica_sprites().get_bola_de_fuego()
             );

@@ -34,7 +34,7 @@ public class ControladorDeVistas implements ControladorJuegoVistaEntidades, Cont
     protected Sonido sonido_juego;
     protected boolean sonido_activo = true;
     private Set<Integer> teclas_presionadas;
-    private Timer game_timer;
+    private Timer timer_juego;
     private static final int FRAME_DELAY = 16;
     
     public ControladorDeVistas(Juego juego) {
@@ -80,8 +80,8 @@ public class ControladorDeVistas implements ControladorJuegoVistaEntidades, Cont
                 actualizar_estado_juego();
             }
         };
-        game_timer = new Timer(FRAME_DELAY, game_loop);
-        game_timer.start();
+        timer_juego = new Timer(FRAME_DELAY, game_loop);
+        timer_juego.start();
     }
 
     private void actualizar_estado_juego() {
@@ -177,7 +177,7 @@ public class ControladorDeVistas implements ControladorJuegoVistaEntidades, Cont
     }
 
     public void accionar_pantalla_inicial() {
-    	game_timer.stop();
+    	timer_juego.stop();
     	mi_juego.reiniciar_juego();
         ventana.setContentPane(panel_pantalla_principal);
         panel_pantalla_principal.setFocusable(true);
@@ -194,7 +194,7 @@ public class ControladorDeVistas implements ControladorJuegoVistaEntidades, Cont
         panel_pantalla_mapa.setFocusable(true);
         panel_pantalla_mapa.requestFocusInWindow(); 
         sonido_juego.activar_sonido();
-        game_timer.start();
+        timer_juego.start();
         refrescar();
     }
     
@@ -234,7 +234,7 @@ public class ControladorDeVistas implements ControladorJuegoVistaEntidades, Cont
     }
 
 	public void accionar_pantalla_victoria() {
-		game_timer.stop();
+		timer_juego.stop();
 		sonido_juego.reproducir_efecto("stage_clear");
 		sonido_juego.detener_musica_de_fondo();
 		ventana.setContentPane(panel_pantalla_victoria);
@@ -242,7 +242,7 @@ public class ControladorDeVistas implements ControladorJuegoVistaEntidades, Cont
 	}
 
 	public void accionar_pantalla_derrota() {
-		game_timer.stop();
+		timer_juego.stop();
 		sonido_juego.detener_musica_de_fondo();
 		ventana.setContentPane(panel_pantalla_derrota);
         refrescar();

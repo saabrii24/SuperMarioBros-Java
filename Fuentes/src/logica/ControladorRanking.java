@@ -24,7 +24,7 @@ public class ControladorRanking implements Serializable {
         this.ruta_archivo = ruta_archivo;
         cargar_ranking();
 
-        if (this.ranking == null) { // Si no se pudo cargar, crea un nuevo ranking
+        if (this.ranking == null) {
             this.ranking = new Ranking();
         }
     }
@@ -59,8 +59,7 @@ public class ControladorRanking implements Serializable {
             String nombre_jugador = solicitar_nombre_jugador();
             ranking.agregar_jugador(nombre_jugador, puntaje);
             guardar_ranking();
-            
-            // Aseguramos que el panel de ranking se actualice correctamente
+
             if (juego != null && juego.get_controlador_vistas() != null) {
                 juego.get_controlador_vistas().accionar_pantalla_ranking();
             }

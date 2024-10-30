@@ -4,8 +4,8 @@ import logica.Mapa;
 
 public class PiranhaPlant extends Enemigo {
     private static final double VELOCIDAD_VERTICAL = 0.4;
-    private int posicion_inicial_y;
     private static final int DISTANCIA_MAXIMA = 96;
+    private int posicion_inicial_y;
     private boolean moviendo_arriba = true;
     private double velocidad_actual = -VELOCIDAD_VERTICAL;
 

@@ -10,16 +10,147 @@ Tiempo: 40
 	Mario: 96, 432
 	
 	# Enemigos
-	Goomba: 480, 432
-	
-	# PowerUps
-	Moneda: 528, 384
-	
-	# Plataformas
-	BloqueDePreguntaConMoneda: 144, 288
-	BloqueDePreguntaConMoneda: 192, 288
-	BloqueDePreguntaConMoneda: 240, 288
+    Goomba: 720, 144
+    Goomba: 768, 144
+    Goomba: 1392, 144
+    Koopa: 2016, 144
+    Koopa: 2112, 144
+    Lakitu: 2736, 528
+    Piranha: 2856, 240
+    Koopa: 3984, 144
+    Lakitu: 3600, 528
+    Piranha: 4200, 240
 
+    # PowerUps
+    BloqueDePreguntaConFlorDeFuego: 480, 288
+	BloqueDePreguntaConMoneda: 528, 288
+	BloqueDePreguntaConMoneda: 576, 288
+	BloqueDePreguntaConMoneda: 624, 288
+	BloqueDePreguntaConMoneda: 672, 288
+	BloqueDePreguntaConMoneda: 1392, 288
+	BloqueDePreguntaConEstrella: 2112, 384
+	BloqueDePreguntaConSuperChampi: 1152, 432
+	Moneda: 1824, 336
+	Moneda: 1872, 480
+	Moneda: 1920, 480
+	Moneda: 1968, 480
+	Moneda: 2016, 480
+	Moneda: 2064, 336
+	BloqueDePreguntaConFlorDeFuego: 2976, 288
+	BloqueDePreguntaConMoneda: 3380, 384
+	BloqueDePreguntaConMoneda: 3428, 384
+	BloqueDePreguntaConMoneda: 4056, 288
+	
+    # Plataformas
+    BloqueSolido: 816, 144
+    BloqueSolido: 912, 144
+    BloqueSolido: 912, 192
+    BloqueSolido: 1008, 144
+    BloqueSolido: 1008, 192
+    BloqueSolido: 1008, 240
+    BloqueSolido: 1104, 144
+    BloqueSolido: 1104, 192
+    BloqueSolido: 1104, 240
+    BloqueSolido: 1104, 288
+    BloqueSolido: 1200, 144
+    BloqueSolido: 1200, 192
+    BloqueSolido: 1200, 240
+    BloqueSolido: 1200, 288
+    BloqueSolido: 1296, 144
+    BloqueSolido: 1296, 192
+    BloqueSolido: 1296, 240
+    BloqueSolido: 1488, 144
+    BloqueSolido: 1488, 192
+    BloqueSolido: 1488, 240
+    BloqueSolido: 1584, 144
+    BloqueSolido: 1584, 192
+    
+	LadrilloSolido: 1776, 288
+	LadrilloSolido: 1776, 336
+	LadrilloSolido: 1776, 384
+	LadrilloSolido: 1824, 288
+	LadrilloSolido: 1872, 288 
+	LadrilloSolido: 1872, 336
+	LadrilloSolido: 1872, 384
+	LadrilloSolido: 1920, 384
+	LadrilloSolido: 1968, 384
+	LadrilloSolido: 2016, 288
+	LadrilloSolido: 2016, 336
+	LadrilloSolido: 2016, 384
+	LadrilloSolido: 2064, 288
+	LadrilloSolido: 2112, 288
+	LadrilloSolido: 2112, 336
+	
+	BloqueSolido: 2160, 144
+	BloqueSolido: 2304, 144
+	
+	Vacio: 2208, 96
+	Vacio: 2208, 48
+	Vacio: 2208, 0
+	
+	LadrilloSolido: 2352, 288
+	LadrilloSolido: 2352, 336
+	LadrilloSolido: 2352, 384
+	LadrilloSolido: 2352, 432
+	LadrilloSolido: 2352, 480
+	LadrilloSolido: 2400, 288
+	LadrilloSolido: 2400, 336
+	LadrilloSolido: 2400, 384
+	LadrilloSolido: 2400, 432
+	LadrilloSolido: 2400, 480
+	
+	LadrilloSolido: 2448, 192
+	LadrilloSolido: 2448, 240
+	LadrilloSolido: 2448, 288
+	LadrilloSolido: 2496, 192
+	LadrilloSolido: 2496, 240
+	LadrilloSolido: 2496, 288
+	
+	LadrilloSolido: 2448, 528
+	LadrilloSolido: 2448, 576
+	LadrilloSolido: 2496, 528
+	LadrilloSolido: 2496, 576
+	
+	Tuberia: 2832, 144
+	
+	Vacio: 3072, 96
+	Vacio: 3072, 48
+	Vacio: 3072, 0
+	Vacio: 3120, 96
+	Vacio: 3120, 48
+	Vacio: 3120, 0
+	
+	LadrilloSolido: 3216, 144
+	LadrilloSolido: 3216, 192
+	LadrilloSolido: 3216, 240
+	LadrilloSolido: 3264, 144
+	LadrilloSolido: 3264, 192
+	LadrilloSolido: 3264, 240
+	
+	LadrilloSolido: 3552, 144
+	
+	Vacio: 3600, 96
+	Vacio: 3600, 48
+	Vacio: 3600, 0
+	Vacio: 3696, 96
+	Vacio: 3696, 48
+	Vacio: 3696, 0
+	
+	LadrilloSolido: 3744, 240
+	
+	Vacio: 3792, 96
+	Vacio: 3792, 48
+	Vacio: 3792, 0
+	Vacio: 3840, 96
+	Vacio: 3840, 48
+	Vacio: 3840, 0
+	
+	LadrilloSolido: 3936, 144
+	LadrilloSolido: 3936, 192
+	
+	Tuberia: 4176, 144
+	
+	
 	# Bloques del suelo y límites del mapa
 	BloqueSolido: -48, 96
 	BloqueSolido: -48, 144
@@ -77,9 +208,6 @@ Tiempo: 40
 	BloqueSolido: 2016, 96
 	BloqueSolido: 2064, 96
 	BloqueSolido: 2112, 96
-	BloqueSolido: 2160, 96
-	BloqueSolido: 2208, 96
-	BloqueSolido: 2256, 96
 	BloqueSolido: 2304, 96
 	BloqueSolido: 2352, 96
 	BloqueSolido: 2400, 96
@@ -96,9 +224,6 @@ Tiempo: 40
 	BloqueSolido: 2928, 96
 	BloqueSolido: 2976, 96
 	BloqueSolido: 3024, 96
-	BloqueSolido: 3072, 96
-	BloqueSolido: 3120, 96
-	BloqueSolido: 3168, 96
 	BloqueSolido: 3216, 96
 	BloqueSolido: 3264, 96
 	BloqueSolido: 3312, 96
@@ -107,13 +232,6 @@ Tiempo: 40
 	BloqueSolido: 3456, 96
 	BloqueSolido: 3504, 96
 	BloqueSolido: 3552, 96
-	BloqueSolido: 3600, 96
-	BloqueSolido: 3648, 96
-	BloqueSolido: 3696, 96
-	BloqueSolido: 3744, 96
-	BloqueSolido: 3792, 96
-	BloqueSolido: 3840, 96
-	BloqueSolido: 3888, 96
 	BloqueSolido: 3936, 96
 	BloqueSolido: 3984, 96
 	BloqueSolido: 4032, 96

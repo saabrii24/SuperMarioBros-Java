@@ -2,24 +2,184 @@
 Nivel: 3
 
 # Tiempo límite en segundos
-Tiempo: 20
+Tiempo: 60
 
 # Creación de las entidades
 	
 	# Mario (x,y)
-	Mario: 96, 432
+	Mario: 0, 432
 	
 	# Enemigos
-
+	Lakitu: 1008, 576
+	Lakitu: 1704, 624
+	Lakitu: 3720, 576
+	Lakitu: 4104, 528
+	Goomba: 432, 384
+	Goomba: 1440, 240
+	Goomba: 1632, 240
+	Goomba: 2832, 288
+	Goomba: 2928, 288
+	Goomba: 3120, 288
+	Koopa: 1536, 240
+	Koopa: 3024, 288
+	Piranha: 360, 480
+	Piranha: 648, 480
+	Piranha: 1896, 528
+	Piranha: 3240, 432
 	
 	# PowerUps
-
+	Moneda: 1248, 480
+	Moneda: 1296, 480
+	Moneda: 1344, 480
+	Moneda: 1392, 480
+	Moneda: 1440, 480
+	Moneda: 1488, 480
+	Moneda: 1536, 480
+	Moneda: 1584, 480
+	Moneda: 1632, 480
+	
+	Moneda: 3600, 384
+	Moneda: 3648, 384
+	Moneda: 3792, 288 
+	Moneda: 3840, 288
+	Moneda: 3984, 192
+	Moneda: 4032, 192
 	
 	# Plataformas
-
+	BloqueSolido: 0, 144
+	BloqueSolido: 48, 144
+	BloqueSolido: 96, 144
+	BloqueSolido: 144, 144
+	
+	BloqueSolido: 240, 240
+	
+	Tuberia: 336, 384
+	BloqueSolido: 336, 336
+	BloqueSolido: 384, 336
+	BloqueSolido: 432, 336
+	BloqueSolido: 480, 336
+	BloqueDePreguntaConFlorDeFuego: 480, 528
+	BloqueDePreguntaConMoneda: 528, 528
+	BloqueSolido: 528, 336
+	BloqueSolido: 576, 336
+	BloqueSolido: 624, 336
+	BloqueSolido: 672, 336
+	Tuberia: 624, 384
+	
+	BloqueSolido: 816, 432
+	BloqueSolido: 864, 432
+	BloqueDePreguntaConMoneda: 864, 576
+	BloqueSolido: 912, 432
+	BloqueDePreguntaConMoneda: 912, 576
+	BloqueSolido: 960, 432
+	
+	LadrilloSolido: 1104, 336
+	
+	LadrilloSolido: 1200, 240
+	LadrilloSolido: 1248, 192
+	LadrilloSolido: 1296, 192
+	LadrilloSolido: 1344, 192
+	LadrilloSolido: 1392, 192
+	LadrilloSolido: 1440, 192
+	LadrilloSolido: 1488, 192
+	LadrilloSolido: 1536, 192
+	LadrilloSolido: 1584, 192
+	LadrilloSolido: 1632, 192
+	LadrilloSolido: 1680, 240
+	
+	LadrilloSolido: 1248, 432
+	LadrilloSolido: 1296, 432
+	LadrilloSolido: 1344, 432
+	LadrilloSolido: 1392, 432
+	LadrilloSolido: 1440, 432
+	LadrilloSolido: 1488, 432
+	LadrilloSolido: 1536, 432
+	LadrilloSolido: 1584, 432
+	LadrilloSolido: 1632, 432
+	LadrilloSolido: 1680, 384
+	
+	BloqueDePreguntaConSuperChampi: 1344, 576
+	BloqueDePreguntaConMoneda: 1392, 576
+	BloqueDePreguntaConMoneda: 1440, 576
+	BloqueDePreguntaConMoneda: 1488, 576
+	BloqueDePreguntaConMoneda: 1536, 576
+	BloqueDePreguntaConEstrella: 1584, 576
+	
+	LadrilloSolido: 1776, 336
+	
+	LadrilloSolido: 1872, 384
+	Tuberia: 1872, 432
+	LadrilloSolido: 1920, 384
+	
+	LadrilloSolido: 2064, 288
+	
+	LadrilloSolido: 2208, 192
+	
+	BloqueDePreguntaConMoneda: 2304, 336
+	
+	LadrilloSolido: 2400, 192
+	
+	LadrilloSolido: 2544, 288
+	
+	LadrilloSolido: 2640, 384
+	
+	BloqueSolido: 2736, 288
+	BloqueSolido: 2784, 240
+	BloqueSolido: 2832, 240
+	BloqueSolido: 2880, 240
+	BloqueSolido: 2928, 240
+	BloqueSolido: 2976, 240
+	BloqueSolido: 3024, 240
+	BloqueSolido: 3072, 240
+	BloqueSolido: 3120, 240
+	BloqueSolido: 3168, 240
+	BloqueSolido: 3216, 288
+	BloqueSolido: 3264, 288
+	Tuberia: 3216, 336
+	BloqueDePreguntaConFlorDeFuego: 2880, 384
+	BloqueDePreguntaConMoneda: 2928, 384
+	BloqueDePreguntaConMoneda: 2976, 384
+	BloqueDePreguntaConMoneda: 3024, 384
+	
+	BloqueSolido: 3408, 432
+	BloqueSolido: 3456, 432
+	
+	BloqueSolido: 3600, 336
+	BloqueSolido: 3648, 336
+	
+	BloqueSolido: 3792, 240
+	BloqueSolido: 3840, 240
+	
+	BloqueSolido: 3984, 144
+	BloqueSolido: 4032, 144
+	
+	BloqueSolido: 4176, 144
+	BloqueSolido: 4224, 144
+	BloqueSolido: 4272, 144
+	BloqueSolido: 4320, 144
+	BloqueSolido: 4368, 144
+	BloqueSolido: 4416, 144
+	BloqueSolido: 4464, 144
+	BloqueSolido: 4512, 144
+	BloqueSolido: 4560, 144
+	BloqueSolido: 4608, 144
+	BloqueSolido: 4656, 144
+	BloqueSolido: 4704, 144
+	BloqueSolido: 4752, 144
+	BloqueSolido: 4800, 144
+	BloqueSolido: 4848, 144
+	BloqueSolido: 4896, 144
+	BloqueSolido: 4944, 144
+	BloqueSolido: 4992, 144
+	BloqueSolido: 5040, 144
+	BloqueSolido: 5088, 144
+	
+	
+	
+	
 	
 	# Bloques del suelo y límites del mapa
-	BloqueSolido: -48, 96
+	BloqueSolido: -48, 0
 	BloqueSolido: -48, 144
 	BloqueSolido: -48, 192
 	BloqueSolido: -48, 240
@@ -30,119 +190,234 @@ Tiempo: 20
 	BloqueSolido: -48, 480
 	BloqueSolido: -48, 528
 	BloqueSolido: -48, 624
-	BloqueSolido: 0, 96
-	BloqueSolido: 48, 96
-	BloqueSolido: 96, 96
-	BloqueSolido: 144,96
-	BloqueSolido: 192,96
-	BloqueSolido: 240, 96
-	BloqueSolido: 288, 96
-	BloqueSolido: 336, 96
-	BloqueSolido: 384, 96
-	BloqueSolido: 432, 96
-	BloqueSolido: 480, 96
-	BloqueSolido: 528, 96
-	BloqueSolido: 576, 96
-	BloqueSolido: 624, 96
-	BloqueSolido: 672, 96
-	BloqueSolido: 720, 96
-	BloqueSolido: 768, 96
-	BloqueSolido: 816, 96
-	BloqueSolido: 864, 96
-	BloqueSolido: 912, 96
-	BloqueSolido: 960, 96
-	BloqueSolido: 1008, 96
-	BloqueSolido: 1056, 96
-	BloqueSolido: 1104, 96
-	BloqueSolido: 1152, 96
-	BloqueSolido: 1200, 96
-	BloqueSolido: 1248, 96
-	BloqueSolido: 1296, 96
-	BloqueSolido: 1344, 96
-	BloqueSolido: 1392, 96
-	BloqueSolido: 1440, 96
-	BloqueSolido: 1488, 96
-	BloqueSolido: 1536, 96
-	BloqueSolido: 1584, 96
-	BloqueSolido: 1632, 96
-	BloqueSolido: 1680, 96
-	BloqueSolido: 1728, 96
-	BloqueSolido: 1776, 96
-	BloqueSolido: 1824, 96
-	BloqueSolido: 1872, 96
-	BloqueSolido: 1920, 96
-	BloqueSolido: 1968, 96
-	BloqueSolido: 2016, 96
-	BloqueSolido: 2064, 96
-	BloqueSolido: 2112, 96
-	BloqueSolido: 2160, 96
-	BloqueSolido: 2208, 96
-	BloqueSolido: 2256, 96
-	BloqueSolido: 2304, 96
-	BloqueSolido: 2352, 96
-	BloqueSolido: 2400, 96
-	BloqueSolido: 2448, 96
-	BloqueSolido: 2496, 96
-	BloqueSolido: 2544, 96
-	BloqueSolido: 2592, 96
-	BloqueSolido: 2640, 96
-	BloqueSolido: 2688, 96
-	BloqueSolido: 2736, 96
-	BloqueSolido: 2784, 96
-	BloqueSolido: 2832, 96
-	BloqueSolido: 2880, 96
-	BloqueSolido: 2928, 96
-	BloqueSolido: 2976, 96
-	BloqueSolido: 3024, 96
-	BloqueSolido: 3072, 96
-	BloqueSolido: 3120, 96
-	BloqueSolido: 3168, 96
-	BloqueSolido: 3216, 96
-	BloqueSolido: 3264, 96
-	BloqueSolido: 3312, 96
-	BloqueSolido: 3360, 96
-	BloqueSolido: 3408, 96
-	BloqueSolido: 3456, 96
-	BloqueSolido: 3504, 96
-	BloqueSolido: 3552, 96
-	BloqueSolido: 3600, 96
-	BloqueSolido: 3648, 96
-	BloqueSolido: 3696, 96
-	BloqueSolido: 3744, 96
-	BloqueSolido: 3792, 96
-	BloqueSolido: 3840, 96
-	BloqueSolido: 3888, 96
-	BloqueSolido: 3936, 96
-	BloqueSolido: 3984, 96
-	BloqueSolido: 4032, 96
-	BloqueSolido: 4080, 96
-	BloqueSolido: 4128, 96
-	BloqueSolido: 4176, 96
-	BloqueSolido: 4224, 96
-	BloqueSolido: 4272, 96
-	BloqueSolido: 4320, 96
-	BloqueSolido: 4368, 96
-	BloqueSolido: 4416, 96
-	BloqueSolido: 4464, 96
-	BloqueSolido: 4512, 96
-	BloqueSolido: 4560, 96
-	BloqueSolido: 4608, 96
-	BloqueSolido: 4656, 96
-	BloqueSolido: 4704, 96
-	BloqueSolido: 4752, 96
-	BloqueSolido: 4800, 96
-	BloqueSolido: 4848, 96
-	BloqueSolido: 4896, 96
-	BloqueSolido: 4944, 96
-	BloqueSolido: 4992, 96
-	BloqueSolido: 5040, 96
-	BloqueSolido: 5088, 96
-	BloqueSolido: 5136, 96
-	BloqueSolido: 5184, 96
-	BloqueSolido: 5232, 96
-	BloqueSolido: 5280, 96
-	BloqueSolido: 5328, 96
-	BloqueSolido: 5376, 96
+	Vacio: 3120, 144
+	Vacio: 0, 0
+	Vacio: 48, 0
+	Vacio: 96, 0
+	Vacio: 144,0
+	Vacio: 192,0
+	Vacio: 240, 0
+	Vacio: 288, 0
+	Vacio: 336, 0
+	Vacio: 384, 0
+	Vacio: 432, 0
+	Vacio: 480, 0
+	Vacio: 528, 0
+	Vacio: 576, 0
+	Vacio: 624, 0
+	Vacio: 672, 0
+	Vacio: 720, 0
+	Vacio: 768, 0
+	Vacio: 816, 0
+	Vacio: 864, 0
+	Vacio: 912, 0
+	Vacio: 00, 0
+	Vacio: 1008, 0
+	Vacio: 1056, 0
+	Vacio: 1104, 0
+	Vacio: 1152, 0
+	Vacio: 1200, 0
+	Vacio: 1248, 0
+	Vacio: 120, 0
+	Vacio: 1344, 0
+	Vacio: 1392, 0
+	Vacio: 1440, 0
+	Vacio: 1488, 0
+	Vacio: 1536, 0
+	Vacio: 1584, 0
+	Vacio: 1632, 0
+	Vacio: 1680, 0
+	Vacio: 1728, 0
+	Vacio: 1776, 0
+	Vacio: 1824, 0
+	Vacio: 1872, 0
+	Vacio: 1920, 0
+	Vacio: 108, 0
+	Vacio: 2016, 0
+	Vacio: 2064, 0
+	Vacio: 2112, 0
+	Vacio: 2160, 0
+	Vacio: 2208, 0
+	Vacio: 2256, 0
+	Vacio: 2304, 0
+	Vacio: 2352, 0
+	Vacio: 2400, 0
+	Vacio: 2448, 0
+	Vacio: 240, 0
+	Vacio: 2544, 0
+	Vacio: 2592, 0
+	Vacio: 2640, 0
+	Vacio: 2688, 0
+	Vacio: 2736, 0
+	Vacio: 2784, 0
+	Vacio: 2832, 0
+	Vacio: 2880, 0
+	Vacio: 2928, 0
+	Vacio: 2976, 0
+	Vacio: 3024, 0
+	Vacio: 3072, 0
+	Vacio: 3120, 0
+	Vacio: 3168, 0
+	Vacio: 3216, 0
+	Vacio: 3264, 0
+	Vacio: 3312, 0
+	Vacio: 3360, 0
+	Vacio: 3408, 0
+	Vacio: 3456, 0
+	Vacio: 3504, 0
+	Vacio: 3552, 0
+	Vacio: 3600, 0
+	Vacio: 3648, 0
+	Vacio: 360, 0
+	Vacio: 3744, 0
+	Vacio: 3792, 0
+	Vacio: 3840, 0
+	Vacio: 3888, 0
+	Vacio: 3936, 0
+	Vacio: 3984, 0
+	Vacio: 4032, 0
+	Vacio: 4080, 0
+	Vacio: 4128, 0
+	Vacio: 4176, 0
+	Vacio: 4224, 0
+	Vacio: 4272, 0
+	Vacio: 4320, 0
+	Vacio: 4368, 0
+	Vacio: 4416, 0
+	Vacio: 4464, 0
+	Vacio: 4512, 0
+	Vacio: 4560, 0
+	Vacio: 4608, 0
+	Vacio: 4656, 0
+	Vacio: 4704, 0
+	Vacio: 4752, 0
+	Vacio: 4800, 0
+	Vacio: 4848, 0
+	Vacio: 480, 0
+	Vacio: 4944, 0
+	Vacio: 4992, 0
+	Vacio: 5040, 0
+	Vacio: 5088, 0
+	Vacio: 5136, 0
+	Vacio: 5184, 0
+	Vacio: 5232, 0
+	Vacio: 5280, 0
+	Vacio: 5328, 0
+	Vacio: 5376, 0
+	Vacio: 0, 48
+	Vacio: 48, 48
+	Vacio: 96, 48
+	Vacio: 144,48
+	Vacio: 192,48
+	Vacio: 240, 48
+	Vacio: 288, 48
+	Vacio: 336, 48
+	Vacio: 384, 48
+	Vacio: 432, 48
+	Vacio: 480, 48
+	Vacio: 528, 48
+	Vacio: 576, 48
+	Vacio: 624, 48
+	Vacio: 672, 48
+	Vacio: 720, 48
+	Vacio: 768, 48
+	Vacio: 816, 48
+	Vacio: 864, 48
+	Vacio: 912, 48
+	Vacio: 480, 48
+	Vacio: 1008, 48
+	Vacio: 1056, 48
+	Vacio: 1104, 48
+	Vacio: 1152, 48
+	Vacio: 1200, 48
+	Vacio: 1248, 48
+	Vacio: 1248, 48
+	Vacio: 1344, 48
+	Vacio: 1392, 48
+	Vacio: 1440, 48
+	Vacio: 1488, 48
+	Vacio: 1536, 48
+	Vacio: 1584, 48
+	Vacio: 1632, 48
+	Vacio: 1680, 48
+	Vacio: 1728, 48
+	Vacio: 1776, 48
+	Vacio: 1824, 48
+	Vacio: 1872, 48
+	Vacio: 1920, 48
+	Vacio: 1488, 48
+	Vacio: 2016, 48
+	Vacio: 2064, 48
+	Vacio: 2112, 48
+	Vacio: 2160, 48
+	Vacio: 2208, 48
+	Vacio: 2256, 48
+	Vacio: 2304, 48
+	Vacio: 2352, 48
+	Vacio: 2400, 48
+	Vacio: 2448, 48
+	Vacio: 2448, 48
+	Vacio: 2544, 48
+	Vacio: 2592, 48
+	Vacio: 2640, 48
+	Vacio: 2688, 48
+	Vacio: 2736, 48
+	Vacio: 2784, 48
+	Vacio: 2832, 48
+	Vacio: 2880, 48
+	Vacio: 2928, 48
+	Vacio: 2976, 48
+	Vacio: 3024, 48
+	Vacio: 3072, 48
+	Vacio: 3120, 48
+	Vacio: 3168, 48
+	Vacio: 3216, 48
+	Vacio: 3264, 48
+	Vacio: 3312, 48
+	Vacio: 3360, 48
+	Vacio: 3408, 48
+	Vacio: 3456, 48
+	Vacio: 3504, 48
+	Vacio: 3552, 48
+	Vacio: 3600, 48
+	Vacio: 3648, 48
+	Vacio: 3648, 48
+	Vacio: 3744, 48
+	Vacio: 3792, 48
+	Vacio: 3840, 48
+	Vacio: 3888, 48
+	Vacio: 3936, 48
+	Vacio: 3984, 48
+	Vacio: 4032, 48
+	Vacio: 4080, 48
+	Vacio: 4128, 48
+	Vacio: 4176, 48
+	Vacio: 4224, 48
+	Vacio: 4272, 48
+	Vacio: 4320, 48
+	Vacio: 4368, 48
+	Vacio: 4416, 48
+	Vacio: 4464, 48
+	Vacio: 4512, 48
+	Vacio: 4560, 48
+	Vacio: 4608, 48
+	Vacio: 4656, 48
+	Vacio: 4704, 48
+	Vacio: 4752, 48
+	Vacio: 4800, 48
+	Vacio: 4848, 48
+	Vacio: 4848, 48
+	Vacio: 4944, 48
+	Vacio: 4992, 48
+	Vacio: 5040, 48
+	Vacio: 5088, 48
+	Vacio: 5136, 48
+	Vacio: 5184, 48
+	Vacio: 5232, 48
+	Vacio: 5280, 48
+	Vacio: 5328, 48
+	Vacio: 5376, 48
+	Vacio: 768, 144
 
 # Definición del mapa
 Mapa: (crear)

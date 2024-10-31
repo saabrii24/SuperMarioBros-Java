@@ -1,6 +1,14 @@
 # **Super Mario Bros - TDP 2024 - UNS**
 
-## 1. Arquitectura General del Juego
+## 1. Vistas Previas
+### Pantalla de inicio
+![pantalla-inicial](https://github.com/user-attachments/assets/24cec54b-b9ee-4d34-aa2b-254f23df0048)
+
+### Nivel 1 - Modos de juego
+![modo-mario](https://github.com/user-attachments/assets/f1654bcf-a81c-42eb-a35f-d25b5ffc38c6)
+![modo-luigi](https://github.com/user-attachments/assets/29c9fa57-ee96-4f53-88ea-dc69be44c613)
+
+## 2. Arquitectura General del Juego
 
 ### **Estructura General:**
 Programado con:
@@ -34,7 +42,7 @@ Además, se sigue un Modelo de 3 Capas:
 3. **`Nivel`**: guarda la configuración y el estado del nivel.
 4. **Controladores**: varios controladores especializados en diferentes áreas del juego.
 
-## 2. Patrones de Diseño Usados
+## 3. Patrones de Diseño Usados
 
 ### **Patrones Creacionales:**
 - **Singleton**: 
@@ -56,7 +64,7 @@ Además, se sigue un Modelo de 3 Capas:
 - **Visitor**: 
   - `PowerUpVisitor` para manejar interacciones de Mario con los potenciadores.
 
-## 3. Jerarquía de Entidades
+## 4. Jerarquía de Entidades
 
 ### **Clases Base:**
 - **Entidad**: clase base de todos los objetos del juego, con posición, sprite, y dimensiones.
@@ -67,7 +75,7 @@ Además, se sigue un Modelo de 3 Capas:
 - **Objetos**: potenciadores como `SuperChampi`, `FlorDeFuego`, `Estrella`, y `Moneda`.
 - **Plataformas**: bloques como `BloqueSólido`, `LadrilloSólido`, `BloqueDePregunta`, `Tubería`, y `Vacío`.
 
-## 4. Sistemas de Control
+## 5. Sistemas de Control
 
 - **Control de Movimiento**:
   - `ControladorMovimiento`: administra los hilos de movimiento, controla los FPS, y maneja el movimiento de Mario y enemigos.
@@ -78,7 +86,7 @@ Además, se sigue un Modelo de 3 Capas:
   - `ControladorRanking`: maneja puntajes y clasificaciones.
   - `ControladorEntidades`: gestiona el comportamiento de las entidades.
 
-## 5. Interfaz de Usuario
+## 6. Interfaz de Usuario
 
 ### **Gestión de Pantallas:**
 - Paneles especializados como:
@@ -91,10 +99,10 @@ Además, se sigue un Modelo de 3 Capas:
 ### **Componentes Visuales:**
 - Renderizado con sprites, capas de paneles para UI compleja, visualización de puntajes y estado del juego.
 
-## 6. Sistema de Sonido
+## 7. Sistema de Sonido
 La clase `Sonido` maneja la música de fondo, efectos de sonido y opciones para activar/desactivar el sonido.
 
-## 7. Sistemas del Juego
+## 8. Sistemas del Juego
 
 - **Sistema de Puntaje**:
   - La interfaz `SistemaPuntuacion` y `ControladorPuntuacionMario` gestionan el puntaje y el conteo de monedas.
@@ -102,13 +110,13 @@ La clase `Sonido` maneja la música de fondo, efectos de sonido y opciones para 
 - **Sistema de Vidas**:
   - La interfaz `SistemaVidas` y `ControladorVidasMario` gestionan las vidas del jugador y condiciones para el fin del juego.
 
-## 8. Características de Extensibilidad
+## 9. Características de Extensibilidad
 
 - **Múltiples Temas**: soporte para diferentes temas visuales usando el patrón Factory y sprites extensibles.
 - **Generación de Niveles**: un sistema de niveles flexible que permite diferentes configuraciones de niveles.
 - **Sistema de Entidades**: una jerarquía extensible, lo que facilita agregar nuevos enemigos, potenciadores y plataformas.
 
-## 9. Consideraciones Técnicas
+## 10. Consideraciones Técnicas
 
 - **Modelo de Hilos**: varios hilos para:
    - Movimiento de Mario

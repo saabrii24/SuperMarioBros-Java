@@ -22,24 +22,13 @@ Tiempo: 40
     Piranha: 4200, 240
 
     # PowerUps
-    BloqueDePreguntaConFlorDeFuego: 480, 288
-	BloqueDePreguntaConMoneda: 528, 288
-	BloqueDePreguntaConMoneda: 576, 288
-	BloqueDePreguntaConMoneda: 624, 288
-	BloqueDePreguntaConMoneda: 672, 288
-	BloqueDePreguntaConMoneda: 1392, 288
-	BloqueDePreguntaConEstrella: 2112, 384
-	BloqueDePreguntaConSuperChampi: 1152, 432
 	Moneda: 1824, 336
 	Moneda: 1872, 480
 	Moneda: 1920, 480
 	Moneda: 1968, 480
 	Moneda: 2016, 480
 	Moneda: 2064, 336
-	BloqueDePreguntaConFlorDeFuego: 2976, 288
-	BloqueDePreguntaConMoneda: 3380, 384
-	BloqueDePreguntaConMoneda: 3428, 384
-	BloqueDePreguntaConMoneda: 4056, 288
+	
 	
     # Plataformas
     BloqueSolido: 816, 144
@@ -64,6 +53,15 @@ Tiempo: 40
     BloqueSolido: 1488, 240
     BloqueSolido: 1584, 144
     BloqueSolido: 1584, 192
+    
+    BloqueDePreguntaConFlorDeFuego: 480, 288
+	BloqueDePreguntaConMoneda: 528, 288
+	BloqueDePreguntaConMoneda: 576, 288
+	BloqueDePreguntaConMoneda: 624, 288
+	BloqueDePreguntaConMoneda: 672, 288
+	BloqueDePreguntaConMoneda: 1392, 288
+	BloqueDePreguntaConEstrella: 2112, 384
+	BloqueDePreguntaConSuperChampi: 1152, 432
     
 	LadrilloSolido: 1776, 288
 	LadrilloSolido: 1776, 336
@@ -120,6 +118,11 @@ Tiempo: 40
 	Vacio: 3120, 48
 	Vacio: 3120, 0
 	
+	BloqueDePreguntaConFlorDeFuego: 2976, 288
+	BloqueDePreguntaConMoneda: 3380, 384
+	BloqueDePreguntaConMoneda: 3428, 384
+	BloqueDePreguntaConMoneda: 4056, 288
+	
 	LadrilloSolido: 3216, 144
 	LadrilloSolido: 3216, 192
 	LadrilloSolido: 3216, 240
@@ -127,22 +130,14 @@ Tiempo: 40
 	LadrilloSolido: 3264, 192
 	LadrilloSolido: 3264, 240
 	
-	LadrilloSolido: 3552, 144
-	
-	Vacio: 3600, 96
-	Vacio: 3600, 48
 	Vacio: 3600, 0
-	Vacio: 3696, 96
-	Vacio: 3696, 48
 	Vacio: 3696, 0
 	
 	LadrilloSolido: 3744, 240
 	
-	Vacio: 3792, 96
-	Vacio: 3792, 48
+	
+	
 	Vacio: 3792, 0
-	Vacio: 3840, 96
-	Vacio: 3840, 48
 	Vacio: 3840, 0
 	
 	LadrilloSolido: 3936, 144

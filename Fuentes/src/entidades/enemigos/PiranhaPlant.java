@@ -7,6 +7,7 @@ import entidades.plataformas.Tuberias;
 import entidades.plataformas.Vacio;
 import fabricas.Sprite;
 import logica.Mapa;
+import logica.ResultadoColision;
 
 public class PiranhaPlant extends Enemigo {
     private static final double VELOCIDAD_VERTICAL = 0.4;
@@ -74,7 +75,7 @@ public class PiranhaPlant extends Enemigo {
         }
     }
     
-    public int aceptar(EnemigosVisitor visitador) {
+    public ResultadoColision aceptar(EnemigosVisitor visitador) {
 		return visitador.visitar(this);
 	}
 

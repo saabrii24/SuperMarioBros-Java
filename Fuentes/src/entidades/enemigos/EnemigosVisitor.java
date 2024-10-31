@@ -1,10 +1,12 @@
 package entidades.enemigos;
 
+import logica.ResultadoColision;
+
 public interface EnemigosVisitor {
-	int visitar(BuzzyBeetle buzzy);
-	int visitar(Goomba goomba);
-	int visitar(KoopaTroopa koopa);
-	int visitar(Lakitu lakitu);
-	int visitar(PiranhaPlant piranha);
-	int visitar(Spiny spiny);
+	ResultadoColision visitar(BuzzyBeetle buzzy);
+	ResultadoColision visitar(Goomba goomba);
+	ResultadoColision visitar(KoopaTroopa koopa);
+	ResultadoColision visitar(Lakitu lakitu);
+	ResultadoColision visitar(PiranhaPlant piranha);
+	ResultadoColision visitar(Spiny spiny);
 }

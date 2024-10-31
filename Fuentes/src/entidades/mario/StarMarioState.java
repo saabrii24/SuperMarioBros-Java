@@ -3,6 +3,7 @@ package entidades.mario;
 import entidades.BolaDeFuego;
 import entidades.plataformas.*;
 import logica.Juego;
+import logica.ResultadoColision;
 import entidades.enemigos.*;
 
 public class StarMarioState implements Mario.MarioState {
@@ -56,30 +57,30 @@ public class StarMarioState implements Mario.MarioState {
 		mario.get_sistema_puntuacion().sumar_puntos(50);
 	}
 	
-	public int colision_con_enemigo(BuzzyBeetle buzzy){
-		return 1;
+	public ResultadoColision colision_con_enemigo(BuzzyBeetle buzzy){
+		return ResultadoColision.ENEMIGO_MUERE;
 		
 	}
 	
-	public int colision_con_enemigo(Goomba goomba) {
-		return 1;
+	public ResultadoColision colision_con_enemigo(Goomba goomba) {
+		return ResultadoColision.ENEMIGO_MUERE;
 		
 	}
 	
-	public int colision_con_enemigo(KoopaTroopa koopa) {
-		return 1;
+	public ResultadoColision colision_con_enemigo(KoopaTroopa koopa) {
+		return ResultadoColision.ENEMIGO_MUERE;
 	}
 	
-	public int colision_con_enemigo(Lakitu lakitu) {
-		return 1;
+	public ResultadoColision colision_con_enemigo(Lakitu lakitu) {
+		return ResultadoColision.ENEMIGO_MUERE;
 	}
 	
-	public int colision_con_enemigo(PiranhaPlant piranha) {
-		return 1;
+	public ResultadoColision colision_con_enemigo(PiranhaPlant piranha) {
+		return ResultadoColision.ENEMIGO_MUERE;
 	}
 	
-	public int colision_con_enemigo(Spiny spiny) {
-		return 1;
+	public ResultadoColision colision_con_enemigo(Spiny spiny) {
+		return ResultadoColision.ENEMIGO_MUERE;
 	}
 
 	@Override
@@ -108,8 +109,7 @@ public class StarMarioState implements Mario.MarioState {
 			if(mario.get_limites_derecha().intersects(bloque_solido.get_limites_izquierda()))
 				mario.set_posicion_en_x(bloque_solido.get_posicion_en_x() - mario.get_dimension().width);
 			else 
-				mario.set_posicion_en_x(bloque_solido.get_posicion_en_x() + bloque_solido.get_dimension().width);
-				
+				mario.set_posicion_en_x(bloque_solido.get_posicion_en_x() + bloque_solido.get_dimension().width);	
 		}
 	}
 

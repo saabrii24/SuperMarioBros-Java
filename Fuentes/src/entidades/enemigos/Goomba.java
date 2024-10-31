@@ -9,6 +9,7 @@ import entidades.plataformas.Tuberias;
 import entidades.plataformas.Vacio;
 import fabricas.Sprite;
 import logica.Mapa;
+import logica.ResultadoColision;
 
 public class Goomba extends Enemigo {
     public Goomba(int x, int y, Sprite sprite) {
@@ -59,7 +60,7 @@ public class Goomba extends Enemigo {
         set_velocidad_en_x(0);
     }
    
-    public int aceptar(EnemigosVisitor visitador) {
+    public ResultadoColision aceptar(EnemigosVisitor visitador) {
 		return visitador.visitar(this);
 	}
 

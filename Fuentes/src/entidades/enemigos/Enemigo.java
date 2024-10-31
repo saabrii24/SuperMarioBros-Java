@@ -4,6 +4,7 @@ import entidades.EntidadMovible;
 import entidades.plataformas.*;
 import fabricas.Sprite;
 import logica.Mapa;
+import logica.ResultadoColision;
 
 public abstract class Enemigo extends EntidadMovible implements PlataformasVisitorEnemigos{
 	
@@ -14,7 +15,7 @@ public abstract class Enemigo extends EntidadMovible implements PlataformasVisit
 	public abstract int calcular_puntaje();
 	public abstract int calcular_penalizacion();
 	public abstract void destruir(Mapa mapa);
-	public abstract int aceptar(EnemigosVisitor visitador);
+	public abstract ResultadoColision aceptar(EnemigosVisitor visitador);
 	public abstract void visitar(Vacio vacio);
 	public abstract void visitar(BloqueSolido bloque_solido);
 	public abstract void visitar(BloqueDePregunta bloque_de_pregunta);

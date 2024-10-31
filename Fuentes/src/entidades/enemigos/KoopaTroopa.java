@@ -10,6 +10,7 @@ import entidades.plataformas.Tuberias;
 import entidades.plataformas.Vacio;
 import fabricas.Sprite;
 import logica.Mapa;
+import logica.ResultadoColision;
 
 public class KoopaTroopa extends Enemigo {
     protected KoopaState estado;
@@ -22,7 +23,7 @@ public class KoopaTroopa extends Enemigo {
     public interface KoopaState {
         void actualizar_sprite();
         void mover();
-        int cambiar_estado();
+        ResultadoColision cambiar_estado();
         boolean en_movimiento();
         boolean mata_tocando();
     }
@@ -69,9 +70,9 @@ public class KoopaTroopa extends Enemigo {
 
     public boolean mata_tocando() { return estado.mata_tocando(); }
 
-    public int cambiar_estado() { return estado.cambiar_estado(); }
+    public ResultadoColision cambiar_estado() { return estado.cambiar_estado(); }
     
-    public int aceptar(EnemigosVisitor visitador) {
+    public ResultadoColision aceptar(EnemigosVisitor visitador) {
 		return visitador.visitar(this);
 	}
     

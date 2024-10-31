@@ -11,6 +11,7 @@ import entidades.plataformas.Vacio;
 import fabricas.Sprite;
 import logica.Juego;
 import logica.Mapa;
+import logica.ResultadoColision;
 
 public class Spiny extends Enemigo{
 
@@ -76,7 +77,7 @@ public class Spiny extends Enemigo{
 		}
 	}
 
-	public int aceptar(EnemigosVisitor visitador) {
+	public ResultadoColision aceptar(EnemigosVisitor visitador) {
 		return visitador.visitar(this);
 	}
 

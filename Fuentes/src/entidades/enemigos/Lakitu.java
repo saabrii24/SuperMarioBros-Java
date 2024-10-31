@@ -9,6 +9,7 @@ import entidades.plataformas.Vacio;
 import fabricas.Sprite;
 import logica.Juego;
 import logica.Mapa;
+import logica.ResultadoColision;
 
 public class Lakitu extends Enemigo{
 	
@@ -56,7 +57,7 @@ public class Lakitu extends Enemigo{
 		spiny.registrar_observer(Juego.get_instancia().get_controlador_vistas().registrar_entidad(spiny));
 	}
 
-	public int aceptar(EnemigosVisitor visitador) {
+	public ResultadoColision aceptar(EnemigosVisitor visitador) {
 		return visitador.visitar(this);
 	}
 

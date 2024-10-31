@@ -1,10 +1,10 @@
 package entidades.mario;
 
 import entidades.BolaDeFuego;
-import entidades.Entidad;
 import entidades.enemigos.*;
 import entidades.plataformas.*;
 import logica.Juego;
+import logica.ResultadoColision;
 
 public class NormalMarioState implements Mario.MarioState {
     private Mario mario;
@@ -58,49 +58,49 @@ public class NormalMarioState implements Mario.MarioState {
 	public void finalizar_invulnerabilidad() {}
 	
 
-	public int colision_con_enemigo(BuzzyBeetle buzzy){
-		int valor=0;
+	public ResultadoColision colision_con_enemigo(BuzzyBeetle buzzy){
+		ResultadoColision valor=ResultadoColision.NADIE_MUERE;
 		if(mario.get_limites_superiores().intersects(buzzy.get_limites_inferiores()))
-			valor=1;
+			valor=ResultadoColision.ENEMIGO_MUERE;
 		else 
-			valor=-1;
+			valor=ResultadoColision.MARIO_MUERE;
 		return valor;
 	}
 	
-	public int colision_con_enemigo(Goomba goomba) {
-		int valor=0;
+	public ResultadoColision colision_con_enemigo(Goomba goomba) {
+		ResultadoColision valor=ResultadoColision.NADIE_MUERE;
 		if(mario.get_limites_superiores().intersects(goomba.get_limites_inferiores()))
-			valor=1;
+			valor=ResultadoColision.ENEMIGO_MUERE;
 		else 
-			valor=-1;
+			valor=ResultadoColision.MARIO_MUERE;
 		return valor;
 		
 	}
 	
-	public int colision_con_enemigo(KoopaTroopa koopa) {
-		int valor=0;
+	public ResultadoColision colision_con_enemigo(KoopaTroopa koopa) {
+		ResultadoColision valor=ResultadoColision.NADIE_MUERE;
 		if(mario.get_limites_superiores().intersects(koopa.get_limites_inferiores()))
 			valor=koopa.cambiar_estado();
 		else 
-			valor=-1;
+			valor=ResultadoColision.MARIO_MUERE;
 		return valor;
 	}
 	
-	public int colision_con_enemigo(Lakitu lakitu) {
-		int valor=0;
+	public ResultadoColision colision_con_enemigo(Lakitu lakitu) {
+		ResultadoColision valor=ResultadoColision.NADIE_MUERE;
 		if(mario.get_limites_superiores().intersects(lakitu.get_limites_inferiores()))
-			valor=1;
+			valor=ResultadoColision.ENEMIGO_MUERE;
 		else 
-			valor=-1;
+			valor=ResultadoColision.MARIO_MUERE;
 		return valor;
 	}
 	
-	public int colision_con_enemigo(PiranhaPlant piranha) {
-		return -1;
+	public ResultadoColision colision_con_enemigo(PiranhaPlant piranha) {
+		return ResultadoColision.MARIO_MUERE;
 	}
 	
-	public int colision_con_enemigo(Spiny spiny) {
-		return -1;
+	public ResultadoColision colision_con_enemigo(Spiny spiny) {
+		return ResultadoColision.MARIO_MUERE;
 	}
 
 	@Override

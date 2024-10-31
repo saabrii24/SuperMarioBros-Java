@@ -15,6 +15,7 @@ import entidades.plataformas.Vacio;
 import entidades.powerups.*;
 import fabricas.Sprite;
 import logica.Juego;
+import logica.ResultadoColision;
 
 public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisitor,EnemigosVisitor,PlataformasVisitorMario {
     private static final double VELOCIDAD_LATERAL = 5.0;
@@ -74,12 +75,12 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
     	void consumir_flor_de_fuego();
     	void finalizar_invulnerabilidad();
 		void actualizar_sprite();
-		int colision_con_enemigo(BuzzyBeetle buzzy);
-		int colision_con_enemigo(Goomba goomba);
-		int colision_con_enemigo(KoopaTroopa koopa);
-		int colision_con_enemigo(Lakitu lakitu);
-		int colision_con_enemigo(PiranhaPlant piranha);
-		int colision_con_enemigo(Spiny spiny);
+		ResultadoColision colision_con_enemigo(BuzzyBeetle buzzy);
+		ResultadoColision colision_con_enemigo(Goomba goomba);
+		ResultadoColision colision_con_enemigo(KoopaTroopa koopa);
+		ResultadoColision colision_con_enemigo(Lakitu lakitu);
+		ResultadoColision colision_con_enemigo(PiranhaPlant piranha);
+		ResultadoColision colision_con_enemigo(Spiny spiny);
 		void colision_con_plataformas(BloqueDePregunta bloque_de_pregunta);
 		void colision_con_plataformas(BloqueSolido bloque_solido);
 		void colision_con_plataformas(LadrilloSolido ladrillo_solido);
@@ -239,48 +240,61 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
 
 	public void set_contador_saltos(int i) { contador_saltos = i; }
 
-	public int visitar(BuzzyBeetle buzzy) {
+	public ResultadoColision visitar(BuzzyBeetle buzzy) {
 		return estado.colision_con_enemigo(buzzy);
 	}
 
-	public int visitar(Goomba goomba) {
+	public ResultadoColision visitar(Goomba goomba) {
 		return estado.colision_con_enemigo(goomba);
 	}
 
-	public int visitar(KoopaTroopa koopa) {
+	public ResultadoColision visitar(KoopaTroopa koopa) {
 		return estado.colision_con_enemigo(koopa);
 	}
 
-	public int visitar(Lakitu lakitu) {
+	public ResultadoColision visitar(Lakitu lakitu) {
 		return estado.colision_con_enemigo(lakitu);
 	}
 
-	public int visitar(PiranhaPlant piranha) {
+	public ResultadoColision visitar(PiranhaPlant piranha) {
 		return estado.colision_con_enemigo(piranha);
 	}
 
-	public int visitar(Spiny spiny) {
+	public ResultadoColision visitar(Spiny spiny) {
 		return estado.colision_con_enemigo(spiny);
 	}
 
 	@Override
-	public void visitar(BloqueDePregunta bloque_de_pregunta) {
-		estado.colision_con_plataformas(bloque_de_pregunta);
+	public boolean visitar(BloqueDePregunta bloque_de_pregunta) {
+		if(!this.get_limites_superiores().intersects(bloque_de_pregunta.get_limites_inferiores()))
+			estado.colision_con_plataformas(bloque_de_pregunta);
+		return true;
 	}
 
 	@Override
-	public void visitar(BloqueSolido bloque_solido) {
-		estado.colision_con_plataformas(bloque_solido);
+	public boolean  visitar(BloqueSolido bloque_solido) {
+		if(!this.get_limites_superiores().intersects(bloque_solido.get_limites_inferiores()))
+			estado.colision_con_plataformas(bloque_solido);
+		return true;
 	}
 
 	@Override
-	public void visitar(LadrilloSolido ladrillo_solido) {
-		estado.colision_con_plataformas(ladrillo_solido);
+	public boolean visitar(LadrilloSolido ladrillo_solido) {
+		if(!this.get_limites_superiores().intersects(ladrillo_solido.get_limites_inferiores()))
+			estado.colision_con_plataformas(ladrillo_solido);
+		return true;
 	}
 
 	@Override
-	public void visitar(Tuberias tuberia) {
-		estado.colision_con_plataformas(tuberia);
+	public boolean visitar(Tuberias tuberia) {
+		if(!this.get_limites_superiores().intersects(tuberia.get_limites_inferiores()))
+			estado.colision_con_plataformas(tuberia);
+		return true;
+	}
+
+	@Override
+	public boolean visitar(Vacio vacio) {
+		return false;
 	}
 
 

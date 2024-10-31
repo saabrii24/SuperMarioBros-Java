@@ -17,7 +17,7 @@ public class Colisionador {
         this.mapa = mapa;
         this.murio_mario = false;
     }
-
+  
     public void verificar_colisiones(Juego juego) {
         Mario mario = Mario.get_instancia();
         verificar_colisiones_con_plataformas(mario);
@@ -34,7 +34,8 @@ public class Colisionador {
     private void verificar_colisiones_con_plataformas_mario(Mario mario) {
     	for(Plataforma plataforma: mapa.get_entidades_plataformas()) {
     		if(mario.get_limites_superiores().intersects(plataforma.get_limites_inferiores())) {
-    			ajustar_posicion_mario_sobre_plataforma(mario,plataforma);
+    			if(plataforma.aceptar(mario))
+    				ajustar_posicion_mario_sobre_plataforma(mario,plataforma);
     		}
     		else {
     			if(mario.get_limites_inferiores().intersects(plataforma.get_limites_superiores())|| mario.get_limites_derecha().intersects(plataforma.get_limites_izquierda()) || mario.get_limites_izquierda().intersects(plataforma.get_limites_derecha()))
@@ -57,7 +58,6 @@ public class Colisionador {
      * 
      * colision bola de fuego y enemigo falta
      * 
-     * 
      */
     
     private void verificar_colisiones_plataformas_enemigos() {
@@ -67,22 +67,20 @@ public class Colisionador {
             manejar_colision_horizontal(enemigo);
         }
     }
-
+    
     private void verificar_colisiones_con_enemigos(Mario mario) {
-    	int valor=0;
-    	for(Enemigo enemigo: mapa.get_entidades_enemigos()) {
-    		if(mario.get_limites().intersects(enemigo.get_limites())) {
-    			valor=enemigo.aceptar(mario);
-    			if(valor==1) {
-    				mario.get_sistema_puntuacion().sumar_puntos(enemigo.calcular_puntaje());
-    				enemigo.destruir(mapa);
-    			}
-    			else
-    				if(valor==-1) {
-    					murio_mario=mario.colision_con_enemigo(enemigo);
-    				}
-    		}
-    	}
+        ResultadoColision resultado = ResultadoColision.NADIE_MUERE;
+        for (Enemigo enemigo : mapa.get_entidades_enemigos()) {
+            if (mario.get_limites().intersects(enemigo.get_limites())) {
+                resultado=enemigo.aceptar(mario);
+                if (resultado == ResultadoColision.ENEMIGO_MUERE) {
+                    mario.get_sistema_puntuacion().sumar_puntos(enemigo.calcular_puntaje());
+                    enemigo.destruir(mapa);
+                } else if (resultado == ResultadoColision.MARIO_MUERE) {
+                    murio_mario = mario.colision_con_enemigo(enemigo);
+                }
+            }
+        }
     }
 
     private void verificar_colisiones_con_powerups(Mario mario) {

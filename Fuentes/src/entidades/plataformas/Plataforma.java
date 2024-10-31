@@ -11,6 +11,6 @@ public abstract class Plataforma extends Entidad {
 	
 	public abstract void aceptar(PlataformasVisitorEnemigos visitador) ;
 	
-	public abstract void aceptar(PlataformasVisitorMario visitador);
+	public abstract boolean aceptar(PlataformasVisitorMario visitador);
 
 }

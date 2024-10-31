@@ -1,9 +1,9 @@
 package entidades.plataformas;
 
 public interface PlataformasVisitorMario {
-	void visitar(BloqueDePregunta bloque_de_pregunta);
-	void visitar(BloqueSolido bloque_solido);
-	void visitar(LadrilloSolido ladrillo_solido);
-	void visitar(Tuberias tuberia);
-
+	boolean visitar(BloqueDePregunta bloque_de_pregunta);
+	boolean visitar(BloqueSolido bloque_solido);
+	boolean visitar(LadrilloSolido ladrillo_solido);
+	boolean visitar(Tuberias tuberia);
+	boolean visitar(Vacio vacio);
 }

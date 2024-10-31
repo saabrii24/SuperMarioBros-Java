@@ -17,8 +17,8 @@ public class LadrilloSolido extends Plataforma{
         }
     }
 	
-	public void aceptar(PlataformasVisitorMario visitador) {
-		visitador.visitar(this);
+	public boolean aceptar(PlataformasVisitorMario visitador) {
+		return visitador.visitar(this);
 	}
 	
 	@Override

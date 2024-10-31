@@ -8,8 +8,8 @@ public class Tuberias extends Plataforma{
 		super(x, y, sprite);
 	}
 
-	public void aceptar(PlataformasVisitorMario visitador) {
-		visitador.visitar(this);
+	public boolean aceptar(PlataformasVisitorMario visitador) {
+		return visitador.visitar(this);
 	}
 	
 	@Override

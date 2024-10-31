@@ -8,7 +8,9 @@ public class Vacio extends Plataforma {
 		super(x, y, sprite);
 	}
 
-	public void aceptar(PlataformasVisitorMario visitador) {}
+	public boolean aceptar(PlataformasVisitorMario visitador) {
+		return visitador.visitar(this);
+	}
 	
 	@Override
 	public void aceptar(PlataformasVisitorEnemigos visitador) {

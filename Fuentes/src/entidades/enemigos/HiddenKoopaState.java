@@ -2,6 +2,7 @@ package entidades.enemigos;
 
 import entidades.mario.Mario;
 import logica.Juego;
+import logica.ResultadoColision;
 
 public class HiddenKoopaState implements KoopaTroopa.KoopaState {
     private final KoopaTroopa koopa;
@@ -9,12 +10,12 @@ public class HiddenKoopaState implements KoopaTroopa.KoopaState {
     public HiddenKoopaState(KoopaTroopa koopa) { this.koopa = koopa; }
 
     @Override
-    public int cambiar_estado() {
+    public ResultadoColision cambiar_estado() {
         koopa.set_estado(new ProjectileKoopaState(koopa));
         Mario mario = Mario.get_instancia();
         int ajuste_posicion = (koopa.get_direccion() == 1) ? -48 : 48;
         mario.set_posicion_en_x(mario.get_posicion_en_x() + ajuste_posicion);
-        return 0;
+        return ResultadoColision.NADIE_MUERE;
     }
 
     @Override

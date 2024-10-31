@@ -1,6 +1,13 @@
 package entidades.enemigos;
 
+import entidades.Entidad;
+import entidades.EntidadMovible;
+import entidades.plataformas.BloqueDePregunta;
+import entidades.plataformas.BloqueSolido;
+import entidades.plataformas.LadrilloSolido;
 import entidades.plataformas.Plataforma;
+import entidades.plataformas.Tuberias;
+import entidades.plataformas.Vacio;
 import fabricas.Sprite;
 import logica.Juego;
 import logica.Mapa;
@@ -74,7 +81,36 @@ public class Spiny extends Enemigo{
 	}
 
 	@Override
-	public boolean visitar(Plataforma plataforma) {
-		return true;
+	public void visitar(Vacio vacio) {
+		this.eliminar_del_mapa();
 	}
+
+
+	@Override
+	public void visitar(BloqueSolido bloque_solido) {
+		ajustar_posicion_enemigo_sobre_plataforma(this,bloque_solido);
+	}
+
+
+	@Override
+	public void visitar(BloqueDePregunta bloque_de_pregunta) {
+		ajustar_posicion_enemigo_sobre_plataforma(this,bloque_de_pregunta);
+	}
+
+
+	@Override
+	public void visitar(Tuberias tuberia) {
+		ajustar_posicion_enemigo_sobre_plataforma(this,tuberia);
+	}
+
+
+	@Override
+	public void visitar(LadrilloSolido ladrillo_solido) {
+		ajustar_posicion_enemigo_sobre_plataforma(this,ladrillo_solido);
+	}
+	
+	 private void ajustar_posicion_enemigo_sobre_plataforma(EntidadMovible enemigo, Entidad plataforma) {
+	        enemigo.set_velocidad_en_y(0);
+	        enemigo.set_posicion_en_y(plataforma.get_posicion_en_y() + plataforma.get_dimension().height);
+	    }	
 }

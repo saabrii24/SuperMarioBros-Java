@@ -16,36 +16,18 @@ public class Mapa {
     protected Juego mi_juego;
     protected Mario mario;
     
-    protected List<Goomba> entidades_goomba;
-    protected List<BuzzyBeetle> entidades_buzzy_beetle;
-    protected List<KoopaTroopa> entidades_koopa_troopa;
-    protected List<Lakitu> entidades_lakitu;
-    protected List<PiranhaPlant> entidades_piranha_plant;
-    protected List<Spiny> entidades_spiny;
-    protected List<PowerUp> entidades_powerup;
-    protected List<BloqueSolido> entidades_bloque_solido;
-    protected List<BloqueDePregunta> entidades_bloque_de_pregunta;
-    protected List<LadrilloSolido> entidades_ladrillo_solido;
-    protected List<Tuberias> entidades_tuberias;
-    protected List<Vacio> entidades_vacio;
+    protected List<Enemigo> entidades_enemigos;	
+    protected List<Plataforma> entidades_plataformas;
     protected List<BolaDeFuego> entidades_proyectiles;
+    protected List<PowerUp> entidades_powerup;
     protected Colisionador colisionador;
 
     public Mapa(Juego juego) {
         this.mi_juego = juego;
-        this.entidades_goomba = new CopyOnWriteArrayList<>();
-        this.entidades_buzzy_beetle = new CopyOnWriteArrayList<>();
-        this.entidades_lakitu = new CopyOnWriteArrayList<>();
-        this.entidades_koopa_troopa = new CopyOnWriteArrayList<>();
-        this.entidades_piranha_plant = new CopyOnWriteArrayList<>();
-        this.entidades_spiny = new CopyOnWriteArrayList<>();
-        this.entidades_powerup = new CopyOnWriteArrayList<>();
-        this.entidades_bloque_solido = new CopyOnWriteArrayList<>();
-        this.entidades_bloque_de_pregunta = new CopyOnWriteArrayList<>();
-        this.entidades_ladrillo_solido = new CopyOnWriteArrayList<>();
-        this.entidades_tuberias = new CopyOnWriteArrayList<>();
-        this.entidades_vacio = new CopyOnWriteArrayList<>();
+        this.entidades_enemigos = new CopyOnWriteArrayList<>();
+        this.entidades_plataformas = new CopyOnWriteArrayList<>();
         this.entidades_proyectiles = new CopyOnWriteArrayList<>();
+        this.entidades_powerup = new CopyOnWriteArrayList<>();
         this.colisionador = new Colisionador(this);
     }
 
@@ -58,45 +40,31 @@ public class Mapa {
 
     private List<EntidadMovible> get_entidades_movibles() {
         List<EntidadMovible> entidades_movibles = new CopyOnWriteArrayList<>();
-        entidades_movibles.addAll(entidades_goomba);
-        entidades_movibles.addAll(entidades_buzzy_beetle);
-        entidades_movibles.addAll(entidades_koopa_troopa);
-        entidades_movibles.addAll(entidades_piranha_plant);
-        entidades_movibles.addAll(entidades_spiny);
+        entidades_movibles.addAll(entidades_enemigos);
         entidades_movibles.addAll(entidades_proyectiles);
-        entidades_movibles.addAll(entidades_lakitu);
         return entidades_movibles;
     }
 
     public Colisionador get_colisionador() { return colisionador; }
 
-    public List<Goomba> get_entidades_goomba() { return entidades_goomba; }
-    public List<BuzzyBeetle> get_entidades_buzzy_beetle() { return entidades_buzzy_beetle; }
-    public List<Lakitu> get_entidades_lakitu() { return entidades_lakitu; }
-    public List<KoopaTroopa> get_entidades_koopa_troopa() { return entidades_koopa_troopa; }
-    public List<PiranhaPlant> get_entidades_piranha_plant() { return entidades_piranha_plant; }
-    public List<Spiny> get_entidades_spiny() { return entidades_spiny; }
-    public List<PowerUp> get_entidades_powerup() { return entidades_powerup; }
-    public List<BloqueSolido> get_entidades_bloque_solido() { return entidades_bloque_solido; }
-    public List<BloqueDePregunta> get_entidades_bloque_de_pregunta() { return entidades_bloque_de_pregunta; }
-    public List<LadrilloSolido> get_entidades_ladrillo_solido() { return entidades_ladrillo_solido; }
-    public List<Tuberias> get_entidades_tuberias() { return entidades_tuberias; }
-    public List<Vacio> get_entidades_vacio() { return entidades_vacio; }
+    public List<Enemigo> get_entidades_enemigos() { return entidades_enemigos; }
+    public List<Plataforma> get_entidades_plataformas() { return entidades_plataformas; }
     public List<BolaDeFuego> get_entidades_proyectiles() { return entidades_proyectiles; }
+    public List<PowerUp> get_entidades_powerup() { return entidades_powerup; }
 
     public void agregar_mario(Mario mario) { this.mario = mario; }
 
-    public void agregar_goomba(Goomba goomba) { entidades_goomba.add(goomba); }
-    public void agregar_buzzy_beetle(BuzzyBeetle buzzy) { entidades_buzzy_beetle.add(buzzy); }
-    public void agregar_koopa_troopa(KoopaTroopa koopa) { entidades_koopa_troopa.add(koopa); }
-    public void agregar_lakitu(Lakitu laki) { entidades_lakitu.add(laki); }
-    public void agregar_piranha_plant(PiranhaPlant piranha) { entidades_piranha_plant.add(piranha); }
-    public void agregar_spiny(Spiny spiny) { entidades_spiny.add(spiny); }
-    public void agregar_bloque_solido(BloqueSolido solido) { entidades_bloque_solido.add(solido); }
-    public void agregar_bloque_de_pregunta(BloqueDePregunta pregunta) { entidades_bloque_de_pregunta.add(pregunta); }
-    public void agregar_ladrillo_solido(LadrilloSolido ladrillo) { entidades_ladrillo_solido.add(ladrillo); }
-    public void agregar_tuberia(Tuberias tuberia) { entidades_tuberias.add(tuberia); }
-    public void agregar_vacio(Vacio vacio) { entidades_vacio.add(vacio); }
+    public void agregar_goomba(Goomba goomba) { entidades_enemigos.add(goomba); }
+    public void agregar_buzzy_beetle(BuzzyBeetle buzzy) { entidades_enemigos.add(buzzy); }
+    public void agregar_koopa_troopa(KoopaTroopa koopa) { entidades_enemigos.add(koopa); }
+    public void agregar_lakitu(Lakitu laki) { entidades_enemigos.add(laki); }
+    public void agregar_piranha_plant(PiranhaPlant piranha) { entidades_enemigos.add(piranha); }
+    public void agregar_spiny(Spiny spiny) { entidades_enemigos.add(spiny); }
+    public void agregar_bloque_solido(BloqueSolido solido) { entidades_plataformas.add(solido); }
+    public void agregar_bloque_de_pregunta(BloqueDePregunta pregunta) { entidades_plataformas.add(pregunta); }
+    public void agregar_ladrillo_solido(LadrilloSolido ladrillo) { entidades_plataformas.add(ladrillo); }
+    public void agregar_tuberia(Tuberias tuberia) { entidades_plataformas.add(tuberia); }
+    public void agregar_vacio(Vacio vacio) { entidades_plataformas.add(vacio); }
     public void agregar_powerup(PowerUp powerup) { 
     	if(powerup.get_envuelto()) {
 	        entidades_powerup.add(powerup);
@@ -113,42 +81,29 @@ public class Mapa {
         }
     }
 
-    public void eliminar_goomba(Goomba goomba) { entidades_goomba.remove(goomba); }
-    public void eliminar_buzzy_beetle(BuzzyBeetle buzzy) { entidades_buzzy_beetle.remove(buzzy); }
-    public void eliminar_koopa_troopa(KoopaTroopa koopa) { entidades_koopa_troopa.remove(koopa); }
-    public void eliminar_lakitu(Lakitu lakitu) { entidades_lakitu.remove(lakitu); }
-    public void eliminar_piranha_plant(PiranhaPlant piranha) { entidades_piranha_plant.remove(piranha); }
-    public void eliminar_spiny(Spiny spiny) { entidades_spiny.remove(spiny); }
+    public void eliminar_goomba(Goomba goomba) { entidades_enemigos.remove(goomba); }
+    public void eliminar_buzzy_beetle(BuzzyBeetle buzzy) { entidades_enemigos.remove(buzzy); }
+    public void eliminar_koopa_troopa(KoopaTroopa koopa) { entidades_enemigos.remove(koopa); }
+    public void eliminar_lakitu(Lakitu lakitu) { entidades_enemigos.remove(lakitu); }
+    public void eliminar_piranha_plant(PiranhaPlant piranha) { entidades_enemigos.remove(piranha); }
+    public void eliminar_spiny(Spiny spiny) { entidades_enemigos.remove(spiny); }
     public void eliminar_powerup(PowerUp powerup) { entidades_powerup.remove(powerup); }
-    public void eliminar_bloque_solido(BloqueSolido solido) { entidades_bloque_solido.remove(solido); }
-    public void eliminar_bloque_de_pregunta(BloqueDePregunta pregunta) { entidades_bloque_de_pregunta.remove(pregunta); }
-    public void eliminar_ladrillo_solido(LadrilloSolido ladrillo) { entidades_ladrillo_solido.remove(ladrillo); }
-    public void eliminar_tuberia(Tuberias tuberia) { entidades_tuberias.remove(tuberia); }
-    public void eliminar_vacio(Vacio vacio) { entidades_vacio.remove(vacio); }
+    public void eliminar_bloque_solido(BloqueSolido solido) { entidades_plataformas.remove(solido); }
+    public void eliminar_bloque_de_pregunta(BloqueDePregunta pregunta) { entidades_plataformas.remove(pregunta); }
+    public void eliminar_ladrillo_solido(LadrilloSolido ladrillo) { entidades_plataformas.remove(ladrillo); }
+    public void eliminar_tuberia(Tuberias tuberia) { entidades_plataformas.remove(tuberia); }
+    public void eliminar_vacio(Vacio vacio) { entidades_plataformas.remove(vacio); }
     public void eliminar_bola_de_fuego(BolaDeFuego bola_de_fuego) { entidades_proyectiles.remove(bola_de_fuego); }
 
     public void barrer_mapa() {
         for (EntidadMovible entidad : get_entidades_movibles()) {
             entidad.eliminar_del_mapa();
         }
-        entidades_goomba.clear();
-        entidades_buzzy_beetle.clear();
-        entidades_koopa_troopa.clear();
-        entidades_lakitu.clear();
-        entidades_piranha_plant.clear();
-        entidades_spiny.clear();
+        entidades_enemigos.clear();
         for (PowerUp powerup : entidades_powerup) powerup.eliminar_del_mapa(); 
         entidades_powerup.clear();
-        for (BloqueSolido bloque_solido : entidades_bloque_solido) bloque_solido.eliminar_del_mapa(); 
-        entidades_bloque_solido.clear();
-        for (BloqueDePregunta bloque_pregunta : entidades_bloque_de_pregunta) bloque_pregunta.eliminar_del_mapa(); 
-        entidades_bloque_de_pregunta.clear();
-        for (LadrilloSolido ladrillo_solido : entidades_ladrillo_solido) ladrillo_solido.eliminar_del_mapa(); 
-        entidades_ladrillo_solido.clear();
-        for (Tuberias tuberia : entidades_tuberias) tuberia.eliminar_del_mapa(); 
-        entidades_tuberias.clear();
-        for (Vacio vacio : entidades_vacio) vacio.eliminar_del_mapa(); 
-        entidades_vacio.clear();
+        for (Plataforma plataformas : entidades_plataformas) plataformas.eliminar_del_mapa(); 
+        entidades_plataformas.clear();
         for (BolaDeFuego proyectil : entidades_proyectiles) proyectil.eliminar_del_mapa(); 
         entidades_proyectiles.clear();
         
@@ -161,12 +116,9 @@ public class Mapa {
     public void reproducir_efecto(String efecto) { mi_juego.reproducir_efecto(efecto); }
 
     public void actualizar_fabrica_sprites(SpritesFactory nueva_fabrica) {
-        for (KoopaTroopa koopa : entidades_koopa_troopa)
-        	koopa.actualizar_fabrica_sprites(nueva_fabrica);
-        for (Spiny spiny : entidades_spiny)
-        	spiny.actualizar_fabrica_sprites(nueva_fabrica);
-        for (BuzzyBeetle buzzy : entidades_buzzy_beetle)
-        	buzzy.actualizar_fabrica_sprites(nueva_fabrica);
+        for(Enemigo enemigo: entidades_enemigos) {
+        	enemigo.actualizar_fabrica_sprites(nueva_fabrica);
+        }
     }
 
 }

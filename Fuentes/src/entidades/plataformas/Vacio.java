@@ -8,4 +8,10 @@ public class Vacio extends Plataforma {
 		super(x, y, sprite);
 	}
 
+	public void aceptar(PlataformasVisitorMario visitador) {}
+	
+	@Override
+	public void aceptar(PlataformasVisitorEnemigos visitador) {
+		visitador.visitar(this);
+	}
 }

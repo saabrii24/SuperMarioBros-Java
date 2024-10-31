@@ -26,4 +26,13 @@ public class BloqueDePregunta extends Plataforma {
             }
            
     }
+
+	public void aceptar(PlataformasVisitorMario visitador) {
+		visitador.visitar(this);
+	}
+
+	@Override
+	public void aceptar(PlataformasVisitorEnemigos visitador) {
+		visitador.visitar(this);
+	}
 }

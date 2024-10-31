@@ -16,4 +16,13 @@ public class LadrilloSolido extends Plataforma{
             eliminar_del_mapa();
         }
     }
+	
+	public void aceptar(PlataformasVisitorMario visitador) {
+		visitador.visitar(this);
+	}
+	
+	@Override
+	public void aceptar(PlataformasVisitorEnemigos visitador) {
+		visitador.visitar(this);
+	}
 }

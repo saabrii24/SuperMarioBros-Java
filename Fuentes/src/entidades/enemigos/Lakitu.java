@@ -1,6 +1,11 @@
 package entidades.enemigos;
 
+import entidades.plataformas.BloqueDePregunta;
+import entidades.plataformas.BloqueSolido;
+import entidades.plataformas.LadrilloSolido;
 import entidades.plataformas.Plataforma;
+import entidades.plataformas.Tuberias;
+import entidades.plataformas.Vacio;
 import fabricas.Sprite;
 import logica.Juego;
 import logica.Mapa;
@@ -56,7 +61,21 @@ public class Lakitu extends Enemigo{
 	}
 
 	@Override
-	public boolean visitar(Plataforma plataforma) {
-		return false;
-	}
+	public void visitar(Vacio vacio) {}
+
+
+	@Override
+	public void visitar(BloqueSolido bloque_solido) {}
+
+
+	@Override
+	public void visitar(BloqueDePregunta bloque_de_pregunta) {}
+
+
+	@Override
+	public void visitar(Tuberias tuberia) {}
+
+
+	@Override
+	public void visitar(LadrilloSolido ladrillo_solido) {}
 }

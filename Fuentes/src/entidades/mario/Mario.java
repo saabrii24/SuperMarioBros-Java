@@ -6,11 +6,17 @@ import entidades.enemigos.*;
 import entidades.interfaces.EntidadJugador;
 import entidades.interfaces.SistemaPuntuacion;
 import entidades.interfaces.SistemaVidas;
+import entidades.plataformas.BloqueDePregunta;
+import entidades.plataformas.BloqueSolido;
+import entidades.plataformas.LadrilloSolido;
+import entidades.plataformas.PlataformasVisitorMario;
+import entidades.plataformas.Tuberias;
+import entidades.plataformas.Vacio;
 import entidades.powerups.*;
 import fabricas.Sprite;
 import logica.Juego;
 
-public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisitor,EnemigosVisitor {
+public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisitor,EnemigosVisitor,PlataformasVisitorMario {
     private static final double VELOCIDAD_LATERAL = 5.0;
     private static final double VELOCIDAD_SALTO = -10.0;
     private static final int VIDAS_INICIALES = 3;
@@ -74,6 +80,10 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
 		int colision_con_enemigo(Lakitu lakitu);
 		int colision_con_enemigo(PiranhaPlant piranha);
 		int colision_con_enemigo(Spiny spiny);
+		void colision_con_plataformas(BloqueDePregunta bloque_de_pregunta);
+		void colision_con_plataformas(BloqueSolido bloque_solido);
+		void colision_con_plataformas(LadrilloSolido ladrillo_solido);
+		void colision_con_plataformas(Tuberias tuberia);
     }
 
     // Getters
@@ -252,5 +262,26 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
 	public int visitar(Spiny spiny) {
 		return estado.colision_con_enemigo(spiny);
 	}
+
+	@Override
+	public void visitar(BloqueDePregunta bloque_de_pregunta) {
+		estado.colision_con_plataformas(bloque_de_pregunta);
+	}
+
+	@Override
+	public void visitar(BloqueSolido bloque_solido) {
+		estado.colision_con_plataformas(bloque_solido);
+	}
+
+	@Override
+	public void visitar(LadrilloSolido ladrillo_solido) {
+		estado.colision_con_plataformas(ladrillo_solido);
+	}
+
+	@Override
+	public void visitar(Tuberias tuberia) {
+		estado.colision_con_plataformas(tuberia);
+	}
+
 
 }

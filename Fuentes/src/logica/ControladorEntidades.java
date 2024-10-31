@@ -40,6 +40,7 @@ public class ControladorEntidades {
         if(mario.get_posicion_en_x() >= 4410) {
             manejar_cambio_nivel();
         }
+        
         if(mario.get_posicion_en_y() < 0) {
             mario_cae_al_vacio(mario);
         }
@@ -70,17 +71,9 @@ public class ControladorEntidades {
         mario.eliminar_del_mapa();
     }
     
-    public void lakitu_dispara() {
-    	for (Lakitu laki : juego.get_mapa_nivel_actual().get_entidades_lakitu()) {
-    		laki.lanzar_spiny(juego.get_mapa_nivel_actual());
-    	}
-    }
 
     public void mover_enemigos() {
-        mover_lista_entidades(juego.get_mapa_nivel_actual().get_entidades_goomba());
-        mover_lista_entidades(juego.get_mapa_nivel_actual().get_entidades_buzzy_beetle());
-        mover_lista_entidades(juego.get_mapa_nivel_actual().get_entidades_koopa_troopa());
-        mover_lista_entidades(juego.get_mapa_nivel_actual().get_entidades_spiny());
+        mover_lista_entidades(juego.get_mapa_nivel_actual().get_entidades_enemigos());
     }
 
     private <T extends EntidadMovible> void mover_lista_entidades(List<T> entidades) {
@@ -115,12 +108,7 @@ public class ControladorEntidades {
 
     public void notificar_observadores_enemigos() {
         Mapa mapa = juego.get_mapa_nivel_actual();
-        notificar_lista_entidades(mapa.get_entidades_buzzy_beetle());
-        notificar_lista_entidades(mapa.get_entidades_koopa_troopa());
-        notificar_lista_entidades(mapa.get_entidades_goomba());
-        notificar_lista_entidades(mapa.get_entidades_lakitu());
-        notificar_lista_entidades(mapa.get_entidades_piranha_plant());
-        notificar_lista_entidades(mapa.get_entidades_spiny());
+        notificar_lista_entidades(mapa.get_entidades_enemigos());
     }
     
     private void notificar_lista_entidades(List<? extends Entidad> entidades) {

@@ -1,8 +1,7 @@
 package entidades.enemigos;
 
 import entidades.EntidadMovible;
-import entidades.plataformas.Plataforma;
-import entidades.plataformas.PlataformasVisitorEnemigos;
+import entidades.plataformas.*;
 import fabricas.Sprite;
 import logica.Mapa;
 
@@ -16,6 +15,9 @@ public abstract class Enemigo extends EntidadMovible implements PlataformasVisit
 	public abstract int calcular_penalizacion();
 	public abstract void destruir(Mapa mapa);
 	public abstract int aceptar(EnemigosVisitor visitador);
-	public abstract boolean visitar(Plataforma plataforma);
-	
+	public abstract void visitar(Vacio vacio);
+	public abstract void visitar(BloqueSolido bloque_solido);
+	public abstract void visitar(BloqueDePregunta bloque_de_pregunta);
+	public abstract void visitar(Tuberias tuberia);
+	public abstract void visitar(LadrilloSolido ladrillo_solido);
 }

@@ -87,8 +87,7 @@ public class ControladorNivel {
         Mario.get_instancia().get_sistema_puntuacion().pasar_nivel();
         
 
-        if(nivel_actual <= 3)
-        	cargar_datos(juego.fabrica_entidades);
+        
     }
 
     public int get_nivel_actual() {

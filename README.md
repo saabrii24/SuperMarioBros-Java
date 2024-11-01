@@ -112,9 +112,9 @@ La clase `Sonido` maneja la música de fondo, efectos de sonido y opciones para 
 
 ## 9. Características de Extensibilidad
 
-- **Múltiples Temas**: soporte para diferentes temas visuales usando el patrón Factory y sprites extensibles.
-- **Generación de Niveles**: un sistema de niveles flexible que permite diferentes configuraciones de niveles.
-- **Sistema de Entidades**: una jerarquía extensible, lo que facilita agregar nuevos enemigos, potenciadores y plataformas.
+- **Múltiples Dominios**: soporte para diferentes dominios de aplicación visuales usando el patrón Factory y sprites extensibles.
+- **Generación de Niveles**: sistema de niveles flexible que permite diferentes configuraciones de niveles.
+- **Sistema de Entidades**: jerarquía extensible, lo que facilita agregar nuevos enemigos, potenciadores y plataformas.
 
 ## 10. Consideraciones Técnicas
 
@@ -122,6 +122,6 @@ La clase `Sonido` maneja la música de fondo, efectos de sonido y opciones para 
    - Movimiento de Mario
    - Movimiento de los enemigos 
    - Actualización de la información.
-   - 
+     
 - **Gestión de Recursos**: carga y almacenamiento de sprites, gestión de sonido y un sistema de ranking persistente. 
 

@@ -10,10 +10,6 @@ import niveles.Nivel;
 
 public class Juego {
     private static Juego instancia_juego;
-    public static final int SALTAR = 15000;
-    public static final int IZQUIERDA = 15001;
-    public static final int DERECHA = 15003;
-    public static final int DISPARAR = 15004;
 
     protected SpritesFactory fabrica_sprites;
     protected EntidadesFactory fabrica_entidades;
@@ -22,7 +18,6 @@ public class Juego {
     protected Mapa mapa_nivel_actual;
     protected String nombre_jugador;
 
-    
     protected ControladorMovimiento controlador_movimiento;
     protected ControladorEntidades controlador_entidades;
     protected ControladorNivel controlador_nivel;
@@ -104,6 +99,18 @@ public class Juego {
         
         mapa_nivel_actual = new Mapa(this);
         nivel_actual = null;
+    }
+    
+    public void pausar_juego() {
+        if (controlador_movimiento != null) {
+            controlador_movimiento.pausar();
+        }
+    }
+
+    public void reanudar_juego() {
+        if (controlador_movimiento != null) {
+            controlador_movimiento.reanudar();
+        }
     }
 
 }

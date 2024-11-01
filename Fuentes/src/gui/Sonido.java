@@ -8,31 +8,46 @@ import java.io.BufferedInputStream;
 public class Sonido {
     private Clip musica_de_fondo;
     private boolean sonido_activo;
+    private long tiempo_pausado_en_ms;
 
     public Sonido() {
         this.sonido_activo = true;
+        this.tiempo_pausado_en_ms = 0;
     }
 
     public void reproducir_musica_de_fondo() {
         if (!sonido_activo) return;
         
         try {
-            BufferedInputStream buffered_stream = new BufferedInputStream(
-                getClass().getResourceAsStream("/assets/sonido/background.wav")
-            );
-            AudioInputStream audio_stream = AudioSystem.getAudioInputStream(buffered_stream);
-            musica_de_fondo = AudioSystem.getClip();
-            musica_de_fondo.open(audio_stream);
-            musica_de_fondo.loop(Clip.LOOP_CONTINUOUSLY);
+            if (musica_de_fondo == null || !musica_de_fondo.isOpen()) {
+                BufferedInputStream buffered_stream = new BufferedInputStream(
+                    getClass().getResourceAsStream("/assets/sonido/background.wav")
+                );
+                AudioInputStream audio_stream = AudioSystem.getAudioInputStream(buffered_stream);
+                musica_de_fondo = AudioSystem.getClip();
+                musica_de_fondo.open(audio_stream);
+                musica_de_fondo.loop(Clip.LOOP_CONTINUOUSLY);
+            } else {
+                musica_de_fondo.setMicrosecondPosition(tiempo_pausado_en_ms);
+                musica_de_fondo.start();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+    
+    public void pausar_musica_de_fondo() {
+        if (musica_de_fondo != null && musica_de_fondo.isRunning()) {
+        	tiempo_pausado_en_ms = musica_de_fondo.getMicrosecondPosition();
+            musica_de_fondo.stop();
+        }
+    }
 
     public void detener_musica_de_fondo() {
-        if (musica_de_fondo != null && musica_de_fondo.isRunning()) {
+        if (musica_de_fondo != null) {
             musica_de_fondo.stop();
             musica_de_fondo.close();
+            tiempo_pausado_en_ms = 0;
         }
     }
 

@@ -36,6 +36,7 @@ public class ControladorDeVistas implements ControladorJuegoVistaEntidades, Cont
     private Set<Integer> teclas_presionadas;
     private Timer timer_juego;
     private static final int FRAME_DELAY = 16;
+    private boolean juego_pausado = false;
     
     public ControladorDeVistas(Juego juego) {
         mi_juego = juego;
@@ -125,9 +126,12 @@ public class ControladorDeVistas implements ControladorJuegoVistaEntidades, Cont
                         sonido_juego.activar_sonido();
                         sonido_activo = true;
                     } else {
-                        sonido_juego.detener_musica_de_fondo();
+                    	sonido_juego.pausar_musica_de_fondo();
                         sonido_activo = false;
                     }
+                }
+                if (evento.getKeyCode() == KeyEvent.VK_P) {
+                    alternar_pausa();
                 }
             }
 
@@ -254,6 +258,25 @@ public class ControladorDeVistas implements ControladorJuegoVistaEntidades, Cont
         generador = new EntidadesFactory(fabrica_sprites);
 		mi_juego.cargar_datos(generador); 
 	}
+	
+	public void alternar_pausa() {
+	    juego_pausado = !juego_pausado;
+	    if (juego_pausado) {
+	        mi_juego.pausar_juego();
+	        panel_pantalla_mapa.mostrar_pausa();
+	        sonido_juego.pausar_musica_de_fondo();
+	    } else {
+	        mi_juego.reanudar_juego();
+	        panel_pantalla_mapa.ocultar_pausa();
+	        if (sonido_activo) {
+	            sonido_juego.reproducir_musica_de_fondo();
+	        }
+	    }
+	}
+
+    public boolean esta_pausado() {
+        return juego_pausado;
+    }
 	
 	public PanelPantallaMapa get_pantalla_mapa() { return panel_pantalla_mapa; }
 	public void reproducir_efecto(String efecto) { sonido_juego.reproducir_efecto(efecto); }

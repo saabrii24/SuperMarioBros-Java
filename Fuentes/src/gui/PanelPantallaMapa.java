@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.io.File;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import entidades.interfaces.EntidadJugador;
@@ -34,6 +36,7 @@ public class PanelPantallaMapa extends JPanel {
     private JLabel label_nivel;
     private JLabel label_tiempo; 
     private JLabel label_vidas;
+    private JLabel label_pausa;
     
     // Recursos
     private Font tipografia;
@@ -53,6 +56,21 @@ public class PanelPantallaMapa extends JPanel {
         panel_mapa = new JPanel();
         panel_mapa.setMinimumSize(new Dimension(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO));
         panel_mapa.setPreferredSize(new Dimension(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO));
+        
+
+        
+        label_pausa = new JLabel();
+        try {
+            ImageIcon icono_pausa = new ImageIcon(ImageIO.read(getClass().getResourceAsStream("/assets/imagenes/pausa.png")));
+            label_pausa.setIcon(icono_pausa);
+        } catch (IOException e) {
+            // Si no encuentra la imagen, usar texto
+            label_pausa.setText("PAUSA");
+            label_pausa.setFont(new Font("Arial", Font.BOLD, 48));
+            label_pausa.setForeground(Color.WHITE);
+        }
+        label_pausa.setHorizontalAlignment(SwingConstants.CENTER);
+        label_pausa.setVisible(false);
         
         actualizar_panel_mapa(layered_pane);
     }
@@ -85,7 +103,15 @@ public class PanelPantallaMapa extends JPanel {
         
         layered_pane.revalidate();
         layered_pane.repaint();
-    }
+        
+        label_pausa.setBounds(
+                0,
+                0,
+                ConstantesVistas.PANEL_ANCHO,
+                ConstantesVistas.PANEL_ALTO
+            );
+            layered_pane.add(label_pausa, Integer.valueOf(2)); // Capa superior
+        }
 
     protected void agregar_panel_mapa_con_fondo(JPanel panel) {
         imagen_fondo = new JLabel();
@@ -284,5 +310,13 @@ public class PanelPantallaMapa extends JPanel {
             e.printStackTrace();
             tipografia = new Font("Arial", Font.PLAIN, 18);
         }
+    }
+    
+    public void mostrar_pausa() {
+        label_pausa.setVisible(true);
+    }
+
+    public void ocultar_pausa() {
+        label_pausa.setVisible(false);
     }
 }

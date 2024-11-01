@@ -12,6 +12,7 @@ public class ControladorMovimiento {
     private Thread hilo_informacion_y_tiempo;
     private volatile boolean esta_ejecutando;
     private volatile boolean juego_terminado;
+    private volatile boolean esta_pausado;
 
     public ControladorMovimiento(Juego juego) {
         this.juego = juego;
@@ -46,6 +47,16 @@ public class ControladorMovimiento {
         final double tiempo_por_frame = 1_000_000_000.0 / 60;
 
         while (esta_ejecutando) {
+            if (esta_pausado) {
+                try {
+                    Thread.sleep(100);
+                    continue;
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    break;
+                }
+            }
+
             long tiempo_actual = System.nanoTime();
             
             juego.controlador_entidades.mover_mario();
@@ -60,6 +71,16 @@ public class ControladorMovimiento {
         final double tiempo_por_frame = 1_000_000_000.0 / 60;
 
         while (esta_ejecutando) {
+            if (esta_pausado) {
+                try {
+                    Thread.sleep(100);
+                    continue;
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    break;
+                }
+            }
+
             long tiempo_actual = System.nanoTime();
 
             juego.controlador_entidades.mover_enemigos();
@@ -76,6 +97,15 @@ public class ControladorMovimiento {
         
         while (esta_ejecutando && !juego_terminado) {
             try {
+            	 if (esta_pausado) {
+                     try {
+                         Thread.sleep(100);
+                         continue;
+                     } catch (InterruptedException e) {
+                         Thread.currentThread().interrupt();
+                         break;
+                     }
+                 }
                 Nivel nivel_actual = juego.get_nivel_actual();
                 Mario mario = Mario.get_instancia();
                 
@@ -165,6 +195,14 @@ public class ControladorMovimiento {
                 }
             }
         }
+    }
+    
+    public void pausar() {
+        esta_pausado = true;
+    }
+
+    public void reanudar() {
+        esta_pausado = false;
     }
 
 }

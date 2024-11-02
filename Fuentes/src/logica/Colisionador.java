@@ -23,10 +23,19 @@ public class Colisionador {
         verificar_colisiones_con_plataformas(mario);
         verificar_colisiones_con_enemigos(mario);
         verificar_colisiones_con_powerups(mario);
+        verificar_colisiones_enemigos_con_enemigos();
         verificar_colisiones_proyectiles();
     }
 
-    private void verificar_colisiones_con_plataformas(Mario mario) {
+    private void verificar_colisiones_enemigos_con_enemigos() {
+    	for(Enemigo enemigo1: mapa.get_entidades_enemigos())
+    		for(Enemigo enemigo2: mapa.get_entidades_enemigos())
+    			if(enemigo1!=enemigo2 && enemigo1.get_limites().intersects(enemigo2.get_limites())) {
+    				System.out.println(enemigo1+"  "+ enemigo2);
+    				enemigo1.aceptar(enemigo2);
+    			}	}
+
+	private void verificar_colisiones_con_plataformas(Mario mario) {
         verificar_colisiones_con_plataformas_mario(mario);
         verificar_colisiones_plataformas_enemigos();
     }

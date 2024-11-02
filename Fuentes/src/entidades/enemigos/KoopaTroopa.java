@@ -108,5 +108,37 @@ public class KoopaTroopa extends Enemigo {
 	 private void ajustar_posicion_enemigo_sobre_plataforma(EntidadMovible enemigo, Entidad plataforma) {
 	        enemigo.set_velocidad_en_y(0);
 	        enemigo.set_posicion_en_y(plataforma.get_posicion_en_y() + plataforma.get_dimension().height);
-	    }	
+	 }	
+	 
+	 @Override
+		public void visitar_enemigo(Goomba goomba) {}
+
+
+		@Override
+		public void visitar_enemigo(BuzzyBeetle buzzy) {}
+
+
+		@Override
+		public void visitar_enemigo(KoopaTroopa koopa) {
+			koopa.set_direccion(koopa.get_direccion()*-1);
+			this.set_direccion(direccion);
+		}
+
+
+		@Override
+		public void visitar_enemigo(Lakitu lakitu) {}
+
+
+		@Override
+		public void visitar_enemigo(PiranhaPlant piranha) {}
+
+
+		@Override
+		public void visitar_enemigo(Spiny spiny) {}
+
+
+		@Override
+		public void aceptar(EnemigoVisitorEnemigo visitador) {
+			visitador.visitar_enemigo(this);
+		}	
 }

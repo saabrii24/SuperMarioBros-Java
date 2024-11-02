@@ -97,4 +97,36 @@ public class Goomba extends Enemigo {
 	        enemigo.set_velocidad_en_y(0);
 	        enemigo.set_posicion_en_y(plataforma.get_posicion_en_y() + plataforma.get_dimension().height);
 	    }	
+	 
+	 @Override
+		public void visitar_enemigo(Goomba goomba) {
+			goomba.set_direccion(goomba.get_direccion()*-1);
+			this.set_direccion(direccion);
+		}
+
+
+		@Override
+		public void visitar_enemigo(BuzzyBeetle buzzy) {}
+
+
+		@Override
+		public void visitar_enemigo(KoopaTroopa koopa) {}
+
+
+		@Override
+		public void visitar_enemigo(Lakitu lakitu) {}
+
+
+		@Override
+		public void visitar_enemigo(PiranhaPlant piranha) {}
+
+
+		@Override
+		public void visitar_enemigo(Spiny spiny) {}
+
+
+		@Override
+		public void aceptar(EnemigoVisitorEnemigo visitador) {
+			visitador.visitar_enemigo(this);
+		}	
 }

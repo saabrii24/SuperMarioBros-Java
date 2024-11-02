@@ -76,7 +76,27 @@ public class Lakitu extends Enemigo{
 	@Override
 	public void visitar(Tuberias tuberia) {}
 
-
 	@Override
 	public void visitar(LadrilloSolido ladrillo_solido) {}
+	
+	@Override
+	public void visitar_enemigo(Goomba goomba) {}
+
+	@Override
+	public void visitar_enemigo(BuzzyBeetle buzzy) {}
+
+	@Override
+	public void visitar_enemigo(KoopaTroopa koopa) {}
+
+	@Override
+	public void visitar_enemigo(Lakitu lakitu) {}
+
+	@Override
+	public void visitar_enemigo(PiranhaPlant piranha) {}
+
+	@Override
+	public void visitar_enemigo(Spiny spiny) {}
+
+	@Override
+	public void aceptar(EnemigoVisitorEnemigo visitador) {}
 }

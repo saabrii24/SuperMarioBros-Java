@@ -68,9 +68,9 @@ Tiempo: 60
 	
 	BloqueSolido: 816, 432
 	BloqueSolido: 864, 432
-	BloqueDePreguntaConMoneda: 864, 576
+	BloqueDePreguntaConMoneda: 864, 600
 	BloqueSolido: 912, 432
-	BloqueDePreguntaConMoneda: 912, 576
+	BloqueDePreguntaConMoneda: 912, 600
 	BloqueSolido: 960, 432
 	
 	LadrilloSolido: 1104, 336
@@ -98,12 +98,12 @@ Tiempo: 60
 	LadrilloSolido: 1632, 432
 	LadrilloSolido: 1680, 384
 	
-	BloqueDePreguntaConSuperChampi: 1344, 576
-	BloqueDePreguntaConMoneda: 1392, 576
-	BloqueDePreguntaConMoneda: 1440, 576
-	BloqueDePreguntaConMoneda: 1488, 576
-	BloqueDePreguntaConMoneda: 1536, 576
-	BloqueDePreguntaConEstrella: 1584, 576
+	BloqueDePreguntaConSuperChampi: 1344, 600
+	BloqueDePreguntaConMoneda: 1392, 600
+	BloqueDePreguntaConMoneda: 1440, 600
+	BloqueDePreguntaConMoneda: 1488, 600
+	BloqueDePreguntaConMoneda: 1536, 600
+	BloqueDePreguntaConEstrella: 1584, 600
 	
 	LadrilloSolido: 1776, 336
 	

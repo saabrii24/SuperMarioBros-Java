@@ -6,12 +6,7 @@ import entidades.enemigos.*;
 import entidades.interfaces.EntidadJugador;
 import entidades.interfaces.SistemaPuntuacion;
 import entidades.interfaces.SistemaVidas;
-import entidades.plataformas.BloqueDePregunta;
-import entidades.plataformas.BloqueSolido;
-import entidades.plataformas.LadrilloSolido;
-import entidades.plataformas.PlataformasVisitorMario;
-import entidades.plataformas.Tuberias;
-import entidades.plataformas.Vacio;
+import entidades.plataformas.*;
 import entidades.powerups.*;
 import fabricas.Sprite;
 import logica.Juego;
@@ -232,7 +227,7 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
 	    velocidad_en_x = 0;
 	    velocidad_en_y = 0;
 	    saltando = false;
-	    cayendo = false;
+	    cayendo = true;
 	    reiniciar_estado();
 	}
 

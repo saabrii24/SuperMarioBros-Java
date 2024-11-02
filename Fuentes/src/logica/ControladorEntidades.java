@@ -2,11 +2,9 @@ package logica;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import entidades.BolaDeFuego;
 import entidades.Entidad;
 import entidades.EntidadMovible;
-import entidades.enemigos.Lakitu;
 import entidades.mario.Mario;
 import entidades.mario.NormalMarioState;
 

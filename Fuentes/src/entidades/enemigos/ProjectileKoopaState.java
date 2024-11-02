@@ -1,5 +1,6 @@
 package entidades.enemigos;
 
+import entidades.mario.Mario;
 import logica.Juego;
 import logica.ResultadoColision;
 
@@ -34,4 +35,10 @@ public class ProjectileKoopaState implements KoopaTroopa.KoopaState {
 
     @Override
     public boolean mata_tocando() { return true; }
+
+	@Override
+	public void visitar_enemigo(Enemigo enemigo) {
+		Mario.get_instancia().get_sistema_puntuacion().sumar_puntos(enemigo.calcular_puntaje());
+		enemigo.destruir(Juego.get_instancia().get_mapa_nivel_actual());
+	}
 }

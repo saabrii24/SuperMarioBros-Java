@@ -26,6 +26,7 @@ public class KoopaTroopa extends Enemigo {
         ResultadoColision cambiar_estado();
         boolean en_movimiento();
         boolean mata_tocando();
+        void visitar_enemigo(Enemigo enemigo);
     }
 
     public void actualizar() {
@@ -111,34 +112,39 @@ public class KoopaTroopa extends Enemigo {
 	 }	
 	 
 	 @Override
-		public void visitar_enemigo(Goomba goomba) {}
+	 public void visitar_enemigo(Goomba goomba) {
+		estado.visitar_enemigo(goomba);
+	}
+
+	@Override
+	public void visitar_enemigo(BuzzyBeetle buzzy) {
+		estado.visitar_enemigo(buzzy);
+	}
+
+	@Override
+	public void visitar_enemigo(KoopaTroopa koopa) {
+		estado.visitar_enemigo(koopa);
+	}
 
 
-		@Override
-		public void visitar_enemigo(BuzzyBeetle buzzy) {}
+	@Override
+	public void visitar_enemigo(Lakitu lakitu) {
+		estado.visitar_enemigo(lakitu);
+	}
 
 
-		@Override
-		public void visitar_enemigo(KoopaTroopa koopa) {
-			koopa.set_direccion(koopa.get_direccion()*-1);
-			this.set_direccion(direccion);
-		}
+	@Override
+	public void visitar_enemigo(PiranhaPlant piranha) {
+		estado.visitar_enemigo(piranha);
+	}
 
+	@Override
+	public void visitar_enemigo(Spiny spiny) {
+		estado.visitar_enemigo(spiny);
+	}
 
-		@Override
-		public void visitar_enemigo(Lakitu lakitu) {}
-
-
-		@Override
-		public void visitar_enemigo(PiranhaPlant piranha) {}
-
-
-		@Override
-		public void visitar_enemigo(Spiny spiny) {}
-
-
-		@Override
-		public void aceptar(EnemigoVisitorEnemigo visitador) {
-			visitador.visitar_enemigo(this);
-		}	
+	@Override
+	public void aceptar(EnemigoVisitorEnemigo visitador) {
+		visitador.visitar_enemigo(this);
+	}	
 }

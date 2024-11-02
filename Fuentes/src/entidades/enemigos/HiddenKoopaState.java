@@ -31,4 +31,7 @@ public class HiddenKoopaState implements KoopaTroopa.KoopaState {
 
     @Override
     public boolean mata_tocando() { return false; }
+
+	@Override
+	public void visitar_enemigo(Enemigo enemigo) {}
 }

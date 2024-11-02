@@ -23,7 +23,7 @@ public class Colisionador {
         verificar_colisiones_con_plataformas(mario);
         verificar_colisiones_con_enemigos(mario);
         verificar_colisiones_con_powerups(mario);
-        //verificar_colisiones_proyectiles();
+        verificar_colisiones_proyectiles();
     }
 
     private void verificar_colisiones_con_plataformas(Mario mario) {
@@ -55,8 +55,7 @@ public class Colisionador {
      * colision mario enemigos ta
      * colision mario pu ta
      * colision mario plataforma ta
-     * 
-     * colision bola de fuego y enemigo falta
+     * colision bola de fuego ta
      * 
      */
     
@@ -92,9 +91,8 @@ public class Colisionador {
         }
     }
 
-  /*  private void verificar_colisiones_proyectiles() {
+   private void verificar_colisiones_proyectiles() {
     	verificar_colisiones_bolas_fuego();
-        verificar_colisiones_koopa_proyectil();
     }
     
     private void verificar_colisiones_bolas_fuego() {
@@ -116,16 +114,9 @@ public class Colisionador {
                 break;
             }
         }
-        for (PiranhaPlant piranha : new ArrayList<>(mapa.get_entidades_piranha_plant())) {
-            if (proyectil.get_limites().intersects(piranha.get_limites())) {
-                Mario.get_instancia().get_sistema_puntuacion().sumar_puntos(piranha.calcular_puntaje());
-                piranha.destruir(mapa);
-                proyectil.destruir(mapa);
-                break;
-            }
-        }
     }
-    //leerlo bien y ver que hacer
+    
+  	/*
     private void verificar_colisiones_koopa_proyectil() {
         Mario mario = Mario.get_instancia();
         for (KoopaTroopa koopa : new ArrayList<>(mapa.get_entidades_koopa_troopa())) {

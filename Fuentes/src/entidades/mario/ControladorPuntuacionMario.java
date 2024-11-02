@@ -73,7 +73,8 @@ public class ControladorPuntuacionMario implements SistemaPuntuacion {
         monedas_nivel_actual = 0;
     }
 
-    public void resetear_puntos(int nivel_actual) {
-        puntaje_nivel_actual = 0;
+    public void resetear_puntos(int nivel_actual, int vidas) {
+        if(vidas>0)
+    		puntaje_nivel_actual = 0;
     }
 }

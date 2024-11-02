@@ -49,7 +49,7 @@ public class ControladorNivel {
     private void resetear_mario() {
         Mario mario = Mario.get_instancia();
         mario.get_sistema_puntuacion().resetear_monedas(nivel_actual);
-        mario.get_sistema_puntuacion().resetear_puntos(nivel_actual);
+        mario.get_sistema_puntuacion().resetear_puntos(nivel_actual, mario.get_vidas());
         mario.resetear_posicion();
         juego.get_mapa_nivel_actual().agregar_mario(mario);
     }

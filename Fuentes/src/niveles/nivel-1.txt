@@ -34,6 +34,8 @@ Tiempo: 50
 	
 	Moneda: 1680, 432
 	Moneda: 1872, 480
+	
+	ChampiVerde: 2112, 480
 
 	# Plataformas
 	Tuberia: 1248, 144
@@ -48,7 +50,7 @@ Tiempo: 50
 	BloqueSolido: 1920, 192
 	BloqueSolido: 1920, 240
 	BloqueSolido: 1920, 288
-	LadrilloSolido: 2112,432
+	LadrilloSolido: 2112, 432
 	BloqueSolido: 2304, 144
 	BloqueSolido: 2304, 192
 	BloqueSolido: 2304, 240
@@ -69,7 +71,7 @@ Tiempo: 50
 	Tuberia: 3264, 144
 	Tuberia: 3600, 144
 
-	BloqueDePreguntaConMoneda: 672, 288
+	BloqueDePreguntaConChampiVerde: 672, 288
 	LadrilloSolido: 864, 288
 	BloqueDePreguntaConSuperChampi: 912, 288
 	LadrilloSolido: 960, 288

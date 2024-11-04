@@ -10,7 +10,6 @@ import entidades.plataformas.*;
 import entidades.powerups.*;
 import fabricas.Sprite;
 import logica.Juego;
-import logica.ResultadoColision;
 
 public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisitor,EnemigosVisitor,PlataformasVisitorMario {
     private static final double VELOCIDAD_LATERAL = 5.0;
@@ -70,12 +69,12 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
     	void consumir_flor_de_fuego();
     	void finalizar_invulnerabilidad();
 		void actualizar_sprite();
-		ResultadoColision colision_con_enemigo(BuzzyBeetle buzzy);
-		ResultadoColision colision_con_enemigo(Goomba goomba);
-		ResultadoColision colision_con_enemigo(KoopaTroopa koopa);
-		ResultadoColision colision_con_enemigo(Lakitu lakitu);
-		ResultadoColision colision_con_enemigo(PiranhaPlant piranha);
-		ResultadoColision colision_con_enemigo(Spiny spiny);
+		boolean colision_con_enemigo(BuzzyBeetle buzzy);
+		boolean colision_con_enemigo(Goomba goomba);
+		boolean colision_con_enemigo(KoopaTroopa koopa);
+		boolean colision_con_enemigo(Lakitu lakitu);
+		boolean colision_con_enemigo(PiranhaPlant piranha);
+		boolean colision_con_enemigo(Spiny spiny);
 		void colision_con_plataformas(BloqueDePregunta bloque_de_pregunta);
 		void colision_con_plataformas(BloqueSolido bloque_solido);
 		void colision_con_plataformas(LadrilloSolido ladrillo_solido);
@@ -235,27 +234,27 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
 
 	public void set_contador_saltos(int i) { contador_saltos = i; }
 
-	public ResultadoColision visitar(BuzzyBeetle buzzy) {
+	public boolean visitar(BuzzyBeetle buzzy) {
 		return estado.colision_con_enemigo(buzzy);
 	}
 
-	public ResultadoColision visitar(Goomba goomba) {
+	public boolean visitar(Goomba goomba) {
 		return estado.colision_con_enemigo(goomba);
 	}
 
-	public ResultadoColision visitar(KoopaTroopa koopa) {
+	public boolean visitar(KoopaTroopa koopa) {
 		return estado.colision_con_enemigo(koopa);
 	}
 
-	public ResultadoColision visitar(Lakitu lakitu) {
+	public boolean visitar(Lakitu lakitu) {
 		return estado.colision_con_enemigo(lakitu);
 	}
 
-	public ResultadoColision visitar(PiranhaPlant piranha) {
+	public boolean visitar(PiranhaPlant piranha) {
 		return estado.colision_con_enemigo(piranha);
 	}
 
-	public ResultadoColision visitar(Spiny spiny) {
+	public boolean visitar(Spiny spiny) {
 		return estado.colision_con_enemigo(spiny);
 	}
 

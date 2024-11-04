@@ -2,17 +2,10 @@ package entidades.enemigos;
 
 import entidades.Entidad;
 import entidades.EntidadMovible;
-import entidades.plataformas.BloqueDePregunta;
-import entidades.plataformas.BloqueSolido;
-import entidades.plataformas.LadrilloSolido;
-import entidades.plataformas.Plataforma;
-import entidades.plataformas.Tuberias;
-import entidades.plataformas.Vacio;
+import entidades.plataformas.*;
 import fabricas.Sprite;
 import logica.Juego;
 import logica.Mapa;
-import logica.ResultadoColision;
-
 public class Spiny extends Enemigo{
 
 	public Spiny(int x, int y, Sprite sprite) {
@@ -77,7 +70,7 @@ public class Spiny extends Enemigo{
 		}
 	}
 
-	public ResultadoColision aceptar(EnemigosVisitor visitador) {
+	public boolean aceptar(EnemigosVisitor visitador) {
 		return visitador.visitar(this);
 	}
 

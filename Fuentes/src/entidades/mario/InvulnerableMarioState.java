@@ -4,7 +4,6 @@ import entidades.BolaDeFuego;
 import entidades.enemigos.*;
 import entidades.plataformas.*;
 import logica.Juego;
-import logica.ResultadoColision;
 
 public class InvulnerableMarioState implements Mario.MarioState {
     private Mario mario;
@@ -57,28 +56,28 @@ public class InvulnerableMarioState implements Mario.MarioState {
     public void consumir_flor_de_fuego() { estado_anterior.consumir_flor_de_fuego(); }
 
 
-    public ResultadoColision colision_con_enemigo(BuzzyBeetle buzzy){
-		return ResultadoColision.NADIE_MUERE;
+    public boolean colision_con_enemigo(BuzzyBeetle buzzy){
+		return false;
 	}
 	
-	public ResultadoColision colision_con_enemigo(Goomba goomba) {
-		return ResultadoColision.NADIE_MUERE;
+	public boolean colision_con_enemigo(Goomba goomba) {
+		return false;
 	}
 	
-	public ResultadoColision colision_con_enemigo(KoopaTroopa koopa) {
-		return ResultadoColision.NADIE_MUERE;
+	public boolean colision_con_enemigo(KoopaTroopa koopa) {
+		return false;
 	}
 	
-	public ResultadoColision colision_con_enemigo(Lakitu lakitu) {
-		return ResultadoColision.NADIE_MUERE;
+	public boolean colision_con_enemigo(Lakitu lakitu) {
+		return false;
 	}
 	
-	public ResultadoColision colision_con_enemigo(PiranhaPlant piranha) {
-		return ResultadoColision.NADIE_MUERE;
+	public boolean colision_con_enemigo(PiranhaPlant piranha) {
+		return false;
 	}
 	
-	public ResultadoColision colision_con_enemigo(Spiny spiny) {
-		return ResultadoColision.NADIE_MUERE;
+	public boolean colision_con_enemigo(Spiny spiny) {
+		return false;
 	}
 	
 	@Override

@@ -2,7 +2,6 @@ package entidades.enemigos;
 
 import entidades.mario.Mario;
 import logica.Juego;
-import logica.ResultadoColision;
 
 public class ProjectileKoopaState implements KoopaTroopa.KoopaState {
     private final KoopaTroopa koopa;
@@ -10,8 +9,8 @@ public class ProjectileKoopaState implements KoopaTroopa.KoopaState {
     public ProjectileKoopaState(KoopaTroopa koopa) { this.koopa = koopa; }
 
     @Override
-    public ResultadoColision cambiar_estado() {
-    	return ResultadoColision.MARIO_MUERE;
+    public boolean cambiar_estado() {
+    	return true;
     }
 
     @Override

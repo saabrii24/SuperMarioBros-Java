@@ -3,7 +3,6 @@ package entidades.mario;
 import entidades.BolaDeFuego;
 import entidades.plataformas.*;
 import logica.Juego;
-import logica.ResultadoColision;
 import entidades.enemigos.*;
 
 public class StarMarioState implements Mario.MarioState {
@@ -42,7 +41,13 @@ public class StarMarioState implements Mario.MarioState {
 
     public boolean rompe_bloque() { return false; }
     public boolean mata_tocando() { return true; }
-    public boolean colision_con_enemigo(Enemigo enemigo) { return false; }
+    
+    public boolean colision_con_enemigo(Enemigo enemigo) { 
+    	enemigo.destruir(Juego.get_instancia().get_mapa_nivel_actual());
+		mario.get_sistema_puntuacion().sumar_puntos(enemigo.calcular_puntaje());
+    	return false;
+    }
+    
     public BolaDeFuego disparar() { return null; }
 
     public void consumir_estrella() {
@@ -57,30 +62,28 @@ public class StarMarioState implements Mario.MarioState {
 		mario.get_sistema_puntuacion().sumar_puntos(50);
 	}
 	
-	public ResultadoColision colision_con_enemigo(BuzzyBeetle buzzy){
-		return ResultadoColision.ENEMIGO_MUERE;
-		
+	public boolean colision_con_enemigo(BuzzyBeetle buzzy){
+		return mario.colision_con_enemigo(buzzy);	
 	}
 	
-	public ResultadoColision colision_con_enemigo(Goomba goomba) {
-		return ResultadoColision.ENEMIGO_MUERE;
-		
+	public boolean colision_con_enemigo(Goomba goomba) {
+		return mario.colision_con_enemigo(goomba);		
 	}
 	
-	public ResultadoColision colision_con_enemigo(KoopaTroopa koopa) {
-		return ResultadoColision.ENEMIGO_MUERE;
+	public boolean colision_con_enemigo(KoopaTroopa koopa) {
+		return mario.colision_con_enemigo(koopa);	
 	}
 	
-	public ResultadoColision colision_con_enemigo(Lakitu lakitu) {
-		return ResultadoColision.ENEMIGO_MUERE;
+	public boolean colision_con_enemigo(Lakitu lakitu) {
+		return mario.colision_con_enemigo(lakitu);
 	}
 	
-	public ResultadoColision colision_con_enemigo(PiranhaPlant piranha) {
-		return ResultadoColision.ENEMIGO_MUERE;
+	public boolean colision_con_enemigo(PiranhaPlant piranha) {
+		return mario.colision_con_enemigo(piranha);
 	}
 	
-	public ResultadoColision colision_con_enemigo(Spiny spiny) {
-		return ResultadoColision.ENEMIGO_MUERE;
+	public boolean colision_con_enemigo(Spiny spiny) {
+		return mario.colision_con_enemigo(spiny);
 	}
 
 	@Override

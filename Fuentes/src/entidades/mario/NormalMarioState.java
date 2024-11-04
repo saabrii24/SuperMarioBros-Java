@@ -4,7 +4,6 @@ import entidades.BolaDeFuego;
 import entidades.enemigos.*;
 import entidades.plataformas.*;
 import logica.Juego;
-import logica.ResultadoColision;
 
 public class NormalMarioState implements Mario.MarioState {
     private Mario mario;
@@ -58,49 +57,54 @@ public class NormalMarioState implements Mario.MarioState {
 	public void finalizar_invulnerabilidad() {}
 	
 
-	public ResultadoColision colision_con_enemigo(BuzzyBeetle buzzy){
-		ResultadoColision valor=ResultadoColision.NADIE_MUERE;
-		if(mario.get_limites_superiores().intersects(buzzy.get_limites_inferiores()))
-			valor=ResultadoColision.ENEMIGO_MUERE;
+	public boolean colision_con_enemigo(BuzzyBeetle buzzy){
+		boolean murio_mario=false;
+		if(mario.get_limites_superiores().intersects(buzzy.get_limites_inferiores())) {
+			buzzy.destruir(Juego.get_instancia().get_mapa_nivel_actual());
+			mario.get_sistema_puntuacion().sumar_puntos(buzzy.calcular_puntaje());
+		}
 		else 
-			valor=ResultadoColision.MARIO_MUERE;
-		return valor;
+			murio_mario=mario.colision_con_enemigo(buzzy);
+		return murio_mario;
 	}
 	
-	public ResultadoColision colision_con_enemigo(Goomba goomba) {
-		ResultadoColision valor=ResultadoColision.NADIE_MUERE;
-		if(mario.get_limites_superiores().intersects(goomba.get_limites_inferiores()))
-			valor=ResultadoColision.ENEMIGO_MUERE;
+	public boolean colision_con_enemigo(Goomba goomba) {
+		boolean murio_mario=false;
+		if(mario.get_limites_superiores().intersects(goomba.get_limites_inferiores())) {
+			goomba.destruir(Juego.get_instancia().get_mapa_nivel_actual());
+			mario.get_sistema_puntuacion().sumar_puntos(goomba.calcular_puntaje());
+		}
 		else 
-			valor=ResultadoColision.MARIO_MUERE;
-		return valor;
-		
+			murio_mario=mario.colision_con_enemigo(goomba);
+		return murio_mario;
 	}
 	
-	public ResultadoColision colision_con_enemigo(KoopaTroopa koopa) {
-		ResultadoColision valor=ResultadoColision.NADIE_MUERE;
+	public boolean colision_con_enemigo(KoopaTroopa koopa) {
+		boolean murio_mario=false;
 		if(mario.get_limites_superiores().intersects(koopa.get_limites_inferiores()))
-			valor=koopa.cambiar_estado();
+			murio_mario=koopa.cambiar_estado();
 		else 
-			valor=ResultadoColision.MARIO_MUERE;
-		return valor;
+			murio_mario=mario.colision_con_enemigo(koopa);
+		return murio_mario;
 	}
 	
-	public ResultadoColision colision_con_enemigo(Lakitu lakitu) {
-		ResultadoColision valor=ResultadoColision.NADIE_MUERE;
-		if(mario.get_limites_superiores().intersects(lakitu.get_limites_inferiores()))
-			valor=ResultadoColision.ENEMIGO_MUERE;
+	public boolean colision_con_enemigo(Lakitu lakitu) {
+		boolean murio_mario=false;
+		if(mario.get_limites_superiores().intersects(lakitu.get_limites_inferiores())) {
+			lakitu.destruir(Juego.get_instancia().get_mapa_nivel_actual());
+			mario.get_sistema_puntuacion().sumar_puntos(lakitu.calcular_puntaje());
+		}
 		else 
-			valor=ResultadoColision.MARIO_MUERE;
-		return valor;
+			murio_mario=mario.colision_con_enemigo(lakitu);
+		return murio_mario;
 	}
 	
-	public ResultadoColision colision_con_enemigo(PiranhaPlant piranha) {
-		return ResultadoColision.MARIO_MUERE;
+	public boolean colision_con_enemigo(PiranhaPlant piranha) {
+		return mario.colision_con_enemigo(piranha);
 	}
 	
-	public ResultadoColision colision_con_enemigo(Spiny spiny) {
-		return ResultadoColision.MARIO_MUERE;
+	public boolean colision_con_enemigo(Spiny spiny) {
+		return mario.colision_con_enemigo(spiny);
 	}
 
 	@Override

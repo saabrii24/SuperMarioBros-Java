@@ -46,4 +46,3 @@ public class BolaDeFuego extends EntidadMovible {
         posicion_en_x += velocidad_en_x;
     }
 }
-

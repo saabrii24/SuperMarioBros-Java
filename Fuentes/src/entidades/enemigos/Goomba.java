@@ -2,14 +2,9 @@ package entidades.enemigos;
 
 import entidades.Entidad;
 import entidades.EntidadMovible;
-import entidades.plataformas.BloqueDePregunta;
-import entidades.plataformas.BloqueSolido;
-import entidades.plataformas.LadrilloSolido;
-import entidades.plataformas.Tuberias;
-import entidades.plataformas.Vacio;
+import entidades.plataformas.*;
 import fabricas.Sprite;
 import logica.Mapa;
-import logica.ResultadoColision;
 
 public class Goomba extends Enemigo {
     public Goomba(int x, int y, Sprite sprite) {
@@ -60,10 +55,10 @@ public class Goomba extends Enemigo {
         set_velocidad_en_x(0);
     }
    
-    public ResultadoColision aceptar(EnemigosVisitor visitador) {
+    public boolean aceptar(EnemigosVisitor visitador) {
 		return visitador.visitar(this);
 	}
-
+    
     @Override
 	public void visitar(Vacio vacio) {
 		this.eliminar_del_mapa();

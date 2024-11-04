@@ -57,8 +57,7 @@ public abstract class Entidad implements EntidadLogica {
             dimension.width - 1, 
             dimension.height - 1
         );
-    }
-    
+    }  
 	public Rectangle get_limites_inferiores() {
 	    return new Rectangle(
 	        (int)posicion_en_x + dimension.width / 8,
@@ -67,7 +66,6 @@ public abstract class Entidad implements EntidadLogica {
 	        dimension.height / 4
 	    );
 	}
-	
 	public Rectangle get_limites_superiores() {
 	    return new Rectangle(
 	        (int)posicion_en_x + dimension.width / 8,
@@ -76,7 +74,6 @@ public abstract class Entidad implements EntidadLogica {
 	        dimension.height / 4
 	    );
 	}
-
 	public Rectangle get_limites_izquierda() {
 	    return new Rectangle(
 	        (int)posicion_en_x,
@@ -85,7 +82,6 @@ public abstract class Entidad implements EntidadLogica {
 	        dimension.height / 2
 	    );
 	}
-
 	public Rectangle get_limites_derecha() {
 	    return new Rectangle(
 	        (int)posicion_en_x + 3 * dimension.width / 4, 

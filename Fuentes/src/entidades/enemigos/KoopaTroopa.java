@@ -2,15 +2,9 @@ package entidades.enemigos;
 
 import entidades.Entidad;
 import entidades.EntidadMovible;
-import entidades.plataformas.BloqueDePregunta;
-import entidades.plataformas.BloqueSolido;
-import entidades.plataformas.LadrilloSolido;
-import entidades.plataformas.Plataforma;
-import entidades.plataformas.Tuberias;
-import entidades.plataformas.Vacio;
+import entidades.plataformas.*;
 import fabricas.Sprite;
 import logica.Mapa;
-import logica.ResultadoColision;
 
 public class KoopaTroopa extends Enemigo {
     protected KoopaState estado;
@@ -23,7 +17,7 @@ public class KoopaTroopa extends Enemigo {
     public interface KoopaState {
         void actualizar_sprite();
         void mover();
-        ResultadoColision cambiar_estado();
+        boolean cambiar_estado();
         boolean en_movimiento();
         boolean mata_tocando();
         void visitar_enemigo(Enemigo enemigo);
@@ -71,9 +65,9 @@ public class KoopaTroopa extends Enemigo {
 
     public boolean mata_tocando() { return estado.mata_tocando(); }
 
-    public ResultadoColision cambiar_estado() { return estado.cambiar_estado(); }
+    public boolean cambiar_estado() { return estado.cambiar_estado(); }
     
-    public ResultadoColision aceptar(EnemigosVisitor visitador) {
+    public boolean aceptar(EnemigosVisitor visitador) {
 		return visitador.visitar(this);
 	}
     

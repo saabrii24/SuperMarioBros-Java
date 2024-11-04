@@ -1,15 +1,9 @@
 package entidades.enemigos;
 
-import entidades.plataformas.BloqueDePregunta;
-import entidades.plataformas.BloqueSolido;
-import entidades.plataformas.LadrilloSolido;
-import entidades.plataformas.Plataforma;
-import entidades.plataformas.Tuberias;
-import entidades.plataformas.Vacio;
+import entidades.plataformas.*;
 import fabricas.Sprite;
 import logica.Juego;
 import logica.Mapa;
-import logica.ResultadoColision;
 
 public class Lakitu extends Enemigo{
 	
@@ -57,7 +51,7 @@ public class Lakitu extends Enemigo{
 		spiny.registrar_observer(Juego.get_instancia().get_controlador_vistas().registrar_entidad(spiny));
 	}
 
-	public ResultadoColision aceptar(EnemigosVisitor visitador) {
+	public boolean aceptar(EnemigosVisitor visitador) {
 		return visitador.visitar(this);
 	}
 

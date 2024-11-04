@@ -60,17 +60,9 @@ public class Colisionador {
     }
     
     private void verificar_colisiones_con_enemigos(Mario mario) {
-    	
-        ResultadoColision resultado = ResultadoColision.NADIE_MUERE;
         for (Enemigo enemigo : mapa.get_entidades_enemigos()) {
             if (mario.get_limites().intersects(enemigo.get_limites())) {
-                resultado=enemigo.aceptar(mario);
-                if (resultado == ResultadoColision.ENEMIGO_MUERE) {
-                    mario.get_sistema_puntuacion().sumar_puntos(enemigo.calcular_puntaje());
-                    enemigo.destruir(mapa);
-                } else if (resultado == ResultadoColision.MARIO_MUERE) {
-                    murio_mario = mario.colision_con_enemigo(enemigo);
-                }
+            	murio_mario=enemigo.aceptar(mario);
             }
         }
     }

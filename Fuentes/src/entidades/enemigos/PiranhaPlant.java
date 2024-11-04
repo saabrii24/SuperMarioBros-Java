@@ -1,13 +1,7 @@
 package entidades.enemigos;
-import entidades.plataformas.BloqueDePregunta;
-import entidades.plataformas.BloqueSolido;
-import entidades.plataformas.LadrilloSolido;
-import entidades.plataformas.Plataforma;
-import entidades.plataformas.Tuberias;
-import entidades.plataformas.Vacio;
+import entidades.plataformas.*;
 import fabricas.Sprite;
 import logica.Mapa;
-import logica.ResultadoColision;
 
 public class PiranhaPlant extends Enemigo {
     private static final double VELOCIDAD_VERTICAL = 0.4;
@@ -75,7 +69,7 @@ public class PiranhaPlant extends Enemigo {
         }
     }
     
-    public ResultadoColision aceptar(EnemigosVisitor visitador) {
+    public boolean aceptar(EnemigosVisitor visitador) {
 		return visitador.visitar(this);
 	}
 

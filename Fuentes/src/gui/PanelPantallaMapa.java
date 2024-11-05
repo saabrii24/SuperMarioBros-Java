@@ -319,4 +319,12 @@ public class PanelPantallaMapa extends JPanel {
     public void ocultar_pausa() {
         label_pausa.setVisible(false);
     }
+
+	public Font get_tipografia() {
+		return tipografia;
+	}
+
+	public JScrollPane get_scroll_pane() {
+		return scroll_pane;
+	}
 }

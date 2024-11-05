@@ -167,7 +167,7 @@ public class SuperMarioState implements Mario.MarioState {
 	}
 
 	@Override
-	public void colision_con_plataformas(Tuberias tuberia) {
+	public void colision_con_plataformas(Tuberia tuberia) {
 		if(mario.get_limites_derecha().intersects(tuberia.get_limites_izquierda()))
 			mario.set_posicion_en_x(tuberia.get_posicion_en_x() - mario.get_dimension().width);
 		else

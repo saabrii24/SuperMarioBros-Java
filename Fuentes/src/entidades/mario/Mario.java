@@ -75,7 +75,7 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
 		void colision_con_plataformas(BloqueDePregunta bloque_de_pregunta);
 		void colision_con_plataformas(BloqueSolido bloque_solido);
 		void colision_con_plataformas(LadrilloSolido ladrillo_solido);
-		void colision_con_plataformas(Tuberias tuberia);
+		void colision_con_plataformas(Tuberia tuberia);
     }
 
     // Getters
@@ -217,7 +217,7 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
 		return true;
 	}
 
-	public boolean visitar(Tuberias tuberia) {
+	public boolean visitar(Tuberia tuberia) {
 		if(!this.get_limites_superiores().intersects(tuberia.get_limites_inferiores()))
 			estado.colision_con_plataformas(tuberia);
 		return true;

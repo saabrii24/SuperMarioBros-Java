@@ -79,9 +79,7 @@ public class FireMarioState implements Mario.MarioState {
 				"+50");
 	}
 
-	@Override
-	public void finalizar_invulnerabilidad() {
-	}
+	public void finalizar_invulnerabilidad() {}
 	
 	public boolean colision_con_enemigo(BuzzyBeetle buzzy){
 		boolean murio_mario=false;
@@ -180,7 +178,7 @@ public class FireMarioState implements Mario.MarioState {
 	}
 
 	@Override
-	public void colision_con_plataformas(Tuberias tuberia) {
+	public void colision_con_plataformas(Tuberia tuberia) {
 		if(mario.get_limites_derecha().intersects(tuberia.get_limites_izquierda()))
 			mario.set_posicion_en_x(tuberia.get_posicion_en_x() - mario.get_dimension().width);
 		else

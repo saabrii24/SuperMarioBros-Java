@@ -4,6 +4,6 @@ public interface PlataformasVisitorMario {
 	boolean visitar(BloqueDePregunta bloque_de_pregunta);
 	boolean visitar(BloqueSolido bloque_solido);
 	boolean visitar(LadrilloSolido ladrillo_solido);
-	boolean visitar(Tuberias tuberia);
+	boolean visitar(Tuberia tuberia);
 	boolean visitar(Vacio vacio);
 }

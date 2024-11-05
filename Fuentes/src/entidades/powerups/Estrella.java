@@ -8,8 +8,8 @@ public class Estrella extends PowerUp{
 		super(x, y, sprite);
 	}
 	@Override
-	public void aceptar(PowerUpVisitor visitador) {
-		visitador.visitar(this);
+	public void aceptar(PowerUpVisitor visitante) {
+		visitante.visitar(this);
 	}
 
 }

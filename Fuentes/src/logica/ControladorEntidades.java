@@ -15,7 +15,7 @@ public class ControladorEntidades {
         this.juego = juego;
     }
 
-    //controladores referidos a mario
+    // Controladores referidos a Mario
     public void mover_mario() {
         Mario mario = Mario.get_instancia();
         synchronized(mario) {
@@ -70,7 +70,7 @@ public class ControladorEntidades {
         Mario.get_instancia().notificar_observer();
     }
   
-    //controladores referidos a enemigos
+    // Controladores referidos a Enemigos
     public void mover_enemigos() {
         mover_lista_entidades(juego.get_mapa_nivel_actual().get_entidades_enemigos());
     }
@@ -91,7 +91,7 @@ public class ControladorEntidades {
         notificar_lista_entidades(mapa.get_entidades_enemigos());
     }
 
-    //controlador lista entidades
+    // Controlador lista Entidades
     private <T extends EntidadMovible> void mover_lista_entidades(List<T> entidades) {
         List<T> entidades_copia = new ArrayList<>(entidades);
         for (T entidad : entidades_copia) {

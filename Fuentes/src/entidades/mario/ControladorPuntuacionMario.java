@@ -45,7 +45,6 @@ public class ControladorPuntuacionMario implements SistemaPuntuacion {
         return monedas_nivel_actual;
     }
 
-    // Mantiene compatibilidad con la interfaz original
     public int get_monedas() {
         return get_monedas_total();
     }

@@ -3739,7 +3739,7 @@
 											"top": 4036,
 											"width": 303.62109375,
 											"height": 13,
-											"text": "+aceptar(visitador: EnemigosVisitor): boolean",
+											"text": "+aceptar(visitante: EnemigosVisitor): boolean",
 											"horizontalAlignment": 0
 										},
 										{
@@ -3756,7 +3756,7 @@
 											"top": 4051,
 											"width": 303.62109375,
 											"height": 13,
-											"text": "+aceptar(visitador EnemigoVisitorEnemigo): boolean",
+											"text": "+aceptar(visitante EnemigoVisitorEnemigo): boolean",
 											"horizontalAlignment": 0
 										}
 									],
@@ -4180,7 +4180,7 @@
 											"top": 3503,
 											"width": 235.6630859375,
 											"height": 13,
-											"text": "+aceptar(visitador: PowerUpVisitor): void",
+											"text": "+aceptar(visitante: PowerUpVisitor): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -4545,7 +4545,7 @@
 											"top": 4263,
 											"width": 534.751953125,
 											"height": 13,
-											"text": "+aceptar(visitador: EnemigosVisitor): boolean",
+											"text": "+aceptar(visitante: EnemigosVisitor): boolean",
 											"horizontalAlignment": 0
 										},
 										{
@@ -4766,7 +4766,7 @@
 											"top": 4458,
 											"width": 534.751953125,
 											"height": 13,
-											"text": "+aceptar(visitador: EnemigoVisitorEnemigo): void",
+											"text": "+aceptar(visitante: EnemigoVisitorEnemigo): void",
 											"horizontalAlignment": 0
 										}
 									],
@@ -5269,7 +5269,7 @@
 											"top": 4396,
 											"width": 538.0146484375,
 											"height": 13,
-											"text": "+aceptar(visitador: EnemigosVisitor): boolean",
+											"text": "+aceptar(visitante: EnemigosVisitor): boolean",
 											"horizontalAlignment": 0
 										},
 										{
@@ -5490,7 +5490,7 @@
 											"top": 4591,
 											"width": 538.0146484375,
 											"height": 13,
-											"text": "+aceptar(visitador: EnemigoVisitorEnemigo): void",
+											"text": "+aceptar(visitante: EnemigoVisitorEnemigo): void",
 											"horizontalAlignment": 0
 										}
 									],
@@ -5893,7 +5893,7 @@
 											"top": 4306,
 											"width": 317.63037109375,
 											"height": 13,
-											"text": "+aceptar(visitador: EnemigosVisitor): boolean",
+											"text": "+aceptar(visitante: EnemigosVisitor): boolean",
 											"horizontalAlignment": 0
 										},
 										{
@@ -6097,7 +6097,7 @@
 											"top": 4486,
 											"width": 317.63037109375,
 											"height": 13,
-											"text": "+aceptar(visitador: EnemigoVisitorEnemigo): void",
+											"text": "+aceptar(visitante: EnemigoVisitorEnemigo): void",
 											"horizontalAlignment": 0
 										}
 									],
@@ -6430,7 +6430,7 @@
 											"top": 4246,
 											"width": 317.63037109375,
 											"height": 13,
-											"text": "+aceptar(visitador: EnemigosVisitor): boolean",
+											"text": "+aceptar(visitante: EnemigosVisitor): boolean",
 											"horizontalAlignment": 0
 										},
 										{
@@ -6634,7 +6634,7 @@
 											"top": 4426,
 											"width": 317.63037109375,
 											"height": 13,
-											"text": "+aceptar(visitador: EnemigoVisitorEnemigo): void",
+											"text": "+aceptar(visitante: EnemigoVisitorEnemigo): void",
 											"horizontalAlignment": 0
 										}
 									],
@@ -7018,7 +7018,7 @@
 											"top": 4715,
 											"width": 534.751953125,
 											"height": 13,
-											"text": "+aceptar(visitador: EnemigosVisitor): boolean",
+											"text": "+aceptar(visitante: EnemigosVisitor): boolean",
 											"horizontalAlignment": 0
 										},
 										{
@@ -7239,7 +7239,7 @@
 											"top": 4910,
 											"width": 534.751953125,
 											"height": 13,
-											"text": "+aceptar(visitador: EnemigoVisitorEnemigo): void",
+											"text": "+aceptar(visitante: EnemigoVisitorEnemigo): void",
 											"horizontalAlignment": 0
 										}
 									],
@@ -7451,7 +7451,7 @@
 											"top": 3599,
 											"width": 288.6787109375,
 											"height": 13,
-											"text": "+aceptar(visitador: PowerUpVisitor): void",
+											"text": "+aceptar(visitante: PowerUpVisitor): void",
 											"horizontalAlignment": 0
 										}
 									],
@@ -7663,7 +7663,7 @@
 											"top": 3503,
 											"width": 285.060546875,
 											"height": 13,
-											"text": "+aceptar(visitador: PowerUpVisitor): void",
+											"text": "+aceptar(visitante: PowerUpVisitor): void",
 											"horizontalAlignment": 0
 										}
 									],
@@ -7875,7 +7875,7 @@
 											"top": 3503,
 											"width": 252.54150390625,
 											"height": 13,
-											"text": "+aceptar(visitador: PowerUpVisitor): void",
+											"text": "+aceptar(visitante: PowerUpVisitor): void",
 											"horizontalAlignment": 0
 										}
 									],
@@ -8087,7 +8087,7 @@
 											"top": 3599,
 											"width": 287.96142578125,
 											"height": 13,
-											"text": "+aceptar(visitador: PowerUpVisitor): void",
+											"text": "+aceptar(visitante: PowerUpVisitor): void",
 											"horizontalAlignment": 0
 										}
 									],
@@ -9727,7 +9727,7 @@
 											"top": 3599,
 											"width": 272.79052734375,
 											"height": 13,
-											"text": "+aceptar(visitador: PowerUpVisitor): void",
+											"text": "+aceptar(visitante: PowerUpVisitor): void",
 											"horizontalAlignment": 0
 										}
 									],
@@ -28255,7 +28255,7 @@
 											"top": 4683,
 											"width": 534.751953125,
 											"height": 13,
-											"text": "+aceptar(visitador: EnemigosVisitor): boolean",
+											"text": "+aceptar(visitante: EnemigosVisitor): boolean",
 											"horizontalAlignment": 0
 										},
 										{
@@ -28476,7 +28476,7 @@
 											"top": 4878,
 											"width": 534.751953125,
 											"height": 13,
-											"text": "+aceptar(visitador: EnemigoVisitorEnemigo): void",
+											"text": "+aceptar(visitante: EnemigoVisitorEnemigo): void",
 											"horizontalAlignment": 0
 										}
 									],
@@ -31837,7 +31837,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGSaB/yIh/oGRg="
 									},
-									"name": "visitador",
+									"name": "visitante",
 									"type": "PowerUpVisitor"
 								}
 							]
@@ -40747,7 +40747,7 @@
 											"_parent": {
 												"$ref": "AAAAAAGS+cze4JZaLXI="
 											},
-											"name": "visitador",
+											"name": "visitante",
 											"type": "EnemigosVisitor"
 										},
 										{
@@ -41134,7 +41134,7 @@
 											"_parent": {
 												"$ref": "AAAAAAGS+dM5jZhcolw="
 											},
-											"name": "visitador",
+											"name": "visitante",
 											"type": "EnemigoVisitorEnemigo"
 										},
 										{
@@ -41634,7 +41634,7 @@
 											"_parent": {
 												"$ref": "AAAAAAGS+ezZ7JmnW4U="
 											},
-											"name": "visitador",
+											"name": "visitante",
 											"type": "EnemigosVisitor"
 										},
 										{
@@ -41990,7 +41990,7 @@
 											"_parent": {
 												"$ref": "AAAAAAGS+fAx55orP8A="
 											},
-											"name": "visitador",
+											"name": "visitante",
 											"type": "EnemigoVisitorEnemigo"
 										},
 										{
@@ -42427,7 +42427,7 @@
 											"_parent": {
 												"$ref": "AAAAAAGS+aFDS5TWAGo="
 											},
-											"name": "visitador",
+											"name": "visitante",
 											"type": "EnemigosVisitor"
 										},
 										{
@@ -42812,7 +42812,7 @@
 											"_parent": {
 												"$ref": "AAAAAAGS+aldz5VrL3Q="
 											},
-											"name": "visitador",
+											"name": "visitante",
 											"type": "EnemigoVisitorEnemigo"
 										},
 										{
@@ -42983,7 +42983,7 @@
 											"_parent": {
 												"$ref": "AAAAAAGSs2FQ0J2LyHY="
 											},
-											"name": "visitador",
+											"name": "visitante",
 											"type": "PowerUpVisitor"
 										},
 										{
@@ -43315,7 +43315,7 @@
 											"_parent": {
 												"$ref": "AAAAAAGS+eM7X5j9Sls="
 											},
-											"name": "visitador",
+											"name": "visitante",
 											"type": "EnemigosVisitor"
 										},
 										{
@@ -43702,7 +43702,7 @@
 											"_parent": {
 												"$ref": "AAAAAAGS+edC9JmO6w8="
 											},
-											"name": "visitador",
+											"name": "visitante",
 											"type": "EnemigoVisitorEnemigo"
 										},
 										{
@@ -43994,7 +43994,7 @@
 											"_parent": {
 												"$ref": "AAAAAAGS+bzjlZW640Y="
 											},
-											"name": "visitador",
+											"name": "visitante",
 											"type": "EnemigosVisitor"
 										},
 										{
@@ -44381,7 +44381,7 @@
 											"_parent": {
 												"$ref": "AAAAAAGS+cAxoZZKZXg="
 											},
-											"name": "visitador",
+											"name": "visitante",
 											"type": "EnemigoVisitorEnemigo"
 										},
 										{
@@ -44623,7 +44623,7 @@
 											"_parent": {
 												"$ref": "AAAAAAGS+dpSc5hrqoA="
 											},
-											"name": "visitador",
+											"name": "visitante",
 											"type": "EnemigosVisitor"
 										},
 										{
@@ -44979,7 +44979,7 @@
 											"_parent": {
 												"$ref": "AAAAAAGS+d13EJjvyj8="
 											},
-											"name": "visitador",
+											"name": "visitante",
 											"type": "EnemigoVisitorEnemigo"
 										},
 										{
@@ -45175,7 +45175,7 @@
 											"_parent": {
 												"$ref": "AAAAAAGSaB8tWB+yv9M="
 											},
-											"name": "visitador",
+											"name": "visitante",
 											"type": "PowerUpVisitor"
 										}
 									]
@@ -45267,7 +45267,7 @@
 											"_parent": {
 												"$ref": "AAAAAAGSaB+VCh++w5E="
 											},
-											"name": "visitador",
+											"name": "visitante",
 											"type": "PowerUpVisitor"
 										}
 									]
@@ -45350,7 +45350,7 @@
 											"_parent": {
 												"$ref": "AAAAAAGSaB/kIB/dd3E="
 											},
-											"name": "visitador",
+											"name": "visitante",
 											"type": "PowerUpVisitor"
 										},
 										{
@@ -45735,7 +45735,7 @@
 											"_parent": {
 												"$ref": "AAAAAAGS+YsA55SFrbA="
 											},
-											"name": "visitador",
+											"name": "visitante",
 											"type": "EnemigosVisitor"
 										},
 										{
@@ -45763,7 +45763,7 @@
 											"_parent": {
 												"$ref": "AAAAAAGS+Yus0ZSRkMQ="
 											},
-											"name": "visitador EnemigoVisitorEnemigo",
+											"name": "visitante EnemigoVisitorEnemigo",
 											"type": ""
 										},
 										{
@@ -45865,7 +45865,7 @@
 											"_parent": {
 												"$ref": "AAAAAAGSaB+/fx/Srrw="
 											},
-											"name": "visitador",
+											"name": "visitante",
 											"type": "PowerUpVisitor"
 										}
 									]

@@ -1,8 +1,6 @@
 package entidades.enemigos;
 
 import entidades.interfaces.EnemigoVisitorEnemigo;
-
-
 import entidades.Entidad;
 import entidades.EntidadMovible;
 import entidades.interfaces.EnemigosVisitor;
@@ -78,13 +76,13 @@ public class Spiny extends Enemigo{
     //Colisiones
     
     //colision mario y spiny
-	public boolean aceptar(EnemigosVisitor visitador) {return visitador.visitar(this);}
+	public boolean aceptar(EnemigosVisitor visitante) {return visitante.visitar(this);}
 	
 	//colision spiny y plataformas
-	public void visitar(Vacio vacio) {this.eliminar_del_mapa();}
+	public void visitar(Vacio vacio) {}
 	public void visitar(BloqueSolido bloque_solido) {ajustar_posicion_enemigo_sobre_plataforma(this,bloque_solido);}
 	public void visitar(BloqueDePregunta bloque_de_pregunta) {ajustar_posicion_enemigo_sobre_plataforma(this,bloque_de_pregunta);}
-	public void visitar(Tuberias tuberia) {ajustar_posicion_enemigo_sobre_plataforma(this,tuberia);}
+	public void visitar(Tuberia tuberia) {ajustar_posicion_enemigo_sobre_plataforma(this,tuberia);}
 	public void visitar(LadrilloSolido ladrillo_solido) {ajustar_posicion_enemigo_sobre_plataforma(this,ladrillo_solido);}
 	private void ajustar_posicion_enemigo_sobre_plataforma(EntidadMovible enemigo, Entidad plataforma) {
 		enemigo.set_velocidad_en_y(0);
@@ -98,5 +96,5 @@ public class Spiny extends Enemigo{
 	public void visitar_enemigo(Lakitu lakitu) {}
 	public void visitar_enemigo(PiranhaPlant piranha) {}
 	public void visitar_enemigo(Spiny spiny) {}// no colisionan para mejorar la fluidez de juego cuando hay muchos
-	public void aceptar(EnemigoVisitorEnemigo visitador) {visitador.visitar_enemigo(this);}		
+	public void aceptar(EnemigoVisitorEnemigo visitante) {visitante.visitar_enemigo(this);}		
 }

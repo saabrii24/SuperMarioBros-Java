@@ -15,7 +15,7 @@ public abstract class PowerUp extends Entidad{
 		envuelto = false;
 	}
 	
-	public abstract void aceptar(PowerUpVisitor visitador);
+	public abstract void aceptar(PowerUpVisitor visitante);
 	
 	public void destruir(Mapa mapa) {
         if (!destruida)

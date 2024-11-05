@@ -9,5 +9,4 @@ public interface ControladorJuegoVistaPaneles {
 	void accionar_pantalla_modo_juego();
 	void accionar_pantalla_victoria();
 	void accionar_pantalla_derrota();
-
 }

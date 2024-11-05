@@ -27,12 +27,12 @@ public class BloqueDePregunta extends Plataforma {
            
     }
 
-	public boolean aceptar(PlataformasVisitorMario visitador) {
-		return visitador.visitar(this);
+	public boolean aceptar(PlataformasVisitorMario visitante) {
+		return visitante.visitar(this);
 	}
 
 	@Override
-	public void aceptar(PlataformasVisitorEnemigos visitador) {
-		visitador.visitar(this);
+	public void aceptar(PlataformasVisitorEnemigos visitante) {
+		visitante.visitar(this);
 	}
 }

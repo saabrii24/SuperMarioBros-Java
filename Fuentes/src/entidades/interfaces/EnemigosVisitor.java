@@ -1,6 +1,6 @@
 package entidades.interfaces;
 
-import entidades.enemigos.*;;
+import entidades.enemigos.*;
 
 public interface EnemigosVisitor {
 	boolean visitar(BuzzyBeetle buzzy);

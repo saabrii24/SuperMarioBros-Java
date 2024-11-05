@@ -104,13 +104,8 @@ public class PanelPantallaMapa extends JPanel {
         layered_pane.revalidate();
         layered_pane.repaint();
         
-        label_pausa.setBounds(
-                0,
-                0,
-                ConstantesVistas.PANEL_ANCHO,
-                ConstantesVistas.PANEL_ALTO
-            );
-            layered_pane.add(label_pausa, Integer.valueOf(2)); // Capa superior
+        label_pausa.setBounds(0, 0, ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
+            layered_pane.add(label_pausa, Integer.valueOf(2));
         }
 
     protected void agregar_panel_mapa_con_fondo(JPanel panel) {

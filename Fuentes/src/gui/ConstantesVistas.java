@@ -1,11 +1,7 @@
 package gui;
 
 public class ConstantesVistas {
-    
-    // Ajustes de tamaño de ventana para Super Mario Bros
-    public static final int VENTANA_ALTO = 720;
-    public static final int VENTANA_ANCHO = 1280;    
-    
+
     // Tamaño del panel principal del juego que ocupa toda la ventana
     public static final int PANEL_ALTO = 720;
     public static final int PANEL_ANCHO = 1280;    

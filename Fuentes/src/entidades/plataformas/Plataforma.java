@@ -9,8 +9,8 @@ public abstract class Plataforma extends Entidad {
 		super(x, y, sprite);
 	}
 	
-	public abstract void aceptar(PlataformasVisitorEnemigos visitador) ;
+	public abstract void aceptar(PlataformasVisitorEnemigos visitante) ;
 	
-	public abstract boolean aceptar(PlataformasVisitorMario visitador);
+	public abstract boolean aceptar(PlataformasVisitorMario visitante);
 
 }

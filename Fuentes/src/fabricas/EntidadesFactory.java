@@ -29,7 +29,7 @@ public class EntidadesFactory {
     public BloqueSolido get_bloque_solido(int x, int y) { return new BloqueSolido(x, y, fabrica_sprites.get_bloque_solido()); }
     public LadrilloSolido get_ladrillo_solido(int x, int y) { return new LadrilloSolido(x, y, fabrica_sprites.get_ladrillo_solido()); }
     public BloqueDePregunta get_bloque_de_pregunta(int x, int y, PowerUp powerup) { return new BloqueDePregunta(x, y, fabrica_sprites.get_bloque_de_pregunta(), powerup); }
-    public Tuberias get_tuberias(int x, int y) { return new Tuberias(x, y, fabrica_sprites.get_tuberias()); }
+    public Tuberia get_tuberias(int x, int y) { return new Tuberia(x, y, fabrica_sprites.get_tuberias()); }
     public Vacio get_vacio(int x, int y) { return new Vacio(x, y, fabrica_sprites.get_vacio()); }
 
     // Otros

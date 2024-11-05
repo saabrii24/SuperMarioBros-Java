@@ -152,7 +152,6 @@ public class PanelPantallaModoDeJuego extends JPanel {
             default:
                 return;
         }
-        // Usar el nuevo método para cambiar el dominio
         Juego.get_instancia().cambiar_dominio(fabrica_sprites);
         controlador_vistas.notificar_eleccion(fabrica_sprites);
         controlador_vistas.accionar_pantalla_mapa();

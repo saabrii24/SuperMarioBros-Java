@@ -55,15 +55,15 @@ public class Lakitu extends Enemigo{
 	//Colisiones
 	
 	//colision entre lakitu y mario
-	public boolean aceptar(EnemigosVisitor visitador) {
-		return visitador.visitar(this);
+	public boolean aceptar(EnemigosVisitor visitante) {
+		return visitante.visitar(this);
 	}
 
 	//colision entre lakitu y plataformas(lakitu no colisiona)
 	public void visitar(Vacio vacio) {}
 	public void visitar(BloqueSolido bloque_solido) {}
 	public void visitar(BloqueDePregunta bloque_de_pregunta) {}
-	public void visitar(Tuberias tuberia) {}
+	public void visitar(Tuberia tuberia) {}
 	public void visitar(LadrilloSolido ladrillo_solido) {}
 	
 	//colision entre lakitu y enemigos(lakitu no colisiona)
@@ -73,5 +73,5 @@ public class Lakitu extends Enemigo{
 	public void visitar_enemigo(Lakitu lakitu) {}
 	public void visitar_enemigo(PiranhaPlant piranha) {}
 	public void visitar_enemigo(Spiny spiny) {}
-	public void aceptar(EnemigoVisitorEnemigo visitador) {}
+	public void aceptar(EnemigoVisitorEnemigo visitante) {}
 }

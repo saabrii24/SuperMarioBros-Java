@@ -69,10 +69,8 @@ public class NormalMarioState implements Mario.MarioState {
     	mario.cambiar_estado(new FireMarioState(mario));
 	}
 
-	@Override
 	public void finalizar_invulnerabilidad() {}
 	
-
 	public boolean colision_con_enemigo(BuzzyBeetle buzzy){
 		boolean murio_mario=false;
 		if(mario.get_limites_superiores().intersects(buzzy.get_limites_inferiores())) {
@@ -125,7 +123,6 @@ public class NormalMarioState implements Mario.MarioState {
 		return mario.colision_con_enemigo(spiny);
 	}
 
-	@Override
 	public void colision_con_plataformas(BloqueDePregunta bloque_de_pregunta) {
 		if(mario.get_limites_inferiores().intersects(bloque_de_pregunta.get_limites_superiores())) {
 			ajustar_posicion_mario_bajo_plataforma(mario,bloque_de_pregunta);
@@ -140,7 +137,6 @@ public class NormalMarioState implements Mario.MarioState {
 		}
 	}
 
-	@Override
 	public void colision_con_plataformas(BloqueSolido bloque_solido) {
 		if(mario.get_limites_inferiores().intersects(bloque_solido.get_limites_superiores())) {
 			ajustar_posicion_mario_bajo_plataforma(mario,bloque_solido);
@@ -155,7 +151,6 @@ public class NormalMarioState implements Mario.MarioState {
 		}
 	}
 
-	@Override
 	public void colision_con_plataformas(LadrilloSolido ladrillo_solido) {
 		if(mario.get_limites_inferiores().intersects(ladrillo_solido.get_limites_superiores())) {
 			ajustar_posicion_mario_bajo_plataforma(mario,ladrillo_solido);
@@ -169,18 +164,16 @@ public class NormalMarioState implements Mario.MarioState {
 		}
 	}
 
-	@Override
-	public void colision_con_plataformas(Tuberias tuberia) {
+	public void colision_con_plataformas(Tuberia tuberia) {
 		if(mario.get_limites_derecha().intersects(tuberia.get_limites_izquierda()))
 			mario.set_posicion_en_x(tuberia.get_posicion_en_x() - mario.get_dimension().width);
 		else
 			mario.set_posicion_en_x(tuberia.get_posicion_en_x() + tuberia.get_dimension().width);
 	}
 	
-	 
-	 private void ajustar_posicion_mario_bajo_plataforma(Mario mario, Plataforma plataforma) {
+	private void ajustar_posicion_mario_bajo_plataforma(Mario mario, Plataforma plataforma) {
 	        mario.set_posicion_en_y(plataforma.get_posicion_en_y() - mario.get_dimension().height + 1);
 	        mario.set_cayendo(true);
 	        mario.set_velocidad_en_y(0);
-		}
+	}
 }

@@ -61,7 +61,7 @@ public class ControladorDeVistas implements ControladorJuegoVistaEntidades, Cont
         ventana = new JFrame("Super Mario Bros");
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setResizable(false);
-        ventana.setSize(ConstantesVistas.VENTANA_ANCHO, ConstantesVistas.VENTANA_ALTO);
+        ventana.setSize(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
         ventana.setLocationRelativeTo(null);
         Image icono;
         try {

@@ -9,8 +9,8 @@ public class ChampiVerde extends PowerUp{
 	}
 	
 	@Override
-	public void aceptar(PowerUpVisitor visitador) {
-		visitador.visitar(this);
+	public void aceptar(PowerUpVisitor visitante) {
+		visitante.visitar(this);
 	}
 
 }

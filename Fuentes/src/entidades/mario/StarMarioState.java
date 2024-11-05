@@ -77,31 +77,14 @@ public class StarMarioState implements Mario.MarioState {
 				"+50");
 	}
 	
-	public boolean colision_con_enemigo(BuzzyBeetle buzzy){
-		return mario.colision_con_enemigo(buzzy);	
-	}
-	
-	public boolean colision_con_enemigo(Goomba goomba) {
-		return mario.colision_con_enemigo(goomba);		
-	}
-	
-	public boolean colision_con_enemigo(KoopaTroopa koopa) {
-		return mario.colision_con_enemigo(koopa);	
-	}
-	
-	public boolean colision_con_enemigo(Lakitu lakitu) {
-		return mario.colision_con_enemigo(lakitu);
-	}
-	
-	public boolean colision_con_enemigo(PiranhaPlant piranha) {
-		return mario.colision_con_enemigo(piranha);
-	}
-	
-	public boolean colision_con_enemigo(Spiny spiny) {
-		return mario.colision_con_enemigo(spiny);
-	}
+	// Métodos de colisión con enemigos específicos
+    public boolean colision_con_enemigo(BuzzyBeetle buzzy) { return mario.colision_con_enemigo(buzzy); }
+    public boolean colision_con_enemigo(Goomba goomba) { return mario.colision_con_enemigo(goomba); }
+    public boolean colision_con_enemigo(KoopaTroopa koopa) { return mario.colision_con_enemigo(koopa); }
+    public boolean colision_con_enemigo(Lakitu lakitu) { return mario.colision_con_enemigo(lakitu); }
+    public boolean colision_con_enemigo(PiranhaPlant piranha) { return mario.colision_con_enemigo(piranha); }
+    public boolean colision_con_enemigo(Spiny spiny) { return mario.colision_con_enemigo(spiny); }
 
-	@Override
 	public void colision_con_plataformas(BloqueDePregunta bloque_de_pregunta) {
 		if(mario.get_limites_inferiores().intersects(bloque_de_pregunta.get_limites_superiores())) {
 			ajustar_posicion_mario_bajo_plataforma(mario,bloque_de_pregunta);
@@ -117,7 +100,6 @@ public class StarMarioState implements Mario.MarioState {
 		}
 	}
 
-	@Override
 	public void colision_con_plataformas(BloqueSolido bloque_solido) {
 		if(mario.get_limites_inferiores().intersects(bloque_solido.get_limites_superiores())) {
 			ajustar_posicion_mario_bajo_plataforma(mario,bloque_solido);
@@ -146,7 +128,7 @@ public class StarMarioState implements Mario.MarioState {
 	}
 
 	@Override
-	public void colision_con_plataformas(Tuberias tuberia) {
+	public void colision_con_plataformas(Tuberia tuberia) {
 		if(mario.get_limites_derecha().intersects(tuberia.get_limites_izquierda()))
 			mario.set_posicion_en_x(tuberia.get_posicion_en_x() - mario.get_dimension().width);
 		else

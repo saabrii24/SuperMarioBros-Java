@@ -31,7 +31,6 @@ public class PanelPantallaRanking extends JPanel {
     }
     
     public void actualizar_ranking() {
-        // Removemos todos los componentes excepto el fondo
         Component fondo = null;
         for (Component comp : getComponents()) {
             if (comp == imagen_fondo) {
@@ -39,12 +38,8 @@ public class PanelPantallaRanking extends JPanel {
             }
         }
         removeAll();
-        
-        // Volvemos a agregar los elementos en el orden correcto
         mostrar_ranking();
         agregar_boton_volver();
-        
-        // Si teníamos un fondo, lo agregamos al final para que quede detrás
         if (fondo != null) {
             add(imagen_fondo);
         } else {

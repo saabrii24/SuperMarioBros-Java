@@ -16,6 +16,6 @@ public abstract class Enemigo extends EntidadMovible implements PlataformasVisit
 	public abstract int calcular_puntaje();
 	public abstract int calcular_penalizacion();
 	public abstract void destruir(Mapa mapa);
-	public abstract boolean aceptar(EnemigosVisitor visitador);
-	public abstract void aceptar(EnemigoVisitorEnemigo visitador);
+	public abstract boolean aceptar(EnemigosVisitor visitante);
+	public abstract void aceptar(EnemigoVisitorEnemigo visitante);
 }

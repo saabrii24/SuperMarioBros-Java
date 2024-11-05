@@ -37,15 +37,8 @@ public class InvulnerableMarioState implements Mario.MarioState {
         }
     }
 
-    public boolean colision_con_enemigo(Enemigo enemigo) {
-        // Durante el estado invulnerable, no se daña al enemigo ni recibe daño Mario.
-        return false;
-    }
-
     public void finalizar_invulnerabilidad() {
-        // Verifica si pasaron los 2 segundos de invulnerabilidad
         if (System.currentTimeMillis() - tiempo_inicio >= DURACION_INVULNERABLE) {
-            // Cambia el estado de Mario de nuevo al estado anterior
             mario.cambiar_estado(estado_anterior);
         }
     }
@@ -58,32 +51,15 @@ public class InvulnerableMarioState implements Mario.MarioState {
     public void consumir(SuperChampi super_champi) { estado_anterior.consumir(super_champi); }
     public void consumir(FlorDeFuego flor_de_fuego) { estado_anterior.consumir(flor_de_fuego); }
 
+    // Métodos de colisión con enemigos
+    public boolean colision_con_enemigo(Enemigo enemigo) { return false; }
+    public boolean colision_con_enemigo(BuzzyBeetle buzzy) { return false; }
+    public boolean colision_con_enemigo(Goomba goomba) { return false; }
+    public boolean colision_con_enemigo(KoopaTroopa koopa) { return false; }
+    public boolean colision_con_enemigo(Lakitu lakitu) { return false; }
+    public boolean colision_con_enemigo(PiranhaPlant piranha) { return false; }
+    public boolean colision_con_enemigo(Spiny spiny) { return false; }
 
-    public boolean colision_con_enemigo(BuzzyBeetle buzzy){
-		return false;
-	}
-	
-	public boolean colision_con_enemigo(Goomba goomba) {
-		return false;
-	}
-	
-	public boolean colision_con_enemigo(KoopaTroopa koopa) {
-		return false;
-	}
-	
-	public boolean colision_con_enemigo(Lakitu lakitu) {
-		return false;
-	}
-	
-	public boolean colision_con_enemigo(PiranhaPlant piranha) {
-		return false;
-	}
-	
-	public boolean colision_con_enemigo(Spiny spiny) {
-		return false;
-	}
-	
-	@Override
 	public void colision_con_plataformas(BloqueDePregunta bloque_de_pregunta) {
 		if(mario.get_limites_inferiores().intersects(bloque_de_pregunta.get_limites_superiores())) {
 			ajustar_posicion_mario_bajo_plataforma(mario,bloque_de_pregunta);
@@ -99,7 +75,6 @@ public class InvulnerableMarioState implements Mario.MarioState {
 		}
 	}
 
-	@Override
 	public void colision_con_plataformas(BloqueSolido bloque_solido) {
 		if(mario.get_limites_inferiores().intersects(bloque_solido.get_limites_superiores())) {
 			ajustar_posicion_mario_bajo_plataforma(mario,bloque_solido);
@@ -114,7 +89,6 @@ public class InvulnerableMarioState implements Mario.MarioState {
 		}
 	}
 
-	@Override
 	public void colision_con_plataformas(LadrilloSolido ladrillo_solido) {
 		if(mario.get_limites_inferiores().intersects(ladrillo_solido.get_limites_superiores())) {
 			ajustar_posicion_mario_bajo_plataforma(mario,ladrillo_solido);
@@ -128,14 +102,12 @@ public class InvulnerableMarioState implements Mario.MarioState {
 		}
 	}
 
-	@Override
-	public void colision_con_plataformas(Tuberias tuberia) {
+	public void colision_con_plataformas(Tuberia tuberia) {
 		if(mario.get_limites_derecha().intersects(tuberia.get_limites_izquierda()))
 			mario.set_posicion_en_x(tuberia.get_posicion_en_x() - mario.get_dimension().width);
 		else
 			mario.set_posicion_en_x(tuberia.get_posicion_en_x() + tuberia.get_dimension().width);
 	}
-	
 	 
 	 private void ajustar_posicion_mario_bajo_plataforma(Mario mario, Plataforma plataforma) {
 	        mario.set_posicion_en_y(plataforma.get_posicion_en_y() - mario.get_dimension().height + 1);

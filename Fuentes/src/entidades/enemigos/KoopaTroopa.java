@@ -9,6 +9,12 @@ import fabricas.Sprite;
 import logica.Juego;
 import logica.Mapa;
 
+/*
+ * Consideramos el comportamiento de Koopa Troopa como en el juego original,
+ * pero solo suma el puntaje en caso de matarla con una bola de fuego o en estado de estrella,
+ * - Se puede derribar saltando 1 vez (Pasa a estado Hidden)
+ * - Con el segundo salto pasa a ser proyectil (Pasa a estado Projectile)
+ */
 public class KoopaTroopa extends Enemigo {
     protected KoopaState estado;
 
@@ -73,13 +79,13 @@ public class KoopaTroopa extends Enemigo {
     //Colisiones
     
     //Colision entre mario y koopa
-    public boolean aceptar(EnemigosVisitor visitador) {return visitador.visitar(this);}
+    public boolean aceptar(EnemigosVisitor visitante) {return visitante.visitar(this);}
     
     //Colisiones koopa y plataformas
 	public void visitar(Vacio vacio) {this.eliminar_del_mapa();}
 	public void visitar(BloqueSolido bloque_solido) {ajustar_posicion_enemigo_sobre_plataforma(this,bloque_solido);}
 	public void visitar(BloqueDePregunta bloque_de_pregunta) {ajustar_posicion_enemigo_sobre_plataforma(this,bloque_de_pregunta);}
-	public void visitar(Tuberias tuberia) {ajustar_posicion_enemigo_sobre_plataforma(this,tuberia);}
+	public void visitar(Tuberia tuberia) {ajustar_posicion_enemigo_sobre_plataforma(this,tuberia);}
 	public void visitar(LadrilloSolido ladrillo_solido) {ajustar_posicion_enemigo_sobre_plataforma(this,ladrillo_solido);}
 	private void ajustar_posicion_enemigo_sobre_plataforma(EntidadMovible enemigo, Entidad plataforma) {
 	        enemigo.set_velocidad_en_y(0);
@@ -93,5 +99,5 @@ public class KoopaTroopa extends Enemigo {
 	public void visitar_enemigo(Lakitu lakitu) {estado.visitar_enemigo(lakitu);}
 	public void visitar_enemigo(PiranhaPlant piranha) {estado.visitar_enemigo(piranha);}
 	public void visitar_enemigo(Spiny spiny) {estado.visitar_enemigo(spiny);}
-	public void aceptar(EnemigoVisitorEnemigo visitador) {visitador.visitar_enemigo(this);}	
+	public void aceptar(EnemigoVisitorEnemigo visitante) {visitante.visitar_enemigo(this);}	
 }

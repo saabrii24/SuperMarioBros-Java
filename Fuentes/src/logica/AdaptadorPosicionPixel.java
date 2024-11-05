@@ -2,6 +2,10 @@ package logica;
 
 import gui.ConstantesVistas;
 
+/**
+ * La clase {@code AdaptadorPosicionPixel} invierte el eje Y.
+ * Esto es importante al tener en cuenta cálculos de gravedad y aplicados en torno al eje Y.
+ */
 public class AdaptadorPosicionPixel {
 	
 	public static double transformar_x(double x) { return x; }

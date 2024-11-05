@@ -2,9 +2,9 @@ package entidades.plataformas;
 
 import fabricas.Sprite;
 
-public class Vacio extends Plataforma {
+public class Tuberia extends Plataforma{
 
-	public Vacio(int x, int y, Sprite sprite) {
+	public Tuberia(int x, int y, Sprite sprite) {
 		super(x, y, sprite);
 	}
 

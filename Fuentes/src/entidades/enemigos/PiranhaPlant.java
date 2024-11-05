@@ -64,15 +64,15 @@ public class PiranhaPlant extends Enemigo {
     //colisiones
     
     //colision piranha y mario
-    public boolean aceptar(EnemigosVisitor visitador) {
-		return visitador.visitar(this);
+    public boolean aceptar(EnemigosVisitor visitante) {
+		return visitante.visitar(this);
 	}
 
     //colisiones piranha y plataformas (piranha no colisiona)
 	public void visitar(Vacio vacio) {}
 	public void visitar(BloqueSolido bloque_solido) {}
 	public void visitar(BloqueDePregunta bloque_de_pregunta) {}
-	public void visitar(Tuberias tuberia) {}
+	public void visitar(Tuberia tuberia) {}
 	public void visitar(LadrilloSolido ladrillo_solido) {}
 
 	//colisiones entre enemigos(piranha no colisiona con nadie)
@@ -82,5 +82,5 @@ public class PiranhaPlant extends Enemigo {
 	public void visitar_enemigo(Lakitu lakitu) {}
 	public void visitar_enemigo(PiranhaPlant piranha) {}
 	public void visitar_enemigo(Spiny spiny) {}
-	public void aceptar(EnemigoVisitorEnemigo visitador) {}
+	public void aceptar(EnemigoVisitorEnemigo visitante) {}
 }

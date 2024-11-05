@@ -44,11 +44,7 @@ public class PanelPantallaAyuda extends JPanel {
     }
     
     private void volver_con_esc() {
-        // Acción para volver a la pantalla inicial
         Action volverAction = new AbstractAction() {
-            /**
-			 * 
-			 */
 			private static final long serialVersionUID = 1L;
 
 			@Override
@@ -56,8 +52,6 @@ public class PanelPantallaAyuda extends JPanel {
                 controlador_vistas.accionar_pantalla_inicial();
             }
         };
-        
-        // Asigna la acción a la tecla 'Esc'
         InputMap inputMap = getInputMap(WHEN_IN_FOCUSED_WINDOW);
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "volver");
         getActionMap().put("volver", volverAction);

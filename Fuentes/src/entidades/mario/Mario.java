@@ -240,6 +240,11 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
 	}
 
 	public boolean visitar(Goomba goomba) {
+		Juego.get_instancia().get_mapa_nivel_actual().animacion_puntaje_obtenido(
+				(int) goomba.get_posicion_en_x(), 
+				(int) goomba.get_posicion_en_y(), 
+				"+"+goomba.calcular_puntaje()
+				);
 		return estado.colision_con_enemigo(goomba);
 	}
 

@@ -1,7 +1,14 @@
 package logica;
-
+import java.awt.Color;
+import java.awt.Point;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JScrollPane;
+import javax.swing.Timer;
+
 
 import entidades.BolaDeFuego;
 import entidades.EntidadMovible;
@@ -13,7 +20,7 @@ import fabricas.SpritesFactory;
 
 public class Mapa {
 
-    protected Juego mi_juego;
+	protected Juego mi_juego;
     protected Mario mario;
     
     protected List<Enemigo> entidades_enemigos;	
@@ -102,4 +109,37 @@ public class Mapa {
 
     public void reproducir_efecto(String efecto) { mi_juego.reproducir_efecto(efecto); }
 
+    public void animacion_puntaje_obtenido(int x, int y, String texto) {
+        JLabel label = new JLabel(texto);
+        label.setFont(mi_juego.controlador_vistas.get_pantalla_mapa().get_tipografia());
+        label.setForeground(Color.WHITE);
+        label.setOpaque(false);
+        label.setSize(label.getPreferredSize());
+        
+        JScrollPane scroll_pane = mi_juego.controlador_vistas.get_pantalla_mapa().get_scroll_pane();
+        Point posicion_en_scroll = scroll_pane.getViewport().getViewPosition();
+        int screen_x = x - posicion_en_scroll.x;
+        int screen_y = y - posicion_en_scroll.y + 350;
+        label.setLocation(screen_x, screen_y);
+        JLayeredPane layered_pane = mi_juego.controlador_vistas.get_pantalla_mapa().get_layered_pane();
+        layered_pane.add(label, JLayeredPane.POPUP_LAYER);
+        label.setBounds(screen_x, screen_y, label.getPreferredSize().width, label.getPreferredSize().height);
+        
+        Timer fade_timer = new Timer(50, null);
+        final float[] alpha = {1.0f};
+        
+        fade_timer.addActionListener(e -> {
+            alpha[0] -= 0.05f;
+            if (alpha[0] <= 0) {
+                fade_timer.stop();
+                layered_pane.remove(label);
+                layered_pane.repaint();
+            } else {
+                label.setForeground(new Color(255, 255, 255, (int)(alpha[0] * 255)));
+                label.setLocation(label.getX(), label.getY() - 1);
+            }
+        });
+        
+        fade_timer.start();
+    }
 }

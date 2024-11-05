@@ -1,12 +1,7 @@
 package gui;
 
-import java.awt.Dimension;
-import java.awt.Image;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import java.awt.*;
+import javax.swing.*;
 
 public class PanelPantallaPrincipal extends JPanel {
 

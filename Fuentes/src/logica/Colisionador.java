@@ -27,11 +27,11 @@ public class Colisionador {
         verificar_colisiones_proyectiles();
     }
 
+    //colisiones con plataformas
 	private void verificar_colisiones_con_plataformas(Mario mario) {
         verificar_colisiones_con_plataformas_mario(mario);
         verificar_colisiones_plataformas_enemigos();
     }
-   
     private void verificar_colisiones_con_plataformas_mario(Mario mario) {
     	for(Plataforma plataforma: mapa.get_entidades_plataformas()) {
     		if(mario.get_limites_superiores().intersects(plataforma.get_limites_inferiores())) {
@@ -43,14 +43,12 @@ public class Colisionador {
     				plataforma.aceptar(mario);
     		}
     	}
-	}
-    
+	}   
     private void ajustar_posicion_mario_sobre_plataforma(Mario mario, Entidad plataforma) {
         mario.set_contador_saltos(0);
         mario.set_velocidad_en_y(0);
         mario.set_posicion_en_y(plataforma.get_posicion_en_y() + plataforma.get_dimension().height);
-    }
-    
+    }    
     private void verificar_colisiones_plataformas_enemigos() {
         List<Enemigo> enemigos = mapa.get_entidades_enemigos();
         for (Enemigo enemigo : enemigos) {
@@ -58,7 +56,25 @@ public class Colisionador {
             manejar_colision_horizontal(enemigo);
         }
     }
-    
+    private void manejar_colision_vertical(Enemigo enemigo) {
+        for (Plataforma plataforma : mapa.get_entidades_plataformas()) {
+        	if (enemigo.get_limites_superiores().intersects(plataforma.get_limites_inferiores()))
+        			plataforma.aceptar(enemigo);
+	     }
+    }   
+    private void manejar_colision_horizontal(Enemigo enemigo) {
+        if (colisiona_con_plataforma(enemigo.get_limites_derecha())) {
+        	enemigo.set_direccion(-1);
+        } else if (colisiona_con_plataforma(enemigo.get_limites_izquierda())) {
+        	enemigo.set_direccion(1);
+        }
+    }    
+    private boolean colisiona_con_plataforma(Rectangle limites) {
+        return mapa.get_entidades_plataformas().stream()
+            .anyMatch(plataforma -> plataforma.get_limites().intersects(limites));
+    }
+ 
+    //colisiones con enemigos
     private void verificar_colisiones_con_enemigos(Mario mario) {
         for (Enemigo enemigo : mapa.get_entidades_enemigos()) {
             if (mario.get_limites().intersects(enemigo.get_limites())) {
@@ -66,7 +82,15 @@ public class Colisionador {
             }
         }
     }
-
+    private void verificar_colisiones_enemigos_con_enemigos() {
+    	//verifica las colisioes entre su misma especie, y existe un caso especial, donde si los intersecta un koopa projectil destruye cualquier otra entidad
+    	for(Enemigo enemigo1: mapa.get_entidades_enemigos())
+    		for(Enemigo enemigo2: mapa.get_entidades_enemigos())
+    			if(enemigo1!=enemigo2 && enemigo1.get_limites().intersects(enemigo2.get_limites())) 
+    				enemigo1.aceptar(enemigo2);
+   	}
+   
+    //colision con powerup
     private void verificar_colisiones_con_powerups(Mario mario) {
         for (PowerUp power_up : new ArrayList<>(mapa.get_entidades_powerup())) {
             if (mario.get_limites().intersects(power_up.get_limites())) {
@@ -76,28 +100,16 @@ public class Colisionador {
         }
     }
     
-    private void verificar_colisiones_enemigos_con_enemigos() {
-    	//verifica las colisioes entre su misma especie, y existe un caso especial, donde si los intersecta un koopa projectil destruye cualquier otra entidad
-    	for(Enemigo enemigo1: mapa.get_entidades_enemigos())
-    		for(Enemigo enemigo2: mapa.get_entidades_enemigos())
-    			if(enemigo1!=enemigo2 && enemigo1.get_limites().intersects(enemigo2.get_limites())) 
-    				enemigo1.aceptar(enemigo2);
-   	}
-   
+    //colisiones de proyectiles
     private void verificar_colisiones_proyectiles() {
-    	verificar_colisiones_bolas_fuego();
-    }
-    
-    private void verificar_colisiones_bolas_fuego() {
-        for (BolaDeFuego proyectil : new ArrayList<>(mapa.get_entidades_proyectiles())) {
+    	for (BolaDeFuego proyectil : new ArrayList<>(mapa.get_entidades_proyectiles())) {
             if (colisiona_con_plataforma(proyectil.get_limites())) {
                 proyectil.destruir(mapa);
                 continue;
             }   
             verificar_colision_proyectil_enemigos(proyectil);
         }
-    }
-    
+    }   
     private void verificar_colision_proyectil_enemigos(BolaDeFuego proyectil) {
         for (Enemigo enemigo : mapa.get_entidades_enemigos()) {
             if (proyectil.get_limites().intersects(enemigo.get_limites())) {
@@ -109,27 +121,7 @@ public class Colisionador {
         }
     }
     
-    private void manejar_colision_vertical(Enemigo enemigo) {
-        for (Plataforma plataforma : mapa.get_entidades_plataformas()) {
-        	if (enemigo.get_limites_superiores().intersects(plataforma.get_limites_inferiores()))
-        			plataforma.aceptar(enemigo);
-	     }
-    } 
-    
-    private void manejar_colision_horizontal(Enemigo entidad) {
-        if (colisiona_con_plataforma(entidad.get_limites_derecha())) {
-            entidad.set_direccion(-1);
-        } else if (colisiona_con_plataforma(entidad.get_limites_izquierda())) {
-            entidad.set_direccion(1);
-        }
-    }
-    
-    private boolean colisiona_con_plataforma(Rectangle limites) {
-        return mapa.get_entidades_plataformas().stream()
-            .anyMatch(plataforma -> plataforma.get_limites().intersects(limites));
-    }
-    
-    public boolean get_murio_mario() { return murio_mario; }
-    
+    //estados de mario
+    public boolean get_murio_mario() { return murio_mario; }    
     public void set_murio_mario(boolean murio) { murio_mario = murio; }
 }

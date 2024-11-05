@@ -31,40 +31,34 @@ public class Mapa {
         this.colisionador = new Colisionador(this);
     }
 
+    //actualizar
     public void actualizar_entidades_movibles() {
         for (EntidadMovible entidad : get_entidades_movibles()) {
             entidad.actualizar();
         }
         colisionador.verificar_colisiones(mi_juego);
     }
-
+    public void actualizar_fabrica_sprites(SpritesFactory nueva_fabrica) {
+        for(Enemigo enemigo: entidades_enemigos) {
+        	enemigo.actualizar_fabrica_sprites(nueva_fabrica);
+        }
+    }
+    
+    //getters
     private List<EntidadMovible> get_entidades_movibles() {
         List<EntidadMovible> entidades_movibles = new CopyOnWriteArrayList<>();
         entidades_movibles.addAll(entidades_enemigos);
         entidades_movibles.addAll(entidades_proyectiles);
         return entidades_movibles;
     }
-
     public Colisionador get_colisionador() { return colisionador; }
-
     public List<Enemigo> get_entidades_enemigos() { return entidades_enemigos; }
     public List<Plataforma> get_entidades_plataformas() { return entidades_plataformas; }
     public List<BolaDeFuego> get_entidades_proyectiles() { return entidades_proyectiles; }
     public List<PowerUp> get_entidades_powerup() { return entidades_powerup; }
 
+    //Agregar al mapa
     public void agregar_mario(Mario mario) { this.mario = mario; }
-
-    public void agregar_goomba(Goomba goomba) { entidades_enemigos.add(goomba); }
-    public void agregar_buzzy_beetle(BuzzyBeetle buzzy) { entidades_enemigos.add(buzzy); }
-    public void agregar_koopa_troopa(KoopaTroopa koopa) { entidades_enemigos.add(koopa); }
-    public void agregar_lakitu(Lakitu laki) { entidades_enemigos.add(laki); }
-    public void agregar_piranha_plant(PiranhaPlant piranha) { entidades_enemigos.add(piranha); }
-    public void agregar_spiny(Spiny spiny) { entidades_enemigos.add(spiny); }
-    public void agregar_bloque_solido(BloqueSolido solido) { entidades_plataformas.add(solido); }
-    public void agregar_bloque_de_pregunta(BloqueDePregunta pregunta) { entidades_plataformas.add(pregunta); }
-    public void agregar_ladrillo_solido(LadrilloSolido ladrillo) { entidades_plataformas.add(ladrillo); }
-    public void agregar_tuberia(Tuberias tuberia) { entidades_plataformas.add(tuberia); }
-    public void agregar_vacio(Vacio vacio) { entidades_plataformas.add(vacio); }
     public void agregar_powerup(PowerUp powerup) { 
     	if(powerup.get_envuelto()) {
 	        entidades_powerup.add(powerup);
@@ -80,21 +74,14 @@ public class Mapa {
             bola_de_fuego.registrar_observer(observer);
         }
     }
-
-    public void eliminar_goomba(Goomba goomba) { entidades_enemigos.remove(goomba); }
-    public void eliminar_buzzy_beetle(BuzzyBeetle buzzy) { entidades_enemigos.remove(buzzy); }
-    public void eliminar_koopa_troopa(KoopaTroopa koopa) { entidades_enemigos.remove(koopa); }
-    public void eliminar_lakitu(Lakitu lakitu) { entidades_enemigos.remove(lakitu); }
-    public void eliminar_piranha_plant(PiranhaPlant piranha) { entidades_enemigos.remove(piranha); }
-    public void eliminar_spiny(Spiny spiny) { entidades_enemigos.remove(spiny); }
+    public void agregar_enemigo(Enemigo enemigo) {entidades_enemigos.add(enemigo);}
+    public void agregar_plataforma(Plataforma plataforma) {entidades_plataformas.add(plataforma);}
+    
+    //borrar del mapa
+    public void eliminar_enemigo(Enemigo enemigo) { entidades_enemigos.remove(enemigo); }
     public void eliminar_powerup(PowerUp powerup) { entidades_powerup.remove(powerup); }
-    public void eliminar_bloque_solido(BloqueSolido solido) { entidades_plataformas.remove(solido); }
-    public void eliminar_bloque_de_pregunta(BloqueDePregunta pregunta) { entidades_plataformas.remove(pregunta); }
-    public void eliminar_ladrillo_solido(LadrilloSolido ladrillo) { entidades_plataformas.remove(ladrillo); }
-    public void eliminar_tuberia(Tuberias tuberia) { entidades_plataformas.remove(tuberia); }
-    public void eliminar_vacio(Vacio vacio) { entidades_plataformas.remove(vacio); }
+    public void eliminar_plataforma(Plataforma plataforma) { entidades_plataformas.remove(plataforma); }
     public void eliminar_bola_de_fuego(BolaDeFuego bola_de_fuego) { entidades_proyectiles.remove(bola_de_fuego); }
-
     public void barrer_mapa() {
         for (EntidadMovible entidad : get_entidades_movibles()) {
             entidad.eliminar_del_mapa();
@@ -114,11 +101,5 @@ public class Mapa {
     }
 
     public void reproducir_efecto(String efecto) { mi_juego.reproducir_efecto(efecto); }
-
-    public void actualizar_fabrica_sprites(SpritesFactory nueva_fabrica) {
-        for(Enemigo enemigo: entidades_enemigos) {
-        	enemigo.actualizar_fabrica_sprites(nueva_fabrica);
-        }
-    }
 
 }

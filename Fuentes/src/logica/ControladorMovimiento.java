@@ -19,6 +19,7 @@ public class ControladorMovimiento {
         this.juego_terminado = false;
     }
 
+    //controlador hilos
     public synchronized void iniciar_hilos() {
         if (esta_ejecutando) return;
         esta_ejecutando = true;
@@ -26,23 +27,58 @@ public class ControladorMovimiento {
         iniciar_hilo_movimiento_mario();
         iniciar_hilo_movimiento_enemigos();
         iniciar_hilo_informacion_y_tiempo();
-    }
-    
+    }   
     private void iniciar_hilo_movimiento_mario() {
         hilo_mario_movimiento = new Thread(this::bucle_movimiento_jugador);
         hilo_mario_movimiento.start();
     }
-
     private void iniciar_hilo_movimiento_enemigos() {
         hilo_enemigos_movimiento = new Thread(this::bucle_movimiento_entidades);
         hilo_enemigos_movimiento.start();
     }
-    
     private void iniciar_hilo_informacion_y_tiempo() {
         hilo_informacion_y_tiempo = new Thread(this::bucle_informacion_y_tiempo);
         hilo_informacion_y_tiempo.start();
     }
+    public void detener_hilos() {
+        esta_ejecutando = false;
+        
+        Thread[] hilos = {
+            hilo_mario_movimiento,
+            hilo_enemigos_movimiento,
+            hilo_informacion_y_tiempo,
+        };
+        
+        for (Thread hilo : hilos) {
+            if (hilo != null && hilo.isAlive()) {
+                try {
+                    hilo.join(1000); // Timeout de 1 segundo
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        }
+    }
+    private void reiniciar_nivel_y_timer() {
+        if (juego_terminado) return;
+        
+        EventQueue.invokeLater(() -> {
+            Mario.get_instancia().get_sistema_vidas().quitar_vida();
+            esta_ejecutando = false;
+            juego.get_controlador_nivel().reiniciar_datos_nivel();
+            
+            if (juego.get_nivel_actual() != null) {
+                juego.get_nivel_actual().set_tiempo_restante(
+                    juego.get_nivel_actual().get_tiempo_inicial()
+                );
+            }
 
+            esta_ejecutando = true; 
+            iniciar_hilos();
+        });
+    }
+    
+    //bucle  de movimiento
     private void bucle_movimiento_jugador() {
         final double tiempo_por_frame = 1_000_000_000.0 / 60;
 
@@ -66,7 +102,6 @@ public class ControladorMovimiento {
             controlar_fps(tiempo_actual, tiempo_por_frame);
         }
     }
-
     private void bucle_movimiento_entidades() {
         final double tiempo_por_frame = 1_000_000_000.0 / 60;
 
@@ -91,7 +126,6 @@ public class ControladorMovimiento {
             controlar_fps(tiempo_actual, tiempo_por_frame);
         }
     }
-
     private void bucle_informacion_y_tiempo() {
         long ultimo_segundo = System.currentTimeMillis();
         
@@ -138,34 +172,7 @@ public class ControladorMovimiento {
         }
     }
     
-    public void terminar_juego() {
-        juego_terminado = true;
-        esta_ejecutando = false;
-        detener_hilos();
-        hilo_mario_movimiento = null;
-        hilo_enemigos_movimiento = null;
-        hilo_informacion_y_tiempo = null;
-    }
-
-    private void reiniciar_nivel_y_timer() {
-        if (juego_terminado) return;
-        
-        EventQueue.invokeLater(() -> {
-            Mario.get_instancia().get_sistema_vidas().quitar_vida();
-            esta_ejecutando = false;
-            juego.get_controlador_nivel().reiniciar_datos_nivel();
-            
-            if (juego.get_nivel_actual() != null) {
-                juego.get_nivel_actual().set_tiempo_restante(
-                    juego.get_nivel_actual().get_tiempo_inicial()
-                );
-            }
-
-            esta_ejecutando = true; 
-            iniciar_hilos();
-        });
-    }
-
+    //controlador frames
     private void controlar_fps(long tiempo_actual, double tiempo_por_frame) {
         long tiempo_restante = (long) tiempo_por_frame - (System.nanoTime() - tiempo_actual);
         if (tiempo_restante > 0) {
@@ -176,31 +183,19 @@ public class ControladorMovimiento {
             }
         }
     }
-
-    public void detener_hilos() {
-        esta_ejecutando = false;
-        
-        Thread[] hilos = {
-            hilo_mario_movimiento,
-            hilo_enemigos_movimiento,
-            hilo_informacion_y_tiempo,
-        };
-        
-        for (Thread hilo : hilos) {
-            if (hilo != null && hilo.isAlive()) {
-                try {
-                    hilo.join(1000); // Timeout de 1 segundo
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                }
-            }
-        }
-    }
     
+    //controlador juego 
+    public void terminar_juego() {
+        juego_terminado = true;
+        esta_ejecutando = false;
+        detener_hilos();
+        hilo_mario_movimiento = null;
+        hilo_enemigos_movimiento = null;
+        hilo_informacion_y_tiempo = null;
+    }
     public void pausar() {
         esta_pausado = true;
     }
-
     public void reanudar() {
         esta_pausado = false;
     }

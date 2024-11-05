@@ -37,14 +37,14 @@ public class Lakitu extends Enemigo{
         if (!destruida) {
         	mapa.reproducir_efecto("kick");
             destruida = true;           
-            mapa.eliminar_lakitu(this);
+            mapa.eliminar_enemigo(this);
             eliminar_del_mapa();
         }
     }
 
 	public void lanzar_spiny(Mapa mapa) {
 		Spiny spiny = new Spiny ((int) this.get_posicion_en_x() + 10, (int )this.get_posicion_en_y(), Juego.get_instancia().get_fabrica_sprites().get_spiny_movimiento_izquierda());
-		mapa.agregar_spiny(spiny);	
+		mapa.agregar_enemigo(spiny);	
 		spiny.registrar_observer(Juego.get_instancia().get_controlador_vistas().registrar_entidad(spiny));
 	}
 

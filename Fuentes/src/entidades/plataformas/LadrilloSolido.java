@@ -12,7 +12,7 @@ public class LadrilloSolido extends Plataforma{
         if (!destruida) {
         	mapa.reproducir_efecto("kick");
             destruida = true;           
-            mapa.eliminar_ladrillo_solido(this);
+            mapa.eliminar_plataforma(this);
             eliminar_del_mapa();
         }
     }

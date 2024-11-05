@@ -15,6 +15,7 @@ public class ControladorEntidades {
         this.juego = juego;
     }
 
+    //controladores referidos a mario
     public void mover_mario() {
         Mario mario = Mario.get_instancia();
         synchronized(mario) {
@@ -33,7 +34,6 @@ public class ControladorEntidades {
             verificar_estado_mario(mario);
         }
     }
-
     private void verificar_estado_mario(Mario mario) {
         if(mario.get_posicion_en_x() >= 4410) {
             manejar_cambio_nivel();
@@ -49,7 +49,6 @@ public class ControladorEntidades {
             juego.controlador_ranking.actualizar_ranking(Mario.get_instancia().get_puntaje());
         }
     }
-
     private void manejar_cambio_nivel() {
         juego.controlador_nivel.set_nivel_actual(juego.controlador_nivel.get_nivel_actual()+1);
         if(juego.controlador_nivel.get_nivel_actual() > 3) {
@@ -62,31 +61,19 @@ public class ControladorEntidades {
             Mario.get_instancia().set_estado(new NormalMarioState(Mario.get_instancia()));
         }
     }
-    
     private void mario_cae_al_vacio(Mario mario) {
         juego.get_mapa_nivel_actual().get_colisionador().set_murio_mario(true);
         mario.caer_en_vacio();
         mario.eliminar_del_mapa();
     }
-    
-
+    public void notificar_observadores_mario() {
+        Mario.get_instancia().notificar_observer();
+    }
+  
+    //controladores referidos a enemigos
     public void mover_enemigos() {
         mover_lista_entidades(juego.get_mapa_nivel_actual().get_entidades_enemigos());
     }
-
-    private <T extends EntidadMovible> void mover_lista_entidades(List<T> entidades) {
-        List<T> entidades_copia = new ArrayList<>(entidades);
-        for (T entidad : entidades_copia) {
-            synchronized(entidad) {
-                try {
-                    entidad.mover();
-                } catch (Exception e) {
-                    continue;
-                }
-            }
-        }
-    }
-
     public void mover_proyectiles() {
         List<BolaDeFuego> proyectiles = new ArrayList<>(juego.get_mapa_nivel_actual().get_entidades_proyectiles());
         for (BolaDeFuego proyectil : proyectiles) {
@@ -99,16 +86,24 @@ public class ControladorEntidades {
             }
         }
     }
-
-    public void notificar_observadores_mario() {
-        Mario.get_instancia().notificar_observer();
-    }
-
     public void notificar_observadores_enemigos() {
         Mapa mapa = juego.get_mapa_nivel_actual();
         notificar_lista_entidades(mapa.get_entidades_enemigos());
     }
-    
+
+    //controlador lista entidades
+    private <T extends EntidadMovible> void mover_lista_entidades(List<T> entidades) {
+        List<T> entidades_copia = new ArrayList<>(entidades);
+        for (T entidad : entidades_copia) {
+            synchronized(entidad) {
+                try {
+                    entidad.mover();
+                } catch (Exception e) {
+                    continue;
+                }
+            }
+        }
+    }
     private void notificar_lista_entidades(List<? extends Entidad> entidades) {
         // Crear una copia de la lista para evitar ConcurrentModificationException
         List<? extends Entidad> entidades_copia = new ArrayList<>(entidades);

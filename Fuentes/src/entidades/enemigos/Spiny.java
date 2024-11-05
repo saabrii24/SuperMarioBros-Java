@@ -66,7 +66,7 @@ public class Spiny extends Enemigo{
         if (!destruida) {
         	mapa.reproducir_efecto("kick");
             destruida = true;           
-            mapa.eliminar_spiny(this);
+            mapa.eliminar_enemigo(this);
             eliminar_del_mapa();
         }
     }

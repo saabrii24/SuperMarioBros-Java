@@ -10,7 +10,7 @@ import niveles.Nivel;
 
 public class Juego {
     private static Juego instancia_juego;
-
+    
     protected SpritesFactory fabrica_sprites;
     protected EntidadesFactory fabrica_entidades;
     protected ControladorDeVistas controlador_vistas;
@@ -112,5 +112,4 @@ public class Juego {
             controlador_movimiento.reanudar();
         }
     }
-
 }

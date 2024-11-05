@@ -6,7 +6,6 @@ import entidades.EntidadMovible;
 import entidades.interfaces.EnemigosVisitor;
 import entidades.plataformas.*;
 import fabricas.Sprite;
-import logica.Juego;
 import logica.Mapa;
 
 /*

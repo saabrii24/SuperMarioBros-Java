@@ -2,7 +2,7 @@
 Nivel: 3
 
 # Tiempo límite en segundos
-Tiempo: 60
+Tiempo: 80
 
 # Creación de las entidades
 	
@@ -17,9 +17,9 @@ Tiempo: 60
 	Goomba: 432, 384
 	Goomba: 1440, 240
 	Goomba: 1632, 240
-	Goomba: 2832, 288
-	Goomba: 2928, 288
-	Goomba: 3120, 288
+	Buuzy: 2832, 288
+	Buuzy: 2928, 288
+	Buuzy: 3120, 288
 	Koopa: 1536, 240
 	Koopa: 3024, 288
 	Piranha: 360, 480

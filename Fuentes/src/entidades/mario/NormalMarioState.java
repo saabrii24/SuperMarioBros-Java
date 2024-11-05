@@ -47,7 +47,6 @@ public class NormalMarioState implements Mario.MarioState {
 				(int) estrella.get_posicion_en_x(), 
 				(int) estrella.get_posicion_en_y(), 
 				"+20");
-		System.out.println(estrella.get_posicion_en_x() + " " + estrella.get_posicion_en_y());
     	mario.cambiar_estado(new StarMarioState(mario,this));
 	}
 
@@ -64,7 +63,7 @@ public class NormalMarioState implements Mario.MarioState {
 		mario.get_sistema_puntuacion().sumar_puntos(5);
 		Juego.get_instancia().get_mapa_nivel_actual().animacion_puntaje_obtenido(
 				(int) flor_de_fuego.get_posicion_en_x(), 
-				(int) flor_de_fuego.get_posicion_en_y(), 
+				(int) flor_de_fuego.get_posicion_en_y()-300, 
 				"+5");
     	mario.cambiar_estado(new FireMarioState(mario));
 	}

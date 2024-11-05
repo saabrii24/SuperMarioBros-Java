@@ -145,6 +145,7 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
     	Juego.get_instancia().reproducir_efecto("coin");
     	get_sistema_puntuacion().sumar_puntos(5);
     	get_sistema_puntuacion().sumar_moneda();
+    	System.out.println((int) moneda.get_posicion_en_x() + " " + (int) moneda.get_posicion_en_y());
 		Juego.get_instancia().get_mapa_nivel_actual().animacion_puntaje_obtenido(
 				(int) moneda.get_posicion_en_x(), 
 				(int) moneda.get_posicion_en_y(), 

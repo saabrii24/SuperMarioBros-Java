@@ -93,6 +93,11 @@ public class Mapa {
     public void eliminar_enemigo(Enemigo enemigo) { 
     	entidades_enemigos.remove(enemigo); 
     	reproducir_efecto("kick");
+		Juego.get_instancia().get_mapa_nivel_actual().animacion_puntaje_obtenido(
+				(int) enemigo.get_posicion_en_x(), 
+				(int) enemigo.get_posicion_en_y(), 
+				"+"+enemigo.calcular_puntaje()
+				);
     }
     public void eliminar_powerup(PowerUp powerup) { entidades_powerup.remove(powerup); }
     public void eliminar_plataforma(Plataforma plataforma) { entidades_plataformas.remove(plataforma); }
@@ -124,30 +129,32 @@ public class Mapa {
         label.setOpaque(false);
         label.setSize(label.getPreferredSize());
         
-        JScrollPane scroll_pane = mi_juego.controlador_vistas.get_pantalla_mapa().get_scroll_pane();
-        Point posicion_en_scroll = scroll_pane.getViewport().getViewPosition();
-        int screen_x = x - posicion_en_scroll.x;
-        int screen_y = y - posicion_en_scroll.y + 350;
-        label.setLocation(screen_x, screen_y);
-        JLayeredPane layered_pane = mi_juego.controlador_vistas.get_pantalla_mapa().get_layered_pane();
-        layered_pane.add(label, JLayeredPane.POPUP_LAYER);
-        label.setBounds(screen_x, screen_y, label.getPreferredSize().width, label.getPreferredSize().height);
+        JScrollPane panel_desplazamiento = mi_juego.controlador_vistas.get_pantalla_mapa().get_scroll_pane();
+        Point posicion_en_scroll = panel_desplazamiento.getViewport().getViewPosition();
+        int altura_panel = panel_desplazamiento.getViewport().getHeight();
+        int x_en_pantalla = x - posicion_en_scroll.x;
+        int y_en_pantalla = altura_panel - (y - posicion_en_scroll.y) - 48;
+        label.setLocation(x_en_pantalla, y_en_pantalla);
+        JLayeredPane panel_capas = mi_juego.controlador_vistas.get_pantalla_mapa().get_layered_pane();
+        panel_capas.add(label, JLayeredPane.POPUP_LAYER);
+        panel_capas.repaint();
+        label.setBounds(x_en_pantalla, y_en_pantalla, label.getPreferredSize().width, label.getPreferredSize().height);
         
-        Timer fade_timer = new Timer(50, null);
+        Timer temporizador_desvanecimiento = new Timer(50, null);
         final float[] alpha = {1.0f};
         
-        fade_timer.addActionListener(e -> {
+        temporizador_desvanecimiento.addActionListener(e -> {
             alpha[0] -= 0.05f;
             if (alpha[0] <= 0) {
-                fade_timer.stop();
-                layered_pane.remove(label);
-                layered_pane.repaint();
+            	temporizador_desvanecimiento.stop();
+                panel_capas.remove(label);
+                panel_capas.repaint();
             } else {
                 label.setForeground(new Color(255, 255, 255, (int)(alpha[0] * 255)));
                 label.setLocation(label.getX(), label.getY() - 1);
             }
         });
         
-        fade_timer.start();
+        temporizador_desvanecimiento.start();
     }
 }

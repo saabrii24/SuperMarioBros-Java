@@ -2,7 +2,7 @@
 Nivel: 2
 
 # Tiempo límite en segundos
-Tiempo: 40
+Tiempo: 90
 
 # Creación de las entidades
 	
@@ -10,8 +10,8 @@ Tiempo: 40
 	Mario: 96, 432
 	
 	# Enemigos
+    Goomba: 600, 144
     Goomba: 720, 144
-    Goomba: 768, 144
     Goomba: 1392, 144
     Koopa: 2016, 144
     Koopa: 2112, 144

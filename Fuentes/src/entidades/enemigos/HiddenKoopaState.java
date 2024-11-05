@@ -8,7 +8,6 @@ public class HiddenKoopaState implements KoopaTroopa.KoopaState {
 
     public HiddenKoopaState(KoopaTroopa koopa) { this.koopa = koopa; }
 
-    @Override
     public boolean cambiar_estado() {
         koopa.set_estado(new ProjectileKoopaState(koopa));
         Mario mario = Mario.get_instancia();
@@ -17,20 +16,15 @@ public class HiddenKoopaState implements KoopaTroopa.KoopaState {
         return false;
     }
 
-    @Override
     public void mover() { koopa.detener_movimiento(); }
 
-    @Override
     public void actualizar_sprite() {
         koopa.cambiar_sprite(Juego.get_instancia().get_fabrica_sprites().get_koopa_escondido());
     }
 
-    @Override
     public boolean en_movimiento() { return false; }
 
-    @Override
     public boolean mata_tocando() { return false; }
-
-	@Override
+    
 	public void visitar_enemigo(Enemigo enemigo) {}
 }

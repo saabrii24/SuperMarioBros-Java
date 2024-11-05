@@ -3,6 +3,7 @@ package entidades.mario;
 import entidades.BolaDeFuego;
 import entidades.EntidadMovible;
 import entidades.enemigos.*;
+import entidades.interfaces.EnemigosVisitor;
 import entidades.interfaces.EntidadJugador;
 import entidades.interfaces.SistemaPuntuacion;
 import entidades.interfaces.SistemaVidas;

@@ -1,4 +1,6 @@
 package entidades.enemigos;
+import entidades.interfaces.EnemigosVisitor;
+import entidades.interfaces.EnemigoVisitorEnemigo;
 import entidades.plataformas.*;
 import fabricas.Sprite;
 import logica.Mapa;
@@ -16,6 +18,7 @@ public class PiranhaPlant extends Enemigo {
         this.cayendo = false;
     }
 
+    //Movimiento
     private void cambiar_direccion() {
         if (moviendo_arriba) {
             if (get_posicion_en_y() <= posicion_inicial_y - DISTANCIA_MAXIMA) {
@@ -29,11 +32,9 @@ public class PiranhaPlant extends Enemigo {
             }
         }
     }
-
-    @Override
     public void mover() {}
 
-    @Override
+    //Actualizar
     public void actualizar() {
         this.cayendo = false;
         set_velocidad_en_y(0);
@@ -41,25 +42,11 @@ public class PiranhaPlant extends Enemigo {
         set_posicion_en_y(get_posicion_en_y() + velocidad_actual);   
     }
 
+    //puntaje
     public int calcular_puntaje() { return 30; }
-
     public int calcular_penalizacion() { return 30; }    
-    
-    @Override
-    public boolean esta_cayendo() {
-        return false;
-    }
-    
-    @Override
-    public void set_cayendo(boolean esta_cayendo) {
-        this.cayendo = false;
-    }
 
-    @Override
-    public void set_velocidad_en_y(double vy) {
-        super.set_velocidad_en_y(0);
-    }
-
+    //destruir del mapa
     public void destruir(Mapa mapa) {
         if (!destruida) {
             mapa.reproducir_efecto("kick");
@@ -69,47 +56,26 @@ public class PiranhaPlant extends Enemigo {
         }
     }
     
+    //colisiones
+    
+    //colision piranha y mario
     public boolean aceptar(EnemigosVisitor visitador) {
 		return visitador.visitar(this);
 	}
 
-    @Override
+    //colisiones piranha y plataformas (piranha no colisiona)
 	public void visitar(Vacio vacio) {}
-
-
-	@Override
 	public void visitar(BloqueSolido bloque_solido) {}
-
-
-	@Override
 	public void visitar(BloqueDePregunta bloque_de_pregunta) {}
-
-
-	@Override
 	public void visitar(Tuberias tuberia) {}
-
-
-	@Override
 	public void visitar(LadrilloSolido ladrillo_solido) {}
 
-	@Override
+	//colisiones entre enemigos(piranha no colisiona con nadie)
 	public void visitar_enemigo(Goomba goomba) {}
-
-	@Override
 	public void visitar_enemigo(BuzzyBeetle buzzy) {}
-
-	@Override
 	public void visitar_enemigo(KoopaTroopa koopa) {}
-
-	@Override
 	public void visitar_enemigo(Lakitu lakitu) {}
-
-	@Override
 	public void visitar_enemigo(PiranhaPlant piranha) {}
-
-	@Override
 	public void visitar_enemigo(Spiny spiny) {}
-
-	@Override
 	public void aceptar(EnemigoVisitorEnemigo visitador) {}
 }

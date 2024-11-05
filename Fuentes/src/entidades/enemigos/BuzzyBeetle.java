@@ -1,7 +1,9 @@
 package entidades.enemigos;
 
 import entidades.Entidad;
+import entidades.interfaces.EnemigoVisitorEnemigo;
 import entidades.EntidadMovible;
+import entidades.interfaces.EnemigosVisitor;
 import entidades.plataformas.*;
 import fabricas.Sprite;
 import logica.Juego;
@@ -14,7 +16,7 @@ public class BuzzyBeetle extends Enemigo{
 		set_velocidad_en_x(3);
 	}
 
-
+	//Actualizar
     public void actualizar() {
         if (cayendo) {
             velocidad_en_y += GRAVEDAD;
@@ -24,15 +26,19 @@ public class BuzzyBeetle extends Enemigo{
         posicion_en_x += velocidad_en_x;
         actualizar_sprite();
     }
-    
-    public int calcular_puntaje() {
-        return 30;
-    }
+    private void actualizar_sprite() {
+		if (velocidad_en_x != 0) {
+            set_sprite(movimiento_derecha ? 
+            	Juego.get_instancia().get_fabrica_sprites().get_buzzy_movimiento_derecha() : 
+            	Juego.get_instancia().get_fabrica_sprites().get_buzzy_movimiento_izquierda());
+		}
+	}
 
-    public int calcular_penalizacion() {
-        return 15;
-    }
+    //Puntajes
+    public int calcular_puntaje() {return 30;}
+    public int calcular_penalizacion() {return 15;}
 
+    //Movimientos
     public void mover() {
         switch (direccion) {
             case 1 -> mover_derecha();
@@ -40,28 +46,19 @@ public class BuzzyBeetle extends Enemigo{
             default -> detener_movimiento();
         }
     }
-
-    protected void mover_izquierda() {
+    private void mover_izquierda() {
         this.velocidad_en_x = -1;
         movimiento_derecha = false;
     }
-
-    protected void mover_derecha() {
+    private void mover_derecha() {
         this.velocidad_en_x = 1;
         movimiento_derecha = true;
     }
-
-    protected void detener_movimiento() {
+    private void detener_movimiento() {
         this.velocidad_en_x = 0;
     }
 
-	private void actualizar_sprite() {
-		if (velocidad_en_x != 0) {
-            set_sprite(movimiento_derecha ? 
-            	Juego.get_instancia().get_fabrica_sprites().get_buzzy_movimiento_derecha() : 
-            	Juego.get_instancia().get_fabrica_sprites().get_buzzy_movimiento_izquierda());
-		}
-	}
+    //Destruir del mapa
 	public void destruir(Mapa mapa) {
         if (!destruida) {
         	mapa.reproducir_efecto("kick");
@@ -71,75 +68,31 @@ public class BuzzyBeetle extends Enemigo{
         }
     }
 
-	public boolean aceptar(EnemigosVisitor visitador) {
-		return visitador.visitar(this);
-	}
-
-	@Override
-	public void visitar(Vacio vacio) {
-		this.eliminar_del_mapa();
-	}
-
-
-	@Override
-	public void visitar(BloqueSolido bloque_solido) {
-		ajustar_posicion_enemigo_sobre_plataforma(this,bloque_solido);
-	}
-
-
-	@Override
-	public void visitar(BloqueDePregunta bloque_de_pregunta) {
-		ajustar_posicion_enemigo_sobre_plataforma(this,bloque_de_pregunta);
-	}
-
-
-	@Override
-	public void visitar(Tuberias tuberia) {
-		ajustar_posicion_enemigo_sobre_plataforma(this,tuberia);
-	}
-
-
-	@Override
-	public void visitar(LadrilloSolido ladrillo_solido) {
-		ajustar_posicion_enemigo_sobre_plataforma(this,ladrillo_solido);
-	}
+	//Colisiones
 	
-	 private void ajustar_posicion_enemigo_sobre_plataforma(EntidadMovible enemigo, Entidad plataforma) {
-	        enemigo.set_velocidad_en_y(0);
-	        enemigo.set_posicion_en_y(plataforma.get_posicion_en_y() + plataforma.get_dimension().height);
-	    }
+	//Colision entre mario y buzzy
+	public boolean aceptar(EnemigosVisitor visitador) {return visitador.visitar(this);}
 
-
-	@Override
-	public void visitar_enemigo(Goomba goomba) {
+	//Colisiones entre buzzy y plataformas
+	public void visitar(Vacio vacio) {this.eliminar_del_mapa();}
+	public void visitar(BloqueSolido bloque_solido) {ajustar_posicion_enemigo_sobre_plataforma(this,bloque_solido);}
+	public void visitar(BloqueDePregunta bloque_de_pregunta) {ajustar_posicion_enemigo_sobre_plataforma(this,bloque_de_pregunta);}
+	public void visitar(Tuberias tuberia) {ajustar_posicion_enemigo_sobre_plataforma(this,tuberia);}
+	public void visitar(LadrilloSolido ladrillo_solido) {ajustar_posicion_enemigo_sobre_plataforma(this,ladrillo_solido);}
+	private void ajustar_posicion_enemigo_sobre_plataforma(EntidadMovible enemigo, Entidad plataforma) {
+	   enemigo.set_velocidad_en_y(0);
+	   enemigo.set_posicion_en_y(plataforma.get_posicion_en_y() + plataforma.get_dimension().height);
 	}
 
-
-	@Override
+	//Colisiones entre enemigos
+	public void visitar_enemigo(Goomba goomba) {}
 	public void visitar_enemigo(BuzzyBeetle buzzy) {
 		buzzy.set_direccion(buzzy.get_direccion()*-1);
 		this.set_direccion(direccion);
 	}
-
-
-	@Override
 	public void visitar_enemigo(KoopaTroopa koopa) {}
-
-
-	@Override
 	public void visitar_enemigo(Lakitu lakitu) {}
-
-
-	@Override
 	public void visitar_enemigo(PiranhaPlant piranha) {}
-
-
-	@Override
 	public void visitar_enemigo(Spiny spiny) {}
-
-
-	@Override
-	public void aceptar(EnemigoVisitorEnemigo visitador) {
-		visitador.visitar_enemigo(this);
-	}	
+	public void aceptar(EnemigoVisitorEnemigo visitador) {visitador.visitar_enemigo(this);}	
 }

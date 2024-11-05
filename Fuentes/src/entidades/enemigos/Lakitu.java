@@ -1,22 +1,22 @@
 package entidades.enemigos;
 
+import entidades.interfaces.EnemigosVisitor;
 import entidades.plataformas.*;
+import entidades.interfaces.EnemigoVisitorEnemigo;
 import fabricas.Sprite;
 import logica.Juego;
 import logica.Mapa;
 
 public class Lakitu extends Enemigo{
-	
 	private long tiempo_ultimo_spiny = 0;
 	private static final long SPINY_COOLDOWN = 3000000000L;
 
-	public Lakitu(int x, int y, Sprite sprite) {
-		super(x, y, sprite);
-	}
+	public Lakitu(int x, int y, Sprite sprite) {super(x, y, sprite);}
 
-	public void mover() {
-	}
+	//movimiento
+	public void mover() {}
 
+	//actualizar
 	public void actualizar() {
         long tiempo_actual = System.nanoTime();
         if (tiempo_actual - tiempo_ultimo_spiny >= SPINY_COOLDOWN) {
@@ -28,14 +28,11 @@ public class Lakitu extends Enemigo{
         }
     }
 	
-    public int calcular_puntaje() {
-        return 60;
-    }
-
-    public int calcular_penalizacion() {
-        return 0;
-    }
+	//puntaje
+    public int calcular_puntaje() {return 60;}
+    public int calcular_penalizacion() {return 0;}
     
+    //destruir del mapa
 	public void destruir(Mapa mapa) {
         if (!destruida) {
         	mapa.reproducir_efecto("kick");
@@ -51,46 +48,26 @@ public class Lakitu extends Enemigo{
 		spiny.registrar_observer(Juego.get_instancia().get_controlador_vistas().registrar_entidad(spiny));
 	}
 
+	//Colisiones
+	
+	//colision entre lakitu y mario
 	public boolean aceptar(EnemigosVisitor visitador) {
 		return visitador.visitar(this);
 	}
 
-	@Override
+	//colision entre lakitu y plataformas(lakitu no colisiona)
 	public void visitar(Vacio vacio) {}
-
-
-	@Override
 	public void visitar(BloqueSolido bloque_solido) {}
-
-
-	@Override
 	public void visitar(BloqueDePregunta bloque_de_pregunta) {}
-
-
-	@Override
 	public void visitar(Tuberias tuberia) {}
-
-	@Override
 	public void visitar(LadrilloSolido ladrillo_solido) {}
 	
-	@Override
+	//colision entre lakitu y enemigos(lakitu no colisiona)
 	public void visitar_enemigo(Goomba goomba) {}
-
-	@Override
 	public void visitar_enemigo(BuzzyBeetle buzzy) {}
-
-	@Override
 	public void visitar_enemigo(KoopaTroopa koopa) {}
-
-	@Override
 	public void visitar_enemigo(Lakitu lakitu) {}
-
-	@Override
 	public void visitar_enemigo(PiranhaPlant piranha) {}
-
-	@Override
 	public void visitar_enemigo(Spiny spiny) {}
-
-	@Override
 	public void aceptar(EnemigoVisitorEnemigo visitador) {}
 }

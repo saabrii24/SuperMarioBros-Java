@@ -1,4 +1,6 @@
-package entidades.enemigos;
+package entidades.interfaces;
+
+import entidades.enemigos.*;
 
 public interface EnemigoVisitorEnemigo {
 	void visitar_enemigo(Goomba goomba);

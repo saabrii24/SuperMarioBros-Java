@@ -9,7 +9,6 @@ public class NormalKoopaState implements KoopaTroopa.KoopaState {
 
     public NormalKoopaState(KoopaTroopa koopa) { this.koopa = koopa; }
 
-    @Override
     public boolean cambiar_estado() {
         koopa.set_estado(new HiddenKoopaState(koopa));
         Mario mario = Mario.get_instancia();
@@ -18,14 +17,12 @@ public class NormalKoopaState implements KoopaTroopa.KoopaState {
         return false;
     }
 
-    @Override
     public void mover() {
         if (koopa.get_direccion() == 1) koopa.mover_derecha();
         else if (koopa.get_direccion() == -1) koopa.mover_izquierda();
         else koopa.detener_movimiento();
     }
-
-    @Override
+    
     public void actualizar_sprite() {
         if (koopa.get_velocidad_en_x() != 0) {
             Sprite sprite = koopa.get_movimiento_derecha()
@@ -35,12 +32,9 @@ public class NormalKoopaState implements KoopaTroopa.KoopaState {
         }
     }
 
-    @Override
     public boolean en_movimiento() { return true; }
 
-    @Override
     public boolean mata_tocando() { return false; }
 
-	@Override
 	public void visitar_enemigo(Enemigo enemigo) {}
 }

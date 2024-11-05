@@ -3,6 +3,9 @@ package entidades.mario;
 import entidades.BolaDeFuego;
 import entidades.enemigos.*;
 import entidades.plataformas.*;
+import entidades.powerups.Estrella;
+import entidades.powerups.FlorDeFuego;
+import entidades.powerups.SuperChampi;
 import logica.Juego;
 
 public class InvulnerableMarioState implements Mario.MarioState {
@@ -51,9 +54,9 @@ public class InvulnerableMarioState implements Mario.MarioState {
     public boolean mata_tocando() { return false; }
     public BolaDeFuego disparar() { return estado_anterior.disparar(); }
 
-    public void consumir_estrella() { estado_anterior.consumir_estrella(); }
-    public void consumir_super_champi() { estado_anterior.consumir_super_champi(); }
-    public void consumir_flor_de_fuego() { estado_anterior.consumir_flor_de_fuego(); }
+    public void consumir(Estrella estrella) { estado_anterior.consumir(estrella); }
+    public void consumir(SuperChampi super_champi) { estado_anterior.consumir(super_champi); }
+    public void consumir(FlorDeFuego flor_de_fuego) { estado_anterior.consumir(flor_de_fuego); }
 
 
     public boolean colision_con_enemigo(BuzzyBeetle buzzy){

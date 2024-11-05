@@ -2,6 +2,9 @@ package entidades.mario;
 
 import entidades.BolaDeFuego;
 import entidades.plataformas.*;
+import entidades.powerups.Estrella;
+import entidades.powerups.FlorDeFuego;
+import entidades.powerups.SuperChampi;
 import logica.Juego;
 import entidades.enemigos.*;
 
@@ -50,16 +53,28 @@ public class StarMarioState implements Mario.MarioState {
     
     public BolaDeFuego disparar() { return null; }
 
-    public void consumir_estrella() {
+    public void consumir(Estrella estrella) {
     	mario.get_sistema_puntuacion().sumar_puntos(35);
+		Juego.get_instancia().get_mapa_nivel_actual().animacion_puntaje_obtenido(
+				(int) estrella.get_posicion_en_x(), 
+				(int) estrella.get_posicion_en_y(), 
+				"+35");
 	}
 
-	public void consumir_super_champi() {
+	public void consumir(SuperChampi super_champi) {
 		mario.get_sistema_puntuacion().sumar_puntos(50);
+		Juego.get_instancia().get_mapa_nivel_actual().animacion_puntaje_obtenido(
+				(int) super_champi.get_posicion_en_x(), 
+				(int) super_champi.get_posicion_en_y(), 
+				"+50");
 	}
 
-	public void consumir_flor_de_fuego() {
+	public void consumir(FlorDeFuego flor_de_fuego) {
 		mario.get_sistema_puntuacion().sumar_puntos(50);
+		Juego.get_instancia().get_mapa_nivel_actual().animacion_puntaje_obtenido(
+				(int) flor_de_fuego.get_posicion_en_x(), 
+				(int) flor_de_fuego.get_posicion_en_y(), 
+				"+50");
 	}
 	
 	public boolean colision_con_enemigo(BuzzyBeetle buzzy){

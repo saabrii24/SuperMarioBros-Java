@@ -3,6 +3,9 @@ package entidades.mario;
 import entidades.BolaDeFuego;
 import entidades.enemigos.*;
 import entidades.plataformas.*;
+import entidades.powerups.Estrella;
+import entidades.powerups.FlorDeFuego;
+import entidades.powerups.SuperChampi;
 import logica.Juego;
 
 public class NormalMarioState implements Mario.MarioState {
@@ -38,18 +41,31 @@ public class NormalMarioState implements Mario.MarioState {
     public boolean mata_tocando() { return false; }
     public BolaDeFuego disparar() { return null; }
 
-    public void consumir_estrella() {
+    public void consumir(Estrella estrella) {
     	mario.get_sistema_puntuacion().sumar_puntos(20);
+		Juego.get_instancia().get_mapa_nivel_actual().animacion_puntaje_obtenido(
+				(int) estrella.get_posicion_en_x(), 
+				(int) estrella.get_posicion_en_y(), 
+				"+20");
+		System.out.println(estrella.get_posicion_en_x() + " " + estrella.get_posicion_en_y());
     	mario.cambiar_estado(new StarMarioState(mario,this));
 	}
 
-	public void consumir_super_champi() {
+	public void consumir(SuperChampi super_champi) {
 		mario.get_sistema_puntuacion().sumar_puntos(10);
+		Juego.get_instancia().get_mapa_nivel_actual().animacion_puntaje_obtenido(
+				(int) super_champi.get_posicion_en_x(), 
+				(int) super_champi.get_posicion_en_y(), 
+				"+10");
     	mario.cambiar_estado(new SuperMarioState(mario));
 	}
 
-	public void consumir_flor_de_fuego() {
+	public void consumir(FlorDeFuego flor_de_fuego) {
 		mario.get_sistema_puntuacion().sumar_puntos(5);
+		Juego.get_instancia().get_mapa_nivel_actual().animacion_puntaje_obtenido(
+				(int) flor_de_fuego.get_posicion_en_x(), 
+				(int) flor_de_fuego.get_posicion_en_y(), 
+				"+5");
     	mario.cambiar_estado(new FireMarioState(mario));
 	}
 
@@ -81,8 +97,10 @@ public class NormalMarioState implements Mario.MarioState {
 	
 	public boolean colision_con_enemigo(KoopaTroopa koopa) {
 		boolean murio_mario=false;
-		if(mario.get_limites_superiores().intersects(koopa.get_limites_inferiores()))
+		if(mario.get_limites_superiores().intersects(koopa.get_limites_inferiores())) {
 			murio_mario=koopa.cambiar_estado();
+	        mario.set_velocidad_en_y(-6);
+		}
 		else 
 			murio_mario=mario.colision_con_enemigo(koopa);
 		return murio_mario;
@@ -118,7 +136,6 @@ public class NormalMarioState implements Mario.MarioState {
 			if(mario.get_limites_derecha().intersects(bloque_de_pregunta.get_limites_izquierda()))
 				mario.set_posicion_en_x(bloque_de_pregunta.get_posicion_en_x() - mario.get_dimension().width);
 			else 
-
 				mario.set_posicion_en_x(bloque_de_pregunta.get_posicion_en_x() + bloque_de_pregunta.get_dimension().width);
 		}
 	}

@@ -12,7 +12,7 @@ public class NormalKoopaState implements KoopaTroopa.KoopaState {
     public boolean cambiar_estado() {
         koopa.set_estado(new HiddenKoopaState(koopa));
         Mario mario = Mario.get_instancia();
-        int ajuste_posicion = (koopa.get_direccion() == 1) ? -48 : 48;
+        int ajuste_posicion = (koopa.get_direccion() == 1) ? -50 : 50;
         mario.set_posicion_en_x(mario.get_posicion_en_x() + ajuste_posicion);
         return false;
     }
@@ -33,8 +33,6 @@ public class NormalKoopaState implements KoopaTroopa.KoopaState {
     }
 
     public boolean en_movimiento() { return true; }
-
     public boolean mata_tocando() { return false; }
-
 	public void visitar_enemigo(Enemigo enemigo) {}
 }

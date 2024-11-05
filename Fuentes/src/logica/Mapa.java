@@ -18,6 +18,11 @@ import entidades.plataformas.*;
 import entidades.powerups.PowerUp;
 import fabricas.SpritesFactory;
 
+/**
+ * La clase {@code Mapa} gestiona las entidades del juego en el nivel actual, incluyendo 
+ * su creación, actualización, eliminación y colisiones. Se encarga de mantener 
+ * el estado del mapa y las interacciones entre entidades.
+ */
 public class Mapa {
 
 	protected Juego mi_juego;
@@ -85,7 +90,10 @@ public class Mapa {
     public void agregar_plataforma(Plataforma plataforma) {entidades_plataformas.add(plataforma);}
     
     //borrar del mapa
-    public void eliminar_enemigo(Enemigo enemigo) { entidades_enemigos.remove(enemigo); }
+    public void eliminar_enemigo(Enemigo enemigo) { 
+    	entidades_enemigos.remove(enemigo); 
+    	reproducir_efecto("kick");
+    }
     public void eliminar_powerup(PowerUp powerup) { entidades_powerup.remove(powerup); }
     public void eliminar_plataforma(Plataforma plataforma) { entidades_plataformas.remove(plataforma); }
     public void eliminar_bola_de_fuego(BolaDeFuego bola_de_fuego) { entidades_proyectiles.remove(bola_de_fuego); }

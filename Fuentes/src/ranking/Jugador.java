@@ -2,6 +2,10 @@ package ranking;
 
 import java.io.Serializable;
 
+/**
+ * La clase {@code Jugador} representa a un jugador en el juego, 
+ * incluyendo su nombre y puntaje.
+ */
 public class Jugador implements Comparable<Jugador>, Serializable{
 	private static final long serialVersionUID = 2557974393300832482L;
 	private String nombre;

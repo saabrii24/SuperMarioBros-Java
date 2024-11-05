@@ -1,8 +1,7 @@
 package entidades;
 
 import entidades.interfaces.Movible;
-import fabricas.Sprite;
-import fabricas.SpritesFactory;
+import fabricas.*;
 
 public abstract class EntidadMovible extends Entidad implements Movible {
     protected static final double GRAVEDAD = 0.3;

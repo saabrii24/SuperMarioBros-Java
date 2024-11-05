@@ -6,6 +6,7 @@ import entidades.EntidadMovible;
 import entidades.interfaces.EnemigosVisitor;
 import entidades.plataformas.*;
 import fabricas.Sprite;
+import logica.Juego;
 import logica.Mapa;
 
 public class KoopaTroopa extends Enemigo {
@@ -38,7 +39,11 @@ public class KoopaTroopa extends Enemigo {
     //Destuir del mapa
     public void destruir(Mapa mapa) {
         if (!destruida) {
-            mapa.reproducir_efecto("kick");
+    		Juego.get_instancia().get_mapa_nivel_actual().animacion_puntaje_obtenido(
+    				(int) this.get_posicion_en_x(), 
+    				(int) this.get_posicion_en_y(), 
+    				"+"+this.calcular_puntaje()
+    				);
             destruida = true;
             mapa.eliminar_enemigo(this);
             eliminar_del_mapa();

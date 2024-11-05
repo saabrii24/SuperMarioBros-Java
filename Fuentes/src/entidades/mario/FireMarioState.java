@@ -9,6 +9,9 @@ import entidades.enemigos.Lakitu;
 import entidades.enemigos.PiranhaPlant;
 import entidades.enemigos.Spiny;
 import entidades.plataformas.*;
+import entidades.powerups.Estrella;
+import entidades.powerups.FlorDeFuego;
+import entidades.powerups.SuperChampi;
 import logica.Juego;
 
 public class FireMarioState implements Mario.MarioState {
@@ -51,17 +54,29 @@ public class FireMarioState implements Mario.MarioState {
 	    return false;
 	}
 
-	public void consumir_estrella() {
-		mario.cambiar_estado(new StarMarioState(mario,this));
+	public void consumir(Estrella estrella) {
 		mario.get_sistema_puntuacion().sumar_puntos(30);
+		Juego.get_instancia().get_mapa_nivel_actual().animacion_puntaje_obtenido(
+				(int) estrella.get_posicion_en_x(), 
+				(int) estrella.get_posicion_en_y(), 
+				"+30");
+		mario.cambiar_estado(new StarMarioState(mario,this));
 	}
 
-	public void consumir_super_champi() {
+	public void consumir(SuperChampi super_champi) {
 		mario.get_sistema_puntuacion().sumar_puntos(50);
+		Juego.get_instancia().get_mapa_nivel_actual().animacion_puntaje_obtenido(
+				(int) super_champi.get_posicion_en_x(), 
+				(int) super_champi.get_posicion_en_y(), 
+				"+50");
 	}
 
-	public void consumir_flor_de_fuego() {
+	public void consumir(FlorDeFuego flor_de_fuego) {
 		mario.get_sistema_puntuacion().sumar_puntos(50);
+		Juego.get_instancia().get_mapa_nivel_actual().animacion_puntaje_obtenido(
+				(int) flor_de_fuego.get_posicion_en_x(), 
+				(int) flor_de_fuego.get_posicion_en_y(), 
+				"+50");
 	}
 
 	@Override

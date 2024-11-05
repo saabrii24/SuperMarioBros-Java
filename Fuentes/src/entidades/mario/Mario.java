@@ -38,10 +38,7 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
         super(x, y, sprite);
         inicializar_componentes();
     }
-    
-    public MarioState get_estado() {
-    	return estado;
-    }
+   
     private void inicializar_componentes() {
         this.sistema_puntuacion = new ControladorPuntuacionMario();
         this.sistema_vidas = new ControladorVidasMario(VIDAS_INICIALES);
@@ -49,7 +46,6 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
         this.contador_saltos = 0;
         set_estado(new NormalMarioState(this));
     }
-
 
     // Singleton: Obtiene la instancia de Mario
     public static Mario get_instancia() {
@@ -65,9 +61,9 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
         boolean rompe_bloque();
         boolean colision_con_enemigo(Enemigo enemigo);
         BolaDeFuego disparar();
-        void consumir_estrella();
-    	void consumir_super_champi();
-    	void consumir_flor_de_fuego();
+        void consumir(Estrella estrella);
+    	void consumir(SuperChampi super_champi);
+    	void consumir(FlorDeFuego flor_de_fuego);
     	void finalizar_invulnerabilidad();
 		void actualizar_sprite();
 		boolean colision_con_enemigo(BuzzyBeetle buzzy);
@@ -97,34 +93,30 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
     // Setters
     public void set_direccion(int direccion) { this.direccion = direccion; }
     public void set_estado(MarioState estado) { this.estado = estado; }
+    public void set_contador_saltos(int i) { contador_saltos = i; }
 
     // Métodos de estado y movimiento
     public void cambiar_estado(MarioState nuevo_estado) { set_estado(nuevo_estado); }
-    
-    public void reiniciar_estado() { set_estado(new NormalMarioState(this)); };
-
-    public void bloquear_movimiento_vertical() {
-        movimiento_vertical_bloqueado = true;
-        detener_movimiento_vertical();
-    }
-
+    public void reiniciar_estado() { set_estado(new NormalMarioState(this)); }
+    public void bloquear_movimiento_vertical() { movimiento_vertical_bloqueado = true; detener_movimiento_vertical(); }
     public void activar_movimiento_vertical() { movimiento_vertical_bloqueado = false; }
-    
-    @Override
+    public void saltar() { if (!saltando && contador_saltos < 1) iniciar_salto(); }
+    public void actualizar() { actualizar_movimiento_vertical(); actualizar_posicion(); estado.actualizar_sprite(); }
+    public void resetear_posicion() { set_posicion(POSICION_INICIAL_X, POSICION_INICIAL_Y); }
+    public boolean esta_en_movimiento() { return (direccion == 1 || direccion == -1); }
     public void mover() {
-    	//System.out.println(posicion_en_x + " - " + posicion_en_y);
         if (!movimiento_vertical_bloqueado) {
             if (direccion == 1) mover_a_derecha();
             else if (direccion == -1) mover_a_izquierda();
             else detener_movimiento_horizontal();
         }
     }
-
+    
+    // Métodos privados de movimiento
     private void mover_a_derecha() {
         velocidad_en_x = VELOCIDAD_LATERAL;
         movimiento_derecha = true;
     }
-
     private void mover_a_izquierda() {
         if (posicion_en_x > 0) {
             velocidad_en_x = -VELOCIDAD_LATERAL;
@@ -134,88 +126,57 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
             detener_movimiento_horizontal();
         }
     }
-
-    public void detener_movimiento_horizontal() { velocidad_en_x = 0; }
-
+    private void detener_movimiento_horizontal() { velocidad_en_x = 0; }
     private void detener_movimiento_vertical() { velocidad_en_y = 0; }
-
-    public void saltar() {
-        if (!saltando && contador_saltos < 1) iniciar_salto();
+    private void iniciar_salto() { 
+    	Juego.get_instancia().reproducir_efecto("jump-small"); 
+    	saltando = true; contador_saltos++; 
+    	velocidad_en_y = VELOCIDAD_SALTO; 
     }
-
-    private void iniciar_salto() {
-        Juego.get_instancia().reproducir_efecto("jump-small");
-        saltando = true;
-        contador_saltos++;
-        velocidad_en_y = VELOCIDAD_SALTO;
-    }
-
-    public void actualizar() {
-        actualizar_movimiento_vertical();
-        actualizar_posicion();
-        estado.actualizar_sprite();
-    }
-
-    private void actualizar_movimiento_vertical() {
-        if (cayendo) aplicar_gravedad();
-        if (saltando) actualizar_salto();
-    }
-
-    private void aplicar_gravedad() {
-        velocidad_en_y += EntidadMovible.GRAVEDAD;
-        posicion_en_y -= velocidad_en_y;
-    }
-
-    private void actualizar_salto() {
-        velocidad_en_y -= EntidadMovible.GRAVEDAD;
-        posicion_en_y -= velocidad_en_y;
-        if (velocidad_en_y <= 0) finalizar_salto();
-    }
-
-    private void finalizar_salto() {
-        saltando = false;
-        cayendo = true;
-    }
-
-    private void actualizar_posicion() {
-        if (!cayendo) detener_movimiento_horizontal();
-        posicion_en_x += velocidad_en_x;
-    }
-
-	protected void cambiar_sprite(Sprite nuevo_sprite) { this.sprite = nuevo_sprite; }
+    private void actualizar_movimiento_vertical() { if (cayendo) aplicar_gravedad(); if (saltando) actualizar_salto(); }
+    private void aplicar_gravedad() { velocidad_en_y += EntidadMovible.GRAVEDAD; posicion_en_y -= velocidad_en_y; }
+    private void actualizar_salto() { velocidad_en_y -= EntidadMovible.GRAVEDAD; posicion_en_y -= velocidad_en_y; if (velocidad_en_y <= 0) finalizar_salto(); }
+    private void finalizar_salto() { saltando = false; cayendo = true; }
+    private void actualizar_posicion() { if (!cayendo) detener_movimiento_horizontal(); posicion_en_x += velocidad_en_x; }
+    protected void cambiar_sprite(Sprite nuevo_sprite) { this.sprite = nuevo_sprite; }
 
  // Métodos de interacción y puntaje
-    
-    public void consumir_moneda() {
+    public void consumir(Moneda moneda) {
     	Juego.get_instancia().reproducir_efecto("coin");
     	get_sistema_puntuacion().sumar_puntos(5);
     	get_sistema_puntuacion().sumar_moneda();
+		Juego.get_instancia().get_mapa_nivel_actual().animacion_puntaje_obtenido(
+				(int) moneda.get_posicion_en_x(), 
+				(int) moneda.get_posicion_en_y(), 
+				"+5");
 	}
 
-    public void consumir_champi_verde() {
+    public void consumir(ChampiVerde champi_verde) {
     	Juego.get_instancia().reproducir_efecto("powerup");
 		get_sistema_puntuacion().sumar_puntos(100);
 		get_sistema_vidas().sumar_vida();
+		Juego.get_instancia().get_mapa_nivel_actual().animacion_puntaje_obtenido(
+				(int) champi_verde.get_posicion_en_x(), 
+				(int) champi_verde.get_posicion_en_y(), 
+				"+100");
 	}
 
-    public void caer_en_vacio() {
-    	get_sistema_puntuacion().restar_puntos(15);
-    	get_sistema_vidas().quitar_vida();
-    }
+    public void caer_en_vacio() { sistema_puntuacion.restar_puntos(15); sistema_vidas.quitar_vida(); }
 
-	public void visitar(Moneda moneda) { consumir_moneda(); }
-	public void visitar(FlorDeFuego flor_de_fuego) { estado.consumir_flor_de_fuego(); Juego.get_instancia().reproducir_efecto("powerup");}
-	public void visitar(SuperChampi super_champi) { estado.consumir_super_champi(); Juego.get_instancia().reproducir_efecto("powerup");}
-	public void visitar(ChampiVerde champi_verde) { consumir_champi_verde(); }
-	public void visitar(Estrella estrella) { estado.consumir_estrella(); Juego.get_instancia().reproducir_efecto("powerup");}
-	
-	 public BolaDeFuego disparar() { return estado.disparar(); }
-	 public void resetear_posicion() { set_posicion(POSICION_INICIAL_X, POSICION_INICIAL_Y); }
-	 public void finalizar_invulnerabilidad() { estado.finalizar_invulnerabilidad(); }
-	 public boolean mata_tocando() { return estado.mata_tocando(); }
-	 public boolean rompe_bloque() { return estado.rompe_bloque(); }
-	 public boolean colision_con_enemigo(Enemigo enemigo) { return estado.colision_con_enemigo(enemigo); }
-
+    // Métodos de visita (Visitor pattern)
+    public void visitar(Moneda moneda) { consumir(moneda); }
+    public void visitar(FlorDeFuego flor_de_fuego) { estado.consumir(flor_de_fuego); Juego.get_instancia().reproducir_efecto("powerup"); }
+    public void visitar(SuperChampi super_champi) { estado.consumir(super_champi); Juego.get_instancia().reproducir_efecto("powerup"); }
+    public void visitar(ChampiVerde champi_verde) { consumir(champi_verde); }
+    public void visitar(Estrella estrella) { estado.consumir(estrella); Juego.get_instancia().reproducir_efecto("powerup"); }
+    
+    // Disparos y colisiones
+    public BolaDeFuego disparar() { return estado.disparar(); }
+    public void finalizar_invulnerabilidad() { estado.finalizar_invulnerabilidad(); }
+    public boolean mata_tocando() { return estado.mata_tocando(); }
+    public boolean rompe_bloque() { return estado.rompe_bloque(); }
+    public boolean colision_con_enemigo(Enemigo enemigo) { return estado.colision_con_enemigo(enemigo); }
+    
 	 public void reiniciar() {
 	    resetear_posicion();
 	    sistema_puntuacion = new ControladorPuntuacionMario();
@@ -231,71 +192,39 @@ public class Mario extends EntidadMovible implements EntidadJugador,PowerUpVisit
 	    reiniciar_estado();
 	}
 
-	public boolean esta_en_movimiento() { return (direccion == 1 || direccion == -1); }
-
-	public void set_contador_saltos(int i) { contador_saltos = i; }
-
-	public boolean visitar(BuzzyBeetle buzzy) {
-		return estado.colision_con_enemigo(buzzy);
-	}
-
-	public boolean visitar(Goomba goomba) {
-		Juego.get_instancia().get_mapa_nivel_actual().animacion_puntaje_obtenido(
-				(int) goomba.get_posicion_en_x(), 
-				(int) goomba.get_posicion_en_y(), 
-				"+"+goomba.calcular_puntaje()
-				);
-		return estado.colision_con_enemigo(goomba);
-	}
-
-	public boolean visitar(KoopaTroopa koopa) {
-		return estado.colision_con_enemigo(koopa);
-	}
-
-	public boolean visitar(Lakitu lakitu) {
-		return estado.colision_con_enemigo(lakitu);
-	}
-
-	public boolean visitar(PiranhaPlant piranha) {
-		return estado.colision_con_enemigo(piranha);
-	}
-
-	public boolean visitar(Spiny spiny) {
-		return estado.colision_con_enemigo(spiny);
-	}
-
-	@Override
+	// Colisiones específicas (Visitor pattern)
+	public boolean visitar(BuzzyBeetle buzzy) { return estado.colision_con_enemigo(buzzy); }
+	public boolean visitar(Goomba goomba) { return estado.colision_con_enemigo(goomba); }
+	public boolean visitar(KoopaTroopa koopa) { return estado.colision_con_enemigo(koopa); }
+	public boolean visitar(Lakitu lakitu) { return estado.colision_con_enemigo(lakitu); }
+	public boolean visitar(PiranhaPlant piranha) { return estado.colision_con_enemigo(piranha); }
+	public boolean visitar(Spiny spiny) { return estado.colision_con_enemigo(spiny); }
 	public boolean visitar(BloqueDePregunta bloque_de_pregunta) {
 		if(!this.get_limites_superiores().intersects(bloque_de_pregunta.get_limites_inferiores()))
 			estado.colision_con_plataformas(bloque_de_pregunta);
 		return true;
 	}
 
-	@Override
 	public boolean  visitar(BloqueSolido bloque_solido) {
 		if(!this.get_limites_superiores().intersects(bloque_solido.get_limites_inferiores()))
 			estado.colision_con_plataformas(bloque_solido);
 		return true;
 	}
 
-	@Override
 	public boolean visitar(LadrilloSolido ladrillo_solido) {
 		if(!this.get_limites_superiores().intersects(ladrillo_solido.get_limites_inferiores()))
 			estado.colision_con_plataformas(ladrillo_solido);
 		return true;
 	}
 
-	@Override
 	public boolean visitar(Tuberias tuberia) {
 		if(!this.get_limites_superiores().intersects(tuberia.get_limites_inferiores()))
 			estado.colision_con_plataformas(tuberia);
 		return true;
 	}
 
-	@Override
 	public boolean visitar(Vacio vacio) {
 		return false;
 	}
-
 
 }

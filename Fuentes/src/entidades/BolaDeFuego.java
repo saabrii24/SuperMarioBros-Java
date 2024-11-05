@@ -42,7 +42,6 @@ public class BolaDeFuego extends EntidadMovible {
                 cayendo = true;
             }
         }
-
         posicion_en_x += velocidad_en_x;
     }
 }

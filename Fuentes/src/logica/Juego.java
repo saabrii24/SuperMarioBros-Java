@@ -8,6 +8,11 @@ import fabricas.SpritesFactory;
 import gui.ControladorDeVistas;
 import niveles.Nivel;
 
+/**
+ * La clase {@code Juego} gestiona la lógica central del juego, incluyendo la inicialización de 
+ * entidades, controladores y el estado del juego. Implementa el patrón Singleton 
+ * para asegurar que solo exista una instancia de juego en ejecución.
+ */
 public class Juego {
     private static Juego instancia_juego;
     

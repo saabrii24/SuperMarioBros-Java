@@ -97,7 +97,7 @@ public class Colisionador {
         }
     }
     
-    private void verificar_colisiones_enemigos_con_enemigos() {
+    private void verificar_colisiones_enemigos_con_enemigos() {//se quito la colision entre enemigo de su misma especie para mejor visibilidad, solo se genera con koopa
     	for(Enemigo enemigo1: mapa.get_entidades_enemigos())
     		for(Enemigo enemigo2: mapa.get_entidades_enemigos())
     			if(enemigo1!=enemigo2 && enemigo1.get_limites().intersects(enemigo2.get_limites())) 

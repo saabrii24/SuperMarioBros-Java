@@ -5,6 +5,7 @@ import entidades.EntidadMovible;
 import entidades.enemigos.*;
 import entidades.interfaces.EnemigosVisitor;
 import entidades.interfaces.EntidadJugador;
+import entidades.interfaces.PlataformasVisitorMario;
 import entidades.interfaces.SistemaPuntuacion;
 import entidades.interfaces.SistemaVidas;
 import entidades.plataformas.*;

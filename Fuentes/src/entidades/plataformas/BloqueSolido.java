@@ -1,5 +1,7 @@
 package entidades.plataformas;
 
+import entidades.interfaces.PlataformasVisitorEnemigos;
+import entidades.interfaces.PlataformasVisitorMario;
 import fabricas.Sprite;
 
 public class BloqueSolido extends Plataforma{

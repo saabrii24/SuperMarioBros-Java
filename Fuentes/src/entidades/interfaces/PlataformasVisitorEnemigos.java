@@ -1,4 +1,6 @@
-package entidades.plataformas;
+package entidades.interfaces;
+
+import entidades.plataformas.*;
 
 public interface PlataformasVisitorEnemigos {
 	void visitar(BloqueSolido bloque_solido);

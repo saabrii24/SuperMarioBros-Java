@@ -75,10 +75,7 @@ public class Goomba extends Enemigo {
 	}	
 	 
 	//colision entre enemigos
-	public void visitar_enemigo(Goomba goomba) {
-		goomba.set_direccion(goomba.get_direccion()*-1);
-		this.set_direccion(direccion);
-	}
+	public void visitar_enemigo(Goomba goomba) {}
 	public void visitar_enemigo(BuzzyBeetle buzzy) {}
 	public void visitar_enemigo(KoopaTroopa koopa) {}
 	public void visitar_enemigo(Lakitu lakitu) {}

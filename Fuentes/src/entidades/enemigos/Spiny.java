@@ -90,6 +90,6 @@ public class Spiny extends Enemigo{
 	public void visitar_enemigo(KoopaTroopa koopa) {}
 	public void visitar_enemigo(Lakitu lakitu) {}
 	public void visitar_enemigo(PiranhaPlant piranha) {}
-	public void visitar_enemigo(Spiny spiny) {}// no colisionan para mejorar la fluidez de juego cuando hay muchos
+	public void visitar_enemigo(Spiny spiny) {}
 	public void aceptar(EnemigoVisitorEnemigo visitante) {visitante.visitar_enemigo(this);}		
 }

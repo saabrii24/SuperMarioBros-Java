@@ -171,8 +171,8 @@ public class NormalMarioState implements Mario.MarioState {
 	}
 	
 	private void ajustar_posicion_mario_bajo_plataforma(Mario mario, Plataforma plataforma) {
-	        mario.set_posicion_en_y(plataforma.get_posicion_en_y() - mario.get_dimension().height + 1);
-	        mario.set_cayendo(true);
-	        mario.set_velocidad_en_y(0);
+		mario.set_posicion_en_y(plataforma.get_posicion_en_y() - mario.get_dimension().height + 1);
+	    mario.set_cayendo(true);
+	    mario.set_velocidad_en_y(0);
 	}
 }

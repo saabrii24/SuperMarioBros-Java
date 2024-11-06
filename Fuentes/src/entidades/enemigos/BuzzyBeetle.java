@@ -85,10 +85,7 @@ public class BuzzyBeetle extends Enemigo{
 
 	//Colisiones entre enemigos
 	public void visitar_enemigo(Goomba goomba) {}
-	public void visitar_enemigo(BuzzyBeetle buzzy) {
-		buzzy.set_direccion(buzzy.get_direccion()*-1);
-		this.set_direccion(direccion);
-	}
+	public void visitar_enemigo(BuzzyBeetle buzzy) {}
 	public void visitar_enemigo(KoopaTroopa koopa) {}
 	public void visitar_enemigo(Lakitu lakitu) {}
 	public void visitar_enemigo(PiranhaPlant piranha) {}

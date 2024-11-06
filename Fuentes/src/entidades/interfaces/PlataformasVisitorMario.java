@@ -1,4 +1,6 @@
-package entidades.plataformas;
+package entidades.interfaces;
+
+import entidades.plataformas.*;
 
 public interface PlataformasVisitorMario {
 	boolean visitar(BloqueDePregunta bloque_de_pregunta);

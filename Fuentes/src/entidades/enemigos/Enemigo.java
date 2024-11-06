@@ -3,7 +3,7 @@ package entidades.enemigos;
 import entidades.EntidadMovible;
 import entidades.interfaces.EnemigoVisitorEnemigo;
 import entidades.interfaces.EnemigosVisitor;
-import entidades.plataformas.PlataformasVisitorEnemigos;
+import entidades.interfaces.PlataformasVisitorEnemigos;
 import fabricas.Sprite;
 import logica.Mapa;
 

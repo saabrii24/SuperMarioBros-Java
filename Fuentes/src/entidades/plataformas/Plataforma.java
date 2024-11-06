@@ -1,6 +1,8 @@
 package entidades.plataformas;
 
 import entidades.Entidad;
+import entidades.interfaces.PlataformasVisitorEnemigos;
+import entidades.interfaces.PlataformasVisitorMario;
 import fabricas.Sprite;
 
 public abstract class Plataforma extends Entidad {

@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
-import java.io.File;
+import java.io.InputStream;
 import logica.ControladorRanking;
 import ranking.Jugador;
 
@@ -23,7 +23,7 @@ public class PanelPantallaRanking extends JPanel {
         this.controlador_ranking = controlador_ranking;
         setSize(ConstantesVistas.PANEL_ANCHO, ConstantesVistas.PANEL_ALTO);
         setLayout(null);
-        cargar_tipografia("src/assets/tipografia/mario-font.ttf");
+        cargar_tipografia();
         mostrar_ranking();
         agregar_imagen_fondo();
         agregar_boton_volver();
@@ -122,12 +122,18 @@ public class PanelPantallaRanking extends JPanel {
         getActionMap().put("volver", volver_action);
     }
     
-    private void cargar_tipografia(String ruta_archivo) {
+    private void cargar_tipografia() {
         try {
-            tipografia = Font.createFont(Font.TRUETYPE_FONT, new File(ruta_archivo)).deriveFont(23f);
+            InputStream is = getClass().getResourceAsStream("/assets/tipografia/mario-font.ttf");
+            if (is == null) {
+                tipografia = new Font("Arial", Font.PLAIN, 18);
+                return;
+            }
+            tipografia = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(18f);
+            is.close();
         } catch (FontFormatException | IOException e) {
             e.printStackTrace();
-            tipografia = new Font("Arial", Font.PLAIN, 23);
+            tipografia = new Font("Arial", Font.PLAIN, 18);
         }
     }
 }

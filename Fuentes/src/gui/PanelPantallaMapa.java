@@ -3,7 +3,7 @@ package gui;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
-import java.io.File;
+import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -50,7 +50,7 @@ public class PanelPantallaMapa extends JPanel {
     private void inicializar_componentes() {
         setLayout(new BorderLayout());
         establecer_dimensiones_base();
-        cargar_tipografia("src/assets/tipografia/mario-font.ttf");
+        cargar_tipografia();
         
         panel_informacion = new JPanel();
         panel_mapa = new JPanel();
@@ -298,9 +298,15 @@ public class PanelPantallaMapa extends JPanel {
         });
     }
 
-    private void cargar_tipografia(String ruta_archivo) {
+    private void cargar_tipografia() {
         try {
-            tipografia = Font.createFont(Font.TRUETYPE_FONT, new File(ruta_archivo)).deriveFont(18f);
+            InputStream is = getClass().getResourceAsStream("/assets/tipografia/mario-font.ttf");
+            if (is == null) {
+                tipografia = new Font("Arial", Font.PLAIN, 18);
+                return;
+            }
+            tipografia = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(18f);
+            is.close();
         } catch (FontFormatException | IOException e) {
             e.printStackTrace();
             tipografia = new Font("Arial", Font.PLAIN, 18);

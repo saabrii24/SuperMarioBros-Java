@@ -2,11 +2,11 @@
 
 ## 1. Vistas Previas
 ### Pantalla de inicio
-![pantalla-inicial](https://github.com/user-attachments/assets/24cec54b-b9ee-4d34-aa2b-254f23df0048)
+![pantalla-inicial](./Fuentes/src/assets/imagenes/vistas-previas/pantalla-inicial.png)
 
 ### Nivel 1 - Modos de juego
-![modo-mario](https://github.com/user-attachments/assets/f1654bcf-a81c-42eb-a35f-d25b5ffc38c6)
-![modo-luigi](https://github.com/user-attachments/assets/29c9fa57-ee96-4f53-88ea-dc69be44c613)
+![modo-mario](./Fuentes/src/assets/imagenes/vistas-previas/modo-mario.png)
+![modo-luigi](./Fuentes/src/assets/imagenes/vistas-previas/modo-luigi.png)
 
 ## 2. Arquitectura General del Juego
 
